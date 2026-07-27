@@ -1,263 +1,305 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>練息場 · 博報堂集團參與率</title>
-
+<title>格威博報堂集團｜練息場活動參與統計（管理端）</title>
 <style>
-:root{
-  --paper:#EEF1EC; --surface:#FFFFFF; --sunken:#E4E9E3;
-  --ink:#16211D; --ink-2:#3C4944; --muted:#69746E;
-  --line:#D2DAD3; --line-soft:#E2E8E2;
-  --moss:#3B6B56; --moss-soft:#E3EDE7;
-  --amber:#9C6B12; --amber-soft:#F6ECD8;
-  --slate:#4A6076; --slate-soft:#E5EAEF;
-  --on-moss:#FFFFFF;
-  --shadow:0 1px 2px rgba(22,33,29,.05), 0 8px 24px -16px rgba(22,33,29,.28);
-  --serif:"Songti TC","Noto Serif TC","Source Han Serif TC","STSong",Georgia,serif;
-  --sans:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
-  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
-}
-@media (prefers-color-scheme:dark){
+  /* ===== 練息場視覺系統（handbook/設計規範/練息場視覺系統.md）＝＝與 /part 同一套 ===== */
   :root{
-    --paper:#0E1412; --surface:#171F1C; --sunken:#121A17;
-    --ink:#E4EAE6; --ink-2:#BCC7C1; --muted:#8B968F;
-    --line:#2B3733; --line-soft:#222C29;
-    --moss:#7CB89D; --moss-soft:#1D2C26;
-    --amber:#D9A441; --amber-soft:#2C2517;
-    --slate:#8FA6BC; --slate-soft:#1B242C;
-    --on-moss:#0E1412;
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+    --brand:#004D89; --brand-deep:#003864; --brand-soft:#6694B8; --ink:#032639;
+    --blue-300:#B2CADC; --blue-200:#CCDCE8; --blue-100:#E5EDF3;
+    --n-700:#4B6472; --n-500:#6F838E; --n-300:#93A2AA; --n-100:#DBE0E3;
+    --p-blue:#CCE0F7; --p-mint:#D3F5EC; --p-green:#F3FBE8; --p-peach:#FFEBD3;
+    --p-yellow:#FFFBEA; --p-pink:#FEF0EA; --p-lav:#E6E5FB;
+
+    --bg:#ffffff; --card:#ffffff; --line:#DBE0E3; --muted:#6F838E; --hair:#EDF1F3;
+    --y25:#6694B8; --y26:#004D89;
+    --yes:#1E8F70; --wait:#B26A00; --leave:#B4593A; --checkin:#004D89;
+    --hero-a:#CCE0F7; --hero-b:#D3F5EC; --hero-c:#FFFBEA;
+    --glass:rgba(255,255,255,.66); --glass-edge:rgba(255,255,255,.75);
+    --shadow:0 1px 2px rgba(3,38,57,.04),0 10px 30px rgba(3,38,57,.07);
+    --shadow-lift:0 2px 6px rgba(3,38,57,.06),0 18px 44px rgba(3,38,57,.10);
+
+    --radius:16px;
+    --spring:cubic-bezier(.32,.72,0,1);   /* 近臨界阻尼彈簧（apple-design §4）*/
+    --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
   }
-}
-:root[data-theme="dark"]{
-  --paper:#0E1412; --surface:#171F1C; --sunken:#121A17;
-  --ink:#E4EAE6; --ink-2:#BCC7C1; --muted:#8B968F;
-  --line:#2B3733; --line-soft:#222C29;
-  --moss:#7CB89D; --moss-soft:#1D2C26;
-  --amber:#D9A441; --amber-soft:#2C2517;
-  --slate:#8FA6BC; --slate-soft:#1B242C;
-  --on-moss:#0E1412;
-  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
-}
-:root[data-theme="light"]{
-  --paper:#EEF1EC; --surface:#FFFFFF; --sunken:#E4E9E3;
-  --ink:#16211D; --ink-2:#3C4944; --muted:#69746E;
-  --line:#D2DAD3; --line-soft:#E2E8E2;
-  --moss:#3B6B56; --moss-soft:#E3EDE7;
-  --amber:#9C6B12; --amber-soft:#F6ECD8;
-  --slate:#4A6076; --slate-soft:#E5EAEF;
-  --on-moss:#FFFFFF;
-  --shadow:0 1px 2px rgba(22,33,29,.05), 0 8px 24px -16px rgba(22,33,29,.28);
-}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+    line-height:1.65;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;}
+  .wrap{max-width:960px;margin:0 auto;padding:22px 18px 80px;}
+  a{color:var(--brand)}
 
-.cloud-badge{display:inline-block;margin-top:10px;padding:3px 11px;border-radius:999px;
-  font-size:12px;font-weight:600;letter-spacing:.02em;border:1px solid transparent;vertical-align:middle}
-.cloud-badge.badge-ok{color:var(--moss);background:var(--moss-soft);border-color:var(--moss-soft)}
-.cloud-badge.badge-wait{color:var(--slate);background:var(--slate-soft);border-color:var(--slate-soft)}
-.cloud-badge.badge-local{color:var(--amber);background:var(--amber-soft);border-color:var(--amber-soft)}
+  /* ===== Hero ===== */
+  .hero{position:relative;overflow:hidden;border-radius:24px;padding:30px 24px 26px;margin:0 0 22px;
+    background:linear-gradient(135deg,var(--hero-a) 0%,var(--hero-b) 58%,var(--hero-c) 100%);}
+  .hero>*:not(.orbs){position:relative;z-index:1}
+  .orbs{position:absolute;inset:0;pointer-events:none}
+  .orb{position:absolute;display:block;opacity:.55;will-change:transform;
+    border-radius:58% 42% 47% 53% / 45% 52% 48% 55%;}
+  .o1{width:158px;height:158px;background:var(--p-mint);left:-44px;top:-52px;animation:drift1 26s ease-in-out infinite alternate}
+  .o2{width:98px;height:98px;background:var(--p-peach);right:7%;top:-32px;animation:drift2 22s ease-in-out infinite alternate}
+  .o3{width:72px;height:72px;background:var(--p-lav);right:-18px;bottom:-26px;animation:drift3 30s ease-in-out infinite alternate}
+  .o4{width:46px;height:46px;background:var(--p-yellow);left:32%;bottom:-18px;animation:drift1 19s ease-in-out infinite alternate-reverse}
+  .o5{width:30px;height:30px;background:var(--p-blue);left:15%;top:24px;animation:drift2 24s ease-in-out infinite alternate-reverse}
+  @keyframes drift1{to{transform:translate3d(26px,18px,0) rotate(18deg) scale(1.08)}}
+  @keyframes drift2{to{transform:translate3d(-22px,20px,0) rotate(-14deg) scale(1.1)}}
+  @keyframes drift3{to{transform:translate3d(-18px,-22px,0) rotate(12deg) scale(1.06)}}
 
-/* ── 可收合大區 ── */
-.fold{border:1px solid var(--line);border-radius:16px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
-.fold>summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:20px 24px}
-.fold>summary::-webkit-details-marker{display:none}
-.fold>summary:focus-visible{outline:2px solid var(--moss);outline-offset:-4px}
-.fold-title{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--ink)}
-.fold-note{font-size:13px;color:var(--muted);flex:1;min-width:120px}
-.fold-chev{margin-left:auto;color:var(--muted);transition:transform .2s;font-size:12px;align-self:center}
-.fold[open]>summary .fold-chev{transform:rotate(180deg)}
-.fold-body{padding:0 24px 24px}
-.fold-hint{font-size:12.5px;color:var(--muted);margin:0 0 4px}
+  .eyebrow{font-size:.76rem;letter-spacing:.16em;color:var(--brand);font-weight:700;margin:0 0 8px}
+  h1{margin:0;color:var(--brand);font-weight:800;white-space:nowrap;
+    font-size:clamp(.9rem,4.15vw,1.9rem);line-height:1.18;letter-spacing:-.022em}
+  .herobar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .cloud-badge{display:inline-block;font-size:.74rem;font-weight:700;padding:3px 11px;border-radius:999px;
+    border:1px solid transparent;transition:background-color .2s var(--spring),color .2s}
+  .badge-ok{background:var(--p-mint);color:#106B52;border-color:#9FE2CE}
+  .badge-wait{background:var(--p-yellow);color:#8A5A00;border-color:#F0DFA8}
+  .badge-local{background:var(--p-peach);color:#9A4B22;border-color:#F3CBA6}
+  .lockchip{font-size:.72rem;font-weight:700;color:var(--n-700);background:var(--glass);
+    border:1px solid var(--glass-edge);border-radius:999px;padding:3px 11px}
 
-/* ── 稽核：逐場 × 網域 ── */
-.audit-grand{border:1px solid var(--line-soft);border-radius:12px;overflow:hidden;margin:14px 0 20px}
-.audit-grand summary{list-style:none;cursor:pointer;padding:12px 16px;font-size:14px;font-weight:600;color:var(--ink-2);background:var(--sunken)}
-.audit-grand summary::-webkit-details-marker{display:none}
-.ev{border:1px solid var(--line-soft);border-radius:12px;margin-top:10px;background:var(--paper);overflow:hidden}
-.ev>summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:12px 16px}
-.ev>summary::-webkit-details-marker{display:none}
-.ev>summary:hover{background:var(--sunken)}
-.ev-date{font-family:var(--mono);font-size:12.5px;color:var(--slate);font-weight:600}
-.ev-title{font-size:13.5px;color:var(--ink);flex:1;min-width:160px}
-.ev-tot{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
-.ev-body{padding:2px 16px 14px}
-.st{font-size:10.5px;padding:1px 8px;border-radius:999px;letter-spacing:.02em}
-.st-ended{background:var(--moss-soft);color:var(--moss)}
-.st-up{background:var(--slate-soft);color:var(--slate)}
-.st-canc{background:var(--amber-soft);color:var(--amber)}
-.dom-tab{width:100%;border-collapse:collapse;font-size:13px}
-.dom-tab td{padding:5px 8px;border-top:1px solid var(--line-soft)}
-.dom-tab td.d{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);text-align:left;word-break:break-all}
-.dom-tab td.n{text-align:right;width:60px;color:var(--muted);font-variant-numeric:tabular-nums}
-.dom-tab .typo td.d{color:var(--amber)}
-.dom-tab .typo td.d::after{content:" ⚠︎ 疑似打錯";font-family:var(--sans);font-size:11px}
-.dom-tab thead td{color:var(--muted);font-size:11.5px;border-top:none}
+  /* ===== 卡片 / 區塊 ===== */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:20px 20px 16px;margin:18px 0}
+  .cardhd{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 12px}
+  .card h2{font-size:1.12rem;margin:0;font-weight:800;letter-spacing:-.012em;color:var(--brand)}
 
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
-     font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1080px;margin:0 auto;padding:40px 24px 96px;display:flex;flex-direction:column;gap:38px}
+  /* ===== 參與率摘要卡 ===== */
+  .rates{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .ratecard{border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px 14px;
+    background:linear-gradient(150deg,color-mix(in srgb,var(--p-blue) 46%,var(--card)) 0%,var(--card) 62%);}
+  .ratecard.y26{background:linear-gradient(150deg,color-mix(in srgb,var(--p-mint) 52%,var(--card)) 0%,var(--card) 62%)}
+  .ratecard .yr{font-size:.76rem;font-weight:800;letter-spacing:.08em;color:var(--brand)}
+  .ratecard .big{font-size:2.1rem;font-weight:800;letter-spacing:-.03em;line-height:1.1;color:var(--ink);margin-top:2px}
+  .ratecard .big.na{font-size:1.15rem;color:var(--n-300);letter-spacing:0}
+  .ratecard .sub{font-size:.82rem;color:var(--muted);font-weight:700;min-height:1.2em}
+  .ratecard .cap{font-size:.76rem;color:var(--muted);margin-top:2px}
+  .ratecard .track{height:6px;border-radius:999px;background:var(--blue-100);margin:12px 0 8px;overflow:hidden}
+  .ratecard .fill{height:100%;border-radius:999px;background:var(--brand);
+    transition:width .6s var(--spring)}
+  .ratecard.y26 .fill{background:var(--yes)}
+  .ratecard .foot{display:flex;gap:14px;font-size:.78rem;color:var(--muted)}
+  .ratecard .foot b{color:var(--ink);font-weight:800}
 
-.masthead{display:flex;flex-direction:column;gap:9px;padding-bottom:22px;border-bottom:1px solid var(--line)}
-.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);font-weight:600}
-h1{font-family:var(--serif);font-size:clamp(27px,4vw,38px);line-height:1.2;margin:0;font-weight:600;text-wrap:balance}
-.lede{margin:0;color:var(--ink-2);max-width:64ch;font-size:14.5px}
+  /* ===== 表格 ===== */
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{border-collapse:collapse;width:100%;font-size:.92rem}
+  th,td{padding:8px 9px;text-align:right;border-bottom:1px solid var(--hair);white-space:nowrap}
+  th.l,td.l,th:first-child,td:first-child{text-align:left}
+  thead th{font-size:.76rem;color:var(--muted);font-weight:700;border-bottom:2px solid var(--line);letter-spacing:.01em}
+  thead th.grp2025{color:var(--y25)} thead th.divider,thead th.y26{color:var(--y26)}
+  tbody td{font-size:.95rem}
+  tbody tr{transition:background-color .16s var(--spring)}
+  tbody tr:hover{background:color-mix(in srgb,var(--p-blue) 30%,transparent)}
+  .divider{border-left:2px solid var(--line)}
+  td.name{font-weight:700}
+  tr.total td{font-weight:800;background:color-mix(in srgb,var(--p-mint) 44%,transparent);
+    border-bottom:2px solid var(--line)}
+  tr.member.zero td{color:var(--n-300)}
+  tr.pr td{color:var(--muted);background:color-mix(in srgb,var(--p-yellow) 40%,transparent)}
+  .rate-dual{display:flex;flex-direction:column;line-height:1.3}
+  .rate-dual .u{font-weight:800;color:var(--yes)}
+  .rate-dual .d{font-size:.78rem;color:var(--brand-soft);font-weight:700}
+  input.empinput{font:inherit;font-size:.9rem;width:70px;text-align:right;padding:3px 6px;border-radius:9px;
+    border:1px solid var(--line);background:var(--blue-100);color:var(--ink);font-variant-numeric:tabular-nums;
+    transition:border-color .18s var(--spring),background-color .18s var(--spring)}
+  input.empinput:focus{outline:2px solid var(--brand-soft);outline-offset:1px}
+  .hint{font-size:.8rem;color:var(--wait);background:color-mix(in srgb,var(--p-yellow) 62%,transparent);
+    border:1px solid color-mix(in srgb,var(--wait) 26%,transparent);border-radius:12px;padding:9px 13px;margin:12px 0 0}
 
-section{display:flex;flex-direction:column;gap:16px}
-.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;justify-content:space-between}
-.sec-head h2{font-family:var(--serif);font-size:22px;margin:0;font-weight:600}
-.sec-note{font-size:13px;color:var(--muted);margin:0;max-width:60ch}
+  /* ===== 按鈕 / 工具列 ===== */
+  .workbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:12px 0 2px;font-size:.82rem}
+  .workbar .spacer{flex:1}
+  .btn{font:inherit;font-size:.82rem;font-weight:700;padding:6px 14px;border-radius:999px;cursor:pointer;
+    border:1px solid var(--line);background:var(--card);color:var(--ink);
+    transition:transform .1s var(--spring),border-color .16s,background-color .16s}
+  .btn:hover{border-color:var(--brand-soft)}
+  .btn:active{transform:scale(.96)}          /* 按下就給回饋（apple-design §1）*/
+  .btn.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+  .btn.pri:hover{background:var(--brand-deep);border-color:var(--brand-deep)}
+  .msg{color:var(--yes);font-weight:700}
+  .msg.warn{color:var(--leave)}
 
-/* ── 兩年參與率摘要 ── */
-.rates{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.ratecard{background:var(--surface);border:1px solid var(--line-soft);border-radius:5px;box-shadow:var(--shadow);
-          padding:20px 22px;display:flex;flex-direction:column;gap:12px}
-.ratecard .yr{font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--muted);font-weight:600}
-.ratecard .big{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:clamp(34px,6vw,50px);
-               line-height:.9;font-weight:600;color:var(--moss)}
-.ratecard .big.na{color:var(--muted)}
-.ratecard .sub{font-family:var(--mono);font-size:13.5px;font-variant-numeric:tabular-nums;color:var(--slate);font-weight:600}
-.ratecard .cap{font-size:12.5px;color:var(--muted)}
-.track{height:6px;background:var(--sunken);border-radius:999px;overflow:hidden}
-.fill{height:100%;background:var(--moss);border-radius:999px;transition:width .3s ease}
-@media (prefers-reduced-motion:reduce){.fill{transition:none}}
-.ratecard .foot{display:flex;gap:20px;font-size:12.5px;color:var(--ink-2)}
-.ratecard .foot b{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--ink)}
+  /* ===== 數據說明：小字底線 ＋ 材質化彈窗（apple-design §12）===== */
+  .notelink{font:inherit;font-size:.8rem;color:var(--muted);background:none;border:0;padding:2px 0;cursor:pointer;
+    text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;
+    transition:color .16s var(--spring),opacity .1s}
+  .notelink:hover{color:var(--brand)}
+  .notelink:active{opacity:.55}
+  dialog#noteDlg{border:1px solid var(--line);border-radius:20px;background:var(--card);color:var(--ink);
+    padding:0;max-width:600px;width:calc(100% - 32px);max-height:calc(100vh - 60px);
+    box-shadow:var(--shadow-lift)}
+  dialog#noteDlg::backdrop{background:rgba(3,38,57,.34);backdrop-filter:blur(6px)}
+  dialog#noteDlg[open]{animation:dlgIn .38s var(--spring)}
+  @keyframes dlgIn{from{opacity:0;transform:translateY(12px) scale(.96);filter:blur(8px)}
+                   to{opacity:1;transform:none;filter:blur(0)}}
+  .dlghd{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px 6px;
+    position:sticky;top:0;background:var(--card);z-index:1}
+  .dlghd h4{margin:0;font-size:1rem;font-weight:800;color:var(--brand)}
+  .dlgclose{background:none;border:0;color:var(--muted);font-size:1.2rem;line-height:1;cursor:pointer;padding:4px 6px;
+    border-radius:999px;transition:transform .1s var(--spring),background-color .16s}
+  .dlgclose:hover{background:var(--blue-100)}
+  .dlgclose:active{transform:scale(.92)}
+  .dlgbody{padding:0 20px 22px;font-size:.85rem;color:var(--n-500);line-height:1.85;overflow-y:auto}
+  .dlgbody b{color:var(--ink);font-weight:700}
+  .dlgbody p{margin:0 0 10px}
+  .dlgbody code{font-family:var(--mono);font-size:.8rem}
 
-/* ── 參與率公式 ── */
-.formula-wrap{display:flex;gap:14px;flex-wrap:wrap}
-.formula{flex:1;min-width:280px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
-         background:var(--moss-soft);border:1px solid var(--line-soft);border-radius:5px;
-         padding:16px 22px;font-family:var(--serif);color:var(--ink)}
-.formula.alt{background:var(--slate-soft)}
-.formula.alt .fx-label{color:var(--slate)}
-.formula .fx-label{font-size:16px;font-weight:600;color:var(--moss)}
-.formula .fx-eq,.formula .fx-mul{font-size:16px;color:var(--ink-2)}
-.formula .fx-frac{display:inline-flex;flex-direction:column;text-align:center;line-height:1.35}
-.formula .fx-num{padding:0 12px 3px;font-size:15px}
-.formula .fx-den{padding:3px 12px 0;font-size:15px;border-top:1.5px solid var(--ink-2)}
-.formula .fx-mul{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:14px}
+  /* 彈窗裡的公式 */
+  .fx{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:.82rem;
+    background:color-mix(in srgb,var(--p-blue) 34%,transparent);border-radius:12px;padding:9px 13px;margin:0 0 8px}
+  .fx b{color:var(--brand);font-weight:800}
+  .fx .frac{display:inline-flex;flex-direction:column;text-align:center;line-height:1.35}
+  .fx .frac .num{border-bottom:1.5px solid var(--brand-soft);padding:0 5px}
+  .fx .frac .den{padding:0 5px}
 
-/* ── 數據表 ── */
-.tablebox{background:var(--surface);border:1px solid var(--line-soft);border-radius:5px;box-shadow:var(--shadow);overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:720px}
-thead th{text-align:right;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
-         font-weight:600;padding:11px 12px;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--surface)}
-thead th.l{text-align:left}
-thead .grp2025{color:var(--moss)}
-tbody td{padding:8px 12px;border-bottom:1px solid var(--line-soft);vertical-align:middle;text-align:right;white-space:nowrap}
-tbody td.l{text-align:left}
-tbody tr:last-child td{border-bottom:0}
-.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
-.y26{color:var(--muted)}
-.divider{border-left:1px solid var(--line);}
+  /* 彈窗裡的原始數據下載 */
+  .dlsec{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+  .dlsec h5{margin:0 0 4px;font-size:.86rem;font-weight:800;color:var(--brand)}
+  .dlsec .why{font-size:.78rem;color:var(--muted);margin:0 0 12px;line-height:1.75}
+  .dlgrp{margin:0 0 14px}
+  .dlgrp .gt{font-size:.8rem;font-weight:800;color:var(--ink);margin:0 0 2px}
+  .dlgrp .gn{font-size:.76rem;color:var(--muted);margin:0 0 8px;line-height:1.7}
+  .dlrow{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:7px 11px;border:1px solid var(--line);
+    border-radius:12px;margin-bottom:7px;background:var(--card);text-decoration:none;color:inherit;
+    transition:transform .18s var(--spring),border-color .16s,background-color .16s}
+  .dlrow:hover{border-color:var(--brand-soft);background:color-mix(in srgb,var(--p-blue) 22%,transparent)}
+  .dlrow:active{transform:scale(.985)}
+  .dlrow .kind{font-size:.66rem;font-weight:800;letter-spacing:.06em;padding:2px 7px;border-radius:999px;
+    background:var(--blue-100);color:var(--brand);flex:none}
+  .dlrow .kind.csv{background:var(--p-mint);color:#106B52}
+  .dlrow .kind.link{background:var(--p-lav);color:#4A47A6}
+  .dlrow .nm{flex:1;min-width:0;font-size:.8rem;font-weight:700;color:var(--ink);
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .dlrow .lb{width:100%;font-size:.74rem;color:var(--muted);line-height:1.6;order:9}
+  .dlrow .sz{font-size:.72rem;color:var(--n-300);font-variant-numeric:tabular-nums;flex:none}
+  .sheetbox{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:8px}
+  .sheetbox input{flex:1;min-width:200px;font:inherit;font-size:.78rem;padding:6px 10px;border-radius:10px;
+    border:1px solid var(--line);background:var(--blue-100);color:var(--ink)}
+  .sheetbox input:focus{outline:2px solid var(--brand-soft);outline-offset:1px}
+  .dlwarn{font-size:.76rem;color:var(--wait);background:color-mix(in srgb,var(--p-yellow) 56%,transparent);
+    border-radius:10px;padding:8px 12px;line-height:1.7}
 
-tr.total td{background:var(--moss-soft);font-weight:700;border-bottom:1px solid var(--line)}
-tr.total .name{font-family:var(--serif);font-size:16px}
-tr.member td{font-weight:600}
-tr.member .name{padding-left:20px;position:relative}
-tr.member .name::before{content:"";position:absolute;left:8px;top:50%;width:5px;height:5px;
-                        border-radius:50%;background:var(--moss);transform:translateY(-50%)}
-tr.member.zero td{color:var(--muted)}
-tr.member.zero .name::before{background:var(--line)}
-tr.pr td{background:var(--slate-soft)}
-tr.pr .name{font-weight:600}
-tr.pr .name::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;
-                    background:var(--slate);margin-right:7px;vertical-align:middle}
-tr.excl td{color:var(--muted)}
-tr.excl .name{font-style:normal}
-.rate-cell{font-weight:600}
-.rate-dual{display:flex;flex-direction:column;line-height:1.2;align-items:flex-end}
-.rate-dual .u{font-weight:700;color:var(--moss);font-variant-numeric:tabular-nums}
-.rate-dual .d{font-size:11px;color:var(--slate);font-variant-numeric:tabular-nums;font-weight:600}
-tr.total .rate-dual .u{color:var(--moss)}
-.sumtot{font-weight:700;color:var(--ink)}
+  /* ===== 大區塊收合 ===== */
+  details.block{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);
+    box-shadow:var(--shadow);margin:18px 0;overflow:hidden;transition:box-shadow .3s var(--spring)}
+  details.block[open]{box-shadow:var(--shadow-lift)}
+  details.block>summary{padding:18px 20px}
+  details.block>summary .btitle{font-size:1.12rem;font-weight:800;letter-spacing:-.012em;color:var(--brand)}
+  details.block>summary .bmeta{font-size:.78rem;color:var(--muted);font-weight:600}
+  details.block>summary .bchev{margin-left:auto;color:var(--n-300);font-size:.9rem;transition:transform .34s var(--spring)}
+  details.block[open]>summary .bchev{transform:rotate(180deg)}
+  details.block>.bbody{padding:0 20px 18px}
 
-.empinput{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13px;width:78px;
-          text-align:right;padding:3px 7px;border:1px solid var(--line);border-radius:3px;
-          background:var(--surface);color:var(--ink)}
-.empinput.soft{border-color:var(--amber);color:var(--amber)}
-.empinput.sum{border:0;background:transparent;font-weight:700;color:inherit;width:70px;pointer-events:none}
+  details{border:1px solid var(--line);border-radius:12px;background:var(--card);margin:10px 0;overflow:hidden}
+  summary{cursor:pointer;list-style:none;padding:13px 16px;display:flex;align-items:center;gap:10px;font-weight:700;
+    transition:background-color .18s var(--spring)}
+  summary::-webkit-details-marker{display:none}
+  summary:hover{background:color-mix(in srgb,var(--p-blue) 26%,transparent)}
+  summary:active{background:color-mix(in srgb,var(--p-blue) 52%,transparent)}
+  summary .chev{transition:transform .34s var(--spring);color:var(--n-300);font-size:.8rem}
+  details[open]>summary .chev{transform:rotate(90deg)}
 
-/* ── 歸納 mail 區 ── */
-.workbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.btn{font:inherit;font-size:13.5px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);
-     padding:6px 14px;border-radius:3px;cursor:pointer}
-.btn:hover{border-color:var(--moss);color:var(--moss)}
-.btn-key{background:var(--moss);border-color:var(--moss);color:var(--on-moss);font-weight:600}
-.btn-key:hover{background:var(--moss);border-color:var(--moss);color:var(--on-moss);opacity:.88}
-.spacer{flex:1}
-:focus-visible{outline:2px solid var(--moss);outline-offset:2px}
+  /* ===== 歸戶區 ===== */
+  .tagbox{max-height:420px;overflow:auto;border:1px solid var(--line);border-radius:12px;margin-top:6px}
+  table.tag{font-size:.88rem}
+  table.tag thead th{position:sticky;top:0;background:var(--card);z-index:1}
+  table.tag td.stripe{width:4px;padding:0;border-bottom:0}
+  tr.tier-boda td.stripe{background:var(--brand)}
+  tr.tier-pr td.stripe{background:var(--blue-300)}
+  tr.tier-out td.stripe{background:var(--n-100)}
+  tr.untagged td.stripe{background:var(--wait)}
+  tr.untagged{background:color-mix(in srgb,var(--p-yellow) 58%,transparent)}
+  .pill{font-size:.68rem;font-weight:800;color:#8A5A00;background:var(--p-yellow);border:1px solid #F0DFA8;
+    border-radius:999px;padding:1px 8px;margin-left:8px}
+  table.tag select{font:inherit;font-size:.8rem;padding:4px 8px;border-radius:9px;border:1px solid var(--line);
+    background:var(--card);color:var(--ink);width:100%;
+    transition:border-color .16s var(--spring)}
+  table.tag select:hover{border-color:var(--brand-soft)}
+  table.tag select:focus{outline:2px solid var(--brand-soft);outline-offset:1px}
+  details.import>summary{font-size:.84rem;font-weight:700;color:var(--muted)}
+  .import-body{padding:2px 16px 14px;font-size:.8rem;color:var(--muted);line-height:1.8}
+  .import-body p{margin:0 0 8px}
+  .import-body textarea{width:100%;height:110px;font-family:var(--mono);font-size:.78rem;padding:9px 11px;
+    border-radius:12px;border:1px solid var(--line);background:var(--blue-100);color:var(--ink);resize:vertical}
+  .import-body textarea:focus{outline:2px solid var(--brand-soft);outline-offset:1px}
 
-.tagbox{background:var(--surface);border:1px solid var(--line-soft);border-radius:5px;box-shadow:var(--shadow);overflow-x:auto}
-table.tag{min-width:560px}
-table.tag td{text-align:right}
-table.tag td.l{text-align:left}
-tr.untagged td{background:var(--amber-soft)}
-.stripe{width:3px;padding:0!important}
-tr.tier-boda .stripe{background:var(--moss)}
-tr.tier-pr .stripe{background:var(--slate)}
-tr.tier-out .stripe{background:var(--line)}
-tr.untagged .stripe{background:var(--amber)}
-select{font:inherit;font-size:13px;padding:4px 8px;border:1px solid var(--line);border-radius:3px;
-       background:var(--surface);color:var(--ink);max-width:158px}
-tr.untagged select{border-color:var(--amber);background:var(--surface);color:var(--amber);font-weight:600}
-.pill{display:inline-block;font-size:11px;padding:1px 8px;border-radius:999px;
-      background:var(--amber-soft);color:var(--amber);font-weight:600;margin-left:8px}
+  /* ===== 稽核區 ===== */
+  .fold-hint{font-size:.8rem;color:var(--muted);line-height:1.8;margin:0 0 10px}
+  details.ev>summary{font-size:.86rem;font-weight:700}
+  .ev-date{color:var(--brand);font-family:var(--mono);font-size:.8rem;flex:none}
+  .ev-title{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+  .ev-tot{font-size:.78rem;color:var(--muted);font-weight:700;white-space:nowrap;flex:none}
+  .st{font-size:.68rem;font-weight:800;border-radius:999px;padding:1px 8px;flex:none}
+  .st-ended{background:var(--p-mint);color:#106B52}
+  .st-up{background:var(--p-blue);color:var(--brand-deep)}
+  .st-canc{background:var(--n-100);color:var(--n-500)}
+  .ev-body{padding:2px 16px 14px}
+  .dom-tab{width:100%;border-collapse:collapse;font-size:.84rem}
+  .dom-tab td,.dom-tab thead td{padding:6px 8px;border-bottom:1px solid var(--hair);text-align:right}
+  .dom-tab td.d{text-align:left;font-family:var(--mono);font-size:.8rem}
+  .dom-tab thead td{color:var(--muted);font-size:.74rem;font-weight:700;border-bottom:2px solid var(--line)}
+  .dom-tab tr.typo td.d::after{content:"疑似打錯";font-family:inherit;font-size:.66rem;font-weight:800;
+    color:#8A5A00;background:var(--p-yellow);border-radius:999px;padding:1px 7px;margin-left:7px}
+  details.audit-grand>summary{font-size:.82rem;font-weight:700;color:var(--muted)}
 
-details.import{background:var(--surface);border:1px solid var(--line-soft);border-radius:5px;box-shadow:var(--shadow);margin-top:4px}
-details.import>summary{cursor:pointer;padding:15px 20px;font-weight:600;list-style:none;display:flex;
-                       align-items:center;justify-content:space-between;gap:10px}
-details.import>summary::-webkit-details-marker{display:none}
-details.import>summary::after{content:"＋";color:var(--muted);font-weight:400}
-details.import[open]>summary::after{content:"−"}
-.import-body{padding:0 20px 20px;display:flex;flex-direction:column;gap:12px}
-.import-body p{margin:0;font-size:13.5px;color:var(--ink-2);max-width:74ch}
-textarea{font-family:var(--mono);font-size:13px;line-height:1.55;width:100%;min-height:140px;
-         padding:12px;border:1px solid var(--line);border-radius:3px;resize:vertical;
-         background:var(--sunken);color:var(--ink)}
-.msg{font-size:13px;color:var(--moss);font-weight:500;min-height:1.4em}
-.msg.warn{color:var(--amber)}
-.hint{font-size:12.5px;color:var(--amber);margin:2px 2px 0}
+  .foot{color:var(--muted);font-size:.8rem;margin-top:26px;line-height:1.75;border-top:1px solid var(--line);padding-top:16px}
+  .foot div{margin-bottom:7px}
+  .foot code{font-family:var(--mono);font-size:.76rem}
 
-footer{border-top:1px solid var(--line);padding-top:20px;font-size:12.5px;color:var(--muted);
-       display:flex;flex-direction:column;gap:5px}
-footer b{color:var(--ink-2)}
-footer code{font-family:var(--mono);font-size:12px}
+  @media (prefers-reduced-transparency:reduce){
+    .lockchip{background:var(--card);-webkit-backdrop-filter:none;backdrop-filter:none}
+    dialog#noteDlg::backdrop{backdrop-filter:none}
+  }
+
+  .reveal{opacity:0;transform:translateY(14px)}
+  .reveal.in{opacity:1;transform:none;transition:opacity .55s var(--spring),transform .55s var(--spring)}
+
+  /* 減少動態：安靜淡入，不位移不彈跳（apple-design §14）*/
+  @media (prefers-reduced-motion:reduce){
+    .orb{animation:none!important}
+    .reveal,.reveal.in{opacity:1!important;transform:none!important;transition:none!important}
+    dialog#noteDlg[open]{animation:fadeIn .2s ease}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    *,*::before,*::after{transition-duration:.01ms!important}
+  }
 </style>
-
+</head>
+<body>
 <div class="wrap">
 
-<header class="masthead">
-  <div class="eyebrow">練息場 Join to Enjoy · 企業參與分析</div>
-  <h1>博報堂集團參與率</h1>
-  <span class="cloud-badge badge-wait" id="cloudBadge">雲端載入中…</span>
-  <p class="lede">上方是分好組的 2025／2026 數據表：博報堂集團 6 家成員合併計算參與率，其餘歸「公關參與」。同時算兩種：<b>不重複參與率</b>（依人數）與<b>含重複參與率</b>（依人次）。2026 由 Wix 直接撈取（14 場活動全年報名）；沒點「所屬企業」下拉的報名者，已用公司 email 網域自動歸戶。下方歸戶區可微調每個帳號屬於哪一家，改完上方立刻重算。<b>員工總數與歸戶會即時存到雲端、跨裝置同步、永久保存</b>。</p>
+<header class="hero reveal">
+  <div class="orbs" aria-hidden="true">
+    <span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span>
+    <span class="orb o4"></span><span class="orb o5"></span>
+  </div>
+  <p class="eyebrow">練息場 Join to Enjoy · 企業參與分析</p>
+  <h1>格威博報堂集團 練息場活動參與統計</h1>
+  <div class="herobar">
+    <span class="cloud-badge badge-wait" id="cloudBadge">雲端載入中…</span>
+    <span class="lockchip">🔒 管理端 · 需密碼</span>
+    <button class="notelink" data-note="src">資料來源與原始數據</button>
+  </div>
 </header>
 
-<section>
-  <div class="sec-head">
-    <h2>一、分組數據表</h2>
-    <p class="sec-note">不重複參與率＝集團參與人數÷員工總數；含重複參與率＝集團參與人次÷員工總數。員工總數 2025／2026 分開、可直接編輯。2026 數字來自 Wix API 撈取。</p>
+<section class="card reveal">
+  <div class="cardhd">
+    <h2>集團整體參與率</h2>
+    <button class="notelink" data-note="rate">數據說明</button>
   </div>
-
   <div class="rates" id="rates"></div>
+</section>
 
-  <div class="formula-wrap">
-    <div class="formula" aria-label="不重複參與率公式">
-      <span class="fx-label">不重複參與率</span>
-      <span class="fx-eq">＝</span>
-      <span class="fx-frac"><span class="fx-num">集團參與人數（去重）</span><span class="fx-den">集團員工總數</span></span>
-      <span class="fx-mul">× 100%</span>
-    </div>
-    <div class="formula alt" aria-label="含重複參與率公式">
-      <span class="fx-label">含重複參與率</span>
-      <span class="fx-eq">＝</span>
-      <span class="fx-frac"><span class="fx-num">集團參與人次（含重複）</span><span class="fx-den">集團員工總數</span></span>
-      <span class="fx-mul">× 100%</span>
-    </div>
+<section class="card reveal">
+  <div class="cardhd">
+    <h2>一、分組數據表</h2>
+    <button class="notelink" data-note="sum">數據說明</button>
   </div>
-
-  <div class="tablebox">
-    <table>
+  <div class="scroll">
+    <table style="min-width:820px">
       <thead>
         <tr>
           <th class="l" rowspan="2" style="vertical-align:bottom">集團 / 成員</th>
@@ -267,98 +309,104 @@ footer code{font-family:var(--mono);font-size:12px}
         <tr>
           <th class="grp2025">人數</th><th class="grp2025">人次</th>
           <th class="grp2025">員工總數</th><th class="grp2025">參與率<br>不重複／含重複</th>
-          <th class="divider">人數</th><th>人次</th>
-          <th>員工總數</th><th>參與率<br>不重複／含重複</th>
+          <th class="divider">人數</th><th class="y26">人次</th>
+          <th class="y26">員工總數</th><th class="y26">參與率<br>不重複／含重複</th>
         </tr>
       </thead>
       <tbody id="rows"></tbody>
     </table>
   </div>
   <div class="workbar">
+    <span style="color:var(--muted)">「員工總數」欄位可隨時修改，改完立刻存雲端，所有人看到的都是最新數字。</span>
     <span class="spacer"></span>
-    <button class="btn" id="btnCsv">下載 CSV</button>
+    <button class="btn" id="btnCsv">下載這張表 CSV</button>
   </div>
 </section>
 
-<section>
- <details class="fold" open>
+<details class="block reveal" id="tagBlock">
   <summary>
-    <span class="fold-title">二、歸戶：標註每個帳號屬於哪一家</span>
-    <span class="fold-note" id="tagStat"></span>
-    <span class="fold-chev">▼</span>
+    <span class="btitle">二、歸戶</span>
+    <button class="notelink" data-note="tag">數據說明</button>
+    <span class="bmeta" id="tagStat"></span>
+    <span class="bchev">▾</span>
   </summary>
-  <div class="fold-body">
-  <div class="workbar">
-    <span id="tagLead" style="font-size:13.5px;color:var(--ink-2)"></span>
-    <span class="spacer"></span>
-    <button class="btn" id="btnReset">還原預設歸戶</button>
-  </div>
-  <div class="tagbox">
-    <table class="tag">
-      <thead>
-        <tr>
-          <th class="stripe"></th>
-          <th class="l">企業帳號（報名時填的公司）</th>
-          <th>2025 人數</th>
-          <th>2026 人數</th>
-          <th class="l" style="width:172px;text-align:left">歸屬</th>
-        </tr>
-      </thead>
-      <tbody id="tagrows"></tbody>
-    </table>
-  </div>
-
-  <details class="import">
-    <summary>2026 數字（已由 Wix 撈好，需要時可手動覆蓋）</summary>
-    <div class="import-body">
-      <p>目前 2026 已由 Wix API 直接撈好、烤進頁面（14 場活動全年報名）。若你想改用某份自己的名單重算，可把「識別欄（姓名或 Email）」與「公司」兩欄貼進來，一行一筆、逗號或 Tab 分隔；貼入會覆蓋現有 2026 數字。</p>
-      <p><code style="font-family:var(--mono);font-size:12.5px;color:var(--muted)">王小明,UCG　／　a@ucgroup.com.tw&#9;HTM</code></p>
-      <p>系統會在你的瀏覽器裡直接算出各公司的人數（去重）與人次，姓名／信箱用完即丟，不會存起來也不會出現在頁面上。</p>
-      <textarea id="paste" placeholder="王小明,UCG&#10;李小華,HTM&#10;張小美,PILOT" spellcheck="false"></textarea>
-      <div class="workbar">
-        <button class="btn btn-key" id="btnImport">用貼上的名單覆蓋 2026</button>
-        <button class="btn" id="btnClear26">還原 Wix 原始數字</button>
-        <span class="msg" id="msg"></span>
-      </div>
+  <div class="bbody">
+    <div class="workbar">
+      <span id="tagLead" style="color:var(--muted)"></span>
+      <span class="spacer"></span>
+      <button class="btn" id="btnReset">還原預設歸戶</button>
     </div>
-  </details>
-  </div>
- </details>
-</section>
+    <div class="tagbox">
+      <table class="tag">
+        <thead>
+          <tr>
+            <th class="stripe"></th>
+            <th class="l">企業帳號（報名時填的公司）</th>
+            <th>2025 人數</th>
+            <th>2026 人數</th>
+            <th class="l" style="width:180px">歸屬</th>
+          </tr>
+        </thead>
+        <tbody id="tagrows"></tbody>
+      </table>
+    </div>
 
-<section>
- <details class="fold">
+    <details class="import">
+      <summary><span class="chev">▸</span>2026 數字（已由 Wix 撈好，需要時可手動覆蓋）</summary>
+      <div class="import-body">
+        <p>目前 2026 已由 Wix API 直接撈好、烤進頁面（14 場活動全年報名）。若你想改用某份自己的名單重算，
+           可把「識別欄（姓名或 Email）」與「公司」兩欄貼進來，一行一筆、逗號或 Tab 分隔；貼入會覆蓋現有 2026 數字。</p>
+        <p><code style="font-family:var(--mono);font-size:.78rem">王小明,UCG　／　a@ucgroup.com.tw&#9;HTM</code></p>
+        <p>系統會在你的瀏覽器裡直接算出各公司的人數（去重）與人次，姓名／信箱用完即丟，不會存起來也不會出現在頁面上。</p>
+        <textarea id="paste" placeholder="王小明,UCG&#10;李小華,HTM&#10;張小美,PILOT" spellcheck="false"></textarea>
+        <div class="workbar">
+          <button class="btn pri" id="btnImport">用貼上的名單覆蓋 2026</button>
+          <button class="btn" id="btnClear26">還原 Wix 原始數字</button>
+          <span class="msg" id="msg"></span>
+        </div>
+      </div>
+    </details>
+  </div>
+</details>
+
+<details class="block reveal" id="auditBlock">
   <summary>
-    <span class="fold-title">三、資料稽核：逐場報名 × email 網域</span>
-    <span class="fold-note" id="auditNote"></span>
-    <span class="fold-chev">▼</span>
+    <span class="btitle">三、資料稽核：逐場報名 × email 網域</span>
+    <button class="notelink" data-note="audit">數據說明</button>
+    <span class="bmeta" id="auditNote"></span>
+    <span class="bchev">▾</span>
   </summary>
-  <div class="fold-body" id="auditBody">
-    <p class="fold-hint">直接來自 Wix Events API。每場只列 email「@ 之後的網域」與筆數（人次／去重人數），<b>不含任何姓名或完整信箱</b>。主管機關可用 Wix 後台自行匯出原始報名逐場對帳。點各場可展開。</p>
+  <div class="bbody">
     <details class="audit-grand">
-      <summary>全年網域總表（跨場去重）— 點開</summary>
-      <div style="padding:6px 16px 14px"><table class="dom-tab" id="grandTab"></table></div>
+      <summary><span class="chev">▸</span>全年網域總表（跨場去重）</summary>
+      <div style="padding:2px 16px 14px"><table class="dom-tab" id="grandTab"></table></div>
     </details>
     <div id="evList"></div>
   </div>
- </details>
-</section>
+</details>
 
-<footer>
-  <div><b>博報堂集團成員</b>（格威博報堂集團，日本博報堂 100% 持有）：聯廣 UCG、先勢集團、米蘭數位 MDCG、光洋波斯特、安益集團、台北博報堂 HTM。</div>
-  <div><b>2025 資料來源</b>：全部以 Wix 後台為準（Events API 逐場撈取＋後台匯出，2025 全年 20 場、總報名 635 人次，與匯出 626 一致，落差 &lt;2%）。表中<b>不重複人數</b>與<b>人次</b>同源——皆為「以集團信箱報名者」之 email 去重人數與報名筆數，逐場可對帳。六家合計不重複 256 人、576 人次。註：此為「用集團信箱報名的不同人」，範圍大於人資在職名冊，故高於公司內部在職統計，屬正常。</div>
-  <div><b>2026 資料來源</b>：Wix Events API 直接撈取（2026 全年 14 場活動）。有點「所屬企業」下拉的用下拉值；沒點的改用公司 email 網域自動歸戶（如 <code>@ua.com.tw</code>→聯廣、<code>@hakuhodotm.com.tw</code>→台北博報堂）。代碼對照：PILOT＝先勢、KY-POST＝光洋波斯特、INTERPLAN＝安益、練息之友歸「不列入」。人數以雜湊 email 去重，姓名／信箱全程未落地。</div>
-  <div><b>網域歸戶（決策者 2026-07-24 確認）</b>：<code>uni*</code>（unismart／unisurf／unisincere／unistyle）歸聯廣 UCG、<code>meshplus</code> 歸米蘭 MDCG、<code>interplan</code> 歸安益、<code>2008-media</code> 歸聯廣；<code>medialand／mxdigi／mdcg.tw</code> 屬米蘭 MDCG。<code>gmail</code> 等個人信箱不計入集團。</div>
-  <div><b>員工總數</b>為各集團全體員工數，供計算參與率之分母，請以人資實際數字覆蓋後再對外引用。</div>
-</footer>
-
+<p class="foot">
+  <span style="display:block"><b>格威博報堂集團成員</b>（日本博報堂 100% 持有）：聯廣 UCG、先勢集團、米蘭數位 MDCG、光洋波斯特、安益集團、台北博報堂 HTM。</span>
+  <span style="display:block"><b>員工總數</b>為各集團全體員工數，供計算參與率之分母，請以人資實際數字覆蓋後再對外引用。</span>
+  <span style="display:block">本頁為管理端工具（需密碼）。對外分享請用不需密碼的 <a href="/part">/part</a> 統計頁。</span>
+</p>
 </div>
 
+<dialog id="noteDlg">
+  <div class="dlghd"><h4 id="dlgTitle">數據說明</h4>
+    <button class="dlgclose" id="dlgClose" aria-label="關閉">✕</button></div>
+  <div class="dlgbody" id="dlgBody"></div>
+</dialog>
+
 <script>
+const REDUCE = matchMedia("(prefers-reduced-motion: reduce)");
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ═══════════════ 資料（來源見各段註解）═══════════════ */
+
 // 2025 全部以 Wix 後台為準（決策者 2026-07-24 定，不再用人工在職比對）。
 //  不重複人數(h)＝該集團信箱之不同 email 去重人數；人次(v)＝報名筆數。兩者同源、逐場可對帳。
-//  網域歸戶：uni* → 聯廣、meshplus → 米蘭、interplan → 安益（決策者 2026-07-24 確認）。
-//  註：去重以各網域 email 計，跨網域重複者極少、屬上限估計。
 const DATA_2025 = [
  {c:"MDCG",h:101,v:255},{c:"UCG",h:62,v:149},{c:"HTM",h:29,v:53},
  {c:"PILOT",h:37,v:77},{c:"KY-POST",h:24,v:39},{c:"INTERPLAN",h:3,v:3}
@@ -366,7 +414,6 @@ const DATA_2025 = [
 
 // 2026 由 Wix API 直接撈取（14 場活動，2026 全年）。有點「所屬企業/集團」下拉的用下拉值；
 // 沒點下拉的改用公司 email 網域當帳號（@domain），交由歸戶區指派集團。
-// 人數＝該帳號不重複 email（雜湊去重）、人次＝報名筆數；姓名／信箱全程未落地。
 const DATA_2026 = [
  {c:"MDCG",h:80,v:120},{c:"UCG",h:55,v:84},{c:"PILOT",h:29,v:35},{c:"HTM",h:25,v:38},
  {c:"@ua.com.tw",h:21,v:24},{c:"練息之友",h:14,v:14},{c:"@hakuhodotm.com.tw",h:13,v:16},
@@ -389,7 +436,7 @@ const PR = "公關參與";
 const OUT = "不列入";
 const isMember = g => MEMBERS.includes(g);
 
-// email 網域 → 集團（沒點下拉者用網域自動歸戶）。確定的先填好，模糊的留空待人工。
+// email 網域 → 集團（沒點下拉者用網域自動歸戶）
 const DOMAIN_GROUP = {
   "@ua.com.tw":"UCG","@ua.com":"UCG","@ace.taipei.com":"UCG","@ace-taipei.com":"UCG","@dvibemedia.com":"UCG",
   "@2008-media.com":"UCG",
@@ -402,21 +449,15 @@ const DOMAIN_GROUP = {
   "@interplan.com.tw":"安益"
 };
 // 決策者 2026-07-24 確認：uni* 歸聯廣、meshplus 歸米蘭、interplan 歸安益。
-// 只剩個人／不明信箱留「待標註」不計入集團。
-const DOMAIN_UNSURE = new Set([
-  "@charismomo.com","@gmail.com"
-]);
+const DOMAIN_UNSURE = new Set(["@charismomo.com","@gmail.com"]);
 
 function guessGroup(c){
-  // 2026 Wix 下拉代碼
   if(c === "PILOT") return "先勢";
   if(c === "KY-POST") return "光洋波斯特";
   if(c === "INTERPLAN") return "安益";
   if(c === "練息之友") return OUT;
-  // email 網域
   if(c in DOMAIN_GROUP) return DOMAIN_GROUP[c];
   if(DOMAIN_UNSURE.has(c)) return "";        // 留待人工歸戶
-  // 2025 中文名稱 + 共同代碼
   if(c.startsWith("UCG")) return "UCG";
   if(/^(先勢|天擎|鈞勢)/.test(c)) return "先勢";
   if(c === "HTM") return "HTM";
@@ -424,22 +465,23 @@ function guessGroup(c){
   if(c.startsWith("光洋")) return "光洋波斯特";
   if(c.startsWith("安益")) return "安益";
   if(c === "練息場") return OUT;
-  return PR;   // 非集團現場收費、其餘公關名單
+  return PR;
 }
 
 const DEFAULT_EMP25 = {"UCG":307};   // 雲端硬碟檔名「UCG集團全體員工307人」，推估值
 const DEFAULT_EMP26 = {"UCG":307};
-const SOFT_EMP = new Set();   // （已取消琥珀色特殊框）
 
+/* ═══════════════ 狀態 ＋ 雲端同步 ═══════════════ */
 const KEY = "jte-boda-tagger-v5";
-const CLOUD = "/api/state";                 // 雲端端點（Cloudflare KV），無此環境時自動退回本機
-let S = {tags:{}, emp25:{...DEFAULT_EMP25}, emp26:{...DEFAULT_EMP26}, d2026:DATA_2026};
+const CLOUD = "/api/state";
+// 現場報到來源表（Google Drive 搜到的活動總表）。頁面上可直接換成別份。
+const DEFAULT_SHEET = "https://docs.google.com/spreadsheets/d/15YtSrqtUtWr7U7MbG_5bAVE0BgA_-VZTK-jbwAeTZQk/edit";
+const BLANK = () => ({tags:{}, emp25:{...DEFAULT_EMP25}, emp26:{...DEFAULT_EMP26}, d2026:DATA_2026, sheetUrl:DEFAULT_SHEET});
+let S = BLANK();
 try{ const raw = localStorage.getItem(KEY); if(raw) S = Object.assign(S, JSON.parse(raw)); }catch(e){}
-const $ = id => document.getElementById(id);
 
-/* ── 雲端同步狀態小徽章 ── */
-let cloudOK = false;                         // 是否成功連上雲端
-function cloudBadge(state){                   // state: "saved" | "saving" | "local" | "loading"
+let cloudOK = false;
+function cloudBadge(state){
   const b = $("cloudBadge"); if(!b) return;
   const map = {
     loading: ["雲端載入中…", "badge-wait"],
@@ -451,10 +493,9 @@ function cloudBadge(state){                   // state: "saved" | "saving" | "lo
   b.textContent = txt; b.className = "cloud-badge " + cls;
 }
 
-/* 本機立即存＋雲端防抖存（改一個字不會狂打 API） */
 let cloudTimer = null;
 function cloudPut(){
-  if(!cloudOK) return;                        // 沒連上雲端就只留本機
+  if(!cloudOK) return;
   cloudBadge("saving");
   fetch(CLOUD, {method:"PUT", headers:{"content-type":"application/json"}, body: JSON.stringify(S)})
     .then(r => cloudBadge(r.ok ? "saved" : "local"))
@@ -462,10 +503,9 @@ function cloudPut(){
 }
 const save = () => {
   try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){}
-  if(cloudOK){ clearTimeout(cloudTimer); cloudTimer = setTimeout(cloudPut, 600); }
+  if(cloudOK){ clearTimeout(cloudTimer); cloudTimer = setTimeout(cloudPut, 350); }
 };
 
-/* 開頁先問雲端要最新版；雲端有資料就以雲端為準（跨裝置同步） */
 async function initState(){
   cloudBadge("loading");
   try{
@@ -474,15 +514,15 @@ async function initState(){
       cloudOK = true;
       const remote = await r.json();
       if(remote && typeof remote === "object"){
-        S = Object.assign({tags:{}, emp25:{...DEFAULT_EMP25}, emp26:{...DEFAULT_EMP26}, d2026:DATA_2026}, remote);
+        S = Object.assign(BLANK(), remote);
         try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){}
       }
       cloudBadge("saved");
     } else { cloudBadge("local"); }
-  }catch(e){ cloudBadge("local"); }   // file:// 或無端點 → 純本機模式
+  }catch(e){ cloudBadge("local"); }   // 本機預覽或無端點 → 純本機模式
 }
 
-/* 每個公司帳號兩年並排 */
+/* ═══════════════ 計算 ═══════════════ */
 function companyRows(){
   const m = new Map();
   DATA_2025.forEach(r => m.set(r.c, {c:r.c, h25:r.h, v25:r.v, h26:0, v26:0}));
@@ -503,19 +543,13 @@ function tierRank(g){
   if(g === OUT) return 91;
   return 99;
 }
-const cell = t => { const td = document.createElement("td"); td.className = "num"; td.textContent = t; return td; };
+const cell = t => { const td = document.createElement("td"); td.textContent = t; return td; };
 const fmtRate = r => (r===null || r===undefined) ? "—" : r.toFixed(1)+"%";
-const rateVal = (n, e) => e>0 ? n/e*100 : null;   // 分母 0 → null（顯示 —）
-
-function render(){
-  companyRows().forEach(r => tagOf(r.c));
-  renderTop();
-  renderTagArea();
-}
+const rateVal = (n, e) => e>0 ? n/e*100 : null;
 
 function aggregate(){
   const rows = companyRows();
-  const mem = new Map();                 // g -> {h25,v25,h26,v26, cos:[]}
+  const mem = new Map();
   MEMBERS.forEach(m => mem.set(m, {h25:0,v25:0,h26:0,v26:0,cos:[]}));
   const pr = {h25:0,v25:0,h26:0,v26:0,cos:[]};
   const out = {h25:0,v25:0,h26:0,v26:0,cos:[]};
@@ -531,9 +565,7 @@ function aggregate(){
 
 function empOf(year, m){ return Number((year===25 ? S.emp25 : S.emp26)[m])||0; }
 function setEmp(year, m, val){ (year===25 ? S.emp25 : S.emp26)[m] = val; }
-function defEmp(year){ return year===25 ? DEFAULT_EMP25 : DEFAULT_EMP26; }
 
-// 全表彙總＋兩種參與率（不重複＝人數/員工、含重複＝人次/員工）
 function calc(){
   const {mem, pr} = aggregate();
   let tH25=0,tV25=0,tH26=0,tV26=0,eSum25=0,eSum26=0; const miss25=[],miss26=[];
@@ -544,35 +576,32 @@ function calc(){
     if(e25>0) eSum25+=e25; else if(p.h25>0) miss25.push(MEMBER_LABEL[m]);
     if(e26>0) eSum26+=e26; else if(p.h26>0) miss26.push(MEMBER_LABEL[m]);
   });
-  // 合併參與率：要所有「有參與的成員」都填了員工數才算得準；否則顯示 —（待補）
+  // 合併參與率：所有「有參與的成員」都填了員工數才算得準，否則顯示 —（待補）
   const ok25 = eSum25>0 && miss25.length===0, ok26 = eSum26>0 && miss26.length===0;
   return {mem, pr, tH25,tV25,tH26,tV26, eSum25,eSum26, miss25,miss26,
     r25u:ok25?rateVal(tH25,eSum25):null, r25d:ok25?rateVal(tV25,eSum25):null,
     r26u:ok26?rateVal(tH26,eSum26):null, r26d:ok26?rateVal(tV26,eSum26):null};
 }
 
+/* ═══════════════ 畫面 ═══════════════ */
 function empInput(year, m){
-  const td = document.createElement("td"); td.className = "num";
-  const inp = document.createElement("input"); inp.type="number"; inp.min="0"; inp.className="empinput";
-  const ev = empOf(year, m); inp.value = ev||""; inp.placeholder="填";
+  const td = document.createElement("td");
+  const inp = document.createElement("input");
+  inp.type="number"; inp.min="0"; inp.className="empinput";
+  inp.value = empOf(year, m)||""; inp.placeholder="填";
   inp.setAttribute("aria-label", MEMBER_LABEL[m]+` ${2000+year} 員工總數`);
-  if(SOFT_EMP.has(m) && ev===defEmp(year)[m]) inp.classList.add("soft");
   // 只更新衍生數字、不重建輸入框 → 可連續輸入不掉焦點
   inp.addEventListener("input", () => {
     setEmp(year, m, inp.value===""?0:Number(inp.value));
-    inp.classList.toggle("soft", SOFT_EMP.has(m) && empOf(year,m)===defEmp(year)[m]);
     save(); refreshDerived();
   });
   td.append(inp); return td;
 }
-// 只放數字、給 id 供 refreshDerived 更新
 function idCell(id, txt){
-  const td = document.createElement("td"); td.className = "num"; td.id = id;
-  td.textContent = txt; return td;
+  const td = document.createElement("td"); td.id = id; td.textContent = txt; return td;
 }
-// 雙值參與率格（上：不重複 綠、下：含重複 藍）
 function dualCell(id){
-  const td = document.createElement("td"); td.className = "num rate-cell"; td.id = id;
+  const td = document.createElement("td"); td.id = id;
   const box = document.createElement("div"); box.className = "rate-dual";
   const u = document.createElement("span"); u.className = "u";
   const d = document.createElement("span"); d.className = "d";
@@ -585,21 +614,21 @@ function setDual(id, uni, dup){
   if(d) d.textContent = fmtRate(dup);
 }
 
-// 重算衍生數字（摘要卡、合計列、各成員參與率、員工小計、提示）— 不動輸入框
+// 重算衍生數字（摘要卡、合計列、各成員參與率、提示）— 不動輸入框
 function refreshDerived(){
   const d = calc();
-  // 摘要卡
   const rc = $("rates"); rc.textContent = "";
   [["2025", d.r25u, d.r25d, d.tH25, d.tV25, d.eSum25],
    ["2026", d.r26u, d.r26d, d.tH26, d.tV26, d.eSum26]].forEach(([yr,uni,dup,h,v,eSum]) => {
-    const card = document.createElement("div"); card.className = "ratecard";
-    const y = document.createElement("div"); y.className = "yr"; y.textContent = yr + " 博報堂集團";
+    const card = document.createElement("div");
+    card.className = "ratecard" + (yr==="2026" ? " y26" : "");
+    const y = document.createElement("div"); y.className = "yr"; y.textContent = yr + " 格威博報堂集團";
     const big = document.createElement("div"); big.className = "big" + (uni===null?" na":"");
-    big.textContent = fmtRate(uni);
+    big.textContent = uni===null ? "待填員工總數" : fmtRate(uni);
     const sub = document.createElement("div"); sub.className = "sub";
     sub.textContent = uni===null ? "" : `含重複 ${fmtRate(dup)}`;
     const cap = document.createElement("div"); cap.className = "cap";
-    cap.textContent = uni===null ? "請於下表填員工總數" : `不重複 ${h} 人 ÷ ${eSum} 人`;
+    cap.textContent = uni===null ? "在下表填入各成員員工總數即可算出" : `不重複 ${h} 人 ÷ ${eSum} 人`;
     const track = document.createElement("div"); track.className = "track";
     const fill = document.createElement("div"); fill.className = "fill";
     fill.style.width = (uni!==null) ? Math.min(100,uni).toFixed(1)+"%" : "0%";
@@ -608,23 +637,20 @@ function refreshDerived(){
     foot.innerHTML = `<span>參與人數 <b>${h}</b></span><span>參與人次 <b>${v}</b></span>`;
     card.append(y, big, sub, cap, track, foot); rc.append(card);
   });
-  // 合計列
   const setTxt = (id,t)=>{ const el=$(id); if(el) el.textContent=t; };
   setTxt("sumE25", d.eSum25||"—"); setDual("rateT25", d.r25u, d.r25d);
   setTxt("sumE26", d.eSum26||"—"); setDual("rateT26", d.r26u, d.r26d);
-  // 各成員參與率
   MEMBERS.forEach((m,i) => {
     const p = d.mem.get(m), e25=empOf(25,m), e26=empOf(26,m);
     setDual("rate25_"+i, rateVal(p.h25,e25), rateVal(p.v25,e25));
     setDual("rate26_"+i, rateVal(p.h26,e26), rateVal(p.v26,e26));
   });
-  // 待補提示
   $("topHint") && $("topHint").remove();
   const note = [];
   if(d.miss25.length) note.push(`2025：${d.miss25.join("、")}`);
   if(d.miss26.length) note.push(`2026：${d.miss26.join("、")}`);
   if(note.length){
-    const box = $("rows").closest(".tablebox");
+    const box = $("rows").closest(".scroll");
     const h = document.createElement("p"); h.className = "hint"; h.id = "topHint";
     h.textContent = `合併參與率尚未完整（分母只計已填員工數的成員）— 待補：${note.join("；")}。`;
     box.after(h);
@@ -635,42 +661,30 @@ function renderTop(){
   const {mem, pr} = aggregate();
   const tb = $("rows"); tb.textContent = "";
 
-  // 合計列（員工小計、參與率由 refreshDerived 填）
   const totalTr = document.createElement("tr"); totalTr.className = "total";
-  const tn = document.createElement("td"); tn.className = "l name"; tn.textContent = "博報堂集團 合計";
+  const tn = document.createElement("td"); tn.className = "l name"; tn.textContent = "格威博報堂集團 合計";
   let tH25=0,tV25=0,tH26=0,tV26=0;
   MEMBERS.forEach(m => { const p=mem.get(m); tH25+=p.h25;tV25+=p.v25;tH26+=p.h26;tV26+=p.v26; });
   totalTr.append(tn, cell(tH25), cell(tV25), idCell("sumE25","—"), dualCell("rateT25"));
-  const th26 = cell(tH26||"—"); th26.classList.add("y26","divider");
-  const tv26 = cell(tV26||"—"); tv26.classList.add("y26");
-  totalTr.append(th26, tv26, idCell("sumE26","—"), dualCell("rateT26"));
+  const th26 = cell(tH26||"—"); th26.classList.add("divider");
+  totalTr.append(th26, cell(tV26||"—"), idCell("sumE26","—"), dualCell("rateT26"));
   tb.append(totalTr);
 
-  // 成員列
   MEMBERS.forEach((m,i) => {
     const p = mem.get(m);
     const trm = document.createElement("tr"); trm.className = "member" + ((p.h25||p.h26)?"":" zero");
     const nm = document.createElement("td"); nm.className = "l name"; nm.textContent = MEMBER_LABEL[m];
     trm.append(nm, cell(p.h25), cell(p.v25), empInput(25,m), dualCell("rate25_"+i));
-    const h26c = cell(p.h26||"—"); h26c.classList.add("y26","divider");
-    const v26c = cell(p.v26||"—"); v26c.classList.add("y26");
-    trm.append(h26c, v26c, empInput(26,m), dualCell("rate26_"+i));
+    const h26c = cell(p.h26||"—"); h26c.classList.add("divider");
+    trm.append(h26c, cell(p.v26||"—"), empInput(26,m), dualCell("rate26_"+i));
     tb.append(trm);
   });
 
-  // 公關參與
   const trp = document.createElement("tr"); trp.className = "pr";
   const pn = document.createElement("td"); pn.className = "l name"; pn.textContent = `公關參與（${pr.cos.length} 家）`;
-  trp.append(pn, cell(pr.h25), cell(pr.v25));
-  const pe25 = document.createElement("td"); pe25.className="num"; pe25.textContent="—";
-  const pr25 = document.createElement("td"); pr25.className="num"; pr25.textContent="不計";
-  trp.append(pe25, pr25);
-  const ph26 = cell(pr.h26||"—"); ph26.classList.add("y26","divider");
-  const pv26 = cell(pr.v26||"—"); pv26.classList.add("y26");
-  trp.append(ph26, pv26);
-  const pe26 = document.createElement("td"); pe26.className="num"; pe26.textContent="—";
-  const pr26 = document.createElement("td"); pr26.className="num"; pr26.textContent="不計";
-  trp.append(pe26, pr26);
+  trp.append(pn, cell(pr.h25), cell(pr.v25), cell("—"), cell("不計"));
+  const ph26 = cell(pr.h26||"—"); ph26.classList.add("divider");
+  trp.append(ph26, cell(pr.v26||"—"), cell("—"), cell("不計"));
   tb.append(trp);
 
   refreshDerived();
@@ -689,12 +703,11 @@ function renderTagArea(){
     const st = document.createElement("td"); st.className = "stripe";
     const nm = document.createElement("td"); nm.className = "l"; nm.textContent = r.c;
     if(!g){ const p=document.createElement("span"); p.className="pill"; p.textContent="待標註"; nm.append(p); }
-    const h25 = cell(r.h25||"—"); const h26 = cell(r.h26||"—"); h26.classList.add("y26");
 
     const sel = document.createElement("select");
     sel.setAttribute("aria-label", r.c+" 歸屬");
     const blank = document.createElement("option"); blank.value=""; blank.textContent="— 尚未標註 —"; sel.append(blank);
-    const og = document.createElement("optgroup"); og.label="博報堂集團";
+    const og = document.createElement("optgroup"); og.label="格威博報堂集團";
     MEMBERS.forEach(m => { const o=document.createElement("option"); o.value=m; o.textContent=MEMBER_LABEL[m]; og.append(o); });
     sel.append(og);
     [PR, OUT].forEach(x => { const o=document.createElement("option"); o.value=x; o.textContent=x; sel.append(o); });
@@ -702,7 +715,7 @@ function renderTagArea(){
     sel.addEventListener("change", () => { S.tags[r.c] = sel.value; save(); render(); });
     const gt = document.createElement("td"); gt.className = "l"; gt.append(sel);
 
-    tr.append(st, nm, h25, h26, gt); tb.append(tr);
+    tr.append(st, nm, cell(r.h25||"—"), cell(r.h26||"—"), gt); tb.append(tr);
   });
   $("tagStat").textContent = `共 ${rows.length} 個企業帳號` + (untagged ? `，還有 ${untagged} 個待標註` : `，全部已標註`);
   $("tagLead").textContent = untagged
@@ -710,7 +723,14 @@ function renderTagArea(){
     : "全部帳號都已歸戶。新帳號（含 2026 匯入）會自動先猜一次，可再手動更正。";
 }
 
-/* ── 控制 ── */
+function render(){
+  companyRows().forEach(r => tagOf(r.c));
+  renderTop();
+  renderTagArea();
+  wireAllDetails();
+}
+
+/* ═══════════════ 控制 ═══════════════ */
 $("btnReset").addEventListener("click", () => { S.tags = {}; save(); render(); });
 
 $("btnCsv").addEventListener("click", () => {
@@ -719,11 +739,11 @@ $("btnCsv").addEventListener("click", () => {
   const L = ["層級,名稱,2025人數,2025人次,2025員工總數,2025不重複參與率%,2025含重複參與率%,2026人數,2026人次,2026員工總數,2026不重複參與率%,2026含重複參與率%"];
   let tH25=0,tV25=0,tH26=0,tV26=0,eS25=0,eS26=0;
   MEMBERS.forEach(m => { const p=mem.get(m),e25=empOf(25,m),e26=empOf(26,m);
-    L.push(["博報堂成員",MEMBER_LABEL[m],
+    L.push(["格威博報堂成員",MEMBER_LABEL[m],
       p.h25,p.v25,e25||"",rp(p.h25,e25),rp(p.v25,e25),
       p.h26,p.v26,e26||"",rp(p.h26,e26),rp(p.v26,e26)].join(","));
     tH25+=p.h25;tV25+=p.v25;tH26+=p.h26;tV26+=p.v26; if(e25>0)eS25+=e25; if(e26>0)eS26+=e26; });
-  L.push(["合計","博報堂集團",
+  L.push(["合計","格威博報堂集團",
     tH25,tV25,eS25||"",rp(tH25,eS25),rp(tV25,eS25),
     tH26,tV26,eS26||"",rp(tH26,eS26),rp(tV26,eS26)].join(","));
   L.push(["非集團",PR,pr.h25,pr.v25,"","","",pr.h26,pr.v26,"","",""].join(","));
@@ -733,7 +753,7 @@ $("btnCsv").addEventListener("click", () => {
     L.push(["",r.c,tagOf(r.c)||"未標註",r.h25,r.v25,r.h26,r.v26].join(",")));
   const blob = new Blob(["﻿"+L.join("\n")], {type:"text/csv;charset=utf-8"});
   const url = URL.createObjectURL(blob);
-  const a = document.createElement("a"); a.href=url; a.download="博報堂集團參與率.csv"; a.click();
+  const a = document.createElement("a"); a.href=url; a.download="格威博報堂集團參與率.csv"; a.click();
   URL.revokeObjectURL(url);
 });
 
@@ -766,7 +786,7 @@ $("btnClear26").addEventListener("click", () => {
   $("msg").className="msg"; $("msg").textContent="已還原為 Wix 原始 2026 數字。";
 });
 
-/* ───── 資料稽核：逐場 × email 網域（直接來自 Wix，只有網域、無個資）───── */
+/* ═══════════════ 資料稽核：逐場 × email 網域（直接來自 Wix，只有網域、無個資）═══════════════ */
 const EVENT_AUDIT = {"year":"2026","count":14,"events":[["2026-01-16","1/16 (五) 動態靜心｜用激靜鼓敲開心流","ENDED",30,30,[["@interplan.com.tw",5,5],["@mxdigi.com",5,5],["@unismart.com.tw",5,5],["@hakuhodotm.com.tw",4,4],["@medialand.tw",4,4],["@ua.com.tw",3,3],["@ky-post.com",2,2],["@gmail.com",1,1],["@meshplus.com.tw",1,1]]],["2026-03-20","3/20（五）春野・開運・馬上好","ENDED",101,100,[["@ua.com.tw",18,18],["@meshplus.com.tw",12,12],["@hakuhodotm.com.tw",11,10],["@medialand.tw",10,10],["@mxdigi.com",10,10],["@unismart.com.tw",6,6],["@grandpr.com.tw",4,4],["@ky-post.com",4,4],["@prestigepr.com.tw",4,4],["@gmail.com",3,3],["@pilotpr.com.tw",3,3],["@unisurf.com.tw",3,3],["@ace-taipei.com",2,2],["@mdcg.tw",2,2],["@unisincere.com.tw",2,2],["@ace.taipei.com",1,1],["@dvibemedia.com",1,1],["@hakuhodoti.com.tw",1,1],["@interplan.com.tw",1,1],["@planetpe.com.tw",1,1],["@planetpr.com.tw",1,1],["@unistyle.com.tw",1,1]]],["2026-03-27","3/27（五）［加場 ! ］春野・開運・馬上好 ","ENDED",52,52,[["@ua.com.tw",12,12],["@hakuhodotm.com.tw",8,8],["@grandpr.com.tw",7,7],["@pilotpr.com.tw",4,4],["@prestigepr.com.tw",4,4],["@unismart.com.tw",4,4],["@planetpr.com.tw",3,3],["@gmail.com",2,2],["@unisincere.com.tw",2,2],["@unisurf.com.tw",2,2],["@dvibemedia.com",1,1],["@medialand.tw",1,1],["@unistyle.com.tw",1,1],["@unisurf.com",1,1]]],["2026-04-17","4/17(五)漫步在樹梢｜一場離地向上的自由練習","ENDED",42,42,[["@ua.com.tw",10,10],["@medialand.tw",7,7],["@grandpr.com.tw",4,4],["@hakuhodotm.com.tw",4,4],["@unismart.com.tw",4,4],["@meshplus.com.tw",3,3],["@ky-post.com",2,2],["@ace-taipei.com",1,1],["@dvibemedia.com",1,1],["@gmail.com",1,1],["@mxdigi.com",1,1],["@pilotpr.com.tw",1,1],["@planetpr.com.tw",1,1],["@ua.com",1,1],["@unisurf.com.tw",1,1]]],["2026-05-22","5/22 (五) 啟動身體原廠設定！｜翻開吳清忠的自癒寶典","ENDED",31,30,[["@gmail.com",16,16],["@mxdigi.com",4,4],["@meshplus.com.tw",3,3],["@medialand.tw",3,2],["@ace-taipei.com",1,1],["@hakuhodotm.com.tw",1,1],["@hotmail.com",1,1],["@msn.com",1,1],["@yahoo.com.tw",1,1]]],["2026-05-13","5/13（三）［高級大人場 ! ］春野・開運・馬上好 ","CANCELED",0,0,[]],["2026-06-04","6/4（四）《鬆鬆在・小滿茶席》  回到身體的三道茶","ENDED",1,1,[["@medialand.tw",1,1]]],["2026-06-05","6/5（五）《鬆鬆在・小滿茶席》  回到身體的三道茶","ENDED",1,1,[["@jointoenjoy.com",1,1]]],["2026-07-31","7/31（五）《聲波共振！開出你專屬的魔法結界》","UPCOMING",30,30,[["@ua.com.tw",13,13],["@medialand.tw",6,6],["@2008-media.com",3,3],["@hakuhodotm.com.tw",2,2],["@mxdigi.com",2,2],["@pilotpr.com.tw",2,2],["@grandpr.com.tw",1,1],["@prestigepr.com.tw",1,1]]],["2026-07-17","7/17（五）《就是你了！來養顆苔球小精靈吧》","ENDED",56,56,[["@hakuhodotm.com.tw",10,10],["@medialand.tw",9,9],["@meshplus.com.tw",7,7],["@ua.com.tw",7,7],["@ky-post.com",5,5],["@unisurf.com.tw",5,5],["@pilotpr.com.tw",4,4],["@ace-taipei.com",2,2],["@mxdigi.com",2,2],["@charismomo.com",1,1],["@dvibemedia.com",1,1],["@grandpr.com.tw",1,1],["@planetpr.com.tw",1,1],["@unistyle.com.tw",1,1]]],["2026-07-31","7/31（五）《就是你了！來養顆苔球小精靈吧》","UPCOMING",45,45,[["@meshplus.com.tw",10,10],["@medialand.tw",9,9],["@ua.com.tw",8,8],["@mxdigi.com",5,5],["@hakuhodotm.com.tw",4,4],["@unisurf.com.tw",4,4],["@ky-post.com",2,2],["@unismart.com.tw",2,2],["@pilotpr.com.tw",1,1]]],["2026-07-30","7/30（四）《就是你了！來養顆苔球小精靈吧》 加場！","UPCOMING",27,27,[["@medialand.tw",6,6],["@meshplus.com.tw",6,6],["@ua.com.tw",4,4],["@hakuhodotm.com.tw",2,2],["@ky-post.com",2,2],["@mxdigi.com",2,2],["@ace-taipei.com",1,1],["@charismomo.com",1,1],["@medialnad.tw",1,1],["@mediand.tw",1,1],["@mxdogi.com",1,1]]],["2026-08-21","8/21（五）《替身體乾一杯！ 滋養自己的香料野草茶》","UPCOMING",0,0,[]],["2026-08-27","8/27（四）《替身體乾一杯！ 滋養自己的香料野草茶》","UPCOMING",0,0,[]]],"grand":[["@ua.com.tw",75,36],["@medialand.tw",56,35],["@hakuhodotm.com.tw",46,23],["@meshplus.com.tw",42,22],["@gmail.com",23,20],["@mxdigi.com",31,17],["@ky-post.com",17,12],["@unismart.com.tw",21,11],["@pilotpr.com.tw",15,10],["@unisurf.com.tw",15,10],["@grandpr.com.tw",17,9],["@prestigepr.com.tw",9,5],["@interplan.com.tw",6,5],["@planetpr.com.tw",6,5],["@ace-taipei.com",7,3],["@unisincere.com.tw",4,3],["@2008-media.com",3,3],["@dvibemedia.com",4,2],["@mdcg.tw",2,2],["@unistyle.com.tw",3,1],["@charismomo.com",2,1],["@ace.taipei.com",1,1],["@hakuhodoti.com.tw",1,1],["@hotmail.com",1,1],["@jointoenjoy.com",1,1],["@medialnad.tw",1,1],["@mediand.tw",1,1],["@msn.com",1,1],["@mxdogi.com",1,1],["@planetpe.com.tw",1,1],["@ua.com",1,1],["@unisurf.com",1,1],["@yahoo.com.tw",1,1]]};
 
 // 疑似打錯的網域（跟某個正確網域幾乎一樣，會被當成獨立帳號、影響歸戶）
@@ -774,13 +794,12 @@ const TYPO_DOMAINS = new Set(["@medialnad.tw","@mediand.tw","@mxdogi.com","@haku
 const ST_MAP = {ENDED:["已結束","st-ended"], UPCOMING:["未來場","st-up"], CANCELED:["已取消","st-canc"]};
 
 function domTable(rows, withHead){
-  const esc = s => s.replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
   let h = "";
-  if(withHead) h += `<thead><tr><td>email 網域</td><td class="n">人次</td><td class="n">人數</td></tr></thead>`;
+  if(withHead) h += `<thead><tr><td>email 網域</td><td>人次</td><td>人數</td></tr></thead>`;
   h += "<tbody>";
   rows.forEach(([d,v,p]) => {
     const cls = TYPO_DOMAINS.has(d) ? ' class="typo"' : "";
-    h += `<tr${cls}><td class="d">${esc(d)}</td><td class="n">${v}</td><td class="n">${p}</td></tr>`;
+    h += `<tr${cls}><td class="d">${esc(d)}</td><td>${v}</td><td>${p}</td></tr>`;
   });
   return h + "</tbody>";
 }
@@ -788,7 +807,6 @@ function domTable(rows, withHead){
 function renderAudit(){
   const A = EVENT_AUDIT;
   const live = A.events.filter(e => e[2] !== "CANCELED" && e[3] > 0);
-  const sumVisits = live.reduce((s,e)=>s+e[3],0);
   $("auditNote").textContent = `Wix 撈取 · ${A.count} 場（有效 ${live.length} 場）· 全年 ${A.grand.length} 種網域`;
   $("grandTab").innerHTML = domTable(A.grand, true);
 
@@ -800,9 +818,9 @@ function renderAudit(){
     d.className = "ev";
     const totTxt = (status === "CANCELED") ? "—" : `${people} 人 / ${visits} 人次`;
     d.innerHTML =
-      `<summary><span class="ev-date">${date}</span>`
+      `<summary><span class="chev">▸</span><span class="ev-date">${date}</span>`
       + `<span class="st ${stCls}">${stTxt}</span>`
-      + `<span class="ev-title">${title.replace(/[<>&]/g,"")}</span>`
+      + `<span class="ev-title">${esc(title)}</span>`
       + `<span class="ev-tot">${totTxt}</span></summary>`
       + `<div class="ev-body">`
       + (doms.length ? `<table class="dom-tab">${domTable(doms,true)}</table>`
@@ -810,9 +828,223 @@ function renderAudit(){
       + `</div>`;
     list.appendChild(d);
   });
+  wireAllDetails();
 }
 
+/* ═══════════════ 原始數據下載（放在數據說明彈窗裡）═══════════════
+   檔案由 pipeline/build_all_downloads.py 產生，放在 /all/data/。
+   /all 整區有密碼保護，所以這些檔案外面的人拿不到。
+   內容全部只有 email「@ 之後的網域」與計數，沒有姓名、沒有完整信箱。 */
+let MANIFEST = null;
+const manifestReady = fetch("/all/data/manifest.json", {cache:"no-store"})
+  .then(r => r.ok ? r.json() : null)
+  .then(j => { MANIFEST = j; })
+  .catch(() => { MANIFEST = null; });
+
+const kb = n => n >= 1024*1024 ? (n/1024/1024).toFixed(1)+" MB" : Math.max(1,Math.round(n/1024))+" KB";
+
+function sheetRowHtml(){
+  const u = (S.sheetUrl ?? DEFAULT_SHEET).trim();
+  const ok = /^https?:\/\//i.test(u);
+  return `<div class="dlgrp">
+    <p class="gt">Google 現場報到表</p>
+    <p class="gn">活動當天的簽到紀錄，是「報到」數字的唯一來源。這份表含姓名與完整信箱，
+       所以<b>只放連結、不放檔案</b>——點過去要有 Google 帳號權限才看得到。</p>
+    ${ok ? `<a class="dlrow" href="${esc(u)}" target="_blank" rel="noopener">
+        <span class="kind link">連結</span>
+        <span class="nm">開啟 Google 試算表（2026_Chill療癒工作坊總表）</span>
+        <span class="sz">↗</span></a>` : ""}
+    <div class="sheetbox">
+      <input id="sheetInput" type="url" spellcheck="false"
+             placeholder="貼上 Google 試算表網址（https://docs.google.com/...）" value="${esc(u)}">
+      <button class="btn pri" id="sheetSave">${ok ? "更新連結" : "儲存連結"}</button>
+      <span class="msg" id="sheetMsg"></span>
+    </div>
+    ${ok ? "" : `<p class="gn">還沒設定。貼上網址後按儲存，會跟員工總數一起存到雲端，其他管理員也看得到。</p>`}
+  </div>`;
+}
+
+function fileRowsHtml(groupTitles){
+  if(!MANIFEST) return `<p class="dlwarn">讀不到下載清單（本機預覽沒有 <code>data/</code> 資料夾時屬正常）。
+    部署後這裡會列出所有原始檔。</p>`;
+  const gs = MANIFEST.groups.filter(g => !groupTitles || groupTitles.includes(g.title));
+  if(!gs.length) return "";
+  return gs.map(g => `<div class="dlgrp">
+    <p class="gt">${esc(g.title)}</p>
+    <p class="gn">${esc(g.note)}</p>
+    ${g.files.map(f => `<a class="dlrow" href="/all/data/${encodeURIComponent(f.file)}" download>
+        <span class="kind ${f.kind==="CSV"?"csv":""}">${esc(f.kind)}</span>
+        <span class="nm">${esc(f.file)}</span>
+        <span class="sz">${kb(f.bytes)}</span>
+        <span class="lb">${esc(f.label)}</span></a>`).join("")}
+  </div>`).join("");
+}
+
+// 每個說明彈窗底下要掛哪些原始檔（null＝全部）
+function downloadsHtml(groupTitles, withSheet){
+  return `<div class="dlsec">
+    <h5>原始數據</h5>
+    <p class="why">下面是這一頁數字的來源檔，可以直接下載回去自己對帳。
+      ${MANIFEST ? `（產出時間 ${esc(MANIFEST.built)}）` : ""}
+      這些檔案<b>只含 email「@ 之後的網域」與計數，沒有姓名、也沒有完整信箱</b>。
+      CSV 用 Excel 直接開；JSON 是程式用的原檔。</p>
+    ${withSheet ? sheetRowHtml() : ""}
+    ${fileRowsHtml(groupTitles)}
+  </div>`;
+}
+
+/* ═══════════════ 數據說明彈窗 ═══════════════ */
+const NOTES = {
+  src: ["資料來源與原始數據", () => `
+    <p>這一頁的數字來自<b>兩個地方</b>，兩邊算的東西不一樣，看數字前先分清楚：</p>
+    <p><b>① Wix 報名系統</b> — 誰「報了名」。含正取、候補、請假。這一頁的人數／人次都是<b>報名</b>。</p>
+    <p><b>② Google 現場報到表</b> — 誰「當天真的來了」。對外的 <a href="/part">/part</a> 統計頁用的是這一份。</p>
+    <p>所以同一場活動，這一頁的數字會<b>大於</b> /part，因為報名的人不一定都會到。</p>
+    <p><b>2025</b> 全部以 Wix 後台為準（Events API 逐場撈取＋後台匯出，全年 20 場、總報名 635 人次，
+       與後台匯出的 626 一致，落差 &lt;2%）。表中「不重複人數」與「人次」同源，逐場可對帳。
+       註：這是「用集團信箱報名的不同人」，範圍大於人資在職名冊，所以會高於公司內部在職統計，屬正常。</p>
+    <p><b>2026</b> 由 Wix Events API 直接撈取（全年 14 場）。有點「所屬企業」下拉的用下拉值；
+       沒點的改用公司 email 網域自動歸戶。代碼對照：PILOT＝先勢、KY-POST＝光洋波斯特、INTERPLAN＝安益，
+       「練息之友」歸不列入。</p>
+    ${downloadsHtml(null, true)}`],
+
+  rate: ["集團整體參與率 · 數據說明", () => `
+    <p>兩張卡分別是 2025 與 2026 的<b>集團合併參與率</b>，大數字是「不重複參與率」。</p>
+    <div class="fx"><b>不重複參與率</b>＝
+      <span class="frac"><span class="num">集團參與人數（去重）</span><span class="den">集團員工總數</span></span>× 100%</div>
+    <div class="fx"><b>含重複參與率</b>＝
+      <span class="frac"><span class="num">集團參與人次（含重複）</span><span class="den">集團員工總數</span></span>× 100%</div>
+    <p><b>人數</b>＝同一人只算一次（用 email 去重）；<b>人次</b>＝報名筆數，同一人參加多場會重複計。
+       所以含重複參與率可能超過 100%，代表平均每人不只參加一場。</p>
+    <p><b>分母是「已填員工總數的成員加總」</b>。只要還有任何一家有參與、但員工總數是空的，
+       合併參與率就會顯示「待填員工總數」，不會給你一個算錯的數字。缺哪幾家會列在表格下方。</p>
+    <p>員工總數即時存到雲端，跨裝置同步、永久保存。</p>
+    ${downloadsHtml(["併檔後：報名 ＋ 現場報到"], false)}`],
+
+  sum: ["分組數據表 · 數據說明", () => `
+    <p>每一列是一家集團成員，2025 與 2026 並排。<b>員工總數欄位可以直接改</b>，改完右邊參與率立刻重算。</p>
+    <p><b>2025／2026 的員工總數分開填</b>，因為兩年的編制人數不一定相同，分開填才算得準。</p>
+    <p><b>公關參與</b>那一列是非集團的來賓與合作對象，只呈現人數、<b>不計入</b>參與率的分子分母。</p>
+    <p><b>合計列</b>的員工總數＝各成員<b>已填</b>數字的加總，沒填的不算進去。</p>
+    <p>右下角「下載這張表 CSV」會把目前畫面上的數字（含你填的員工總數與歸戶結果）匯出成 Excel 可開的檔案。</p>
+    ${downloadsHtml(["併檔後：報名 ＋ 現場報到"], false)}`],
+
+  tag: ["歸戶 · 數據說明", () => `
+    <p><b>為什麼要歸戶</b>：報名時有人選了「所屬企業」下拉、有人沒選。沒選的只能靠 email 網域判斷是哪一家，
+       所以這裡把每個「企業帳號」（下拉值或 <code>@網域</code>）對到一家集團成員。</p>
+    <p>系統會先自動猜一次（<code>uni*</code>→聯廣、<code>meshplus</code>→米蘭、<code>interplan</code>→安益、
+       <code>2008-media</code>→聯廣、<code>medialand／mxdigi／mdcg.tw</code>→米蘭，決策者 2026-07-24 確認），
+       猜不出來的留「待標註」用琥珀色標出來，請人工從右邊下拉指定。</p>
+    <p><code>gmail</code> 等個人信箱不算集團。改完上方表格與參與率會立刻重算，並存到雲端。</p>
+    <p>「還原預設歸戶」會清掉所有人工指定、全部重猜一次。</p>
+    ${downloadsHtml(["Wix 報名原始數據"], false)}`],
+
+  audit: ["資料稽核 · 數據說明", () => `
+    <p>這一區是<b>沒有經過任何加工</b>的 Wix 原始撈取結果，用來逐場對帳、確認上面的彙總沒算錯。</p>
+    <p>每場只列 email「@ 之後的網域」與筆數（人次／去重人數），<b>不含任何姓名或完整信箱</b>。
+       需要看到人名時，請直接到 Wix 後台自行匯出。</p>
+    <p><b>場次狀態</b>：已結束＝活動辦完了；未來場＝還沒辦，報名數會繼續變動；已取消＝這場沒辦成。</p>
+    <p>標「疑似打錯」的網域，是跟某個正確網域幾乎一樣、但拼錯的手 key 結果
+       （例如 <code>@medialnad.tw</code>）。它們會被當成獨立帳號，記得在歸戶區指定一下。</p>
+    ${downloadsHtml(["Wix 報名原始數據","Wix 報名狀態（正取／候補／請假）"], false)}`]
+};
+
+(function(){
+  const dlg = $("noteDlg");
+  function close(){
+    if(REDUCE.matches){ dlg.close(); return; }
+    // 退場走原路徑回去（apple-design §7）：同樣的模糊＋縮放，只是反過來、快一點
+    dlg.getAnimations().forEach(a=>a.cancel());
+    const a = dlg.animate(
+      [{opacity:1,transform:"none",filter:"blur(0px)"},
+       {opacity:0,transform:"translateY(8px) scale(.98)",filter:"blur(6px)"}],
+      {duration:220,easing:"ease-in"});
+    const shut = () => dlg.close();
+    a.onfinish = shut;
+    setTimeout(shut, 260);   // 分頁在背景時動畫會凍住，保險起見一定關得掉
+  }
+
+  // 綁在 document 上：稽核區的列是後來才畫出來的，事後綁會漏
+  document.addEventListener("click", e => {
+    const b = e.target.closest(".notelink");
+    if(!b) return;
+    e.preventDefault(); e.stopPropagation();     // 在 summary 裡點說明時不要順便展開區塊
+    const n = NOTES[b.dataset.note]; if(!n) return;
+    $("dlgTitle").textContent = n[0];
+    const paint = () => { $("dlgBody").innerHTML = typeof n[1] === "function" ? n[1]() : n[1]; };
+    paint();
+    dlg.showModal();
+    if(!MANIFEST) manifestReady.then(paint);     // 清單晚點才回來就補畫一次
+  });
+
+  // Google 試算表連結：存在雲端，跟員工總數同一份
+  $("dlgBody").addEventListener("click", e => {
+    if(e.target.id !== "sheetSave") return;
+    const inp = $("sheetInput"), msg = $("sheetMsg");
+    const v = inp.value.trim();
+    if(v && !/^https?:\/\//i.test(v)){
+      msg.className = "msg warn"; msg.textContent = "請貼完整網址（要有 https://）";
+      return;
+    }
+    S.sheetUrl = v; save();
+    msg.className = "msg";
+    msg.textContent = cloudOK ? "已存到雲端 ✓" : "已存本機（未連雲端）";
+  });
+
+  $("dlgClose").addEventListener("click", close);
+  dlg.addEventListener("click", e => { if(e.target === dlg) close(); });
+  dlg.addEventListener("cancel", e => { e.preventDefault(); close(); });
+})();
+
+/* ═══════════════ 展開／收合：可隨時抓住、隨時反轉（apple-design §3）═══════════════
+   不用 CSS transition —— 手勢中的東西必須能從「目前畫面上的值」接手。
+   每次都讀當下高度當起點、舊動畫直接取消，所以連點也不會跳。 */
+function wireDetails(d){
+  if(d.dataset.wired) return;
+  d.dataset.wired = "1";
+  const sum = d.querySelector(":scope > summary");
+  const body = Array.from(d.children).find(el => el.tagName !== "SUMMARY");
+  if(!sum || !body) return;
+  sum.addEventListener("click", e => {
+    if(e.target.closest(".notelink")) return;      // 點「數據說明」不要順便展開
+    e.preventDefault();
+    if(REDUCE.matches){ d.open = !d.open; return; }
+    // 正在動的話，以「動畫的意圖」為準，而不是 d.open
+    const opening = d.dataset.anim ? d.dataset.anim !== "open" : !d.open;
+    const start = body.getBoundingClientRect().height;   // 先讀當前值，再取消舊動畫
+    body.getAnimations().forEach(a => a.cancel());
+    d.dataset.anim = opening ? "open" : "close";
+    if(opening) d.open = true;
+    body.style.overflow = "hidden";
+    const end = opening ? body.scrollHeight : 0;
+    const anim = body.animate(
+      [{height:start+"px", opacity:opening?.4:1},
+       {height:end+"px",   opacity:opening?1:.4}],
+      {duration:400, easing:"cubic-bezier(.32,.72,0,1)"});
+    let settled = false;
+    const done = () => {
+      if(settled || anim.playState === "idle") return;   // idle＝已被下一次點擊取消，交給它收尾
+      settled = true;
+      delete d.dataset.anim;
+      body.style.overflow = ""; body.style.height = "";
+      if(!opening) d.open = false;
+    };
+    anim.onfinish = done;
+    setTimeout(done, 460);   // 分頁在背景時動畫會凍住，保險起見一定收得了尾
+  });
+}
+function wireAllDetails(){ document.querySelectorAll("details").forEach(wireDetails); }
+
+/* ═══════════════ 進場 ═══════════════ */
+requestAnimationFrame(() => {
+  document.querySelectorAll(".reveal").forEach((el,i) => setTimeout(() => el.classList.add("in"), i*70));
+});
+
+
+/* ═══════════════ 啟動 ═══════════════ */
 render();
 renderAudit();
 initState().then(render);   // 先畫本機版，雲端回來再以雲端為準重畫
 </script>
+</body>
+</html>

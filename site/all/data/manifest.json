@@ -1,0 +1,82 @@
+{
+ "built": "2026-07-27 15:46",
+ "groups": [
+  {
+   "title": "Wix 報名原始數據",
+   "note": "直接用 Wix Events API 逐場撈下來的報名紀錄，已把每個人的信箱切成「@ 之後的網域」再彙總。人次＝報名筆數，人數＝該網域不重複的報名者。場次狀態 ENDED＝已結束、UPCOMING＝尚未舉辦、CANCELED＝已取消。",
+   "files": [
+    {
+     "file": "wix-2025-報名逐場.csv",
+     "label": "2025 每一場、每個 email 網域的報名人次與人數",
+     "kind": "CSV",
+     "rows": 219,
+     "bytes": 22539
+    },
+    {
+     "file": "wix-2025-報名逐場.json",
+     "label": "2025 同上，JSON 原檔（另含全年網域總表 grand_domains）",
+     "kind": "JSON",
+     "bytes": 25042
+    },
+    {
+     "file": "wix-2026-報名逐場.csv",
+     "label": "2026 每一場、每個 email 網域的報名人次與人數",
+     "kind": "CSV",
+     "rows": 113,
+     "bytes": 11426
+    },
+    {
+     "file": "wix-2026-報名逐場.json",
+     "label": "2026 同上，JSON 原檔（另含全年網域總表 grand_domains）",
+     "kind": "JSON",
+     "bytes": 14670
+    }
+   ]
+  },
+  {
+   "title": "Wix 報名狀態（正取／候補／請假）",
+   "note": "同一批 Wix 資料，但拆出每個人當初的報名狀態。正取＝取得名額（Wix 的 ATTENDING）、候補＝額滿排補（IN_WAITLIST）、請假＝報名後取消（NOT_ATTENDING）。這是「報名」不是「到場」。",
+   "files": [
+    {
+     "file": "wix-報名狀態逐場.csv",
+     "label": "2025＋2026 每一場、每個網域的正取／候補／請假人數",
+     "kind": "CSV",
+     "rows": 332,
+     "bytes": 34448
+    },
+    {
+     "file": "wix-報名狀態逐場.json",
+     "label": "同上，JSON 原檔（含每場總計 totals）",
+     "kind": "JSON",
+     "bytes": 35116
+    }
+   ]
+  },
+  {
+   "title": "併檔後：報名 ＋ 現場報到",
+   "note": "把上面的 Wix 報名，跟 Google 現場報到表對起來之後的結果，也就是這一頁與 /part 真正拿來算數字的那一份。「報到」只有實際簽到才算；沒有報到表的場次（欄位『報到表＝無』）報到一律是 0，不代表沒人來。",
+   "files": [
+    {
+     "file": "併檔-報名與報到逐場.csv",
+     "label": "每一場、每個網域的正取／候補／請假／報到，含歸屬公司",
+     "kind": "CSV",
+     "rows": 294,
+     "bytes": 30764
+    },
+    {
+     "file": "併檔-報名與報到逐場.json",
+     "label": "同上，JSON 原檔",
+     "kind": "JSON",
+     "bytes": 39139
+    },
+    {
+     "file": "彙總-各公司兩年度.json",
+     "label": "各公司 2025／2026 的人次與人數彙總（這一頁表格的來源）",
+     "kind": "JSON",
+     "bytes": 7477
+    }
+   ]
+  }
+ ],
+ "privacy": "以上檔案全部只含 email「@ 之後的網域」與計數，沒有姓名、沒有完整信箱。含真名的原始匯出只留在本機，不進 git、也不會上傳。"
+}
