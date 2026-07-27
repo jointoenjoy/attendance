@@ -5,53 +5,99 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>格威博報堂集團 × 練息場 · 參與統計</title>
 <style>
-  :root{ --bg:#f5f3ee; --card:#fffdf9; --ink:#23282a; --muted:#6d7175; --line:#e4e0d6;
-    --accent:#2f8f83; --accent-d:#1f6b61; --accent-soft:#dcefeb;
-    --shadow:0 1px 2px rgba(40,45,40,.05),0 8px 26px rgba(40,45,40,.07);}
-  @media (prefers-color-scheme:dark){ :root{ --bg:#14171a; --card:#1b1f22; --ink:#e9e7e0; --muted:#9aa0a2;
-    --line:#2c3236; --accent:#4db8aa; --accent-d:#7fd0c4; --accent-soft:#1e3d39;
-    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.4);} }
-  :root[data-theme="dark"]{ --bg:#14171a; --card:#1b1f22; --ink:#e9e7e0; --muted:#9aa0a2; --line:#2c3236;
-    --accent:#4db8aa; --accent-d:#7fd0c4; --accent-soft:#1e3d39;}
-  :root[data-theme="light"]{ --bg:#f5f3ee; --card:#fffdf9; --ink:#23282a; --muted:#6d7175; --line:#e4e0d6;
-    --accent:#2f8f83; --accent-d:#1f6b61; --accent-soft:#dcefeb;}
+  /* 練息場視覺系統（handbook/設計規範/練息場視覺系統.md）＋ apple-design 動效 */
+  :root{
+    --brand:#004D89; --brand-deep:#003864; --brand-soft:#6694B8; --ink:#032639;
+    --bg:#ffffff; --card:#ffffff; --line:#DBE0E3; --muted:#6F838E;
+    --p-blue:#CCE0F7; --p-mint:#D3F5EC; --p-yellow:#FFFBEA; --p-peach:#FFEBD3; --p-lav:#E6E5FB;
+    --hero-a:#CCE0F7; --hero-b:#D3F5EC; --hero-c:#FFFBEA;
+    --radius:16px; --spring:cubic-bezier(.32,.72,0,1);
+    --shadow:0 1px 2px rgba(3,38,57,.04),0 10px 30px rgba(3,38,57,.07);
+    --shadow-lift:0 2px 6px rgba(3,38,57,.06),0 18px 44px rgba(3,38,57,.10);
+  }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+    --bg:#041d2b; --card:#062b3d; --ink:#E5EDF3; --line:#0e4159; --muted:#93A2AA;
+    --brand:#8CB3E0; --brand-deep:#B2CADC;
+    --hero-a:#073349; --hero-b:#06403c; --hero-c:#0b2f42;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 30px rgba(0,0,0,.4);
+    --shadow-lift:0 2px 6px rgba(0,0,0,.4),0 18px 44px rgba(0,0,0,.5);
+  }}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;
-    font-family:-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;line-height:1.6;padding:32px 18px;}
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+    line-height:1.65;padding:32px 18px;-webkit-font-smoothing:antialiased;}
   .wrap{max-width:640px;width:100%}
-  .eyebrow{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-d);font-weight:700;margin:0 0 8px}
-  h1{font-size:1.7rem;line-height:1.28;margin:0 0 10px;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
-  .lede{color:var(--muted);margin:0 0 26px}
+
+  .hero{position:relative;overflow:hidden;border-radius:24px;padding:30px 26px 26px;margin:0 0 20px;
+    background:linear-gradient(135deg,var(--hero-a) 0%,var(--hero-b) 58%,var(--hero-c) 100%);}
+  .hero>*:not(.orbs){position:relative;z-index:1}
+  .orbs{position:absolute;inset:0;pointer-events:none}
+  .orb{position:absolute;display:block;opacity:.5;will-change:transform;
+    border-radius:58% 42% 47% 53% / 45% 52% 48% 55%;}
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .orb{opacity:.2} }
+  .o1{width:140px;height:140px;background:var(--p-mint);left:-40px;top:-48px;animation:d1 26s ease-in-out infinite alternate}
+  .o2{width:90px;height:90px;background:var(--p-peach);right:6%;top:-30px;animation:d2 22s ease-in-out infinite alternate}
+  .o3{width:60px;height:60px;background:var(--p-lav);right:-16px;bottom:-22px;animation:d3 30s ease-in-out infinite alternate}
+  @keyframes d1{to{transform:translate3d(24px,16px,0) rotate(18deg) scale(1.08)}}
+  @keyframes d2{to{transform:translate3d(-20px,18px,0) rotate(-14deg) scale(1.1)}}
+  @keyframes d3{to{transform:translate3d(-16px,-20px,0) rotate(12deg) scale(1.06)}}
+
+  .eyebrow{font-size:.76rem;letter-spacing:.16em;color:var(--brand);font-weight:700;margin:0 0 8px}
+  h1{font-size:clamp(1.25rem,5.2vw,1.7rem);line-height:1.22;margin:0 0 8px;font-weight:800;
+    letter-spacing:-.022em;color:var(--brand);text-wrap:balance}
+  .lede{color:#4B6472;margin:0;font-size:.9rem}
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .lede{color:#B7C1C6} }
+
   .cards{display:grid;gap:14px}
   a.card{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);
-    border-radius:16px;box-shadow:var(--shadow);padding:20px 22px;transition:transform .14s,border-color .14s}
-  a.card:hover{transform:translateY(-2px);border-color:var(--accent)}
-  a.card .t{font-size:1.15rem;font-weight:800;margin:0 0 4px;display:flex;align-items:center;gap:8px}
-  a.card .t .arw{color:var(--accent);font-weight:800}
-  a.card .d{color:var(--muted);font-size:.94rem;margin:0}
-  .foot{color:var(--muted);font-size:.8rem;margin-top:26px}
+    border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 22px;
+    transition:transform .3s var(--spring),box-shadow .3s var(--spring),border-color .2s}
+  a.card:hover{transform:translateY(-3px);border-color:var(--brand-soft);box-shadow:var(--shadow-lift)}
+  a.card:active{transform:scale(.985);transition-duration:.1s}   /* 按下就給回饋 */
+  a.card .t{font-size:1.12rem;font-weight:800;margin:0 0 4px;display:flex;align-items:center;gap:8px;
+    letter-spacing:-.012em;color:var(--brand)}
+  a.card .t .arw{color:var(--brand-soft);font-weight:800}
+  a.card .t .lock{margin-left:auto;font-size:.72rem;font-weight:700;color:var(--muted);
+    border:1px solid var(--line);border-radius:999px;padding:2px 9px}
+  a.card .d{color:var(--muted);font-size:.9rem;margin:0}
+  .foot{color:var(--muted);font-size:.8rem;margin-top:24px}
+
+  .reveal{opacity:0;transform:translateY(14px)}
+  .reveal.in{opacity:1;transform:none;transition:opacity .55s var(--spring),transform .55s var(--spring)}
+  @media (prefers-reduced-motion:reduce){
+    .orb{animation:none!important}
+    .reveal,.reveal.in{opacity:1!important;transform:none!important;transition:none!important}
+    *,*::before,*::after{transition-duration:.01ms!important}
+  }
 </style>
 </head>
 <body>
   <div class="wrap">
-    <p class="eyebrow">練息場 Join to Enjoy × 格威博報堂集團</p>
-    <h1>集團參與練息場活動 · 統計總覽</h1>
-    <p class="lede">格威博報堂集團（日本博報堂 100% 持有）旗下成員公司，參與練息場身心活動的兩種視角。</p>
+    <header class="hero reveal">
+      <div class="orbs" aria-hidden="true">
+        <span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span>
+      </div>
+      <p class="eyebrow">練息場 Join to Enjoy × 格威博報堂集團</p>
+      <h1>集團參與練息場活動 · 統計總覽</h1>
+      <p class="lede">格威博報堂集團（日本博報堂 100% 持有）旗下成員公司，參與練息場身心活動的兩種視角。</p>
+    </header>
     <div class="cards">
-      <a class="card" href="/all">
-        <p class="t"><span class="arw">→</span> 全集團總覽</p>
+      <a class="card reveal" href="/all">
+        <p class="t"><span class="arw">→</span> 全集團總覽 <span class="lock">需密碼</span></p>
         <p class="d">把所有成員公司併為「格威博報堂集團」一個單位，看整體參與（可互動分類、標記各 email 網域）。</p>
       </a>
-      <a class="card" href="/part">
-        <p class="t"><span class="arw">→</span> 各子公司細分</p>
-        <p class="d">聯廣、米蘭 MDCG、先勢、台北博報堂 HTM 等各子公司「實際到場」的人次與人數，及各場報名／報到／網域明細。</p>
+      <a class="card reveal" href="/part">
+        <p class="t"><span class="arw">→</span> UCG · PILOT · HTM 統計</p>
+        <p class="d">聯廣傳播集團（拆各子公司）、先勢集團、台北博報堂 HTM「實際到場」的人次與人數，
+          及 Email 歸戶對照與各場明細。可獨立分享。</p>
       </a>
     </div>
     <p class="foot">資料已去識別化，僅呈現公司層級彙總與 email 網域，不含姓名或完整帳號。</p>
   </div>
   <script>
-    const root=document.documentElement;
-    // 尊重系統主題即可；此頁不放切換鈕，保持簡潔。
+    requestAnimationFrame(()=>{
+      document.querySelectorAll(".reveal").forEach((el,i)=>setTimeout(()=>el.classList.add("in"), i*80));
+    });
   </script>
 </body>
 </html>
