@@ -246,6 +246,15 @@
     color:#8A5A00;background:var(--p-yellow);border-radius:999px;padding:1px 7px;margin-left:7px}
   details.audit-grand>summary{font-size:.82rem;font-weight:700;color:var(--muted)}
 
+  /* 資料稽核分年度：2026 / 2025 各一塊 */
+  details.yearblk{border:0;background:transparent;box-shadow:none!important;border-radius:0;margin:18px 0 0;overflow:visible}
+  details.yearblk>summary{padding:6px 2px;border-bottom:2px solid var(--line);margin-bottom:4px}
+  details.yearblk>summary:hover,details.yearblk>summary:active{background:transparent}
+  details.yearblk>summary .ytitle{font-size:1.02rem;font-weight:800;color:var(--brand)}
+  details.yearblk>summary .ymeta{font-size:.78rem;color:var(--muted);font-weight:600}
+  details.yearblk>summary .bchev{margin-left:auto;color:var(--n-300);font-size:.9rem;transition:transform .34s var(--spring)}
+  details.yearblk[open]>summary .bchev{transform:rotate(180deg)}
+
   .foot{color:var(--muted);font-size:.8rem;margin-top:26px;line-height:1.75;border-top:1px solid var(--line);padding-top:16px}
   .foot div{margin-bottom:7px}
   .foot code{font-family:var(--mono);font-size:.76rem}
@@ -376,13 +385,7 @@
     <span class="bmeta" id="auditNote"></span>
     <span class="bchev">▾</span>
   </summary>
-  <div class="bbody">
-    <details class="audit-grand">
-      <summary><span class="chev">▸</span>全年網域總表（跨場去重）</summary>
-      <div style="padding:2px 16px 14px"><table class="dom-tab" id="grandTab"></table></div>
-    </details>
-    <div id="evList"></div>
-  </div>
+  <div class="bbody" id="auditYears"></div>
 </details>
 
 <p class="foot">
@@ -787,7 +790,7 @@ $("btnClear26").addEventListener("click", () => {
 });
 
 /* ═══════════════ 資料稽核：逐場 × email 網域（直接來自 Wix，只有網域、無個資）═══════════════ */
-const EVENT_AUDIT = {"year":"2026","count":14,"events":[["2026-01-16","1/16 (五) 動態靜心｜用激靜鼓敲開心流","ENDED",30,30,[["@interplan.com.tw",5,5],["@mxdigi.com",5,5],["@unismart.com.tw",5,5],["@hakuhodotm.com.tw",4,4],["@medialand.tw",4,4],["@ua.com.tw",3,3],["@ky-post.com",2,2],["@gmail.com",1,1],["@meshplus.com.tw",1,1]]],["2026-03-20","3/20（五）春野・開運・馬上好","ENDED",101,100,[["@ua.com.tw",18,18],["@meshplus.com.tw",12,12],["@hakuhodotm.com.tw",11,10],["@medialand.tw",10,10],["@mxdigi.com",10,10],["@unismart.com.tw",6,6],["@grandpr.com.tw",4,4],["@ky-post.com",4,4],["@prestigepr.com.tw",4,4],["@gmail.com",3,3],["@pilotpr.com.tw",3,3],["@unisurf.com.tw",3,3],["@ace-taipei.com",2,2],["@mdcg.tw",2,2],["@unisincere.com.tw",2,2],["@ace.taipei.com",1,1],["@dvibemedia.com",1,1],["@hakuhodoti.com.tw",1,1],["@interplan.com.tw",1,1],["@planetpe.com.tw",1,1],["@planetpr.com.tw",1,1],["@unistyle.com.tw",1,1]]],["2026-03-27","3/27（五）［加場 ! ］春野・開運・馬上好 ","ENDED",52,52,[["@ua.com.tw",12,12],["@hakuhodotm.com.tw",8,8],["@grandpr.com.tw",7,7],["@pilotpr.com.tw",4,4],["@prestigepr.com.tw",4,4],["@unismart.com.tw",4,4],["@planetpr.com.tw",3,3],["@gmail.com",2,2],["@unisincere.com.tw",2,2],["@unisurf.com.tw",2,2],["@dvibemedia.com",1,1],["@medialand.tw",1,1],["@unistyle.com.tw",1,1],["@unisurf.com",1,1]]],["2026-04-17","4/17(五)漫步在樹梢｜一場離地向上的自由練習","ENDED",42,42,[["@ua.com.tw",10,10],["@medialand.tw",7,7],["@grandpr.com.tw",4,4],["@hakuhodotm.com.tw",4,4],["@unismart.com.tw",4,4],["@meshplus.com.tw",3,3],["@ky-post.com",2,2],["@ace-taipei.com",1,1],["@dvibemedia.com",1,1],["@gmail.com",1,1],["@mxdigi.com",1,1],["@pilotpr.com.tw",1,1],["@planetpr.com.tw",1,1],["@ua.com",1,1],["@unisurf.com.tw",1,1]]],["2026-05-22","5/22 (五) 啟動身體原廠設定！｜翻開吳清忠的自癒寶典","ENDED",31,30,[["@gmail.com",16,16],["@mxdigi.com",4,4],["@meshplus.com.tw",3,3],["@medialand.tw",3,2],["@ace-taipei.com",1,1],["@hakuhodotm.com.tw",1,1],["@hotmail.com",1,1],["@msn.com",1,1],["@yahoo.com.tw",1,1]]],["2026-05-13","5/13（三）［高級大人場 ! ］春野・開運・馬上好 ","CANCELED",0,0,[]],["2026-06-04","6/4（四）《鬆鬆在・小滿茶席》  回到身體的三道茶","ENDED",1,1,[["@medialand.tw",1,1]]],["2026-06-05","6/5（五）《鬆鬆在・小滿茶席》  回到身體的三道茶","ENDED",1,1,[["@jointoenjoy.com",1,1]]],["2026-07-31","7/31（五）《聲波共振！開出你專屬的魔法結界》","UPCOMING",30,30,[["@ua.com.tw",13,13],["@medialand.tw",6,6],["@2008-media.com",3,3],["@hakuhodotm.com.tw",2,2],["@mxdigi.com",2,2],["@pilotpr.com.tw",2,2],["@grandpr.com.tw",1,1],["@prestigepr.com.tw",1,1]]],["2026-07-17","7/17（五）《就是你了！來養顆苔球小精靈吧》","ENDED",56,56,[["@hakuhodotm.com.tw",10,10],["@medialand.tw",9,9],["@meshplus.com.tw",7,7],["@ua.com.tw",7,7],["@ky-post.com",5,5],["@unisurf.com.tw",5,5],["@pilotpr.com.tw",4,4],["@ace-taipei.com",2,2],["@mxdigi.com",2,2],["@charismomo.com",1,1],["@dvibemedia.com",1,1],["@grandpr.com.tw",1,1],["@planetpr.com.tw",1,1],["@unistyle.com.tw",1,1]]],["2026-07-31","7/31（五）《就是你了！來養顆苔球小精靈吧》","UPCOMING",45,45,[["@meshplus.com.tw",10,10],["@medialand.tw",9,9],["@ua.com.tw",8,8],["@mxdigi.com",5,5],["@hakuhodotm.com.tw",4,4],["@unisurf.com.tw",4,4],["@ky-post.com",2,2],["@unismart.com.tw",2,2],["@pilotpr.com.tw",1,1]]],["2026-07-30","7/30（四）《就是你了！來養顆苔球小精靈吧》 加場！","UPCOMING",27,27,[["@medialand.tw",6,6],["@meshplus.com.tw",6,6],["@ua.com.tw",4,4],["@hakuhodotm.com.tw",2,2],["@ky-post.com",2,2],["@mxdigi.com",2,2],["@ace-taipei.com",1,1],["@charismomo.com",1,1],["@medialnad.tw",1,1],["@mediand.tw",1,1],["@mxdogi.com",1,1]]],["2026-08-21","8/21（五）《替身體乾一杯！ 滋養自己的香料野草茶》","UPCOMING",0,0,[]],["2026-08-27","8/27（四）《替身體乾一杯！ 滋養自己的香料野草茶》","UPCOMING",0,0,[]]],"grand":[["@ua.com.tw",75,36],["@medialand.tw",56,35],["@hakuhodotm.com.tw",46,23],["@meshplus.com.tw",42,22],["@gmail.com",23,20],["@mxdigi.com",31,17],["@ky-post.com",17,12],["@unismart.com.tw",21,11],["@pilotpr.com.tw",15,10],["@unisurf.com.tw",15,10],["@grandpr.com.tw",17,9],["@prestigepr.com.tw",9,5],["@interplan.com.tw",6,5],["@planetpr.com.tw",6,5],["@ace-taipei.com",7,3],["@unisincere.com.tw",4,3],["@2008-media.com",3,3],["@dvibemedia.com",4,2],["@mdcg.tw",2,2],["@unistyle.com.tw",3,1],["@charismomo.com",2,1],["@ace.taipei.com",1,1],["@hakuhodoti.com.tw",1,1],["@hotmail.com",1,1],["@jointoenjoy.com",1,1],["@medialnad.tw",1,1],["@mediand.tw",1,1],["@msn.com",1,1],["@mxdogi.com",1,1],["@planetpe.com.tw",1,1],["@ua.com",1,1],["@unisurf.com",1,1],["@yahoo.com.tw",1,1]]};
+const EVENT_AUDIT = {"2026":{"count":14,"events":[["2026-01-16","1/16 (五) 動態靜心｜用激靜鼓敲開心流","ENDED",30,30,[["@interplan.com.tw",5,5],["@mxdigi.com",5,5],["@unismart.com.tw",5,5],["@hakuhodotm.com.tw",4,4],["@medialand.tw",4,4],["@ua.com.tw",3,3],["@ky-post.com",2,2],["@gmail.com",1,1],["@meshplus.com.tw",1,1]]],["2026-03-20","3/20（五）春野・開運・馬上好","ENDED",101,100,[["@ua.com.tw",18,18],["@meshplus.com.tw",12,12],["@hakuhodotm.com.tw",11,10],["@medialand.tw",10,10],["@mxdigi.com",10,10],["@unismart.com.tw",6,6],["@grandpr.com.tw",4,4],["@ky-post.com",4,4],["@prestigepr.com.tw",4,4],["@gmail.com",3,3],["@pilotpr.com.tw",3,3],["@unisurf.com.tw",3,3],["@ace-taipei.com",2,2],["@mdcg.tw",2,2],["@unisincere.com.tw",2,2],["@ace.taipei.com",1,1],["@dvibemedia.com",1,1],["@hakuhodoti.com.tw",1,1],["@interplan.com.tw",1,1],["@planetpe.com.tw",1,1],["@planetpr.com.tw",1,1],["@unistyle.com.tw",1,1]]],["2026-03-27","3/27（五）［加場 ! ］春野・開運・馬上好 ","ENDED",52,52,[["@ua.com.tw",12,12],["@hakuhodotm.com.tw",8,8],["@grandpr.com.tw",7,7],["@pilotpr.com.tw",4,4],["@prestigepr.com.tw",4,4],["@unismart.com.tw",4,4],["@planetpr.com.tw",3,3],["@gmail.com",2,2],["@unisincere.com.tw",2,2],["@unisurf.com.tw",2,2],["@dvibemedia.com",1,1],["@medialand.tw",1,1],["@unistyle.com.tw",1,1],["@unisurf.com",1,1]]],["2026-04-17","4/17(五)漫步在樹梢｜一場離地向上的自由練習","ENDED",42,42,[["@ua.com.tw",10,10],["@medialand.tw",7,7],["@grandpr.com.tw",4,4],["@hakuhodotm.com.tw",4,4],["@unismart.com.tw",4,4],["@meshplus.com.tw",3,3],["@ky-post.com",2,2],["@ace-taipei.com",1,1],["@dvibemedia.com",1,1],["@gmail.com",1,1],["@mxdigi.com",1,1],["@pilotpr.com.tw",1,1],["@planetpr.com.tw",1,1],["@ua.com",1,1],["@unisurf.com.tw",1,1]]],["2026-05-13","5/13（三）［高級大人場 ! ］春野・開運・馬上好 ","CANCELED",0,0,[]],["2026-05-22","5/22 (五) 啟動身體原廠設定！｜翻開吳清忠的自癒寶典","ENDED",31,30,[["@gmail.com",16,16],["@mxdigi.com",4,4],["@meshplus.com.tw",3,3],["@medialand.tw",3,2],["@ace-taipei.com",1,1],["@hakuhodotm.com.tw",1,1],["@hotmail.com",1,1],["@msn.com",1,1],["@yahoo.com.tw",1,1]]],["2026-06-04","6/4（四）《鬆鬆在・小滿茶席》  回到身體的三道茶","ENDED",1,1,[["@medialand.tw",1,1]]],["2026-06-05","6/5（五）《鬆鬆在・小滿茶席》  回到身體的三道茶","ENDED",1,1,[["@jointoenjoy.com",1,1]]],["2026-07-17","7/17（五）《就是你了！來養顆苔球小精靈吧》","ENDED",56,56,[["@hakuhodotm.com.tw",10,10],["@medialand.tw",9,9],["@meshplus.com.tw",7,7],["@ua.com.tw",7,7],["@ky-post.com",5,5],["@unisurf.com.tw",5,5],["@pilotpr.com.tw",4,4],["@ace-taipei.com",2,2],["@mxdigi.com",2,2],["@charismomo.com",1,1],["@dvibemedia.com",1,1],["@grandpr.com.tw",1,1],["@planetpr.com.tw",1,1],["@unistyle.com.tw",1,1]]],["2026-07-30","7/30（四）《就是你了！來養顆苔球小精靈吧》 加場！","UPCOMING",27,27,[["@medialand.tw",6,6],["@meshplus.com.tw",6,6],["@ua.com.tw",4,4],["@hakuhodotm.com.tw",2,2],["@ky-post.com",2,2],["@mxdigi.com",2,2],["@ace-taipei.com",1,1],["@charismomo.com",1,1],["@medialnad.tw",1,1],["@mediand.tw",1,1],["@mxdogi.com",1,1]]],["2026-07-31","7/31（五）《聲波共振！開出你專屬的魔法結界》","UPCOMING",30,30,[["@ua.com.tw",13,13],["@medialand.tw",6,6],["@2008-media.com",3,3],["@hakuhodotm.com.tw",2,2],["@mxdigi.com",2,2],["@pilotpr.com.tw",2,2],["@grandpr.com.tw",1,1],["@prestigepr.com.tw",1,1]]],["2026-07-31","7/31（五）《就是你了！來養顆苔球小精靈吧》","UPCOMING",45,45,[["@meshplus.com.tw",10,10],["@medialand.tw",9,9],["@ua.com.tw",8,8],["@mxdigi.com",5,5],["@hakuhodotm.com.tw",4,4],["@unisurf.com.tw",4,4],["@ky-post.com",2,2],["@unismart.com.tw",2,2],["@pilotpr.com.tw",1,1]]],["2026-08-21","8/21（五）《替身體乾一杯！ 滋養自己的香料野草茶》","UPCOMING",0,0,[]],["2026-08-27","8/27（四）《替身體乾一杯！ 滋養自己的香料野草茶》","UPCOMING",0,0,[]]],"grand":[["@ua.com.tw",75,36],["@medialand.tw",56,35],["@hakuhodotm.com.tw",46,23],["@meshplus.com.tw",42,22],["@gmail.com",23,20],["@mxdigi.com",31,17],["@ky-post.com",17,12],["@unismart.com.tw",21,11],["@pilotpr.com.tw",15,10],["@unisurf.com.tw",15,10],["@grandpr.com.tw",17,9],["@prestigepr.com.tw",9,5],["@interplan.com.tw",6,5],["@planetpr.com.tw",6,5],["@ace-taipei.com",7,3],["@unisincere.com.tw",4,3],["@2008-media.com",3,3],["@dvibemedia.com",4,2],["@mdcg.tw",2,2],["@unistyle.com.tw",3,1],["@charismomo.com",2,1],["@ace.taipei.com",1,1],["@hakuhodoti.com.tw",1,1],["@hotmail.com",1,1],["@jointoenjoy.com",1,1],["@medialnad.tw",1,1],["@mediand.tw",1,1],["@msn.com",1,1],["@mxdogi.com",1,1],["@planetpe.com.tw",1,1],["@ua.com",1,1],["@unisurf.com",1,1],["@yahoo.com.tw",1,1]]},"2025":{"count":21,"events":[["2025-01-10","1/10 (五) 薛喬 心理師｜[夢想UP] 新年人生整理術","ENDED",9,9,[["@medialand.tw",3,3],["@gmail.com",1,1],["@meshplus.com.tw",1,1],["@pilotpr.com.tw",1,1],["@planetpr.com.tw",1,1],["@ua.com.tw",1,1],["@unismart.com.tw",1,1]]],["2025-02-21","2/21 (五) 用耳朵來場森呼吸｜春之象：採集自然之聲小旅行","ENDED",41,41,[["@medialand.tw",13,13],["@planetpr.com.tw",5,5],["@gmail.com",4,4],["@ky-post.com",4,4],["@meshplus.com.tw",3,3],["@ua.com.tw",3,3],["@mxdigi.com",2,2],["@pilotpr.com.tw",2,2],["@grandpr.com.tw",1,1],["@hakuhodoti.com.tw",1,1],["@unismart.com.tw",1,1],["@unistyle.com.tw",1,1],["@unisurf.com.tw",1,1]]],["2025-02-27","2/27 (四) 用耳朵來場森呼吸｜春之象：採集自然之聲小旅行 ","ENDED",39,37,[["@medialand.tw",15,13],["@mxdigi.com",5,5],["@ua.com.tw",5,5],["@pilotpr.com.tw",4,4],["@gmail.com",3,3],["@unismart.com.tw",2,2],["@9floor.co",1,1],["@mdcg.tw",1,1],["@mediand.tw",1,1],["@meshplus.com.tw",1,1],["@planetpr.com.tw",1,1]]],["2025-03-28","3/28（五）春蛻 暗光 字茶席｜坪林","ENDED",39,38,[["@pilotpr.com.tw",7,7],["@unismart.com.tw",7,6],["@mxdigi.com",6,6],["@medialand.tw",4,4],["@unisincere.com.tw",3,3],["@grandpr.com.tw",2,2],["@hakuhodotm.com.tw",2,2],["@2008-media.com",1,1],["@ace-taipei.com",1,1],["@gmail.com",1,1],["@ky-post.com",1,1],["@meshplus.com.tw",1,1],["@mxdogi.com",1,1],["@ua.com.tw",1,1],["@unisurf.com.tw",1,1]]],["2025-04-11","4/11（五）春蛻 暗光 字茶席｜貓空","ENDED",45,45,[["@medialand.tw",7,7],["@ua.com.tw",7,7],["@mxdigi.com",6,6],["@ky-post.com",5,5],["@planetpr.com.tw",5,5],["@hakuhodotm.com.tw",4,4],["@unismart.com.tw",3,3],["@pilotpr.com.tw",2,2],["@unisincere.com.tw",2,2],["@ace-taipei.com",1,1],["@gmail.com",1,1],["@mdcg.tw",1,1],["@meshplus.com.tw",1,1]]],["2025-04-25","4/25 (五) 銅鑼躺躺｜潛入聲波之海","ENDED",44,44,[["@medialand.tw",14,14],["@mxdigi.com",7,7],["@2008-media.com",6,6],["@ua.com.tw",5,5],["@gmail.com",4,4],["@hakuhodotm.com.tw",2,2],["@ky-post.com",2,2],["@meshplus.con.tw",1,1],["@planetpr.com.tw",1,1],["@unismart.com.tw",1,1],["@unisurf.com.tw",1,1]]],["2025-05-02","5/2（五）<加場> 春蛻 暗光 字茶席｜貓空 ","ENDED",27,27,[["@medialand.tw",9,9],["@ky-post.com",4,4],["@mxdigi.com",4,4],["@gmail.com",3,3],["@planetpr.com.tw",3,3],["@pilotpr.com.tw",1,1],["@ua.com.tw",1,1],["@unisincere.com.tw",1,1],["@unismart.com.tw",1,1]]],["2025-06-13","6/13 (五) 場次一 13:30 土地精靈音樂會｜夏之象","ENDED",8,8,[["@gmail.com",3,3],["@medialand.tw",2,2],["@meshplus.com.tw",2,2],["@mxdigi.com",1,1]]],["2025-06-13","6/13 (五) 場次二 15:30 土地精靈音樂會｜夏之象 ","ENDED",25,25,[["@mxdigi.com",10,10],["@medialand.tw",5,5],["@pilotpr.com.tw",3,3],["@ky-post.com",2,2],["@meshplus.com.tw",2,2],["@hakuhodotm.com.tw",1,1],["@mdcg.tw",1,1],["@msa.hinet.net",1,1]]],["2025-06-27","6/27 (五) 初階身心必修課｜陳德中的正念生活道場","ENDED",27,27,[["@medialand.tw",8,8],["@hakuhodotm.com.tw",5,5],["@ua.com.tw",4,4],["@mxdigi.com",3,3],["@unismart.com.tw",3,3],["@dvibemedia.com",1,1],["@grandpr.com.tw",1,1],["@meshplus.com.tw",1,1],["@pilotpr.com.tw",1,1]]],["2025-07-18","7/18 (五) 進階情緒關係課｜陳德中的正念生活道場","ENDED",26,26,[["@medialand.tw",7,7],["@mxdigi.com",4,4],["@hakuhodotm.com.tw",3,3],["@2008-media.com",2,2],["@ky-post.com",2,2],["@ua.com.tw",2,2],["@unismart.com.tw",2,2],["@dvibemedia.com",1,1],["@gmail.com",1,1],["@grandpr.com.tw",1,1],["@pilotpr.com.tw",1,1]]],["2025-07-25","7/25 (五) 喚覺躺躺｜夏日聲波花園","ENDED",55,55,[["@gmail.com",10,10],["@medialand.tw",8,8],["@ua.com.tw",6,6],["@mxdigi.com",5,5],["@pilotpr.com.tw",5,5],["@unismart.com.tw",5,5],["@hakuhodotm.com.tw",3,3],["@ky-post.com",3,3],["@accuhit.net",2,2],["@meshplus.com.tw",2,2],["@2008-media.com",1,1],["@dvibemedia.com",1,1],["@gapps.ntnu.edu.tw",1,1],["@grandpr.com.tw",1,1],["@hakuhodoti.com.tw",1,1],["@planetpr.com.tw",1,1]]],["2025-08-29","8/29 (五) 風土味蕾小宇宙 ｜夏之象——餐桌上的土地漫遊","ENDED",28,28,[["@medialand.tw",6,6],["@mxdigi.com",5,5],["@grandpr.com.tw",4,4],["@unismart.com.tw",3,3],["@hakuhodotm.com.tw",2,2],["@ky-post.com",2,2],["@meshplus.com.tw",2,2],["@ua.com.tw",2,2],["@gmail.com",1,1],["@pilotpr.com.tw",1,1]]],["2025-09-05","9/5 (五) 風土味蕾小宇宙｜夏之象——餐桌上的土地漫遊","ENDED",31,31,[["@medialand.tw",7,7],["@mxdigi.com",4,4],["@meshplus.com.tw",3,3],["@planetpr.com.tw",3,3],["@2008-media.com",2,2],["@hakuhodotm.com.tw",2,2],["@ua.com.tw",2,2],["@ace-taipei.com",1,1],["@ky-post.com",1,1],["@medialand.com",1,1],["@pilotpr.com.tw",1,1],["@unisincere.com",1,1],["@unisincere.com.tw",1,1],["@unismart.com.tw",1,1],["@unisurf.com.tw",1,1]]],["2025-10-03","10/3（五）水之旅｜大自然的離線之旅｜秋之象 森林療癒 ","ENDED",19,19,[["@ky-post.com",5,5],["@medialand.tw",4,4],["@ua.com.tw",3,3],["@mxdigi.com",2,2],["@pilotpr.com.tw",2,2],["@gmail.com",1,1],["@grandpr.com.tw",1,1],["@planetpr.com.tw",1,1]]],["2025-10-09","10/9（四）森之旅｜大自然的離線之旅｜秋之象 森林療癒 ","ENDED",29,29,[["@ua.com.tw",7,7],["@unismart.com.tw",5,5],["@hakuhodotm.com.tw",4,4],["@meshplus.com.tw",4,4],["@ky-post.com",2,2],["@pilotpr.com.tw",2,2],["@charismomo.com",1,1],["@grandpr.com.tw",1,1],["@medialand.tw",1,1],["@mxdigi.com",1,1],["@planetpr.com.tw",1,1]]],["2025-11-07","11/7 (五) 聲音╳書寫・療癒實驗室","ENDED",46,45,[["@ua.com.tw",10,10],["@meshplus.com.tw",7,7],["@mxdigi.com",7,7],["@medialand.tw",6,6],["@gmail.com",2,2],["@hakuhodotm.com.tw",2,2],["@ky-post.com",2,2],["@pilotpr.com.tw",2,2],["@prestigepr.com.tw",2,2],["@bioproweb.com",2,1],["@divibemedia.com",1,1],["@ffceap.com.tw",1,1],["@planetpr.com.tw",1,1],["@unismart.com.tw",1,1]]],["2025-11-21","11/21(五)  上午10:00 ｜ RESET！讓內耗退場的動力發光術","ENDED",16,16,[["@medialand.tw",5,5],["@gmail.com",3,3],["@mxdigi.com",3,3],["@unismart.com.tw",2,2],["@meshplus.com.tw",1,1],["@pilotpr.com.tw",1,1],["@ua.com.tw",1,1]]],["2025-11-21","11/21(五)  下午14:30 ｜ RESET！讓內耗退場的動力發光術 ","ENDED",23,23,[["@ua.com.tw",6,6],["@hakuhodotm.com.tw",4,4],["@medialand.tw",4,4],["@mxdigi.com",3,3],["@prestigepr.com.tw",2,2],["@unismart.com.tw",2,2],["@ky-post.com",1,1],["@unisurf.com.tw",1,1]]],["2025-12-19","12/19(五)  練息場HR特邀場｜森之聖誕・微醺療癒","ENDED",21,21,[["@hakuhodotm.com.tw",9,9],["@interplan.com.tw",3,3],["@medialand.tw",3,3],["@pilotpr.com.tw",2,2],["@hakuhodoti.com.tw",1,1],["@jointoenjoy.com",1,1],["@kecc.com.tw",1,1],["@messetaoyuan.com",1,1]]],["2025-12-26","12/26 (五) 呼吸清理・找回身體的原廠設定","ENDED",37,37,[["@hakuhodotm.com.tw",7,7],["@medialand.tw",6,6],["@mxdigi.com",5,5],["@ua.com.tw",5,5],["@ky-post.com",3,3],["@unismart.com.tw",3,3],["@2008-media.com",2,2],["@gmail.com",2,2],["@unisincere.com.tw",2,2],["@jointoenjoy.com",1,1],["@meshplus.com.tw",1,1]]]],"grand":[["@medialand.tw",137,56],["@ua.com.tw",71,31],["@hakuhodotm.com.tw",50,27],["@mxdigi.com",83,26],["@gmail.com",40,26],["@ky-post.com",39,24],["@pilotpr.com.tw",38,20],["@meshplus.com.tw",32,18],["@unismart.com.tw",43,12],["@planetpr.com.tw",23,9],["@2008-media.com",14,7],["@grandpr.com.tw",12,6],["@unisincere.com.tw",9,6],["@unisurf.com.tw",5,3],["@interplan.com.tw",3,3],["@prestigepr.com.tw",4,2],["@hakuhodoti.com.tw",3,2],["@accuhit.net",2,2],["@ace-taipei.com",3,1],["@dvibemedia.com",3,1],["@mdcg.tw",3,1],["@bioproweb.com",2,1],["@jointoenjoy.com",2,1],["@9floor.co",1,1],["@charismomo.com",1,1],["@divibemedia.com",1,1],["@ffceap.com.tw",1,1],["@gapps.ntnu.edu.tw",1,1],["@kecc.com.tw",1,1],["@medialand.com",1,1],["@mediand.tw",1,1],["@meshplus.con.tw",1,1],["@messetaoyuan.com",1,1],["@msa.hinet.net",1,1],["@mxdogi.com",1,1],["@unisincere.com",1,1],["@unistyle.com.tw",1,1]]}};
 
 // 疑似打錯的網域（跟某個正確網域幾乎一樣，會被當成獨立帳號、影響歸戶）
 const TYPO_DOMAINS = new Set(["@medialnad.tw","@mediand.tw","@mxdogi.com","@hakuhodoti.com.tw","@unisurf.com","@ua.com","@ace.taipei.com"]);
@@ -804,30 +807,46 @@ function domTable(rows, withHead){
   return h + "</tbody>";
 }
 
-function renderAudit(){
-  const A = EVENT_AUDIT;
-  const live = A.events.filter(e => e[2] !== "CANCELED" && e[3] > 0);
-  $("auditNote").textContent = `Wix 撈取 · ${A.count} 場（有效 ${live.length} 場）· 全年 ${A.grand.length} 種網域`;
-  $("grandTab").innerHTML = domTable(A.grand, true);
+const AUDIT_YEARS = ["2026","2025"];   // 新的排前面
 
-  const list = $("evList");
-  list.innerHTML = "";
-  A.events.forEach(([date,title,status,visits,people,doms]) => {
-    const [stTxt,stCls] = ST_MAP[status] || [status,"st-up"];
-    const d = document.createElement("details");
-    d.className = "ev";
-    const totTxt = (status === "CANCELED") ? "—" : `${people} 人 / ${visits} 人次`;
-    d.innerHTML =
-      `<summary><span class="chev">▸</span><span class="ev-date">${date}</span>`
-      + `<span class="st ${stCls}">${stTxt}</span>`
-      + `<span class="ev-title">${esc(title)}</span>`
-      + `<span class="ev-tot">${totTxt}</span></summary>`
-      + `<div class="ev-body">`
-      + (doms.length ? `<table class="dom-tab">${domTable(doms,true)}</table>`
-                     : `<p class="fold-hint" style="margin:8px 0 0">此場無報名資料。</p>`)
-      + `</div>`;
-    list.appendChild(d);
-  });
+function evHtml([date,title,status,visits,people,doms]){
+  const [stTxt,stCls] = ST_MAP[status] || [status,"st-up"];
+  const totTxt = (status === "CANCELED") ? "—" : `${people} 人 / ${visits} 人次`;
+  return `<details class="ev">`
+    + `<summary><span class="chev">▸</span><span class="ev-date">${date}</span>`
+    + `<span class="st ${stCls}">${stTxt}</span>`
+    + `<span class="ev-title">${esc(title)}</span>`
+    + `<span class="ev-tot">${totTxt}</span></summary>`
+    + `<div class="ev-body">`
+    + (doms.length ? `<table class="dom-tab">${domTable(doms,true)}</table>`
+                   : `<p class="fold-hint" style="margin:8px 0 0">此場無報名資料。</p>`)
+    + `</div></details>`;
+}
+
+function renderAudit(){
+  let totalEv = 0, totalDom = 0;
+  const html = AUDIT_YEARS.map(y => {
+    const A = EVENT_AUDIT[y];
+    const live = A.events.filter(e => e[2] !== "CANCELED" && e[3] > 0);
+    const visits = A.events.reduce((s,e) => s + e[3], 0);
+    totalEv += A.count; totalDom += A.grand.length;
+    return `<details class="yearblk" open>
+      <summary>
+        <span class="ytitle">${y}</span>
+        <span class="ymeta">${A.count} 場（有效 ${live.length} 場）· ${visits} 報名人次 · ${A.grand.length} 種網域</span>
+        <span class="bchev">▾</span>
+      </summary>
+      <div class="ybody">
+        <details class="audit-grand">
+          <summary><span class="chev">▸</span>${y} 全年網域總表（跨場去重）</summary>
+          <div style="padding:2px 16px 14px"><table class="dom-tab">${domTable(A.grand,true)}</table></div>
+        </details>
+        ${A.events.map(evHtml).join("")}
+      </div>
+    </details>`;
+  }).join("");
+  $("auditYears").innerHTML = html;
+  $("auditNote").textContent = `Wix 撈取 · 2026 ${EVENT_AUDIT["2026"].count} 場、2025 ${EVENT_AUDIT["2025"].count} 場`;
   wireAllDetails();
 }
 
