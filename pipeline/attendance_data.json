@@ -1,0 +1,555 @@
+{
+ "cats": [
+  "聯廣 UCG",
+  "艾斯",
+  "2008傳媒",
+  "迪維",
+  "米蘭 MDCG",
+  "先勢集團",
+  "光洋波斯特",
+  "安益",
+  "台北博報堂 HTM"
+ ],
+ "y2025": {
+  "聯廣 UCG": {
+   "visits": 60,
+   "people": 26
+  },
+  "艾斯": {
+   "visits": 2,
+   "people": 1
+  },
+  "2008傳媒": {
+   "visits": 10,
+   "people": 6
+  },
+  "迪維": {
+   "visits": 7,
+   "people": 4
+  },
+  "米蘭 MDCG": {
+   "visits": 210,
+   "people": 83
+  },
+  "先勢集團": {
+   "visits": 23,
+   "people": 19
+  },
+  "光洋波斯特": {
+   "visits": 32,
+   "people": 23
+  },
+  "安益": {
+   "visits": 8,
+   "people": 6
+  },
+  "台北博報堂 HTM": {
+   "visits": 68,
+   "people": 34
+  }
+ },
+ "y2026": {
+  "聯廣 UCG": {
+   "reg": 71,
+   "uniq": 42,
+   "att": 33,
+   "att_uniq": 27
+  },
+  "艾斯": {
+   "reg": 6,
+   "uniq": 3,
+   "att": 5,
+   "att_uniq": 3
+  },
+  "2008傳媒": {
+   "reg": 3,
+   "uniq": 3,
+   "att": 0,
+   "att_uniq": 0
+  },
+  "迪維": {
+   "reg": 3,
+   "uniq": 2,
+   "att": 3,
+   "att_uniq": 2
+  },
+  "米蘭 MDCG": {
+   "reg": 100,
+   "uniq": 67,
+   "att": 54,
+   "att_uniq": 45
+  },
+  "先勢集團": {
+   "reg": 31,
+   "uniq": 27,
+   "att": 21,
+   "att_uniq": 19
+  },
+  "光洋波斯特": {
+   "reg": 6,
+   "uniq": 5,
+   "att": 4,
+   "att_uniq": 4
+  },
+  "安益": {
+   "reg": 1,
+   "uniq": 1,
+   "att": 0,
+   "att_uniq": 0
+  },
+  "台北博報堂 HTM": {
+   "reg": 29,
+   "uniq": 21,
+   "att": 21,
+   "att_uniq": 17
+  }
+ },
+ "events2026": [
+  {
+   "ev": "0320",
+   "reg": 49,
+   "att": 45,
+   "domains": [
+    {
+     "d": "meshplus.com.tw",
+     "reg": 12,
+     "att": 12
+    },
+    {
+     "d": "mxdigi.com",
+     "reg": 10,
+     "att": 9
+    },
+    {
+     "d": "medialand.tw",
+     "reg": 9,
+     "att": 9
+    },
+    {
+     "d": "ky-post.com",
+     "reg": 4,
+     "att": 4
+    },
+    {
+     "d": "ua.com.tw",
+     "reg": 4,
+     "att": 2
+    },
+    {
+     "d": "ace-taipei.com",
+     "reg": 2,
+     "att": 2
+    },
+    {
+     "d": "hakuhodotm.com.tw",
+     "reg": 2,
+     "att": 2
+    },
+    {
+     "d": "mdcg.tw",
+     "reg": 2,
+     "att": 2
+    },
+    {
+     "d": "hakuhodoti.com.tw",
+     "reg": 1,
+     "att": 1
+    },
+    {
+     "d": "unisincere.com.tw",
+     "reg": 1,
+     "att": 1
+    },
+    {
+     "d": "unisurf.com.tw",
+     "reg": 1,
+     "att": 1
+    },
+    {
+     "d": "interplan.com.tw",
+     "reg": 1,
+     "att": 0
+    }
+   ]
+  },
+  {
+   "ev": "0327",
+   "reg": 48,
+   "att": 40,
+   "domains": [
+    {
+     "d": "ua.com.tw",
+     "reg": 12,
+     "att": 11
+    },
+    {
+     "d": "hakuhodotm.com.tw",
+     "reg": 8,
+     "att": 7
+    },
+    {
+     "d": "grandpr.com.tw",
+     "reg": 5,
+     "att": 5
+    },
+    {
+     "d": "pilotpr.com.tw",
+     "reg": 4,
+     "att": 4
+    },
+    {
+     "d": "prestigepr.com.tw",
+     "reg": 4,
+     "att": 3
+    },
+    {
+     "d": "unismart.com.tw",
+     "reg": 4,
+     "att": 3
+    },
+    {
+     "d": "planetpr.com.tw",
+     "reg": 3,
+     "att": 3
+    },
+    {
+     "d": "unisincere.com.tw",
+     "reg": 2,
+     "att": 2
+    },
+    {
+     "d": "unisurf.com.tw",
+     "reg": 2,
+     "att": 0
+    },
+    {
+     "d": "dvibemedia.com",
+     "reg": 1,
+     "att": 1
+    },
+    {
+     "d": "unistyle.com.tw",
+     "reg": 1,
+     "att": 1
+    },
+    {
+     "d": "medialand.tw",
+     "reg": 1,
+     "att": 0
+    },
+    {
+     "d": "unisurf.com",
+     "reg": 1,
+     "att": 0
+    }
+   ]
+  },
+  {
+   "ev": "0417",
+   "reg": 26,
+   "att": 16,
+   "domains": [
+    {
+     "d": "ua.com.tw",
+     "reg": 7,
+     "att": 4
+    },
+    {
+     "d": "unismart.com.tw",
+     "reg": 4,
+     "att": 2
+    },
+    {
+     "d": "hakuhodotm.com.tw",
+     "reg": 3,
+     "att": 3
+    },
+    {
+     "d": "grandpr.com.tw",
+     "reg": 3,
+     "att": 2
+    },
+    {
+     "d": "medialand.tw",
+     "reg": 3,
+     "att": 2
+    },
+    {
+     "d": "ace-taipei.com",
+     "reg": 1,
+     "att": 1
+    },
+    {
+     "d": "dvibemedia.com",
+     "reg": 1,
+     "att": 1
+    },
+    {
+     "d": "meshplus.com.tw",
+     "reg": 1,
+     "att": 1
+    },
+    {
+     "d": "mxdigi.com",
+     "reg": 1,
+     "att": 0
+    },
+    {
+     "d": "pilotpr.com.tw",
+     "reg": 1,
+     "att": 0
+    },
+    {
+     "d": "planetpr.com.tw",
+     "reg": 1,
+     "att": 0
+    }
+   ]
+  },
+  {
+   "ev": "0522",
+   "reg": 12,
+   "att": 11,
+   "domains": [
+    {
+     "d": "mxdigi.com",
+     "reg": 4,
+     "att": 3
+    },
+    {
+     "d": "medialand.tw",
+     "reg": 3,
+     "att": 3
+    },
+    {
+     "d": "meshplus.com.tw",
+     "reg": 3,
+     "att": 3
+    },
+    {
+     "d": "ace-taipei.com",
+     "reg": 1,
+     "att": 1
+    },
+    {
+     "d": "hakuhodotm.com.tw",
+     "reg": 1,
+     "att": 1
+    }
+   ]
+  },
+  {
+   "ev": "0717",
+   "reg": 31,
+   "att": 29,
+   "domains": [
+    {
+     "d": "hakuhodotm.com.tw",
+     "reg": 7,
+     "att": 7
+    },
+    {
+     "d": "medialand.tw",
+     "reg": 6,
+     "att": 4
+    },
+    {
+     "d": "ua.com.tw",
+     "reg": 5,
+     "att": 5
+    },
+    {
+     "d": "meshplus.com.tw",
+     "reg": 4,
+     "att": 4
+    },
+    {
+     "d": "pilotpr.com.tw",
+     "reg": 3,
+     "att": 2
+    },
+    {
+     "d": "mxdigi.com",
+     "reg": 1,
+     "att": 2
+    },
+    {
+     "d": "ace-taipei.com",
+     "reg": 1,
+     "att": 1
+    },
+    {
+     "d": "dvibemedia.com",
+     "reg": 1,
+     "att": 1
+    },
+    {
+     "d": "grandpr.com.tw",
+     "reg": 1,
+     "att": 1
+    },
+    {
+     "d": "planetpr.com.tw",
+     "reg": 1,
+     "att": 1
+    },
+    {
+     "d": "unistyle.com.tw",
+     "reg": 1,
+     "att": 1
+    }
+   ]
+  },
+  {
+   "ev": "0730",
+   "reg": 26,
+   "att": 0,
+   "domains": [
+    {
+     "d": "medialand.tw",
+     "reg": 6,
+     "att": 0
+    },
+    {
+     "d": "meshplus.com.tw",
+     "reg": 6,
+     "att": 0
+    },
+    {
+     "d": "ua.com.tw",
+     "reg": 4,
+     "att": 0
+    },
+    {
+     "d": "hakuhodotm.com.tw",
+     "reg": 2,
+     "att": 0
+    },
+    {
+     "d": "ky-post.com",
+     "reg": 2,
+     "att": 0
+    },
+    {
+     "d": "mxdigi.com",
+     "reg": 2,
+     "att": 0
+    },
+    {
+     "d": "ace-taipei.com",
+     "reg": 1,
+     "att": 0
+    },
+    {
+     "d": "medialnad.tw",
+     "reg": 1,
+     "att": 0
+    },
+    {
+     "d": "mediand.tw",
+     "reg": 1,
+     "att": 0
+    },
+    {
+     "d": "mxdogi.com",
+     "reg": 1,
+     "att": 0
+    }
+   ]
+  },
+  {
+   "ev": "0731苔球",
+   "reg": 30,
+   "att": 0,
+   "domains": [
+    {
+     "d": "medialand.tw",
+     "reg": 7,
+     "att": 0
+    },
+    {
+     "d": "meshplus.com.tw",
+     "reg": 6,
+     "att": 0
+    },
+    {
+     "d": "ua.com.tw",
+     "reg": 5,
+     "att": 0
+    },
+    {
+     "d": "unisurf.com.tw",
+     "reg": 4,
+     "att": 0
+    },
+    {
+     "d": "hakuhodotm.com.tw",
+     "reg": 3,
+     "att": 0
+    },
+    {
+     "d": "mxdigi.com",
+     "reg": 2,
+     "att": 0
+    },
+    {
+     "d": "unismart.com.tw",
+     "reg": 2,
+     "att": 0
+    },
+    {
+     "d": "pilotpr.com.tw",
+     "reg": 1,
+     "att": 0
+    }
+   ]
+  },
+  {
+   "ev": "0731聲波",
+   "reg": 28,
+   "att": 0,
+   "domains": [
+    {
+     "d": "ua.com.tw",
+     "reg": 11,
+     "att": 0
+    },
+    {
+     "d": "medialand.tw",
+     "reg": 6,
+     "att": 0
+    },
+    {
+     "d": "2008-media.com",
+     "reg": 3,
+     "att": 0
+    },
+    {
+     "d": "hakuhodotm.com.tw",
+     "reg": 2,
+     "att": 0
+    },
+    {
+     "d": "mxdigi.com",
+     "reg": 2,
+     "att": 0
+    },
+    {
+     "d": "pilotpr.com.tw",
+     "reg": 2,
+     "att": 0
+    },
+    {
+     "d": "grandpr.com.tw",
+     "reg": 1,
+     "att": 0
+    },
+    {
+     "d": "prestigepr.com.tw",
+     "reg": 1,
+     "att": 0
+    }
+   ]
+  }
+ ]
+}

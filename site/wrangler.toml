@@ -1,0 +1,7 @@
+name = "attendance"
+pages_build_output_dir = "."
+compatibility_date = "2025-01-01"
+
+[[kv_namespaces]]
+binding = "STATE"
+id = "f00a45eecb4249ed83f6481c5b4d9eb2"

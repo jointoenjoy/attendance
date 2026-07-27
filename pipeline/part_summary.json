@@ -1,0 +1,587 @@
+{
+ "ucg_subs": [
+  "聯廣",
+  "聯太",
+  "聯樂",
+  "艾斯",
+  "聯眾",
+  "2008傳媒",
+  "迪維",
+  "聯勤"
+ ],
+ "page_cats": [
+  "聯廣",
+  "聯太",
+  "聯樂",
+  "艾斯",
+  "聯眾",
+  "2008傳媒",
+  "迪維",
+  "聯勤",
+  "先勢集團",
+  "台北博報堂 HTM"
+ ],
+ "y2025": {
+  "聯廣": {
+   "visits": 27,
+   "people": 13
+  },
+  "聯太": {
+   "visits": 0,
+   "people": 0
+  },
+  "聯樂": {
+   "visits": 3,
+   "people": 3
+  },
+  "艾斯": {
+   "visits": 2,
+   "people": 1
+  },
+  "聯眾": {
+   "visits": 26,
+   "people": 7
+  },
+  "2008傳媒": {
+   "visits": 10,
+   "people": 6
+  },
+  "迪維": {
+   "visits": 7,
+   "people": 4
+  },
+  "聯勤": {
+   "visits": 4,
+   "people": 3
+  },
+  "先勢集團": {
+   "visits": 23,
+   "people": 19
+  },
+  "台北博報堂 HTM": {
+   "visits": 68,
+   "people": 34
+  },
+  "米蘭 MDCG": {
+   "visits": 210,
+   "people": 83
+  },
+  "光洋波斯特": {
+   "visits": 32,
+   "people": 23
+  },
+  "安益": {
+   "visits": 8,
+   "people": 6
+  }
+ },
+ "y2026": {
+  "聯廣": {
+   "att": 22,
+   "att_uniq": 18,
+   "reg": 73,
+   "reg_uniq": 36
+  },
+  "聯太": {
+   "att": 2,
+   "att_uniq": 1,
+   "reg": 3,
+   "reg_uniq": 1
+  },
+  "聯樂": {
+   "att": 1,
+   "att_uniq": 1,
+   "reg": 16,
+   "reg_uniq": 11
+  },
+  "艾斯": {
+   "att": 5,
+   "att_uniq": 3,
+   "reg": 8,
+   "reg_uniq": 4
+  },
+  "聯眾": {
+   "att": 5,
+   "att_uniq": 4,
+   "reg": 16,
+   "reg_uniq": 9
+  },
+  "2008傳媒": {
+   "att": 0,
+   "att_uniq": 0,
+   "reg": 3,
+   "reg_uniq": 3
+  },
+  "迪維": {
+   "att": 3,
+   "att_uniq": 2,
+   "reg": 4,
+   "reg_uniq": 2
+  },
+  "聯勤": {
+   "att": 3,
+   "att_uniq": 3,
+   "reg": 4,
+   "reg_uniq": 3
+  },
+  "先勢集團": {
+   "att": 22,
+   "att_uniq": 20,
+   "reg": 50,
+   "reg_uniq": 31
+  },
+  "台北博報堂 HTM": {
+   "att": 21,
+   "att_uniq": 17,
+   "reg": 43,
+   "reg_uniq": 22
+  },
+  "米蘭 MDCG": {
+   "att": 54,
+   "att_uniq": 45,
+   "reg": 123,
+   "reg_uniq": 76
+  },
+  "光洋波斯特": {
+   "att": 4,
+   "att_uniq": 4,
+   "reg": 15,
+   "reg_uniq": 11
+  },
+  "安益": {
+   "att": 0,
+   "att_uniq": 0,
+   "reg": 1,
+   "reg_uniq": 1
+  }
+ },
+ "groups": [
+  {
+   "key": "ua",
+   "cat": "聯廣",
+   "note": "UNITED ADVERTISING 聯廣廣告",
+   "confirmed": true,
+   "seen": [
+    "ua.com",
+    "ua.com.tw"
+   ],
+   "rows": 73,
+   "att": 22
+  },
+  {
+   "key": "unistyle",
+   "cat": "聯太",
+   "note": "聯太（聯廣集團旗下）；試算表「所屬企業」欄標為 PILOT，經確認應歸聯太",
+   "confirmed": true,
+   "seen": [
+    "unistyle.com.tw"
+   ],
+   "rows": 3,
+   "att": 2
+  },
+  {
+   "key": "unisurf",
+   "cat": "聯樂",
+   "note": "UNISURF 聯樂數位行銷",
+   "confirmed": true,
+   "seen": [
+    "unisurf.com",
+    "unisurf.com.tw"
+   ],
+   "rows": 16,
+   "att": 1
+  },
+  {
+   "key": "ace-taipei",
+   "cat": "艾斯",
+   "note": "艾斯",
+   "confirmed": true,
+   "seen": [
+    "ace-taipei.com",
+    "ace.taipei.com"
+   ],
+   "rows": 8,
+   "att": 5
+  },
+  {
+   "key": "unismart",
+   "cat": "聯眾",
+   "note": "Uni-Smart 聯眾廣告／UPOINT 聯眾觀點",
+   "confirmed": true,
+   "seen": [
+    "unismart.com.tw"
+   ],
+   "rows": 16,
+   "att": 5
+  },
+  {
+   "key": "2008-media",
+   "cat": "2008傳媒",
+   "note": "2008 傳媒行銷",
+   "confirmed": true,
+   "seen": [
+    "2008-media.com"
+   ],
+   "rows": 3,
+   "att": 0
+  },
+  {
+   "key": "dvibemedia",
+   "cat": "迪維",
+   "note": "dvibe 迪維數位智造",
+   "confirmed": true,
+   "seen": [
+    "dvibemedia.com"
+   ],
+   "rows": 4,
+   "att": 3
+  },
+  {
+   "key": "unisincere",
+   "cat": "聯勤",
+   "note": "UPR 聯勤公關",
+   "confirmed": true,
+   "seen": [
+    "unisincere.com.tw"
+   ],
+   "rows": 4,
+   "att": 3
+  },
+  {
+   "key": "pilotpr",
+   "cat": "先勢集團",
+   "note": "先勢公關",
+   "confirmed": true,
+   "seen": [
+    "pilotpr.com.tw"
+   ],
+   "rows": 15,
+   "att": 6
+  },
+  {
+   "key": "grandpr",
+   "cat": "先勢集團",
+   "note": "精采公關",
+   "confirmed": true,
+   "seen": [
+    "grandpr.com.tw"
+   ],
+   "rows": 17,
+   "att": 8
+  },
+  {
+   "key": "prestigepr",
+   "cat": "先勢集團",
+   "note": "楷模公關",
+   "confirmed": true,
+   "seen": [
+    "prestigepr.com.tw"
+   ],
+   "rows": 9,
+   "att": 3
+  },
+  {
+   "key": "planetpr",
+   "cat": "先勢集團",
+   "note": "頤德／星團公關（planetpe 為打錯的變體，已併入）",
+   "confirmed": true,
+   "seen": [
+    "planetpe.com.tw",
+    "planetpr.com.tw"
+   ],
+   "rows": 7,
+   "att": 4
+  },
+  {
+   "key": "charismomo",
+   "cat": "先勢集團",
+   "note": "試算表「所屬企業」欄標 PILOT，但這不是先勢既有網域，請確認是哪家",
+   "confirmed": false,
+   "seen": [
+    "charismomo.com"
+   ],
+   "rows": 2,
+   "att": 1
+  },
+  {
+   "key": "hakuhodo",
+   "cat": "台北博報堂 HTM",
+   "note": "台北博報堂（hakuhodotm 與 hakuhodoti 兩組寫法已合併）",
+   "confirmed": true,
+   "seen": [
+    "hakuhodoti.com.tw",
+    "hakuhodotm.com.tw"
+   ],
+   "rows": 43,
+   "att": 21
+  }
+ ],
+ "ev_att": {
+  "0320": {
+   "hakuhodo": 3,
+   "ua": 2,
+   "ace-taipei": 2,
+   "unisurf": 1,
+   "unisincere": 1
+  },
+  "0327": {
+   "grandpr": 5,
+   "pilotpr": 4,
+   "ua": 11,
+   "prestigepr": 3,
+   "unismart": 3,
+   "hakuhodo": 7,
+   "planetpr": 3,
+   "dvibemedia": 1,
+   "unisincere": 2,
+   "unistyle": 1
+  },
+  "0417": {
+   "unismart": 2,
+   "ua": 4,
+   "dvibemedia": 1,
+   "ace-taipei": 1,
+   "hakuhodo": 3,
+   "grandpr": 2
+  },
+  "0522": {
+   "hakuhodo": 1,
+   "ace-taipei": 1
+  },
+  "0717": {
+   "ua": 5,
+   "dvibemedia": 1,
+   "ace-taipei": 1,
+   "hakuhodo": 7,
+   "pilotpr": 2,
+   "grandpr": 1,
+   "planetpr": 1,
+   "unistyle": 1,
+   "charismomo": 1
+  }
+ },
+ "ev2025": [
+  {
+   "date": "2025-02-21",
+   "label": "採集自然之聲",
+   "cats": {
+    "先勢集團": 4,
+    "台北博報堂 HTM": 1,
+    "聯廣": 3,
+    "聯樂": 1
+   }
+  },
+  {
+   "date": "2025-02-27",
+   "label": "採集自然之聲",
+   "cats": {
+    "台北博報堂 HTM": 2
+   }
+  },
+  {
+   "date": "2025-03-28",
+   "label": "茶席",
+   "cats": {
+    "先勢集團": 2,
+    "聯樂": 1,
+    "聯眾": 1,
+    "艾斯": 1,
+    "台北博報堂 HTM": 2
+   }
+  },
+  {
+   "date": "2025-04-11",
+   "label": "茶席",
+   "cats": {
+    "台北博報堂 HTM": 7
+   }
+  },
+  {
+   "date": "2025-04-25",
+   "label": "躺躺",
+   "cats": {
+    "2008傳媒": 6,
+    "聯廣": 1,
+    "聯眾": 1,
+    "迪維": 1,
+    "台北博報堂 HTM": 2
+   }
+  },
+  {
+   "date": "2025-05-02",
+   "label": "茶席",
+   "cats": {
+    "聯眾": 1
+   }
+  },
+  {
+   "date": "2025-06-13",
+   "label": "音樂會",
+   "cats": {
+    "台北博報堂 HTM": 2,
+    "先勢集團": 2
+   }
+  },
+  {
+   "date": "2025-06-27",
+   "label": "正念",
+   "cats": {
+    "台北博報堂 HTM": 5,
+    "聯廣": 3,
+    "聯眾": 3,
+    "迪維": 1,
+    "先勢集團": 1
+   }
+  },
+  {
+   "date": "2025-07-18",
+   "label": "正念",
+   "cats": {
+    "台北博報堂 HTM": 3,
+    "聯眾": 2,
+    "聯廣": 2,
+    "迪維": 1,
+    "2008傳媒": 2
+   }
+  },
+  {
+   "date": "2025-07-25",
+   "label": "喚覺躺躺",
+   "cats": {
+    "台北博報堂 HTM": 5,
+    "聯眾": 3,
+    "迪維": 2
+   }
+  },
+  {
+   "date": "2025-08-29",
+   "label": "風土味蕾小宇宙",
+   "cats": {
+    "台北博報堂 HTM": 2,
+    "聯廣": 1,
+    "聯眾": 3,
+    "先勢集團": 4
+   }
+  },
+  {
+   "date": "2025-09-05",
+   "label": "風土味蕾小宇宙",
+   "cats": {
+    "台北博報堂 HTM": 2,
+    "聯廣": 2,
+    "聯眾": 1,
+    "聯勤": 2,
+    "聯樂": 1,
+    "艾斯": 1,
+    "先勢集團": 2
+   }
+  },
+  {
+   "date": "2025-10-03",
+   "label": "水之旅",
+   "cats": {
+    "聯廣": 2,
+    "先勢集團": 3
+   }
+  },
+  {
+   "date": "2025-10-09",
+   "label": "森之旅",
+   "cats": {
+    "台北博報堂 HTM": 4,
+    "聯廣": 3,
+    "聯眾": 4
+   }
+  },
+  {
+   "date": "2025-11-07",
+   "label": "聲音書寫",
+   "cats": {
+    "台北博報堂 HTM": 5,
+    "聯廣": 3,
+    "聯眾": 1,
+    "迪維": 2,
+    "先勢集團": 4
+   }
+  },
+  {
+   "date": "2025-11-21",
+   "label": "內耗退場(上午)",
+   "cats": {
+    "聯眾": 1,
+    "先勢集團": 1
+   }
+  },
+  {
+   "date": "2025-11-21",
+   "label": "內耗退場(下午)",
+   "cats": {
+    "台北博報堂 HTM": 4,
+    "聯廣": 2,
+    "聯眾": 1
+   }
+  },
+  {
+   "date": "2025-12-21",
+   "label": "聖誕森療",
+   "cats": {
+    "台北博報堂 HTM": 12
+   }
+  },
+  {
+   "date": "2025-12-26",
+   "label": "呼吸清理",
+   "cats": {
+    "聯廣": 4,
+    "聯眾": 3,
+    "聯勤": 2,
+    "台北博報堂 HTM": 5,
+    "2008傳媒": 2
+   }
+  },
+  {
+   "date": "2026-01-16",
+   "label": "激靜鼓",
+   "cats": {
+    "聯廣": 1,
+    "聯眾": 1,
+    "台北博報堂 HTM": 5
+   }
+  }
+ ],
+ "exceptions": [
+  {
+   "kind": "conflict",
+   "email": "gr***@ua.com.tw",
+   "dom": "ua.com.tw",
+   "ours": "聯廣",
+   "sheet": "HTM"
+  },
+  {
+   "kind": "conflict",
+   "email": "na***@ua.com.tw",
+   "dom": "ua.com.tw",
+   "ours": "聯廣",
+   "sheet": "HTM"
+  },
+  {
+   "kind": "unmapped",
+   "email": "ry***@gmail.com",
+   "dom": "gmail.com",
+   "ours": null,
+   "sheet": "UCG"
+  }
+ ],
+ "held": [
+  "0320",
+  "0327",
+  "0417",
+  "0522",
+  "0717"
+ ],
+ "future": [
+  "0730",
+  "0731苔球",
+  "0731聲波"
+ ]
+}
