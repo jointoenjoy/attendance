@@ -415,19 +415,70 @@ const DATA_2025 = [
  {c:"PILOT",h:37,v:77},{c:"KY-POST",h:24,v:39},{c:"INTERPLAN",h:3,v:3}
 ];
 
-// 2026 由 Wix API 直接撈取（14 場活動，2026 全年）。有點「所屬企業/集團」下拉的用下拉值；
-// 沒點下拉的改用公司 email 網域當帳號（@domain），交由歸戶區指派集團。
+// 2026 上半年（3/20～7/31 共 8 場）— 由原始報名名單逐筆產出。
+// 有填「所屬企業/集團」的用該值當帳號；沒填的用公司 email 網域（@domain），交由歸戶區指派集團。
+// c=企業帳號  h=該帳號的不重複人數  v=人次（報名筆數）
 const DATA_2026 = [
- {c:"MDCG",h:80,v:120},{c:"UCG",h:55,v:84},{c:"PILOT",h:29,v:35},{c:"HTM",h:25,v:38},
- {c:"@ua.com.tw",h:21,v:24},{c:"練息之友",h:14,v:14},{c:"@hakuhodotm.com.tw",h:13,v:16},
- {c:"@medialand.tw",h:11,v:12},{c:"@ky-post.com",h:8,v:9},{c:"KY-POST",h:7,v:8},
- {c:"@unisurf.com.tw",h:7,v:7},{c:"@meshplus.com.tw",h:6,v:8},{c:"@unismart.com.tw",h:6,v:6},
- {c:"INTERPLAN",h:5,v:6},{c:"@grandpr.com.tw",h:5,v:5},{c:"@pilotpr.com.tw",h:5,v:5},
- {c:"@prestigepr.com.tw",h:4,v:4},{c:"@mxdigi.com",h:3,v:3},{c:"非集團員工現場收費500元",h:2,v:2},
- {c:"@dvibemedia.com",h:1,v:1},{c:"@ace.taipei.com",h:1,v:1},{c:"@unisincere.com.tw",h:1,v:1},
- {c:"@gmail.com",h:1,v:1},{c:"@unistyle.com.tw",h:1,v:1},{c:"@planetpe.com.tw",h:1,v:1},
- {c:"@planetpr.com.tw",h:1,v:1},{c:"@ua.com",h:1,v:1},{c:"@charismomo.com",h:1,v:1},
- {c:"@ace-taipei.com",h:1,v:1}
+ {c:"MDCG",h:72,v:99},{c:"UCG",h:45,v:66},{c:"@ua.com.tw",h:29,v:35},
+ {c:"PILOT",h:26,v:31},{c:"HTM",h:22,v:28},{c:"@medialand.tw",h:16,v:18},
+ {c:"@hakuhodotm.com.tw",h:14,v:18},{c:"練息之友",h:14,v:14},{c:"@ky-post.com",h:8,v:9},
+ {c:"@pilotpr.com.tw",h:7,v:7},{c:"@unisurf.com.tw",h:7,v:7},{c:"@meshplus.com.tw",h:6,v:8},
+ {c:"@grandpr.com.tw",h:6,v:6},{c:"@unismart.com.tw",h:6,v:6},{c:"KY-POST",h:5,v:6},
+ {c:"@mxdigi.com",h:5,v:5},{c:"@prestigepr.com.tw",h:5,v:5},{c:"@2008-media.com",h:3,v:3},
+ {c:"非集團員工現場收費500元",h:2,v:2},{c:"@ace.taipei.com",h:1,v:1},{c:"@ace-taipei.com",h:1,v:1},
+ {c:"@charismomo.com",h:1,v:1},{c:"@dvibemedia.com",h:1,v:1},{c:"@gmail.com",h:1,v:1},
+ {c:"@planetpe.com.tw",h:1,v:1},{c:"@planetpr.com.tw",h:1,v:1},{c:"@ua.com",h:1,v:1},
+ {c:"@unisincere.com.tw",h:1,v:1},{c:"@unistyle.com.tw",h:1,v:1},{c:"INTERPLAN",h:1,v:1}
+];
+// 資料版本：改了 DATA_2026 就要進版，否則雲端存的舊陣列會蓋掉新資料。
+const DATA_2026_VER = 2;
+
+// ⚠️ 人數不能把上面每個帳號的 h 相加。
+// 候補報名不會被問「所屬企業」，同一個人因此可能同時出現在「下拉帳號」與「網域帳號」兩個桶裡，
+// 相加就會把一個人算成兩個（2026 上半年有 76 人是這種情形）。
+// 這張表記錄「每個人出現過哪些帳號」→ 有幾個人，讓歸戶怎麼改都能正確去重。
+// 只有帳號與人數，無姓名、無信箱。
+const PEOPLE_2026 = [
+ [["MDCG"],54],
+ [["UCG"],19],
+ [["@ua.com.tw","UCG"],17],
+ [["練息之友"],14],
+ [["@hakuhodotm.com.tw","HTM"],12],
+ [["@ua.com.tw"],10],
+ [["PILOT"],10],
+ [["@medialand.tw"],8],
+ [["@medialand.tw","MDCG"],8],
+ [["HTM"],8],
+ [["@grandpr.com.tw","PILOT"],6],
+ [["@ky-post.com"],6],
+ [["@meshplus.com.tw","MDCG"],6],
+ [["@mxdigi.com","MDCG"],4],
+ [["@pilotpr.com.tw"],4],
+ [["@prestigepr.com.tw","PILOT"],4],
+ [["@unisurf.com.tw"],4],
+ [["@2008-media.com"],3],
+ [["@pilotpr.com.tw","PILOT"],3],
+ [["@unismart.com.tw"],3],
+ [["@unismart.com.tw","UCG"],3],
+ [["@unisurf.com.tw","UCG"],3],
+ [["KY-POST"],3],
+ [["@hakuhodotm.com.tw"],2],
+ [["@ky-post.com","KY-POST"],2],
+ [["@ua.com.tw","HTM"],2],
+ [["非集團員工現場收費500元"],2],
+ [["@ace.taipei.com"],1],
+ [["@ace-taipei.com","UCG"],1],
+ [["@charismomo.com","PILOT"],1],
+ [["@dvibemedia.com","UCG"],1],
+ [["@gmail.com"],1],
+ [["@mxdigi.com"],1],
+ [["@planetpe.com.tw"],1],
+ [["@planetpr.com.tw","PILOT"],1],
+ [["@prestigepr.com.tw"],1],
+ [["@ua.com"],1],
+ [["@unisincere.com.tw","UCG"],1],
+ [["@unistyle.com.tw","PILOT"],1],
+ [["INTERPLAN"],1]
 ];
 
 const MEMBERS = ["MDCG","UCG","HTM","先勢","光洋波斯特","安益"];
@@ -479,7 +530,8 @@ const KEY = "jte-boda-tagger-v5";
 const CLOUD = "/api/state";
 // 現場報到來源表（Google Drive 搜到的活動總表）。頁面上可直接換成別份。
 const DEFAULT_SHEET = "https://docs.google.com/spreadsheets/d/15YtSrqtUtWr7U7MbG_5bAVE0BgA_-VZTK-jbwAeTZQk/edit";
-const BLANK = () => ({tags:{}, emp25:{...DEFAULT_EMP25}, emp26:{...DEFAULT_EMP26}, d2026:DATA_2026, sheetUrl:DEFAULT_SHEET});
+const BLANK = () => ({tags:{}, emp25:{...DEFAULT_EMP25}, emp26:{...DEFAULT_EMP26},
+                      d2026:DATA_2026, d2026Ver:DATA_2026_VER, sheetUrl:DEFAULT_SHEET});
 let S = BLANK();
 try{ const raw = localStorage.getItem(KEY); if(raw) S = Object.assign(S, JSON.parse(raw)); }catch(e){}
 
@@ -518,6 +570,11 @@ async function initState(){
       const remote = await r.json();
       if(remote && typeof remote === "object"){
         S = Object.assign(BLANK(), remote);
+        // 雲端存的是舊版 2026 陣列（或根本沒有版本號）→ 換成頁面內建的新資料。
+        // 人工貼上匯入的名單（d2026Ver=0）不會被蓋掉。
+        if(S.d2026Ver !== DATA_2026_VER && S.d2026Ver !== 0){
+          S.d2026 = DATA_2026; S.d2026Ver = DATA_2026_VER;
+        }
         try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){}
       }
       cloudBadge("saved");
@@ -550,6 +607,17 @@ const cell = t => { const td = document.createElement("td"); td.textContent = t;
 const fmtRate = r => (r===null || r===undefined) ? "—" : r.toFixed(1)+"%";
 const rateVal = (n, e) => e>0 ? n/e*100 : null;
 
+// 2026 的人數要整份去重，不能把各帳號的去重人數相加（見 PEOPLE_2026 的說明）。
+// match(集團) 回傳 true 的帳號，只要有一個出現在某人身上，這個人就算進去、且只算一次。
+const usePeople26 = () => S.d2026Ver === DATA_2026_VER;
+function uniq26(match){
+  let n = 0;
+  for(const [accts, cnt] of PEOPLE_2026){
+    if(accts.some(a => match(tagOf(a)))) n += cnt;
+  }
+  return n;
+}
+
 function aggregate(){
   const rows = companyRows();
   const mem = new Map();
@@ -563,6 +631,11 @@ function aggregate(){
     bucket.h25 += r.h25; bucket.v25 += r.v25; bucket.h26 += r.h26; bucket.v26 += r.v26;
     bucket.cos.push(r);
   });
+  if(usePeople26()){
+    MEMBERS.forEach(m => { mem.get(m).h26 = uniq26(g => g === m); });
+    pr.h26 = uniq26(g => g === PR);
+    out.h26 = uniq26(g => g === OUT);
+  }
   return {mem, pr, out};
 }
 
@@ -579,6 +652,9 @@ function calc(){
     if(e25>0) eSum25+=e25; else if(p.h25>0) miss25.push(MEMBER_LABEL[m]);
     if(e26>0) eSum26+=e26; else if(p.h26>0) miss26.push(MEMBER_LABEL[m]);
   });
+  // 集團合計人數也要整份去重：少數人同時被歸到兩家（信箱網域屬 A、下拉填 B），
+  // 各家數字相加會重複計到，所以合計另外算一次。
+  if(usePeople26()) tH26 = uniq26(g => isMember(g));
   // 合併參與率：所有「有參與的成員」都填了員工數才算得準，否則顯示 —（待補）
   const ok25 = eSum25>0 && miss25.length===0, ok26 = eSum26>0 && miss26.length===0;
   return {mem, pr, tH25,tV25,tH26,tV26, eSum25,eSum26, miss25,miss26,
@@ -668,6 +744,7 @@ function renderTop(){
   const tn = document.createElement("td"); tn.className = "l name"; tn.textContent = "格威博報堂集團 合計";
   let tH25=0,tV25=0,tH26=0,tV26=0;
   MEMBERS.forEach(m => { const p=mem.get(m); tH25+=p.h25;tV25+=p.v25;tH26+=p.h26;tV26+=p.v26; });
+  if(usePeople26()) tH26 = uniq26(g => isMember(g));   // 合計人數整份去重（見 PEOPLE_2026）
   totalTr.append(tn, cell(tH25), cell(tV25), idCell("sumE25","—"), dualCell("rateT25"));
   const th26 = cell(tH26||"—"); th26.classList.add("divider");
   totalTr.append(th26, cell(tV26||"—"), idCell("sumE26","—"), dualCell("rateT26"));
@@ -746,6 +823,7 @@ $("btnCsv").addEventListener("click", () => {
       p.h25,p.v25,e25||"",rp(p.h25,e25),rp(p.v25,e25),
       p.h26,p.v26,e26||"",rp(p.h26,e26),rp(p.v26,e26)].join(","));
     tH25+=p.h25;tV25+=p.v25;tH26+=p.h26;tV26+=p.v26; if(e25>0)eS25+=e25; if(e26>0)eS26+=e26; });
+  if(usePeople26()) tH26 = uniq26(g => isMember(g));   // 合計人數整份去重，同上
   L.push(["合計","格威博報堂集團",
     tH25,tV25,eS25||"",rp(tH25,eS25),rp(tV25,eS25),
     tH26,tV26,eS26||"",rp(tH26,eS26),rp(tV26,eS26)].join(","));
@@ -778,6 +856,7 @@ $("btnImport").addEventListener("click", () => {
   if(!ok){ msg.className="msg warn"; msg.textContent="沒有讀到可用資料，請確認每行都是「識別欄,公司」兩欄。"; return; }
   S.d2026 = [...visits.keys()].map(c => ({c, h:people.get(c).size, v:visits.get(c)}))
     .sort((a,b)=>b.h-a.h||a.c.localeCompare(b.c,"zh-Hant"));
+  S.d2026Ver = 0;    // 人工匯入的名單沒有對應的 PEOPLE_2026，人數退回各帳號相加
   $("paste").value = ""; save(); render();
   const tot = S.d2026.reduce((s,r)=>s+r.h,0);
   msg.className="msg";
@@ -785,7 +864,7 @@ $("btnImport").addEventListener("click", () => {
 });
 
 $("btnClear26").addEventListener("click", () => {
-  S.d2026 = DATA_2026; save(); render();
+  S.d2026 = DATA_2026; S.d2026Ver = DATA_2026_VER; save(); render();
   $("msg").className="msg"; $("msg").textContent="已還原為 Wix 原始 2026 數字。";
 });
 
@@ -922,9 +1001,13 @@ const NOTES = {
     <p><b>2025</b> 全部以 Wix 後台為準（Events API 逐場撈取＋後台匯出，全年 20 場、總報名 635 人次，
        與後台匯出的 626 一致，落差 &lt;2%）。表中「不重複人數」與「人次」同源，逐場可對帳。
        註：這是「用集團信箱報名的不同人」，範圍大於人資在職名冊，所以會高於公司內部在職統計，屬正常。</p>
-    <p><b>2026</b> 由 Wix Events API 直接撈取（全年 14 場）。有點「所屬企業」下拉的用下拉值；
-       沒點的改用公司 email 網域自動歸戶。代碼對照：PILOT＝先勢、KY-POST＝光洋波斯特、INTERPLAN＝安益，
-       「練息之友」歸不列入。</p>
+    <p><b>2026</b> 為<b>上半年 3/20～7/31 共 8 場</b>（與對外 /part 頁同一批場次，1/16 那場依慣例歸 2025）。
+       有填「所屬企業」的用該值歸戶；沒填的改用公司 email 網域自動歸戶。
+       代碼對照：PILOT＝先勢、KY-POST＝光洋波斯特、INTERPLAN＝安益，「練息之友」歸不列入。</p>
+    <p><b>2026 人數為什麼不等於各帳號相加</b>：候補報名不會被問「所屬企業」（109 筆候補有 104 筆空白），
+       另有一場活動整場未收集此欄位。同一個人因此可能同時出現在「下拉帳號」與「網域帳號」兩個桶裡，
+       相加會把一個人算成兩個（上半年有 76 人是這種情形）。本頁的人數改為<b>整份逐人去重</b>，
+       所以合計會小於各帳號 h 的加總，這是正確的。</p>
     ${downloadsHtml(null, true)}`],
 
   rate: ["集團整體參與率 · 數據說明", () => `
@@ -935,6 +1018,8 @@ const NOTES = {
       <span class="frac"><span class="num">集團參與人次（含重複）</span><span class="den">集團員工總數</span></span>× 100%</div>
     <p><b>人數</b>＝同一人只算一次（用 email 去重）；<b>人次</b>＝報名筆數，同一人參加多場會重複計。
        所以含重複參與率可能超過 100%，代表平均每人不只參加一場。</p>
+    <p>2026 的人數是<b>整份逐人去重</b>後的結果：同一個人就算在不同場次被記在不同「企業帳號」下
+       （候補報名不會被問所屬企業），也只算一個人。因此各家人數相加會略大於集團合計，屬正常。</p>
     <p><b>分母是「已填員工總數的成員加總」</b>。只要還有任何一家有參與、但員工總數是空的，
        合併參與率就會顯示「待填員工總數」，不會給你一個算錯的數字。缺哪幾家會列在表格下方。</p>
     <p>員工總數即時存到雲端，跨裝置同步、永久保存。</p>
