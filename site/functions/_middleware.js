@@ -3,8 +3,8 @@
 // 做法：進 /all 之前先出一頁輸入密碼，輸對就寫一個 cookie，之後同一台裝置直接進得去。
 // 連 /api/state（/all 的資料端點）也一起擋，否則只擋畫面、資料還是被抓得走。
 //
-// 想換密碼：到 Cloudflare Pages 專案設環境變數 ALL_PASSWORD 即可，不用改程式。
-const DEFAULT_PW = "27390000";
+// 密碼一律由環境變數 ALL_PASSWORD 提供，程式碼裡不留密碼；沒設就把 /all 鎖死（fail closed）。
+// 想換密碼：wrangler pages secret put ALL_PASSWORD --project-name <專案名>，不用改程式。
 const COOKIE = "jte_all";
 
 const GATED = (p) => p === "/all" || p.startsWith("/all/") || p === "/api/state";
@@ -73,7 +73,15 @@ export async function onRequest(context) {
   const url = new URL(request.url);
   if (!GATED(url.pathname)) return next();
 
-  const token = await tokenOf(env.ALL_PASSWORD || DEFAULT_PW);
+  // 沒設環境變數就不放行，避免漏設時 /all 的原始報名資料變成裸公開
+  if (!env.ALL_PASSWORD) {
+    return new Response("此站尚未設定 ALL_PASSWORD 環境變數，/all 暫時無法檢視。", {
+      status: 503,
+      headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "no-store" },
+    });
+  }
+
+  const token = await tokenOf(env.ALL_PASSWORD);
   if (cookieVal(request, COOKIE) === token) return next();
 
   // 送出密碼
