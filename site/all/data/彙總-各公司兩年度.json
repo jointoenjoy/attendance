@@ -77,20 +77,20 @@
  },
  "y2026": {
   "聯廣": {
-   "att": 36,
-   "att_uniq": 24,
+   "att": 44,
+   "att_uniq": 25,
    "reg": 90,
    "reg_uniq": 39
   },
   "聯太": {
-   "att": 2,
+   "att": 3,
    "att_uniq": 1,
    "reg": 5,
    "reg_uniq": 1
   },
   "聯樂": {
-   "att": 4,
-   "att_uniq": 3,
+   "att": 8,
+   "att_uniq": 7,
    "reg": 20,
    "reg_uniq": 15
   },
@@ -101,20 +101,20 @@
    "reg_uniq": 4
   },
   "聯眾": {
-   "att": 7,
-   "att_uniq": 5,
+   "att": 11,
+   "att_uniq": 6,
    "reg": 22,
    "reg_uniq": 10
   },
   "2008傳媒": {
-   "att": 3,
-   "att_uniq": 3,
+   "att": 6,
+   "att_uniq": 6,
    "reg": 6,
    "reg_uniq": 6
   },
   "迪維": {
-   "att": 3,
-   "att_uniq": 2,
+   "att": 5,
+   "att_uniq": 3,
    "reg": 6,
    "reg_uniq": 3
   },
@@ -125,26 +125,26 @@
    "reg_uniq": 3
   },
   "先勢集團": {
-   "att": 23,
-   "att_uniq": 21,
+   "att": 29,
+   "att_uniq": 25,
    "reg": 59,
    "reg_uniq": 35
   },
   "台北博報堂 HTM": {
-   "att": 27,
-   "att_uniq": 20,
+   "att": 37,
+   "att_uniq": 26,
    "reg": 69,
    "reg_uniq": 32
   },
   "米蘭 MDCG": {
-   "att": 84,
-   "att_uniq": 61,
+   "att": 105,
+   "att_uniq": 65,
    "reg": 146,
    "reg_uniq": 82
   },
   "光洋波斯特": {
-   "att": 6,
-   "att_uniq": 5,
+   "att": 10,
+   "att_uniq": 8,
    "reg": 21,
    "reg_uniq": 13
   },
@@ -166,7 +166,7 @@
     "ua.com.tw"
    ],
    "rows": 90,
-   "att": 36
+   "att": 44
   },
   {
    "key": "unistyle",
@@ -177,7 +177,7 @@
     "unistyle.com.tw"
    ],
    "rows": 5,
-   "att": 2
+   "att": 3
   },
   {
    "key": "unisurf",
@@ -189,7 +189,7 @@
     "unisurf.com.tw"
    ],
    "rows": 20,
-   "att": 4
+   "att": 8
   },
   {
    "key": "ace-taipei",
@@ -212,7 +212,7 @@
     "unismart.com.tw"
    ],
    "rows": 22,
-   "att": 7
+   "att": 11
   },
   {
    "key": "2008-media",
@@ -223,7 +223,7 @@
     "2008-media.com"
    ],
    "rows": 6,
-   "att": 3
+   "att": 6
   },
   {
    "key": "dvibemedia",
@@ -234,7 +234,7 @@
     "dvibemedia.com"
    ],
    "rows": 6,
-   "att": 3
+   "att": 5
   },
   {
    "key": "unisincere",
@@ -256,7 +256,7 @@
     "pilotpr.com.tw"
    ],
    "rows": 17,
-   "att": 7
+   "att": 9
   },
   {
    "key": "grandpr",
@@ -290,7 +290,7 @@
     "planetpr.com.tw"
    ],
    "rows": 13,
-   "att": 4
+   "att": 8
   },
   {
    "key": "charismomo",
@@ -313,7 +313,7 @@
     "hakuhodotm.com.tw"
    ],
    "rows": 69,
-   "att": 27
+   "att": 37
   }
  ],
  "ev_att": {
@@ -374,6 +374,29 @@
    "unismart": 2,
    "ua": 4,
    "hakuhodo": 2
+  },
+  "2026-08-21|8/21（五）《替身體乾一杯！ 滋養自己的香料野草茶》": {
+   "unismart": 1,
+   "planetpr": 2,
+   "ua": 1
+  },
+  "2026-08-27|8/27（四）《替身體乾一杯！ 滋養自己的香料野草茶》": {
+   "hakuhodo": 9,
+   "unismart": 2,
+   "ua": 4,
+   "2008-media": 1,
+   "dvibemedia": 2,
+   "unistyle": 1,
+   "unisurf": 1
+  },
+  "2026-09-04|9/4（五）《按下關機鍵：退出磁碟的休眠課》": {
+   "planetpr": 2,
+   "2008-media": 2,
+   "unisurf": 3,
+   "hakuhodo": 1,
+   "ua": 3,
+   "unismart": 1,
+   "pilotpr": 2
   }
  },
  "ev2025": [
@@ -603,14 +626,13 @@
   "2026-07-17|7/17（五）《就是你了！來養顆苔球小精靈吧》",
   "2026-07-30|7/30（四）《就是你了！來養顆苔球小精靈吧》 加場！",
   "2026-07-31|7/31（五）《聲波共振！開出你專屬的魔法結界》",
-  "2026-07-31|7/31（五）《就是你了！來養顆苔球小精靈吧》"
- ],
- "nocheck": [
+  "2026-07-31|7/31（五）《就是你了！來養顆苔球小精靈吧》",
   "2026-08-21|8/21（五）《替身體乾一杯！ 滋養自己的香料野草茶》",
   "2026-08-27|8/27（四）《替身體乾一杯！ 滋養自己的香料野草茶》",
   "2026-09-04|9/4（五）《按下關機鍵：退出磁碟的休眠課》"
  ],
+ "nocheck": [],
  "future": [],
- "last_checkin": "2026-07-31",
+ "last_checkin": "2026-09-04",
  "generated": "2026-10-01"
 }
