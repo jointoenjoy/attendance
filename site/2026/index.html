@@ -67,6 +67,8 @@
   th:first-child,td:first-child{text-align:left}
   thead th{font-size:.76rem;color:var(--muted);font-weight:700;border-bottom:2px solid var(--line)}
   tfoot td{border-top:2px solid var(--line);font-weight:800;background:color-mix(in srgb,var(--p-mint) 46%,transparent)}
+  tfoot tr.sub td{border-top:1px solid var(--line);font-weight:500;background:none;color:var(--muted,#667)}
+  tfoot tr.all td{border-top:1px solid var(--line);font-weight:700;background:none}
   tbody tr:hover{background:color-mix(in srgb,var(--p-blue) 30%,transparent)}
   .dl{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 0}
   .btn{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:.86rem;font-weight:700;text-decoration:none;
@@ -123,7 +125,7 @@
     </section>
     <section class="card">
       <h2>各公司彙總</h2>
-      <p class="hint">人數＝同一人只算一次（用 email 去重）；人次＝報名筆數。報到只計有登錄報到的場次。</p>
+      <p class="hint">人數＝同一人只算一次（用 email 判斷，不重複計算）；人次＝報名筆數。報到只計有登錄報到的場次。</p>
       <div class="scroll"><table id="coTbl"></table></div>
     </section>
     <section class="card">
@@ -164,7 +166,7 @@
   }
   const T = D.totals, CO = Object.fromEntries(D.companies.map((c) => [c.code, c.name]));
   $("lede").textContent = `${md(D.events[0].date)}～${md(D.events.at(-1).date)} 共 ${T.events} 場｜資料更新：${D.generated}（每週三自動更新）`;
-  for (const [v, l] of [[T.people, "參與人數（去重）"], [T.rows, "報名人次"], [T.ck, "報到人次"], [T.events, "場次"]])
+  for (const [v, l] of [[T.people, "參與人數（不重複）"], [T.rows, "報名人次"], [T.ck, "報到人次"], [T.events, "場次"]])
     $("kpis").append(el("div", { class: "kpi" }, el("b", {}, v.toLocaleString()), el("span", {}, l)));
 
   const btn = (f, label, primary) => el("a", { class: "btn" + (primary ? " primary" : ""), href: f.url, download: f.name },
@@ -180,7 +182,13 @@
     tb.append(el("tr", {}, ...[c.name, c.people, c.rows, c["正取"], c["候補"], c["請假"], c.ck, c.ck_people].map((v) => el("td", {}, v))));
   t.append(tb);
   const sum = (k) => D.companies.reduce((a, c) => a + c[k], 0);
-  t.append(el("tfoot", {}, el("tr", {}, ...["全集團（去重）", T.people, T.rows, sum("正取"), sum("候補"), sum("請假"), T.ck, T.ck_people].map((v) => el("td", {}, v)))));
+  t.append(el("tfoot", {}, el("tr", {}, ...["全集團（不重複）", T.people, T.rows, sum("正取"), sum("候補"), sum("請假"), T.ck, T.ck_people].map((v) => el("td", {}, v))),
+    // 加回沒納入的非集團報名＝Wix 全部報名，報名／候補／請假跟年中報告「Chill 活動報名概況」同一個算法
+    ...(() => {
+      const ss = D.skipped_st || {}, n = Object.values(ss).reduce((a, b) => a + b, 0), x = (k) => ss[k] || 0;
+      return n ? [el("tr", { class: "sub" }, ...["＋ 非集團（不在本頁名單）", "", n, x("正取"), x("候補"), x("請假"), "", ""].map((v) => el("td", {}, v))),
+        el("tr", { class: "all" }, ...["＝ Wix 全部報名", "", T.rows + n, sum("正取") + x("正取"), sum("候補") + x("候補"), sum("請假") + x("請假"), "", ""].map((v) => el("td", {}, v)))] : [];
+    })()));
 
   for (const c of D.companies) $("co").append(el("option", { value: c.code }, c.name));
   const render = () => {

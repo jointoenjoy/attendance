@@ -44,6 +44,7 @@ def write_csv(name, head, rows):
 T = today()
 events = [e for e in year_events() if e["date"] <= T]
 skipped = Counter()
+skipped_st = Counter()   # 未納入的報名狀態，讓頁面能加回成 Wix 全部報名（＝年中報告的報名／候補／請假）
 by_mail = Counter()
 evs, recs = [], []
 for e in events:
@@ -55,6 +56,7 @@ for e in events:
             code, src = CAT_CODE.get(cat_of(g["email"].split("@")[-1]), ""), "依 email 判斷"
         if code not in HAKUHODO:
             skipped[g["company"] or "（未選企業・私人信箱）"] += 1
+            skipped_st[g["status"]] += 1
             continue
         by_mail[src] += 1
         ck = ("已報到" if g["wix_checked_in"] else "未報到") if rec else "報到未登錄"
@@ -97,7 +99,7 @@ data = {
     "totals": {"events": len(evs), "people": len(person), "rows": len(recs),
                "ok": sum(c["正取"] for c in companies),
                "ck": sum(c["ck"] for c in companies), "ck_people": len({e for e, p in person.items() if p["ck"]})},
-    "nocheck": nocheck, "skipped": dict(skipped.most_common()), "by_mail": by_mail["依 email 判斷"],
+    "nocheck": nocheck, "skipped": dict(skipped.most_common()), "skipped_st": dict(skipped_st), "by_mail": by_mail["依 email 判斷"],
 }
 os.makedirs(SITE, exist_ok=True)
 json.dump(data, open(os.path.join(SITE, "data.json"), "w", encoding="utf-8"), ensure_ascii=False,

@@ -366,7 +366,7 @@
         <p>目前 2026 已由 Wix API 直接撈好、烤進頁面（2026 已舉辦 11 場、每週三自動更新）。若你想改用某份自己的名單重算，
            可把「識別欄（姓名或 Email）」與「公司」兩欄貼進來，一行一筆、逗號或 Tab 分隔；貼入會覆蓋現有 2026 數字。</p>
         <p><code style="font-family:var(--mono);font-size:.78rem">王小明,UCG　／　a@ucgroup.com.tw&#9;HTM</code></p>
-        <p>系統會在你的瀏覽器裡直接算出各公司的人數（去重）與人次，姓名／信箱用完即丟，不會存起來也不會出現在頁面上。</p>
+        <p>系統會在你的瀏覽器裡直接算出各公司的人數（不重複）與人次，姓名／信箱用完即丟，不會存起來也不會出現在頁面上。</p>
         <textarea id="paste" placeholder="王小明,UCG&#10;李小華,HTM&#10;張小美,PILOT" spellcheck="false"></textarea>
         <div class="workbar">
           <button class="btn pri" id="btnImport">用貼上的名單覆蓋 2026</button>
@@ -914,7 +914,7 @@ function renderAudit(){
       </summary>
       <div class="ybody">
         <details class="audit-grand">
-          <summary><span class="chev">▸</span>${y} 全年網域總表（跨場去重）</summary>
+          <summary><span class="chev">▸</span>${y} 全年網域總表（跨場不重複）</summary>
           <div style="padding:2px 16px 14px"><table class="dom-tab">${domTable(A.grand,true)}</table></div>
         </details>
         ${A.events.map(evHtml).join("")}
@@ -1003,19 +1003,19 @@ const NOTES = {
        代碼對照：PILOT＝先勢、KY-POST＝光洋波斯特、INTERPLAN＝安益，「練息之友」歸不列入。</p>
     <p><b>2026 人數為什麼不等於各帳號相加</b>：候補報名不會被問「所屬企業」（111 筆候補有 106 筆空白），
        同一個人因此可能同時出現在「下拉帳號」與「網域帳號」兩個桶裡，
-       相加會把一個人算成兩個（2026 有 75 人是這種情形）。本頁的人數改為<b>整份逐人去重</b>，
+       相加會把一個人算成兩個（2026 有 75 人是這種情形）。本頁的人數改為<b>整份逐人不重複計算</b>，
        所以合計會小於各帳號 h 的加總，這是正確的。</p>
     ${downloadsHtml(null, true)}`],
 
   rate: ["集團整體參與率 · 數據說明", () => `
     <p>兩張卡分別是 2025 與 2026 的<b>集團合併參與率</b>，大數字是「不重複參與率」。</p>
     <div class="fx"><b>不重複參與率</b>＝
-      <span class="frac"><span class="num">集團參與人數（去重）</span><span class="den">集團員工總數</span></span>× 100%</div>
+      <span class="frac"><span class="num">集團參與人數（不重複）</span><span class="den">集團員工總數</span></span>× 100%</div>
     <div class="fx"><b>含重複參與率</b>＝
       <span class="frac"><span class="num">集團參與人次（含重複）</span><span class="den">集團員工總數</span></span>× 100%</div>
-    <p><b>人數</b>＝同一人只算一次（用 email 去重）；<b>人次</b>＝報名筆數，同一人參加多場會重複計。
+    <p><b>人數</b>＝同一人只算一次（用 email 判斷，不重複計算）；<b>人次</b>＝報名筆數，同一人參加多場會重複計。
        所以含重複參與率可能超過 100%，代表平均每人不只參加一場。</p>
-    <p>2026 的人數是<b>整份逐人去重</b>後的結果：同一個人就算在不同場次被記在不同「企業帳號」下
+    <p>2026 的人數是<b>整份逐人不重複計算</b>後的結果：同一個人就算在不同場次被記在不同「企業帳號」下
        （候補報名不會被問所屬企業），也只算一個人。因此各家人數相加會略大於集團合計，屬正常。</p>
     <p><b>分母是「已填員工總數的成員加總」</b>。只要還有任何一家有參與、但員工總數是空的，
        合併參與率就會顯示「待填員工總數」，不會給你一個算錯的數字。缺哪幾家會列在表格下方。</p>
@@ -1042,7 +1042,7 @@ const NOTES = {
 
   audit: ["資料稽核 · 數據說明", () => `
     <p>這一區是<b>沒有經過任何加工</b>的 Wix 原始撈取結果，用來逐場對帳、確認上面的彙總沒算錯。</p>
-    <p>每場只列 email「@ 之後的網域」與筆數（人次／去重人數），<b>不含任何姓名或完整信箱</b>。
+    <p>每場只列 email「@ 之後的網域」與筆數（人次／不重複人數），<b>不含任何姓名或完整信箱</b>。
        需要看到人名時，請直接到 Wix 後台自行匯出。</p>
     <p><b>場次狀態</b>：已結束＝活動辦完了；未來場＝還沒辦，報名數會繼續變動；已取消＝這場沒辦成。</p>
     <p>標「疑似打錯」的網域，是跟某個正確網域幾乎一樣、但拼錯的手 key 結果
