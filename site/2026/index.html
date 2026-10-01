@@ -199,7 +199,7 @@
       const tbl = el("table", {}, el("thead", {}, el("tr", {}, ...["姓名", "email", "公司", "報名狀態", "報到"].map((h) => el("th", {}, h)))));
       const b = el("tbody");
       for (const g of gs)
-        b.append(el("tr", {}, el("td", {}, g.n), el("td", {}, g.e), el("td", {}, CO[g.c] || g.c),
+        b.append(el("tr", {}, el("td", {}, g.n), el("td", {}, g.e), el("td", {}, (CO[g.c] || g.c) + (g.m ? "＊" : "")),
           el("td", { class: "s-" + g.s }, g.s), el("td", { class: "k-" + g.k }, g.k)));
       tbl.append(b);
       d.append(el("div", { class: "scroll" }, tbl));
@@ -219,9 +219,9 @@
   const sk = Object.entries(D.skipped).map(([k, v]) => `${k} ${v} 筆`).join("、");
   const notes = [
     "資料來源：Wix 活動後台的報名名單與報到勾選，每週三自動抓最新一次。",
-    "只納入報名時「所屬企業/集團」選了博報堂集團六家的報名。" + (sk ? `沒有納入：${sk}。` : ""),
-    `與年中報告對照：本頁 ${T.rows} 筆 ＋ 沒有納入 ${Object.values(D.skipped).reduce((a, b) => a + b, 0)} 筆 ＝ Wix 總報名 ${T.rows + Object.values(D.skipped).reduce((a, b) => a + b, 0)} 筆，與年中報告「Chill 活動報名概況」合計一致。`,
-    "年中報告「兩年參與人數比較」只算回覆出席（正取）、以 email 網域分公司，所以各公司人數會比本頁少，兩邊算法不同、都正確。",
+    `本頁算法：報名時選了博報堂六家公司的人，加上沒選公司、但用集團公司信箱報名的人（多半是候補，因為 Wix 候補表單不會問公司；這些人在名單上公司後面標「＊」，表示依 email 判斷）。共 ${T.rows} 筆。`,
+    (sk ? `沒有算進本頁的：${sk}。` : "") + `本頁加上這些，就是 Wix 上全部的報名（${T.rows + Object.values(D.skipped).reduce((a, b) => a + b, 0)} 筆），跟年中報告「Chill 活動報名概況」的合計一樣。`,
+    "年中報告「兩年參與人數比較」只算確定會來的人（不含候補、請假），所以各公司人數會比本頁少。兩邊只是算法不同，數字都正確。",
     "報名狀態：正取＝取得名額；候補＝額滿排補；請假＝報名後取消。",
     "報到：已報到＝Wix 後台有勾報到；未報到＝該場有登錄報到但此人沒勾。",
   ];
