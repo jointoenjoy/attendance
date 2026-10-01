@@ -299,7 +299,7 @@ HTML = r"""<!doctype html>
         <thead>
           <tr><th rowspan="2">公司</th>
             <th colspan="5" class="grp y25">2025 全年報到</th>
-            <th colspan="5" class="grp y26 divider">2026 報到（截至 7/17 已辦）</th></tr>
+            <th colspan="5" class="grp y26 divider">2026 報到（截至 __LAST__）</th></tr>
           <tr><th class="y25">員工總數</th><th class="y25">人次</th><th class="y25">人數</th>
               <th class="y25">人次率</th><th class="y25">人數率</th>
             <th class="y26 divider">員工總數</th><th class="y26">人次</th><th class="y26">人數</th>
@@ -383,7 +383,7 @@ const NOTES = {
        <b>人數率</b>＝人數 ÷ 員工總數（代表全公司有多少比例的同仁至少來過一次）。</p>
     <p><b>公司分類</b>：UCG 拆為聯廣、聯太、聯樂、艾斯、聯眾、2008傳媒、迪維、聯勤；先勢集團（PILOT）不拆、維持一家。
        2026/1/16 那場歸入 2025 統計。</p>
-    <p><b>2026 尚在進行中</b>：7/30、7/31 與 8 月之後的場次尚未舉辦，報到未計入。</p>
+    <p>__PENDNOTE__</p>
     <p><b>UCG 小計／三家合計</b>的員工總數＝各列<b>已填</b>數字的加總；還沒填的公司不會被算進去，
        所以填寫未齊時，合計列的參與率僅供參考。</p>
     <p>員工總數存放於雲端，<b>任何人開啟此頁都可以直接修改</b>（不需密碼）；存檔後所有人都會看到最新數字。</p>`],
@@ -394,12 +394,12 @@ const NOTES = {
     <p><b>筆數</b>＝2026 該網域的報名紀錄筆數；<b>報到</b>＝其中實際到場的人次。</p>
     <p>本頁只顯示 email 的網域，不含任何帳號或姓名。</p>`],
   ev: ["各場明細 · 數據說明", `
-    <p><b>正取／候補／請假</b> 來源：Wix 報名系統。<b>報到</b> 來源：Google 現場報到表，
-       與上方總表<b>同一份資料</b>，各場報到加總＝總表當年人次。</p>
+    <p><b>正取／候補／請假</b> 來源：Wix 報名系統。<b>報到</b> 來源：Wix 後台的現場報到勾選
+       （7/31 以前已與 Google 現場報到表逐場核對，人數一致），與上方總表<b>同一份資料</b>，各場報到加總＝總表當年人次。</p>
     <p>只列上表三家（UCG／PILOT／HTM）的資料，其餘集團公司與外部來賓不列入。</p>
     <p><b>2026</b> 各場以 <b>email 網域</b>為單位（寫法變體已合併，同歸戶對照）；
        <b>2025</b> 現場名冊沒有 email，故各場以<b>公司</b>為單位呈現。</p>
-    <p>未舉辦的場次，報到欄標示「尚未舉辦」；名冊上查不到報到紀錄的場次以「—」表示。</p>`]
+    <p>未舉辦的場次，報到欄標示「尚未舉辦」；已舉辦但 Wix 尚未登錄報到的場次標示「報到未登錄」，補登後下次每週更新會自動帶入。</p>`]
 };
 (function(){
   const dlg=document.getElementById("noteDlg");
@@ -592,7 +592,7 @@ function renderEvent(e){
   const t=e.totals, isDom = e.rowkind!=="cat";
   const future = e.date>TODAY;
   const ciSummary = future ? '<span class="notdone">尚未舉辦</span>'
-                  : !e.has_checkin ? '<span class="dash">報到 —</span>'
+                  : !e.has_checkin ? '<span class="dash">報到未登錄</span>'
                   : `報到 <span class="checkin">${t.c}</span>`;
   const raw = e.domains.map(d=>`<tr>
       <td>${isDom ? `<span class="dom">@${esc(d.d)}</span><span class="cotag">${esc(d.cat)}</span>`
@@ -689,6 +689,18 @@ tb.addEventListener("click",()=>{
 </html>
 """
 
+def _md(d):
+    return "%d/%d" % (int(d[5:7]), int(d[8:10]))
+_last = SUM.get("last_checkin") or ""
+_noc = sorted({k[:10] for k in SUM.get("nocheck", [])})
+_fut = sorted({k[:10] for k in SUM.get("future", [])})
+_pend = []
+if _noc:
+    _pend.append("、".join(_md(d) for d in _noc) + " 已舉辦，但 Wix 後台尚未登錄現場報到，暫未計入（補登後每週三自動更新）")
+if _fut:
+    _pend.append("、".join(_md(d) for d in _fut) + " 尚未舉辦")
+PEND = ("<b>2026 報到範圍</b>：已計入至 %s 的場次。" % _md(_last) + "；".join(_pend) + "。") if _last else ""
+HTML = HTML.replace("__LAST__", _md(_last) if _last else "—").replace("__PENDNOTE__", PEND)
 HTML = (HTML.replace("__DATA__", json.dumps(PAYLOAD, ensure_ascii=False))
             .replace("__EVENTS__", json.dumps(EVENTS, ensure_ascii=False)))
 out = os.path.join(ROOT, "site", "part", "index.html")

@@ -5,3 +5,4 @@ pipeline/__pycache__/
 site/.wrangler/
 .DS_Store
 site/2026/*.json
+site/2026/files/

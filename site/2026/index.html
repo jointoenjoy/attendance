@@ -1,3 +1,233 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>2026 全集團參與報告</title>
-<style>body{margin:0;min-height:100vh;display:grid;place-items:center;font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;color:#004D89;background:#fff}</style></head>
-<body><p>2026 全集團參與報告整理中，資料接上後會自動出現。</p></body></html>
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>2026 博報堂集團參與報告</title>
+<!-- 這個檔是空殼、不含個資；名單在 /2026/data.json，跟本頁一樣被密碼擋著，且不進 git。
+     資料由 pipeline/build_2026.py 每週三自動重算。 -->
+<style>
+  :root{
+    --brand:#004D89; --brand-deep:#003864; --brand-soft:#6694B8; --ink:#032639;
+    --n-700:#4B6472; --n-300:#93A2AA;
+    --p-blue:#CCE0F7; --p-mint:#D3F5EC; --p-peach:#FFEBD3; --p-yellow:#FFFBEA; --p-lav:#E6E5FB;
+    --bg:#fff; --card:#fff; --line:#DBE0E3; --hair:#EDF1F3; --muted:#6F838E;
+    --yes:#1E8F70; --wait:#B26A00; --leave:#B4593A;
+    --hero-a:#CCE0F7; --hero-b:#D3F5EC; --hero-c:#FFFBEA;
+    --shadow:0 1px 2px rgba(3,38,57,.04),0 10px 30px rgba(3,38,57,.07);
+    --radius:16px; --spring:cubic-bezier(.32,.72,0,1);
+  }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+    --bg:#041d2b; --card:#062b3d; --ink:#E5EDF3; --line:#0e4159; --hair:#0a3549; --muted:#93A2AA;
+    --brand:#8CB3E0; --brand-deep:#B2CADC; --yes:#23CDA0; --wait:#FFC27C; --leave:#F9B497;
+    --hero-a:#073349; --hero-b:#06403c; --hero-c:#0b2f42;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 30px rgba(0,0,0,.4);
+  }}
+  :root[data-theme="dark"]{
+    --bg:#041d2b; --card:#062b3d; --ink:#E5EDF3; --line:#0e4159; --hair:#0a3549; --muted:#93A2AA;
+    --brand:#8CB3E0; --brand-deep:#B2CADC; --yes:#23CDA0; --wait:#FFC27C; --leave:#F9B497;
+    --hero-a:#073349; --hero-b:#06403c; --hero-c:#0b2f42;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 30px rgba(0,0,0,.4);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased;
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+    font-variant-numeric:tabular-nums}
+  .wrap{max-width:960px;margin:0 auto;padding:22px 16px 80px}
+  a{color:var(--brand)}
+  .hero{position:relative;overflow:hidden;border-radius:24px;padding:30px 24px 26px;margin:0 0 22px;
+    background:linear-gradient(135deg,var(--hero-a) 0%,var(--hero-b) 58%,var(--hero-c) 100%)}
+  .hero>*:not(.orb){position:relative;z-index:1}
+  .orb{position:absolute;display:block;opacity:.55;border-radius:58% 42% 47% 53% / 45% 52% 48% 55%;pointer-events:none}
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .orb{opacity:.2} }
+  .o1{width:150px;height:150px;background:var(--p-mint);left:-44px;top:-52px;animation:d1 26s ease-in-out infinite alternate}
+  .o2{width:96px;height:96px;background:var(--p-peach);right:7%;top:-32px;animation:d2 22s ease-in-out infinite alternate}
+  .o3{width:70px;height:70px;background:var(--p-lav);right:-18px;bottom:-26px;animation:d1 30s ease-in-out infinite alternate-reverse}
+  @keyframes d1{to{transform:translate3d(26px,18px,0) rotate(18deg) scale(1.08)}}
+  @keyframes d2{to{transform:translate3d(-22px,20px,0) rotate(-14deg) scale(1.1)}}
+  .eyebrow{font-size:.76rem;letter-spacing:.16em;color:var(--brand);font-weight:700;margin:0 0 8px}
+  h1{margin:0;color:var(--brand);font-weight:800;font-size:clamp(1.2rem,5vw,2rem);line-height:1.2;letter-spacing:-.022em}
+  .lede{margin:10px 0 0;color:var(--n-700);font-size:.9rem}
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .lede{color:var(--muted)} }
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 0}
+  .kpi{background:rgba(255,255,255,.66);border:1px solid rgba(255,255,255,.75);border-radius:14px;padding:12px 14px}
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .kpi{background:rgba(6,43,61,.62);border-color:rgba(140,179,224,.22)} }
+  .kpi b{display:block;font-size:1.5rem;font-weight:800;color:var(--brand);letter-spacing:-.02em}
+  .kpi span{font-size:.76rem;color:var(--muted)}
+  @media (max-width:600px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:20px 18px 16px;margin:18px 0}
+  .card h2{font-size:1.12rem;margin:0 0 4px;font-weight:800;letter-spacing:-.012em;color:var(--brand)}
+  .hint{font-size:.82rem;color:var(--muted);margin:0 0 12px}
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{border-collapse:collapse;width:100%;font-size:.9rem}
+  th,td{padding:8px 9px;text-align:right;border-bottom:1px solid var(--hair);white-space:nowrap}
+  th:first-child,td:first-child{text-align:left}
+  thead th{font-size:.76rem;color:var(--muted);font-weight:700;border-bottom:2px solid var(--line)}
+  tfoot td{border-top:2px solid var(--line);font-weight:800;background:color-mix(in srgb,var(--p-mint) 46%,transparent)}
+  tbody tr:hover{background:color-mix(in srgb,var(--p-blue) 30%,transparent)}
+  .dl{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 0}
+  .btn{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:.86rem;font-weight:700;text-decoration:none;
+    padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--brand);
+    transition:transform .1s var(--spring),background-color .2s}
+  .btn:hover{background:color-mix(in srgb,var(--p-blue) 40%,transparent)}
+  .btn:active{transform:scale(.97)}
+  .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+  :root[data-theme="dark"] .btn.primary{color:#041d2b}
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .btn.primary{color:#041d2b} }
+  .btn small{font-weight:500;opacity:.75}
+  .tools{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .tools input,.tools select{font:inherit;font-size:.9rem;padding:8px 12px;border-radius:12px;border:1px solid var(--line);
+    background:var(--card);color:var(--ink);min-width:0}
+  .tools input{flex:1 1 200px}
+  details.ev{border:1px solid var(--line);border-radius:14px;margin:0 0 10px;overflow:hidden}
+  details.ev>summary{cursor:pointer;list-style:none;padding:12px 14px;display:flex;flex-wrap:wrap;gap:4px 12px;
+    align-items:baseline;justify-content:space-between}
+  details.ev>summary::-webkit-details-marker{display:none}
+  details.ev[open]>summary{background:color-mix(in srgb,var(--p-blue) 30%,transparent);border-bottom:1px solid var(--line)}
+  .evt{font-weight:700}
+  .evt small{color:var(--muted);font-weight:500;margin-right:6px}
+  .evn{font-size:.82rem;color:var(--muted)}
+  details.ev .scroll{padding:4px 8px 8px}
+  details.ev td,details.ev th{text-align:left}
+  .s-正取{color:var(--yes);font-weight:700} .s-候補{color:var(--wait);font-weight:700} .s-請假{color:var(--leave);font-weight:700}
+  .k-已報到{color:var(--yes);font-weight:700} .k-未報到{color:var(--muted)} .k-報到未登錄{color:var(--wait)}
+  .tag{display:inline-block;font-size:.72rem;font-weight:700;padding:1px 8px;border-radius:999px;
+    background:color-mix(in srgb,var(--p-peach) 80%,transparent);color:#8a4b00}
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .tag{background:#3a2a10;color:#FFC27C} }
+  .note{font-size:.82rem;color:var(--muted);line-height:1.8}
+  .note li{margin:2px 0}
+  #msg{padding:40px 0;text-align:center;color:var(--muted)}
+  @media (prefers-reduced-motion:reduce){.orb{animation:none}*{transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span>
+    <p class="eyebrow">練息場 Join to Enjoy · 內部報告</p>
+    <h1>2026 博報堂集團 練息場參與報告</h1>
+    <p class="lede" id="lede">資料載入中…</p>
+    <div class="kpis" id="kpis"></div>
+  </header>
+  <div id="msg">資料載入中…</div>
+  <main id="main" hidden>
+    <section class="card">
+      <h2>下載數據（Excel 可直接開）</h2>
+      <p class="hint">CSV 檔用 Excel 或 Google 試算表打開即可，中文不會亂碼。每個公司的 HR 可以只下載自己公司的檔案。</p>
+      <div class="dl" id="dlAll"></div>
+      <p class="hint" style="margin:14px 0 6px">各公司明細：</p>
+      <div class="dl" id="dlCo"></div>
+    </section>
+    <section class="card">
+      <h2>各公司彙總</h2>
+      <p class="hint">人數＝同一人只算一次（用 email 去重）；人次＝報名筆數。報到只計有登錄報到的場次。</p>
+      <div class="scroll"><table id="coTbl"></table></div>
+    </section>
+    <section class="card">
+      <h2>各場明細（姓名・email）</h2>
+      <p class="hint">點場次展開名單。可以用公司篩選，或輸入姓名／email 搜尋。</p>
+      <div class="tools">
+        <input id="q" type="search" placeholder="搜尋姓名或 email">
+        <select id="co"><option value="">全部公司</option></select>
+        <button class="btn" id="tog" type="button">全部展開</button>
+      </div>
+      <div id="evs"></div>
+    </section>
+    <section class="card">
+      <h2>數據說明</h2>
+      <ul class="note" id="notes"></ul>
+    </section>
+  </main>
+</div>
+<script>
+(async () => {
+  const $ = (id) => document.getElementById(id);
+  const el = (tag, attrs = {}, ...kids) => {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) k === "class" ? (n.className = v) : n.setAttribute(k, v);
+    for (const c of kids) n.append(c instanceof Node ? c : document.createTextNode(String(c)));
+    return n;
+  };
+  const md = (d) => +d.slice(5, 7) + "/" + +d.slice(8, 10);
+  let D;
+  try {
+    const r = await fetch("/2026/data.json", { cache: "no-store", credentials: "same-origin" });
+    if (!r.ok) throw new Error(r.status);
+    D = await r.json();
+  } catch (e) {
+    $("msg").textContent = "資料讀取失敗，請重新整理，或重新輸入密碼。";
+    $("lede").textContent = "";
+    return;
+  }
+  const T = D.totals, CO = Object.fromEntries(D.companies.map((c) => [c.code, c.name]));
+  $("lede").textContent = `${md(D.events[0].date)}～${md(D.events.at(-1).date)} 共 ${T.events} 場｜資料更新：${D.generated}（每週三自動更新）`;
+  for (const [v, l] of [[T.people, "參與人數（去重）"], [T.rows, "報名人次"], [T.ck, "報到人次"], [T.events, "場次"]])
+    $("kpis").append(el("div", { class: "kpi" }, el("b", {}, v.toLocaleString()), el("span", {}, l)));
+
+  const btn = (f, label, primary) => el("a", { class: "btn" + (primary ? " primary" : ""), href: f.url, download: f.name },
+    "⬇ " + label + " ", el("small", {}, `${f.rows} 筆`));
+  $("dlAll").append(btn(D.files.all, "全集團逐筆明細", true), btn(D.files.people, "全集團人員彙總"));
+  for (const c of D.companies) $("dlCo").append(btn(D.files.byco[c.code], c.name));
+
+  const H = ["公司", "報名人數", "報名人次", "正取", "候補", "請假", "報到人次", "報到人數"];
+  const t = $("coTbl");
+  t.append(el("thead", {}, el("tr", {}, ...H.map((h) => el("th", {}, h)))));
+  const tb = el("tbody");
+  for (const c of D.companies)
+    tb.append(el("tr", {}, ...[c.name, c.people, c.rows, c["正取"], c["候補"], c["請假"], c.ck, c.ck_people].map((v) => el("td", {}, v))));
+  t.append(tb);
+  const sum = (k) => D.companies.reduce((a, c) => a + c[k], 0);
+  t.append(el("tfoot", {}, el("tr", {}, ...["全集團（去重）", T.people, T.rows, sum("正取"), sum("候補"), sum("請假"), T.ck, T.ck_people].map((v) => el("td", {}, v)))));
+
+  for (const c of D.companies) $("co").append(el("option", { value: c.code }, c.name));
+  const render = () => {
+    const q = $("q").value.trim().toLowerCase(), co = $("co").value, box = $("evs");
+    const wasOpen = new Set([...box.querySelectorAll("details[open]")].map((d) => d.dataset.k));
+    box.textContent = "";
+    for (const e of [...D.events].reverse()) {
+      const gs = e.guests.filter((g) => (!co || g.c === co) && (!q || g.n.toLowerCase().includes(q) || g.e.includes(q)));
+      if ((q || co) && !gs.length) continue;
+      const ck = gs.filter((g) => g.k === "已報到").length, k = e.date + e.title;
+      const d = el("details", { class: "ev", "data-k": k });
+      if (wasOpen.has(k) || q) d.open = true;
+      d.append(el("summary", {},
+        el("span", { class: "evt" }, el("small", {}, e.date), e.title),
+        el("span", { class: "evn" }, `報名 ${gs.length} 人次・`, e.recorded ? `報到 ${ck}` : el("span", { class: "tag" }, "報到未登錄"))));
+      const tbl = el("table", {}, el("thead", {}, el("tr", {}, ...["姓名", "email", "公司", "報名狀態", "報到"].map((h) => el("th", {}, h)))));
+      const b = el("tbody");
+      for (const g of gs)
+        b.append(el("tr", {}, el("td", {}, g.n), el("td", {}, g.e), el("td", {}, CO[g.c] || g.c),
+          el("td", { class: "s-" + g.s }, g.s), el("td", { class: "k-" + g.k }, g.k)));
+      tbl.append(b);
+      d.append(el("div", { class: "scroll" }, tbl));
+      box.append(d);
+    }
+    if (!box.children.length) box.append(el("p", { class: "hint" }, "沒有符合的名單。"));
+  };
+  $("q").addEventListener("input", render);
+  $("co").addEventListener("change", render);
+  $("tog").addEventListener("click", () => {
+    const ds = [...$("evs").querySelectorAll("details")], open = ds.some((d) => !d.open);
+    ds.forEach((d) => (d.open = open));
+    $("tog").textContent = open ? "全部收合" : "全部展開";
+  });
+  render();
+
+  const sk = Object.entries(D.skipped).map(([k, v]) => `${k} ${v} 筆`).join("、");
+  const notes = [
+    "資料來源：Wix 活動後台的報名名單與報到勾選，每週三自動抓最新一次。",
+    "只納入報名時「所屬企業/集團」選了博報堂集團六家的報名。" + (sk ? `沒有納入：${sk}。` : ""),
+    "報名狀態：正取＝取得名額；候補＝額滿排補；請假＝報名後取消。",
+    "報到：已報到＝Wix 後台有勾報到；未報到＝該場有登錄報到但此人沒勾。",
+  ];
+  if (D.nocheck.length) notes.push(`${D.nocheck.map(md).join("、")} 這幾場的報到目前只有紙本簽到表，Wix 後台還沒勾，所以標「報到未登錄」（不代表沒人來）。到後台補勾後，下週三會自動更新。`);
+  notes.push("本頁含姓名與 email，僅供內部與各公司 HR 使用，請勿轉貼公開。");
+  for (const n of notes) $("notes").append(el("li", {}, n));
+  $("msg").hidden = true; $("main").hidden = false;
+})();
+</script>
+</body>
+</html>

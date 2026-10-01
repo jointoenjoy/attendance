@@ -1,6 +1,6 @@
 {
- "pulled_year": "2026",
- "event_count": 14,
+ "pulled_year": 2026,
+ "event_count": 15,
  "events": [
   {
    "date": "2026-01-16",
@@ -179,7 +179,7 @@
   },
   {
    "date": "2026-03-27",
-   "title": "3/27（五）［加場 ! ］春野・開運・馬上好 ",
+   "title": "3/27（五）［加場 ! ］春野・開運・馬上好",
    "status": "ENDED",
    "total_visits": 52,
    "total_people": 52,
@@ -343,6 +343,15 @@
    ]
   },
   {
+   "date": "2026-05-13",
+   "title": "5/13（三）［高級大人場 ! ］春野・開運・馬上好",
+   "status": "CANCELED",
+   "total_visits": 0,
+   "total_people": 0,
+   "no_email": 0,
+   "domains": []
+  },
+  {
    "date": "2026-05-22",
    "title": "5/22 (五) 啟動身體原廠設定！｜翻開吳清忠的自癒寶典",
    "status": "ENDED",
@@ -361,14 +370,14 @@
      "people": 4
     },
     {
-     "domain": "@meshplus.com.tw",
-     "visits": 3,
-     "people": 3
-    },
-    {
      "domain": "@medialand.tw",
      "visits": 3,
      "people": 2
+    },
+    {
+     "domain": "@meshplus.com.tw",
+     "visits": 3,
+     "people": 3
     },
     {
      "domain": "@ace-taipei.com",
@@ -398,14 +407,6 @@
    ]
   },
   {
-   "date": "2026-05-13",
-   "title": "5/13（三）［高級大人場 ! ］春野・開運・馬上好 ",
-   "status": "CANCELED",
-   "total_visits": 0,
-   "total_people": 0,
-   "domains": []
-  },
-  {
    "date": "2026-06-04",
    "title": "6/4（四）《鬆鬆在・小滿茶席》  回到身體的三道茶",
    "status": "ENDED",
@@ -430,56 +431,6 @@
    "domains": [
     {
      "domain": "@jointoenjoy.com",
-     "visits": 1,
-     "people": 1
-    }
-   ]
-  },
-  {
-   "date": "2026-07-31",
-   "title": "7/31（五）《聲波共振！開出你專屬的魔法結界》",
-   "status": "UPCOMING",
-   "total_visits": 30,
-   "total_people": 30,
-   "no_email": 0,
-   "domains": [
-    {
-     "domain": "@ua.com.tw",
-     "visits": 13,
-     "people": 13
-    },
-    {
-     "domain": "@medialand.tw",
-     "visits": 6,
-     "people": 6
-    },
-    {
-     "domain": "@2008-media.com",
-     "visits": 3,
-     "people": 3
-    },
-    {
-     "domain": "@hakuhodotm.com.tw",
-     "visits": 2,
-     "people": 2
-    },
-    {
-     "domain": "@mxdigi.com",
-     "visits": 2,
-     "people": 2
-    },
-    {
-     "domain": "@pilotpr.com.tw",
-     "visits": 2,
-     "people": 2
-    },
-    {
-     "domain": "@grandpr.com.tw",
-     "visits": 1,
-     "people": 1
-    },
-    {
-     "domain": "@prestigepr.com.tw",
      "visits": 1,
      "people": 1
     }
@@ -566,11 +517,136 @@
    ]
   },
   {
+   "date": "2026-07-30",
+   "title": "7/30（四）《就是你了！來養顆苔球小精靈吧》 加場！",
+   "status": "ENDED",
+   "total_visits": 32,
+   "total_people": 32,
+   "no_email": 0,
+   "domains": [
+    {
+     "domain": "@medialand.tw",
+     "visits": 6,
+     "people": 6
+    },
+    {
+     "domain": "@meshplus.com.tw",
+     "visits": 6,
+     "people": 6
+    },
+    {
+     "domain": "@gmail.com",
+     "visits": 4,
+     "people": 4
+    },
+    {
+     "domain": "@ua.com.tw",
+     "visits": 4,
+     "people": 4
+    },
+    {
+     "domain": "@hakuhodotm.com.tw",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@ky-post.com",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@mxdigi.com",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@ace-taipei.com",
+     "visits": 1,
+     "people": 1
+    },
+    {
+     "domain": "@leader-ac.com.tw",
+     "visits": 1,
+     "people": 1
+    },
+    {
+     "domain": "@medialand.com",
+     "visits": 1,
+     "people": 1
+    },
+    {
+     "domain": "@medialnad.tw",
+     "visits": 1,
+     "people": 1
+    },
+    {
+     "domain": "@mediand.tw",
+     "visits": 1,
+     "people": 1
+    },
+    {
+     "domain": "@mxdogi.com",
+     "visits": 1,
+     "people": 1
+    }
+   ]
+  },
+  {
+   "date": "2026-07-31",
+   "title": "7/31（五）《聲波共振！開出你專屬的魔法結界》",
+   "status": "ENDED",
+   "total_visits": 30,
+   "total_people": 30,
+   "no_email": 0,
+   "domains": [
+    {
+     "domain": "@ua.com.tw",
+     "visits": 14,
+     "people": 14
+    },
+    {
+     "domain": "@medialand.tw",
+     "visits": 5,
+     "people": 5
+    },
+    {
+     "domain": "@2008-media.com",
+     "visits": 3,
+     "people": 3
+    },
+    {
+     "domain": "@hakuhodotm.com.tw",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@mxdigi.com",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@pilotpr.com.tw",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@grandpr.com.tw",
+     "visits": 1,
+     "people": 1
+    },
+    {
+     "domain": "@prestigepr.com.tw",
+     "visits": 1,
+     "people": 1
+    }
+   ]
+  },
+  {
    "date": "2026-07-31",
    "title": "7/31（五）《就是你了！來養顆苔球小精靈吧》",
-   "status": "UPCOMING",
-   "total_visits": 45,
-   "total_people": 45,
+   "status": "ENDED",
+   "total_visits": 43,
+   "total_people": 43,
    "no_email": 0,
    "domains": [
     {
@@ -579,14 +655,14 @@
      "people": 10
     },
     {
-     "domain": "@medialand.tw",
-     "visits": 9,
-     "people": 9
-    },
-    {
      "domain": "@ua.com.tw",
      "visits": 8,
      "people": 8
+    },
+    {
+     "domain": "@medialand.tw",
+     "visits": 7,
+     "people": 7
     },
     {
      "domain": "@mxdigi.com",
@@ -621,17 +697,92 @@
    ]
   },
   {
-   "date": "2026-07-30",
-   "title": "7/30（四）《就是你了！來養顆苔球小精靈吧》 加場！",
-   "status": "UPCOMING",
-   "total_visits": 27,
-   "total_people": 27,
+   "date": "2026-08-21",
+   "title": "8/21（五）《替身體乾一杯！ 滋養自己的香料野草茶》",
+   "status": "ENDED",
+   "total_visits": 45,
+   "total_people": 45,
    "no_email": 0,
    "domains": [
     {
+     "domain": "@gmail.com",
+     "visits": 12,
+     "people": 12
+    },
+    {
+     "domain": "@hakuhodotm.com.tw",
+     "visits": 12,
+     "people": 12
+    },
+    {
+     "domain": "@meshplus.com.tw",
+     "visits": 5,
+     "people": 5
+    },
+    {
+     "domain": "@hotmail.com",
+     "visits": 3,
+     "people": 3
+    },
+    {
+     "domain": "@planetpr.com.tw",
+     "visits": 3,
+     "people": 3
+    },
+    {
+     "domain": "@ua.com.tw",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@unismart.com.tw",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@yahoo.com.tw",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@ky-post.com",
+     "visits": 1,
+     "people": 1
+    },
+    {
      "domain": "@medialand.tw",
-     "visits": 6,
-     "people": 6
+     "visits": 1,
+     "people": 1
+    },
+    {
+     "domain": "@mxdigi.com",
+     "visits": 1,
+     "people": 1
+    },
+    {
+     "domain": "@unistyle.com.tw",
+     "visits": 1,
+     "people": 1
+    }
+   ]
+  },
+  {
+   "date": "2026-08-27",
+   "title": "8/27（四）《替身體乾一杯！ 滋養自己的香料野草茶》",
+   "status": "ENDED",
+   "total_visits": 38,
+   "total_people": 38,
+   "no_email": 0,
+   "domains": [
+    {
+     "domain": "@hakuhodotm.com.tw",
+     "visits": 13,
+     "people": 13
+    },
+    {
+     "domain": "@ua.com.tw",
+     "visits": 8,
+     "people": 8
     },
     {
      "domain": "@meshplus.com.tw",
@@ -639,17 +790,7 @@
      "people": 6
     },
     {
-     "domain": "@ua.com.tw",
-     "visits": 4,
-     "people": 4
-    },
-    {
-     "domain": "@hakuhodotm.com.tw",
-     "visits": 2,
-     "people": 2
-    },
-    {
-     "domain": "@ky-post.com",
+     "domain": "@dvibemedia.com",
      "visits": 2,
      "people": 2
     },
@@ -659,110 +800,192 @@
      "people": 2
     },
     {
-     "domain": "@ace-taipei.com",
+     "domain": "@unismart.com.tw",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@2008-media.com",
      "visits": 1,
      "people": 1
     },
     {
-     "domain": "@charismomo.com",
+     "domain": "@ky-post.com",
      "visits": 1,
      "people": 1
     },
     {
-     "domain": "@medialnad.tw",
+     "domain": "@planetpr.com.tw",
      "visits": 1,
      "people": 1
     },
     {
-     "domain": "@mediand.tw",
+     "domain": "@unistyle.com.tw",
      "visits": 1,
      "people": 1
     },
     {
-     "domain": "@mxdogi.com",
+     "domain": "@unisurf.com.tw",
      "visits": 1,
      "people": 1
     }
    ]
   },
   {
-   "date": "2026-08-21",
-   "title": "8/21（五）《替身體乾一杯！ 滋養自己的香料野草茶》",
-   "status": "UPCOMING",
-   "total_visits": 0,
-   "total_people": 0,
+   "date": "2026-09-04",
+   "title": "9/4（五）《按下關機鍵：退出磁碟的休眠課》",
+   "status": "ENDED",
+   "total_visits": 38,
+   "total_people": 38,
    "no_email": 0,
-   "domains": []
-  },
-  {
-   "date": "2026-08-27",
-   "title": "8/27（四）《替身體乾一杯！ 滋養自己的香料野草茶》",
-   "status": "UPCOMING",
-   "total_visits": 0,
-   "total_people": 0,
-   "no_email": 0,
-   "domains": []
+   "domains": [
+    {
+     "domain": "@ua.com.tw",
+     "visits": 6,
+     "people": 6
+    },
+    {
+     "domain": "@ky-post.com",
+     "visits": 4,
+     "people": 4
+    },
+    {
+     "domain": "@medialand.tw",
+     "visits": 4,
+     "people": 4
+    },
+    {
+     "domain": "@meshplus.com.tw",
+     "visits": 4,
+     "people": 4
+    },
+    {
+     "domain": "@gmail.com",
+     "visits": 3,
+     "people": 3
+    },
+    {
+     "domain": "@unisurf.com.tw",
+     "visits": 3,
+     "people": 3
+    },
+    {
+     "domain": "@2008-media.com",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@mxdigi.com",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@pilotpr.com.tw",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@planetpr.com.tw",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@unismart.com.tw",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@grandpr.com.tw",
+     "visits": 1,
+     "people": 1
+    },
+    {
+     "domain": "@hakuhodotm.com.tw",
+     "visits": 1,
+     "people": 1
+    },
+    {
+     "domain": "@jointoenjoy.com",
+     "visits": 1,
+     "people": 1
+    },
+    {
+     "domain": "@prestigepr.com.tw",
+     "visits": 1,
+     "people": 1
+    }
+   ]
   }
  ],
  "grand_domains": [
   {
    "domain": "@ua.com.tw",
-   "visits": 75,
+   "visits": 92,
+   "people": 39
+  },
+  {
+   "domain": "@gmail.com",
+   "visits": 42,
    "people": 36
   },
   {
    "domain": "@medialand.tw",
-   "visits": 56,
+   "visits": 58,
    "people": 35
   },
   {
    "domain": "@hakuhodotm.com.tw",
-   "visits": 46,
-   "people": 23
+   "visits": 72,
+   "people": 31
   },
   {
    "domain": "@meshplus.com.tw",
-   "visits": 42,
-   "people": 22
-  },
-  {
-   "domain": "@gmail.com",
-   "visits": 23,
-   "people": 20
+   "visits": 57,
+   "people": 24
   },
   {
    "domain": "@mxdigi.com",
-   "visits": 31,
-   "people": 17
+   "visits": 36,
+   "people": 20
   },
   {
    "domain": "@ky-post.com",
-   "visits": 17,
-   "people": 12
-  },
-  {
-   "domain": "@unismart.com.tw",
-   "visits": 21,
-   "people": 11
-  },
-  {
-   "domain": "@pilotpr.com.tw",
-   "visits": 15,
-   "people": 10
+   "visits": 23,
+   "people": 14
   },
   {
    "domain": "@unisurf.com.tw",
-   "visits": 15,
-   "people": 10
+   "visits": 19,
+   "people": 14
+  },
+  {
+   "domain": "@unismart.com.tw",
+   "visits": 27,
+   "people": 12
+  },
+  {
+   "domain": "@pilotpr.com.tw",
+   "visits": 17,
+   "people": 11
   },
   {
    "domain": "@grandpr.com.tw",
-   "visits": 17,
+   "visits": 18,
    "people": 9
   },
   {
+   "domain": "@planetpr.com.tw",
+   "visits": 12,
+   "people": 8
+  },
+  {
+   "domain": "@2008-media.com",
+   "visits": 6,
+   "people": 6
+  },
+  {
    "domain": "@prestigepr.com.tw",
-   "visits": 9,
+   "visits": 10,
    "people": 5
   },
   {
@@ -771,13 +994,18 @@
    "people": 5
   },
   {
-   "domain": "@planetpr.com.tw",
-   "visits": 6,
-   "people": 5
+   "domain": "@hotmail.com",
+   "visits": 4,
+   "people": 4
   },
   {
    "domain": "@ace-taipei.com",
    "visits": 7,
+   "people": 3
+  },
+  {
+   "domain": "@dvibemedia.com",
+   "visits": 6,
    "people": 3
   },
   {
@@ -786,13 +1014,13 @@
    "people": 3
   },
   {
-   "domain": "@2008-media.com",
+   "domain": "@yahoo.com.tw",
    "visits": 3,
    "people": 3
   },
   {
-   "domain": "@dvibemedia.com",
-   "visits": 4,
+   "domain": "@jointoenjoy.com",
+   "visits": 2,
    "people": 2
   },
   {
@@ -802,16 +1030,16 @@
   },
   {
    "domain": "@unistyle.com.tw",
-   "visits": 3,
-   "people": 1
-  },
-  {
-   "domain": "@charismomo.com",
-   "visits": 2,
+   "visits": 5,
    "people": 1
   },
   {
    "domain": "@ace.taipei.com",
+   "visits": 1,
+   "people": 1
+  },
+  {
+   "domain": "@charismomo.com",
    "visits": 1,
    "people": 1
   },
@@ -821,12 +1049,12 @@
    "people": 1
   },
   {
-   "domain": "@hotmail.com",
+   "domain": "@leader-ac.com.tw",
    "visits": 1,
    "people": 1
   },
   {
-   "domain": "@jointoenjoy.com",
+   "domain": "@medialand.com",
    "visits": 1,
    "people": 1
   },
@@ -862,11 +1090,6 @@
   },
   {
    "domain": "@unisurf.com",
-   "visits": 1,
-   "people": 1
-  },
-  {
-   "domain": "@yahoo.com.tw",
    "visits": 1,
    "people": 1
   }

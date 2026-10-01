@@ -77,22 +77,22 @@
  },
  "y2026": {
   "聯廣": {
-   "att": 22,
-   "att_uniq": 18,
-   "reg": 73,
-   "reg_uniq": 36
+   "att": 36,
+   "att_uniq": 24,
+   "reg": 90,
+   "reg_uniq": 39
   },
   "聯太": {
    "att": 2,
    "att_uniq": 1,
-   "reg": 3,
+   "reg": 5,
    "reg_uniq": 1
   },
   "聯樂": {
-   "att": 1,
-   "att_uniq": 1,
-   "reg": 16,
-   "reg_uniq": 11
+   "att": 4,
+   "att_uniq": 3,
+   "reg": 20,
+   "reg_uniq": 15
   },
   "艾斯": {
    "att": 5,
@@ -101,22 +101,22 @@
    "reg_uniq": 4
   },
   "聯眾": {
-   "att": 5,
-   "att_uniq": 4,
-   "reg": 16,
-   "reg_uniq": 9
+   "att": 7,
+   "att_uniq": 5,
+   "reg": 22,
+   "reg_uniq": 10
   },
   "2008傳媒": {
-   "att": 0,
-   "att_uniq": 0,
-   "reg": 3,
-   "reg_uniq": 3
+   "att": 3,
+   "att_uniq": 3,
+   "reg": 6,
+   "reg_uniq": 6
   },
   "迪維": {
    "att": 3,
    "att_uniq": 2,
-   "reg": 4,
-   "reg_uniq": 2
+   "reg": 6,
+   "reg_uniq": 3
   },
   "聯勤": {
    "att": 3,
@@ -125,28 +125,28 @@
    "reg_uniq": 3
   },
   "先勢集團": {
-   "att": 22,
-   "att_uniq": 20,
-   "reg": 50,
-   "reg_uniq": 31
+   "att": 23,
+   "att_uniq": 21,
+   "reg": 59,
+   "reg_uniq": 35
   },
   "台北博報堂 HTM": {
-   "att": 21,
-   "att_uniq": 17,
-   "reg": 43,
-   "reg_uniq": 22
+   "att": 27,
+   "att_uniq": 20,
+   "reg": 69,
+   "reg_uniq": 32
   },
   "米蘭 MDCG": {
-   "att": 54,
-   "att_uniq": 45,
-   "reg": 123,
-   "reg_uniq": 76
+   "att": 84,
+   "att_uniq": 61,
+   "reg": 146,
+   "reg_uniq": 82
   },
   "光洋波斯特": {
-   "att": 4,
-   "att_uniq": 4,
-   "reg": 15,
-   "reg_uniq": 11
+   "att": 6,
+   "att_uniq": 5,
+   "reg": 21,
+   "reg_uniq": 13
   },
   "安益": {
    "att": 0,
@@ -165,8 +165,8 @@
     "ua.com",
     "ua.com.tw"
    ],
-   "rows": 73,
-   "att": 22
+   "rows": 90,
+   "att": 36
   },
   {
    "key": "unistyle",
@@ -176,7 +176,7 @@
    "seen": [
     "unistyle.com.tw"
    ],
-   "rows": 3,
+   "rows": 5,
    "att": 2
   },
   {
@@ -188,8 +188,8 @@
     "unisurf.com",
     "unisurf.com.tw"
    ],
-   "rows": 16,
-   "att": 1
+   "rows": 20,
+   "att": 4
   },
   {
    "key": "ace-taipei",
@@ -211,8 +211,8 @@
    "seen": [
     "unismart.com.tw"
    ],
-   "rows": 16,
-   "att": 5
+   "rows": 22,
+   "att": 7
   },
   {
    "key": "2008-media",
@@ -222,8 +222,8 @@
    "seen": [
     "2008-media.com"
    ],
-   "rows": 3,
-   "att": 0
+   "rows": 6,
+   "att": 3
   },
   {
    "key": "dvibemedia",
@@ -233,7 +233,7 @@
    "seen": [
     "dvibemedia.com"
    ],
-   "rows": 4,
+   "rows": 6,
    "att": 3
   },
   {
@@ -255,8 +255,8 @@
    "seen": [
     "pilotpr.com.tw"
    ],
-   "rows": 15,
-   "att": 6
+   "rows": 17,
+   "att": 7
   },
   {
    "key": "grandpr",
@@ -266,7 +266,7 @@
    "seen": [
     "grandpr.com.tw"
    ],
-   "rows": 17,
+   "rows": 18,
    "att": 8
   },
   {
@@ -277,7 +277,7 @@
    "seen": [
     "prestigepr.com.tw"
    ],
-   "rows": 9,
+   "rows": 10,
    "att": 3
   },
   {
@@ -289,7 +289,7 @@
     "planetpe.com.tw",
     "planetpr.com.tw"
    ],
-   "rows": 7,
+   "rows": 13,
    "att": 4
   },
   {
@@ -300,7 +300,7 @@
    "seen": [
     "charismomo.com"
    ],
-   "rows": 2,
+   "rows": 1,
    "att": 1
   },
   {
@@ -312,52 +312,68 @@
     "hakuhodoti.com.tw",
     "hakuhodotm.com.tw"
    ],
-   "rows": 43,
-   "att": 21
+   "rows": 69,
+   "att": 27
   }
  ],
  "ev_att": {
-  "0320": {
-   "hakuhodo": 3,
+  "2026-03-20|3/20（五）春野・開運・馬上好": {
    "ua": 2,
-   "ace-taipei": 2,
+   "hakuhodo": 3,
    "unisurf": 1,
+   "ace-taipei": 2,
    "unisincere": 1
   },
-  "0327": {
-   "grandpr": 5,
-   "pilotpr": 4,
-   "ua": 11,
+  "2026-03-27|3/27（五）［加場 ! ］春野・開運・馬上好": {
    "prestigepr": 3,
-   "unismart": 3,
    "hakuhodo": 7,
-   "planetpr": 3,
-   "dvibemedia": 1,
+   "ua": 11,
    "unisincere": 2,
-   "unistyle": 1
+   "unismart": 3,
+   "pilotpr": 4,
+   "planetpr": 3,
+   "grandpr": 5,
+   "unistyle": 1,
+   "dvibemedia": 1
   },
-  "0417": {
-   "unismart": 2,
+  "2026-04-17|4/17(五)漫步在樹梢｜一場離地向上的自由練習": {
    "ua": 4,
-   "dvibemedia": 1,
-   "ace-taipei": 1,
+   "grandpr": 2,
+   "unismart": 2,
    "hakuhodo": 3,
-   "grandpr": 2
+   "dvibemedia": 1,
+   "ace-taipei": 1
   },
-  "0522": {
+  "2026-05-22|5/22 (五) 啟動身體原廠設定！｜翻開吳清忠的自癒寶典": {
    "hakuhodo": 1,
    "ace-taipei": 1
   },
-  "0717": {
-   "ua": 5,
-   "dvibemedia": 1,
-   "ace-taipei": 1,
+  "2026-07-17|7/17（五）《就是你了！來養顆苔球小精靈吧》": {
    "hakuhodo": 7,
-   "pilotpr": 2,
-   "grandpr": 1,
-   "planetpr": 1,
    "unistyle": 1,
-   "charismomo": 1
+   "ua": 5,
+   "pilotpr": 2,
+   "charismomo": 1,
+   "ace-taipei": 1,
+   "dvibemedia": 1,
+   "planetpr": 1,
+   "grandpr": 1
+  },
+  "2026-07-30|7/30（四）《就是你了！來養顆苔球小精靈吧》 加場！": {
+   "hakuhodo": 2,
+   "ua": 4
+  },
+  "2026-07-31|7/31（五）《聲波共振！開出你專屬的魔法結界》": {
+   "ua": 6,
+   "2008-media": 3,
+   "hakuhodo": 2,
+   "pilotpr": 1
+  },
+  "2026-07-31|7/31（五）《就是你了！來養顆苔球小精靈吧》": {
+   "unisurf": 3,
+   "unismart": 2,
+   "ua": 4,
+   "hakuhodo": 2
   }
  },
  "ev2025": [
@@ -570,18 +586,31 @@
    "dom": "gmail.com",
    "ours": null,
    "sheet": "UCG"
+  },
+  {
+   "kind": "unmapped",
+   "email": "cl***@gmail.com",
+   "dom": "gmail.com",
+   "ours": null,
+   "sheet": "PILOT"
   }
  ],
  "held": [
-  "0320",
-  "0327",
-  "0417",
-  "0522",
-  "0717"
+  "2026-03-20|3/20（五）春野・開運・馬上好",
+  "2026-03-27|3/27（五）［加場 ! ］春野・開運・馬上好",
+  "2026-04-17|4/17(五)漫步在樹梢｜一場離地向上的自由練習",
+  "2026-05-22|5/22 (五) 啟動身體原廠設定！｜翻開吳清忠的自癒寶典",
+  "2026-07-17|7/17（五）《就是你了！來養顆苔球小精靈吧》",
+  "2026-07-30|7/30（四）《就是你了！來養顆苔球小精靈吧》 加場！",
+  "2026-07-31|7/31（五）《聲波共振！開出你專屬的魔法結界》",
+  "2026-07-31|7/31（五）《就是你了！來養顆苔球小精靈吧》"
  ],
- "future": [
-  "0730",
-  "0731苔球",
-  "0731聲波"
- ]
+ "nocheck": [
+  "2026-08-21|8/21（五）《替身體乾一杯！ 滋養自己的香料野草茶》",
+  "2026-08-27|8/27（四）《替身體乾一杯！ 滋養自己的香料野草茶》",
+  "2026-09-04|9/4（五）《按下關機鍵：退出磁碟的休眠課》"
+ ],
+ "future": [],
+ "last_checkin": "2026-07-31",
+ "generated": "2026-10-01"
 }

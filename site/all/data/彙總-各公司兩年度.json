@@ -1,23 +1,46 @@
 {
- "cats": [
-  "聯廣 UCG",
+ "ucg_subs": [
+  "聯廣",
+  "聯太",
+  "聯樂",
   "艾斯",
+  "聯眾",
   "2008傳媒",
   "迪維",
-  "米蘭 MDCG",
+  "聯勤"
+ ],
+ "page_cats": [
+  "聯廣",
+  "聯太",
+  "聯樂",
+  "艾斯",
+  "聯眾",
+  "2008傳媒",
+  "迪維",
+  "聯勤",
   "先勢集團",
-  "光洋波斯特",
-  "安益",
   "台北博報堂 HTM"
  ],
  "y2025": {
-  "聯廣 UCG": {
-   "visits": 60,
-   "people": 26
+  "聯廣": {
+   "visits": 27,
+   "people": 13
+  },
+  "聯太": {
+   "visits": 0,
+   "people": 0
+  },
+  "聯樂": {
+   "visits": 3,
+   "people": 3
   },
   "艾斯": {
    "visits": 2,
    "people": 1
+  },
+  "聯眾": {
+   "visits": 26,
+   "people": 7
   },
   "2008傳媒": {
    "visits": 10,
@@ -27,13 +50,21 @@
    "visits": 7,
    "people": 4
   },
-  "米蘭 MDCG": {
-   "visits": 210,
-   "people": 83
+  "聯勤": {
+   "visits": 4,
+   "people": 3
   },
   "先勢集團": {
    "visits": 23,
    "people": 19
+  },
+  "台北博報堂 HTM": {
+   "visits": 68,
+   "people": 34
+  },
+  "米蘭 MDCG": {
+   "visits": 210,
+   "people": 83
   },
   "光洋波斯特": {
    "visits": 32,
@@ -42,514 +73,544 @@
   "安益": {
    "visits": 8,
    "people": 6
-  },
-  "台北博報堂 HTM": {
-   "visits": 68,
-   "people": 34
   }
  },
  "y2026": {
-  "聯廣 UCG": {
-   "reg": 71,
-   "uniq": 42,
-   "att": 33,
-   "att_uniq": 27
+  "聯廣": {
+   "att": 36,
+   "att_uniq": 24,
+   "reg": 90,
+   "reg_uniq": 39
+  },
+  "聯太": {
+   "att": 2,
+   "att_uniq": 1,
+   "reg": 5,
+   "reg_uniq": 1
+  },
+  "聯樂": {
+   "att": 4,
+   "att_uniq": 3,
+   "reg": 20,
+   "reg_uniq": 15
   },
   "艾斯": {
-   "reg": 6,
-   "uniq": 3,
    "att": 5,
-   "att_uniq": 3
+   "att_uniq": 3,
+   "reg": 8,
+   "reg_uniq": 4
+  },
+  "聯眾": {
+   "att": 7,
+   "att_uniq": 5,
+   "reg": 22,
+   "reg_uniq": 10
   },
   "2008傳媒": {
-   "reg": 3,
-   "uniq": 3,
-   "att": 0,
-   "att_uniq": 0
+   "att": 3,
+   "att_uniq": 3,
+   "reg": 6,
+   "reg_uniq": 6
   },
   "迪維": {
-   "reg": 3,
-   "uniq": 2,
    "att": 3,
-   "att_uniq": 2
+   "att_uniq": 2,
+   "reg": 6,
+   "reg_uniq": 3
   },
-  "米蘭 MDCG": {
-   "reg": 100,
-   "uniq": 67,
-   "att": 54,
-   "att_uniq": 45
+  "聯勤": {
+   "att": 3,
+   "att_uniq": 3,
+   "reg": 4,
+   "reg_uniq": 3
   },
   "先勢集團": {
-   "reg": 31,
-   "uniq": 27,
-   "att": 21,
-   "att_uniq": 19
-  },
-  "光洋波斯特": {
-   "reg": 6,
-   "uniq": 5,
-   "att": 4,
-   "att_uniq": 4
-  },
-  "安益": {
-   "reg": 1,
-   "uniq": 1,
-   "att": 0,
-   "att_uniq": 0
+   "att": 23,
+   "att_uniq": 21,
+   "reg": 59,
+   "reg_uniq": 35
   },
   "台北博報堂 HTM": {
-   "reg": 29,
-   "uniq": 21,
-   "att": 21,
-   "att_uniq": 17
+   "att": 27,
+   "att_uniq": 20,
+   "reg": 69,
+   "reg_uniq": 32
+  },
+  "米蘭 MDCG": {
+   "att": 84,
+   "att_uniq": 61,
+   "reg": 146,
+   "reg_uniq": 82
+  },
+  "光洋波斯特": {
+   "att": 6,
+   "att_uniq": 5,
+   "reg": 21,
+   "reg_uniq": 13
+  },
+  "安益": {
+   "att": 0,
+   "att_uniq": 0,
+   "reg": 1,
+   "reg_uniq": 1
   }
  },
- "events2026": [
+ "groups": [
   {
-   "ev": "0320",
-   "reg": 49,
-   "att": 45,
-   "domains": [
-    {
-     "d": "meshplus.com.tw",
-     "reg": 12,
-     "att": 12
-    },
-    {
-     "d": "mxdigi.com",
-     "reg": 10,
-     "att": 9
-    },
-    {
-     "d": "medialand.tw",
-     "reg": 9,
-     "att": 9
-    },
-    {
-     "d": "ky-post.com",
-     "reg": 4,
-     "att": 4
-    },
-    {
-     "d": "ua.com.tw",
-     "reg": 4,
-     "att": 2
-    },
-    {
-     "d": "ace-taipei.com",
-     "reg": 2,
-     "att": 2
-    },
-    {
-     "d": "hakuhodotm.com.tw",
-     "reg": 2,
-     "att": 2
-    },
-    {
-     "d": "mdcg.tw",
-     "reg": 2,
-     "att": 2
-    },
-    {
-     "d": "hakuhodoti.com.tw",
-     "reg": 1,
-     "att": 1
-    },
-    {
-     "d": "unisincere.com.tw",
-     "reg": 1,
-     "att": 1
-    },
-    {
-     "d": "unisurf.com.tw",
-     "reg": 1,
-     "att": 1
-    },
-    {
-     "d": "interplan.com.tw",
-     "reg": 1,
-     "att": 0
-    }
-   ]
+   "key": "ua",
+   "cat": "聯廣",
+   "note": "UNITED ADVERTISING 聯廣廣告",
+   "confirmed": true,
+   "seen": [
+    "ua.com",
+    "ua.com.tw"
+   ],
+   "rows": 90,
+   "att": 36
   },
   {
-   "ev": "0327",
-   "reg": 48,
-   "att": 40,
-   "domains": [
-    {
-     "d": "ua.com.tw",
-     "reg": 12,
-     "att": 11
-    },
-    {
-     "d": "hakuhodotm.com.tw",
-     "reg": 8,
-     "att": 7
-    },
-    {
-     "d": "grandpr.com.tw",
-     "reg": 5,
-     "att": 5
-    },
-    {
-     "d": "pilotpr.com.tw",
-     "reg": 4,
-     "att": 4
-    },
-    {
-     "d": "prestigepr.com.tw",
-     "reg": 4,
-     "att": 3
-    },
-    {
-     "d": "unismart.com.tw",
-     "reg": 4,
-     "att": 3
-    },
-    {
-     "d": "planetpr.com.tw",
-     "reg": 3,
-     "att": 3
-    },
-    {
-     "d": "unisincere.com.tw",
-     "reg": 2,
-     "att": 2
-    },
-    {
-     "d": "unisurf.com.tw",
-     "reg": 2,
-     "att": 0
-    },
-    {
-     "d": "dvibemedia.com",
-     "reg": 1,
-     "att": 1
-    },
-    {
-     "d": "unistyle.com.tw",
-     "reg": 1,
-     "att": 1
-    },
-    {
-     "d": "medialand.tw",
-     "reg": 1,
-     "att": 0
-    },
-    {
-     "d": "unisurf.com",
-     "reg": 1,
-     "att": 0
-    }
-   ]
+   "key": "unistyle",
+   "cat": "聯太",
+   "note": "聯太（聯廣集團旗下）；試算表「所屬企業」欄標為 PILOT，經確認應歸聯太",
+   "confirmed": true,
+   "seen": [
+    "unistyle.com.tw"
+   ],
+   "rows": 5,
+   "att": 2
   },
   {
-   "ev": "0417",
-   "reg": 26,
-   "att": 16,
-   "domains": [
-    {
-     "d": "ua.com.tw",
-     "reg": 7,
-     "att": 4
-    },
-    {
-     "d": "unismart.com.tw",
-     "reg": 4,
-     "att": 2
-    },
-    {
-     "d": "hakuhodotm.com.tw",
-     "reg": 3,
-     "att": 3
-    },
-    {
-     "d": "grandpr.com.tw",
-     "reg": 3,
-     "att": 2
-    },
-    {
-     "d": "medialand.tw",
-     "reg": 3,
-     "att": 2
-    },
-    {
-     "d": "ace-taipei.com",
-     "reg": 1,
-     "att": 1
-    },
-    {
-     "d": "dvibemedia.com",
-     "reg": 1,
-     "att": 1
-    },
-    {
-     "d": "meshplus.com.tw",
-     "reg": 1,
-     "att": 1
-    },
-    {
-     "d": "mxdigi.com",
-     "reg": 1,
-     "att": 0
-    },
-    {
-     "d": "pilotpr.com.tw",
-     "reg": 1,
-     "att": 0
-    },
-    {
-     "d": "planetpr.com.tw",
-     "reg": 1,
-     "att": 0
-    }
-   ]
+   "key": "unisurf",
+   "cat": "聯樂",
+   "note": "UNISURF 聯樂數位行銷",
+   "confirmed": true,
+   "seen": [
+    "unisurf.com",
+    "unisurf.com.tw"
+   ],
+   "rows": 20,
+   "att": 4
   },
   {
-   "ev": "0522",
-   "reg": 12,
-   "att": 11,
-   "domains": [
-    {
-     "d": "mxdigi.com",
-     "reg": 4,
-     "att": 3
-    },
-    {
-     "d": "medialand.tw",
-     "reg": 3,
-     "att": 3
-    },
-    {
-     "d": "meshplus.com.tw",
-     "reg": 3,
-     "att": 3
-    },
-    {
-     "d": "ace-taipei.com",
-     "reg": 1,
-     "att": 1
-    },
-    {
-     "d": "hakuhodotm.com.tw",
-     "reg": 1,
-     "att": 1
-    }
-   ]
+   "key": "ace-taipei",
+   "cat": "艾斯",
+   "note": "艾斯",
+   "confirmed": true,
+   "seen": [
+    "ace-taipei.com",
+    "ace.taipei.com"
+   ],
+   "rows": 8,
+   "att": 5
   },
   {
-   "ev": "0717",
-   "reg": 31,
-   "att": 29,
-   "domains": [
-    {
-     "d": "hakuhodotm.com.tw",
-     "reg": 7,
-     "att": 7
-    },
-    {
-     "d": "medialand.tw",
-     "reg": 6,
-     "att": 4
-    },
-    {
-     "d": "ua.com.tw",
-     "reg": 5,
-     "att": 5
-    },
-    {
-     "d": "meshplus.com.tw",
-     "reg": 4,
-     "att": 4
-    },
-    {
-     "d": "pilotpr.com.tw",
-     "reg": 3,
-     "att": 2
-    },
-    {
-     "d": "mxdigi.com",
-     "reg": 1,
-     "att": 2
-    },
-    {
-     "d": "ace-taipei.com",
-     "reg": 1,
-     "att": 1
-    },
-    {
-     "d": "dvibemedia.com",
-     "reg": 1,
-     "att": 1
-    },
-    {
-     "d": "grandpr.com.tw",
-     "reg": 1,
-     "att": 1
-    },
-    {
-     "d": "planetpr.com.tw",
-     "reg": 1,
-     "att": 1
-    },
-    {
-     "d": "unistyle.com.tw",
-     "reg": 1,
-     "att": 1
-    }
-   ]
+   "key": "unismart",
+   "cat": "聯眾",
+   "note": "Uni-Smart 聯眾廣告／UPOINT 聯眾觀點",
+   "confirmed": true,
+   "seen": [
+    "unismart.com.tw"
+   ],
+   "rows": 22,
+   "att": 7
   },
   {
-   "ev": "0730",
-   "reg": 26,
-   "att": 0,
-   "domains": [
-    {
-     "d": "medialand.tw",
-     "reg": 6,
-     "att": 0
-    },
-    {
-     "d": "meshplus.com.tw",
-     "reg": 6,
-     "att": 0
-    },
-    {
-     "d": "ua.com.tw",
-     "reg": 4,
-     "att": 0
-    },
-    {
-     "d": "hakuhodotm.com.tw",
-     "reg": 2,
-     "att": 0
-    },
-    {
-     "d": "ky-post.com",
-     "reg": 2,
-     "att": 0
-    },
-    {
-     "d": "mxdigi.com",
-     "reg": 2,
-     "att": 0
-    },
-    {
-     "d": "ace-taipei.com",
-     "reg": 1,
-     "att": 0
-    },
-    {
-     "d": "medialnad.tw",
-     "reg": 1,
-     "att": 0
-    },
-    {
-     "d": "mediand.tw",
-     "reg": 1,
-     "att": 0
-    },
-    {
-     "d": "mxdogi.com",
-     "reg": 1,
-     "att": 0
-    }
-   ]
+   "key": "2008-media",
+   "cat": "2008傳媒",
+   "note": "2008 傳媒行銷",
+   "confirmed": true,
+   "seen": [
+    "2008-media.com"
+   ],
+   "rows": 6,
+   "att": 3
   },
   {
-   "ev": "0731苔球",
-   "reg": 30,
-   "att": 0,
-   "domains": [
-    {
-     "d": "medialand.tw",
-     "reg": 7,
-     "att": 0
-    },
-    {
-     "d": "meshplus.com.tw",
-     "reg": 6,
-     "att": 0
-    },
-    {
-     "d": "ua.com.tw",
-     "reg": 5,
-     "att": 0
-    },
-    {
-     "d": "unisurf.com.tw",
-     "reg": 4,
-     "att": 0
-    },
-    {
-     "d": "hakuhodotm.com.tw",
-     "reg": 3,
-     "att": 0
-    },
-    {
-     "d": "mxdigi.com",
-     "reg": 2,
-     "att": 0
-    },
-    {
-     "d": "unismart.com.tw",
-     "reg": 2,
-     "att": 0
-    },
-    {
-     "d": "pilotpr.com.tw",
-     "reg": 1,
-     "att": 0
-    }
-   ]
+   "key": "dvibemedia",
+   "cat": "迪維",
+   "note": "dvibe 迪維數位智造",
+   "confirmed": true,
+   "seen": [
+    "dvibemedia.com"
+   ],
+   "rows": 6,
+   "att": 3
   },
   {
-   "ev": "0731聲波",
-   "reg": 28,
-   "att": 0,
-   "domains": [
-    {
-     "d": "ua.com.tw",
-     "reg": 11,
-     "att": 0
-    },
-    {
-     "d": "medialand.tw",
-     "reg": 6,
-     "att": 0
-    },
-    {
-     "d": "2008-media.com",
-     "reg": 3,
-     "att": 0
-    },
-    {
-     "d": "hakuhodotm.com.tw",
-     "reg": 2,
-     "att": 0
-    },
-    {
-     "d": "mxdigi.com",
-     "reg": 2,
-     "att": 0
-    },
-    {
-     "d": "pilotpr.com.tw",
-     "reg": 2,
-     "att": 0
-    },
-    {
-     "d": "grandpr.com.tw",
-     "reg": 1,
-     "att": 0
-    },
-    {
-     "d": "prestigepr.com.tw",
-     "reg": 1,
-     "att": 0
-    }
-   ]
+   "key": "unisincere",
+   "cat": "聯勤",
+   "note": "UPR 聯勤公關",
+   "confirmed": true,
+   "seen": [
+    "unisincere.com.tw"
+   ],
+   "rows": 4,
+   "att": 3
+  },
+  {
+   "key": "pilotpr",
+   "cat": "先勢集團",
+   "note": "先勢公關",
+   "confirmed": true,
+   "seen": [
+    "pilotpr.com.tw"
+   ],
+   "rows": 17,
+   "att": 7
+  },
+  {
+   "key": "grandpr",
+   "cat": "先勢集團",
+   "note": "精采公關",
+   "confirmed": true,
+   "seen": [
+    "grandpr.com.tw"
+   ],
+   "rows": 18,
+   "att": 8
+  },
+  {
+   "key": "prestigepr",
+   "cat": "先勢集團",
+   "note": "楷模公關",
+   "confirmed": true,
+   "seen": [
+    "prestigepr.com.tw"
+   ],
+   "rows": 10,
+   "att": 3
+  },
+  {
+   "key": "planetpr",
+   "cat": "先勢集團",
+   "note": "頤德／星團公關（planetpe 為打錯的變體，已併入）",
+   "confirmed": true,
+   "seen": [
+    "planetpe.com.tw",
+    "planetpr.com.tw"
+   ],
+   "rows": 13,
+   "att": 4
+  },
+  {
+   "key": "charismomo",
+   "cat": "先勢集團",
+   "note": "試算表「所屬企業」欄標 PILOT，但這不是先勢既有網域，請確認是哪家",
+   "confirmed": false,
+   "seen": [
+    "charismomo.com"
+   ],
+   "rows": 1,
+   "att": 1
+  },
+  {
+   "key": "hakuhodo",
+   "cat": "台北博報堂 HTM",
+   "note": "台北博報堂（hakuhodotm 與 hakuhodoti 兩組寫法已合併）",
+   "confirmed": true,
+   "seen": [
+    "hakuhodoti.com.tw",
+    "hakuhodotm.com.tw"
+   ],
+   "rows": 69,
+   "att": 27
   }
- ]
+ ],
+ "ev_att": {
+  "2026-03-20|3/20（五）春野・開運・馬上好": {
+   "ua": 2,
+   "hakuhodo": 3,
+   "unisurf": 1,
+   "ace-taipei": 2,
+   "unisincere": 1
+  },
+  "2026-03-27|3/27（五）［加場 ! ］春野・開運・馬上好": {
+   "prestigepr": 3,
+   "hakuhodo": 7,
+   "ua": 11,
+   "unisincere": 2,
+   "unismart": 3,
+   "pilotpr": 4,
+   "planetpr": 3,
+   "grandpr": 5,
+   "unistyle": 1,
+   "dvibemedia": 1
+  },
+  "2026-04-17|4/17(五)漫步在樹梢｜一場離地向上的自由練習": {
+   "ua": 4,
+   "grandpr": 2,
+   "unismart": 2,
+   "hakuhodo": 3,
+   "dvibemedia": 1,
+   "ace-taipei": 1
+  },
+  "2026-05-22|5/22 (五) 啟動身體原廠設定！｜翻開吳清忠的自癒寶典": {
+   "hakuhodo": 1,
+   "ace-taipei": 1
+  },
+  "2026-07-17|7/17（五）《就是你了！來養顆苔球小精靈吧》": {
+   "hakuhodo": 7,
+   "unistyle": 1,
+   "ua": 5,
+   "pilotpr": 2,
+   "charismomo": 1,
+   "ace-taipei": 1,
+   "dvibemedia": 1,
+   "planetpr": 1,
+   "grandpr": 1
+  },
+  "2026-07-30|7/30（四）《就是你了！來養顆苔球小精靈吧》 加場！": {
+   "hakuhodo": 2,
+   "ua": 4
+  },
+  "2026-07-31|7/31（五）《聲波共振！開出你專屬的魔法結界》": {
+   "ua": 6,
+   "2008-media": 3,
+   "hakuhodo": 2,
+   "pilotpr": 1
+  },
+  "2026-07-31|7/31（五）《就是你了！來養顆苔球小精靈吧》": {
+   "unisurf": 3,
+   "unismart": 2,
+   "ua": 4,
+   "hakuhodo": 2
+  }
+ },
+ "ev2025": [
+  {
+   "date": "2025-02-21",
+   "label": "採集自然之聲",
+   "cats": {
+    "先勢集團": 4,
+    "台北博報堂 HTM": 1,
+    "聯廣": 3,
+    "聯樂": 1
+   }
+  },
+  {
+   "date": "2025-02-27",
+   "label": "採集自然之聲",
+   "cats": {
+    "台北博報堂 HTM": 2
+   }
+  },
+  {
+   "date": "2025-03-28",
+   "label": "茶席",
+   "cats": {
+    "先勢集團": 2,
+    "聯樂": 1,
+    "聯眾": 1,
+    "艾斯": 1,
+    "台北博報堂 HTM": 2
+   }
+  },
+  {
+   "date": "2025-04-11",
+   "label": "茶席",
+   "cats": {
+    "台北博報堂 HTM": 7
+   }
+  },
+  {
+   "date": "2025-04-25",
+   "label": "躺躺",
+   "cats": {
+    "2008傳媒": 6,
+    "聯廣": 1,
+    "聯眾": 1,
+    "迪維": 1,
+    "台北博報堂 HTM": 2
+   }
+  },
+  {
+   "date": "2025-05-02",
+   "label": "茶席",
+   "cats": {
+    "聯眾": 1
+   }
+  },
+  {
+   "date": "2025-06-13",
+   "label": "音樂會",
+   "cats": {
+    "台北博報堂 HTM": 2,
+    "先勢集團": 2
+   }
+  },
+  {
+   "date": "2025-06-27",
+   "label": "正念",
+   "cats": {
+    "台北博報堂 HTM": 5,
+    "聯廣": 3,
+    "聯眾": 3,
+    "迪維": 1,
+    "先勢集團": 1
+   }
+  },
+  {
+   "date": "2025-07-18",
+   "label": "正念",
+   "cats": {
+    "台北博報堂 HTM": 3,
+    "聯眾": 2,
+    "聯廣": 2,
+    "迪維": 1,
+    "2008傳媒": 2
+   }
+  },
+  {
+   "date": "2025-07-25",
+   "label": "喚覺躺躺",
+   "cats": {
+    "台北博報堂 HTM": 5,
+    "聯眾": 3,
+    "迪維": 2
+   }
+  },
+  {
+   "date": "2025-08-29",
+   "label": "風土味蕾小宇宙",
+   "cats": {
+    "台北博報堂 HTM": 2,
+    "聯廣": 1,
+    "聯眾": 3,
+    "先勢集團": 4
+   }
+  },
+  {
+   "date": "2025-09-05",
+   "label": "風土味蕾小宇宙",
+   "cats": {
+    "台北博報堂 HTM": 2,
+    "聯廣": 2,
+    "聯眾": 1,
+    "聯勤": 2,
+    "聯樂": 1,
+    "艾斯": 1,
+    "先勢集團": 2
+   }
+  },
+  {
+   "date": "2025-10-03",
+   "label": "水之旅",
+   "cats": {
+    "聯廣": 2,
+    "先勢集團": 3
+   }
+  },
+  {
+   "date": "2025-10-09",
+   "label": "森之旅",
+   "cats": {
+    "台北博報堂 HTM": 4,
+    "聯廣": 3,
+    "聯眾": 4
+   }
+  },
+  {
+   "date": "2025-11-07",
+   "label": "聲音書寫",
+   "cats": {
+    "台北博報堂 HTM": 5,
+    "聯廣": 3,
+    "聯眾": 1,
+    "迪維": 2,
+    "先勢集團": 4
+   }
+  },
+  {
+   "date": "2025-11-21",
+   "label": "內耗退場(上午)",
+   "cats": {
+    "聯眾": 1,
+    "先勢集團": 1
+   }
+  },
+  {
+   "date": "2025-11-21",
+   "label": "內耗退場(下午)",
+   "cats": {
+    "台北博報堂 HTM": 4,
+    "聯廣": 2,
+    "聯眾": 1
+   }
+  },
+  {
+   "date": "2025-12-21",
+   "label": "聖誕森療",
+   "cats": {
+    "台北博報堂 HTM": 12
+   }
+  },
+  {
+   "date": "2025-12-26",
+   "label": "呼吸清理",
+   "cats": {
+    "聯廣": 4,
+    "聯眾": 3,
+    "聯勤": 2,
+    "台北博報堂 HTM": 5,
+    "2008傳媒": 2
+   }
+  },
+  {
+   "date": "2026-01-16",
+   "label": "激靜鼓",
+   "cats": {
+    "聯廣": 1,
+    "聯眾": 1,
+    "台北博報堂 HTM": 5
+   }
+  }
+ ],
+ "exceptions": [
+  {
+   "kind": "conflict",
+   "email": "gr***@ua.com.tw",
+   "dom": "ua.com.tw",
+   "ours": "聯廣",
+   "sheet": "HTM"
+  },
+  {
+   "kind": "conflict",
+   "email": "na***@ua.com.tw",
+   "dom": "ua.com.tw",
+   "ours": "聯廣",
+   "sheet": "HTM"
+  },
+  {
+   "kind": "unmapped",
+   "email": "ry***@gmail.com",
+   "dom": "gmail.com",
+   "ours": null,
+   "sheet": "UCG"
+  },
+  {
+   "kind": "unmapped",
+   "email": "cl***@gmail.com",
+   "dom": "gmail.com",
+   "ours": null,
+   "sheet": "PILOT"
+  }
+ ],
+ "held": [
+  "2026-03-20|3/20（五）春野・開運・馬上好",
+  "2026-03-27|3/27（五）［加場 ! ］春野・開運・馬上好",
+  "2026-04-17|4/17(五)漫步在樹梢｜一場離地向上的自由練習",
+  "2026-05-22|5/22 (五) 啟動身體原廠設定！｜翻開吳清忠的自癒寶典",
+  "2026-07-17|7/17（五）《就是你了！來養顆苔球小精靈吧》",
+  "2026-07-30|7/30（四）《就是你了！來養顆苔球小精靈吧》 加場！",
+  "2026-07-31|7/31（五）《聲波共振！開出你專屬的魔法結界》",
+  "2026-07-31|7/31（五）《就是你了！來養顆苔球小精靈吧》"
+ ],
+ "nocheck": [
+  "2026-08-21|8/21（五）《替身體乾一杯！ 滋養自己的香料野草茶》",
+  "2026-08-27|8/27（四）《替身體乾一杯！ 滋養自己的香料野草茶》",
+  "2026-09-04|9/4（五）《按下關機鍵：退出磁碟的休眠課》"
+ ],
+ "future": [],
+ "last_checkin": "2026-07-31",
+ "generated": "2026-10-01"
 }

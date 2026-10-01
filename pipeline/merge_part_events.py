@@ -2,7 +2,7 @@
 """併 Wix（正取／候補／請假）+ Google 現場報到表（報到）-> pipeline/part_events.json
 只留本頁三家：UCG（拆子公司）、先勢集團、台北博報堂 HTM。其餘集團公司與外部人員一律排除。
 
-- 報到數改抓 part_summary.json 的 ev_att，與總表同源，各場加總 = 總表人次。
+- 2026 報到＝Wix 報到勾選（經 parse_part 彙整）；報到數改抓 part_summary.json 的 ev_att，與總表同源，各場加總 = 總表人次。
 - 網域一律合併到 subsidiary_map.GROUPS 的名字（手 key 的 .com.tw／拼字變體不再各自成列）。
 - 輸出只有網域名字，不含帳號或姓名。
 """
@@ -10,14 +10,13 @@ import json, os, re
 from collections import defaultdict
 
 from subsidiary_map import GROUP_BY_KEY, PAGE_CATS, group_of, cat_of
+from wix2026 import ev_key
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 wix = json.load(open(os.path.join(HERE, "wix_states.json"), encoding="utf-8"))
 SUM = json.load(open(os.path.join(HERE, "part_summary.json"), encoding="utf-8"))
 EV_ATT = SUM["ev_att"]
 
-SHEET_EV = {"2026-03-20": "0320", "2026-03-27": "0327", "2026-04-17": "0417",
-            "2026-05-22": "0522", "2026-07-17": "0717", "2026-07-30": "0730"}
 EXCLUDE_DATES = {"2026-06-04", "2026-06-05"}      # 小滿茶席（延後／測試，1 人）
 
 # 2025 名冊矩陣的日期 -> Wix 場次日期（試算表把聖誕場記成 12/21，Wix 是 12/19）
@@ -37,14 +36,6 @@ def match_2025(w):
                 break
         else:
             return e
-    return None
-
-
-def sheet_ev(date, title):
-    if date in SHEET_EV:
-        return SHEET_EV[date]
-    if date == "2026-07-31":
-        return "0731聲波" if "聲波" in title else "0731苔球"
     return None
 
 
@@ -76,8 +67,8 @@ for w in wix:
         att = claim.get(id(w), {})
         keyfn, catfn = cat_of, (lambda x: x)
     else:
-        ev = sheet_ev(w["date"], w["title"])
-        att = EV_ATT.get(ev, {}) if ev else {}
+        ev = ev_key(w["date"], w["title"])
+        att = EV_ATT.get(ev, {})
         keyfn, catfn = group_of, (lambda k: GROUP_BY_KEY[k]["cat"])
 
     rmap = defaultdict(lambda: {"y": 0, "w": 0, "l": 0, "c": 0})
@@ -101,7 +92,7 @@ for w in wix:
     if not any(tot.values()):        # 本頁三家完全沒人的場次（含 Wix 的空重複場）不列
         continue
     out_events.append({"date": w["date"], "year": w["year"], "title": clean_title(w["title"]),
-                       "has_checkin": bool(att) or (not is25 and ev is not None),
+                       "has_checkin": bool(att) or (not is25 and ev in SUM["held"]),
                        "rowkind": "cat" if is25 else "domain",
                        "totals": tot, "domains": rows})
 

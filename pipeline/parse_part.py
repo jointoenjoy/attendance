@@ -12,6 +12,7 @@ from collections import defaultdict
 
 from subsidiary_map import (GROUPS, GROUP_BY_KEY, UCG_SUBS, PAGE_CATS, OTHER_CATS,
                             group_of, cat_of, label2cat)
+from wix2026 import year_events, ev_key, has_checkin, today, REG
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RAW = os.path.join(HERE, "_private", "sheet_2026.txt")
@@ -26,8 +27,6 @@ CODE_FAMILY = {
     "KY-POST": {"光洋波斯特"}, "KYPOST": {"光洋波斯特"},
     "INTERPLAN": {"安益"},
 }
-HELD = ["0320", "0327", "0417", "0522", "0717"]          # 截至 7/17 已辦
-FUTURE = ["0730", "0731苔球", "0731聲波"]                 # 尚未舉辦
 
 
 def cells(line):
@@ -93,23 +92,22 @@ if hi is not None:
     ev2025 = [{"date": d, "label": lbl, "cats": dict(tally[k])}
               for k, (_j, d, lbl) in enumerate(cols)]
 
-# ============ 2026：逐筆名單（活動｜Email｜報名｜報到｜所屬企業）============
-mode = None
+# ============ 2026：逐筆名單（改由 Wix 直接產生）============
+# 7/31 以前跟 Google 現場報到表逐場對過，Wix 報到勾選人數完全一致，所以 2026 一律以 Wix 為準，
+# 每週自動更新時不用再手動匯出試算表。欄位維持原本格式：活動｜email｜報名｜報到｜所屬企業。
 rows = []
-for ln in LINES:
-    c = cells(ln)
-    if not c:
-        continue
-    if len(c) >= 4 and c[0] == "活動" and c[1] == "Email" and c[3] == "報到":
-        # 兩張表：第一張是「首筆保留」去重表，第二張才是完整名單
-        mode = "dedup" if (len(c) >= 6 and "重複" in c[5]) else "full"
-        continue
-    if mode != "full" or len(c) < 5 or "@" not in c[1]:
-        continue
-    email = c[1].lower().replace("\\", "")
-    rows.append({"ev": c[0], "email": email, "dom": email.split("@")[-1],
-                 "reg": c[2].strip(), "att": c[3].strip(),
-                 "code": c[4].strip().upper()})
+EVS = year_events()
+for e in EVS:
+    for g in e["guests"]:
+        if "@" not in g["email"]:
+            continue
+        rows.append({"ev": ev_key(e["date"], e["title"]), "email": g["email"],
+                     "dom": g["email"].split("@")[-1], "reg": REG[g["status"]],
+                     "att": "1" if g["wix_checked_in"] else "", "code": g["company"].upper()})
+T = today()
+HELD = [ev_key(e["date"], e["title"]) for e in EVS if e["date"] <= T and has_checkin(e)]
+NOCHECK = [ev_key(e["date"], e["title"]) for e in EVS if e["date"] <= T and not has_checkin(e)]
+FUTURE = [ev_key(e["date"], e["title"]) for e in EVS if e["date"] > T]
 
 y2026 = defaultdict(lambda: {"att": 0, "uniq": set(), "reg": 0, "reg_uniq": set()})
 grp_stat = defaultdict(lambda: {"rows": 0, "att": 0, "seen": set()})
@@ -165,7 +163,9 @@ out = {
     "ev2025": ev2025,
     "exceptions": [e for e in exceptions
                    if (e["ours"] in PAGE_CATS) or (e["sheet"] in ("UCG", "HTM", "PILOT"))],
-    "held": HELD, "future": FUTURE,
+    "held": HELD, "nocheck": NOCHECK, "future": FUTURE,
+    "last_checkin": max([k[:10] for k in HELD], default=""),
+    "generated": T,
 }
 json.dump(out, open(os.path.join(HERE, "part_summary.json"), "w", encoding="utf-8"),
           ensure_ascii=False, indent=1)
@@ -176,7 +176,7 @@ for c in PAGE_CATS:
     print("  %-14s 人次%4d  人數%4d" % (c, y2025[c]["visits"], y2025[c]["people"]))
 print("  %-14s 人次%4d  人數%4d" % ("本頁合計",
       sum(y2025[c]["visits"] for c in PAGE_CATS), sum(y2025[c]["people"] for c in PAGE_CATS)))
-print("\n=== 2026 報到（截至 7/17 已辦）===")
+print("\n=== 2026 報到（Wix 有勾報到的場次）===")
 for c in PAGE_CATS:
     print("  %-14s 人次%4d  人數%4d   (報名人次%4d 報名人數%4d)"
           % (c, y2026[c]["att"], len(y2026[c]["uniq"]), y2026[c]["reg"], len(y2026[c]["reg_uniq"])))
@@ -185,10 +185,10 @@ print("  %-14s 人次%4d  人數%4d" % ("本頁合計", tot_att,
       sum(len(y2026[c]["uniq"]) for c in PAGE_CATS)))
 print("\n=== 各場報到（本頁三家；合計應等於上面的人次 %d）===" % tot_att)
 chk = 0
-for ev in HELD + FUTURE:
+for ev in HELD + NOCHECK + FUTURE:
     n = sum(ev_att.get(ev, {}).values())
     chk += n
-    print("  %-10s %3d" % (ev, n))
+    print("  %-10s %3d  %s" % (ev[:10], n, ev[11:30]))
 print("  各場加總 %d  →  %s" % (chk, "✅ 對得起來" if chk == tot_att else "❌ 對不起來"))
 v25 = sum(y2025[c]["visits"] for c in PAGE_CATS)
 print("\n=== 2025 各場報到（本頁三家；合計應等於 2025 人次 %d，1/10 那場不在名冊矩陣裡）===" % v25)

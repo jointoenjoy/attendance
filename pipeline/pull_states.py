@@ -39,7 +39,10 @@ evs.sort(key=lambda e: e["dateAndTimeSettings"]["startDate"])
 
 out = []
 for e in evs:
-    d = e["dateAndTimeSettings"]["startDate"][:10]
+    # Wix 的 startDate 是 UTC，換成台北日期（跟 pull_2026_guests 一致）
+    from datetime import datetime, timedelta
+    d = (datetime.fromisoformat(e["dateAndTimeSettings"]["startDate"].replace("Z", "+00:00"))
+         + timedelta(hours=8)).strftime("%Y-%m-%d")
     gs = get_guests(e["id"])
     dom = defaultdict(lambda: {"att": 0, "wait": 0, "leave": 0})
     tot = {"att": 0, "wait": 0, "leave": 0}

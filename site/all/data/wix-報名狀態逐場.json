@@ -2233,23 +2233,29 @@
   "date": "2026-07-30",
   "year": "2026",
   "title": "7/30（四）《就是你了！來養顆苔球小精靈吧》 加場！",
-  "status": "UPCOMING",
-  "guests": 27,
+  "status": "ENDED",
+  "guests": 32,
   "totals": {
-   "att": 25,
+   "att": 27,
    "wait": 0,
-   "leave": 2
+   "leave": 5
   },
   "domains": [
    {
     "d": "medialand.tw",
+    "att": 5,
+    "wait": 0,
+    "leave": 1
+   },
+   {
+    "d": "meshplus.com.tw",
     "att": 6,
     "wait": 0,
     "leave": 0
    },
    {
-    "d": "meshplus.com.tw",
-    "att": 6,
+    "d": "gmail.com",
+    "att": 4,
     "wait": 0,
     "leave": 0
    },
@@ -2273,9 +2279,9 @@
    },
    {
     "d": "mxdigi.com",
-    "att": 2,
+    "att": 1,
     "wait": 0,
-    "leave": 0
+    "leave": 1
    },
    {
     "d": "ace-taipei.com",
@@ -2284,16 +2290,22 @@
     "leave": 1
    },
    {
-    "d": "charismomo.com",
+    "d": "leader-ac.com.tw",
+    "att": 1,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "medialand.com",
     "att": 1,
     "wait": 0,
     "leave": 0
    },
    {
     "d": "medialnad.tw",
-    "att": 1,
+    "att": 0,
     "wait": 0,
-    "leave": 0
+    "leave": 1
    },
    {
     "d": "mediand.tw",
@@ -2313,23 +2325,23 @@
   "date": "2026-07-31",
   "year": "2026",
   "title": "7/31（五）《聲波共振！開出你專屬的魔法結界》",
-  "status": "UPCOMING",
+  "status": "ENDED",
   "guests": 30,
   "totals": {
-   "att": 26,
-   "wait": 2,
-   "leave": 2
+   "att": 21,
+   "wait": 0,
+   "leave": 9
   },
   "domains": [
    {
     "d": "ua.com.tw",
     "att": 10,
-    "wait": 2,
-    "leave": 1
+    "wait": 0,
+    "leave": 4
    },
    {
     "d": "medialand.tw",
-    "att": 5,
+    "att": 4,
     "wait": 0,
     "leave": 1
    },
@@ -2347,27 +2359,27 @@
    },
    {
     "d": "mxdigi.com",
-    "att": 2,
+    "att": 1,
     "wait": 0,
-    "leave": 0
+    "leave": 1
    },
    {
     "d": "pilotpr.com.tw",
-    "att": 2,
+    "att": 1,
     "wait": 0,
-    "leave": 0
+    "leave": 1
    },
    {
     "d": "grandpr.com.tw",
-    "att": 1,
+    "att": 0,
     "wait": 0,
-    "leave": 0
+    "leave": 1
    },
    {
     "d": "prestigepr.com.tw",
-    "att": 1,
+    "att": 0,
     "wait": 0,
-    "leave": 0
+    "leave": 1
    }
   ]
  },
@@ -2375,12 +2387,12 @@
   "date": "2026-07-31",
   "year": "2026",
   "title": "7/31（五）《就是你了！來養顆苔球小精靈吧》",
-  "status": "UPCOMING",
-  "guests": 45,
+  "status": "ENDED",
+  "guests": 43,
   "totals": {
-   "att": 30,
+   "att": 24,
    "wait": 15,
-   "leave": 0
+   "leave": 4
   },
   "domains": [
    {
@@ -2390,16 +2402,16 @@
     "leave": 0
    },
    {
-    "d": "medialand.tw",
-    "att": 7,
-    "wait": 2,
-    "leave": 0
+    "d": "ua.com.tw",
+    "att": 4,
+    "wait": 3,
+    "leave": 1
    },
    {
-    "d": "ua.com.tw",
-    "att": 5,
-    "wait": 3,
-    "leave": 0
+    "d": "medialand.tw",
+    "att": 4,
+    "wait": 2,
+    "leave": 1
    },
    {
     "d": "mxdigi.com",
@@ -2415,9 +2427,9 @@
    },
    {
     "d": "unisurf.com.tw",
-    "att": 4,
+    "att": 3,
     "wait": 0,
-    "leave": 0
+    "leave": 1
    },
    {
     "d": "ky-post.com",
@@ -2433,9 +2445,9 @@
    },
    {
     "d": "pilotpr.com.tw",
-    "att": 1,
+    "att": 0,
     "wait": 0,
-    "leave": 0
+    "leave": 1
    }
   ]
  },
@@ -2443,26 +2455,270 @@
   "date": "2026-08-21",
   "year": "2026",
   "title": "8/21（五）《替身體乾一杯！ 滋養自己的香料野草茶》",
-  "status": "UPCOMING",
-  "guests": 0,
+  "status": "ENDED",
+  "guests": 45,
   "totals": {
-   "att": 0,
+   "att": 25,
    "wait": 0,
-   "leave": 0
+   "leave": 20
   },
-  "domains": []
+  "domains": [
+   {
+    "d": "gmail.com",
+    "att": 9,
+    "wait": 0,
+    "leave": 3
+   },
+   {
+    "d": "hakuhodotm.com.tw",
+    "att": 0,
+    "wait": 0,
+    "leave": 12
+   },
+   {
+    "d": "meshplus.com.tw",
+    "att": 4,
+    "wait": 0,
+    "leave": 1
+   },
+   {
+    "d": "hotmail.com",
+    "att": 3,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "planetpr.com.tw",
+    "att": 2,
+    "wait": 0,
+    "leave": 1
+   },
+   {
+    "d": "ua.com.tw",
+    "att": 1,
+    "wait": 0,
+    "leave": 1
+   },
+   {
+    "d": "unismart.com.tw",
+    "att": 1,
+    "wait": 0,
+    "leave": 1
+   },
+   {
+    "d": "yahoo.com.tw",
+    "att": 2,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "ky-post.com",
+    "att": 1,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "medialand.tw",
+    "att": 1,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "mxdigi.com",
+    "att": 1,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "unistyle.com.tw",
+    "att": 0,
+    "wait": 0,
+    "leave": 1
+   }
+  ]
  },
  {
   "date": "2026-08-27",
   "year": "2026",
   "title": "8/27（四）《替身體乾一杯！ 滋養自己的香料野草茶》",
-  "status": "UPCOMING",
-  "guests": 0,
+  "status": "ENDED",
+  "guests": 38,
   "totals": {
-   "att": 0,
-   "wait": 0,
-   "leave": 0
+   "att": 29,
+   "wait": 4,
+   "leave": 5
   },
-  "domains": []
+  "domains": [
+   {
+    "d": "hakuhodotm.com.tw",
+    "att": 9,
+    "wait": 4,
+    "leave": 0
+   },
+   {
+    "d": "ua.com.tw",
+    "att": 4,
+    "wait": 0,
+    "leave": 4
+   },
+   {
+    "d": "meshplus.com.tw",
+    "att": 6,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "dvibemedia.com",
+    "att": 2,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "mxdigi.com",
+    "att": 2,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "unismart.com.tw",
+    "att": 2,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "2008-media.com",
+    "att": 1,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "ky-post.com",
+    "att": 1,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "planetpr.com.tw",
+    "att": 0,
+    "wait": 0,
+    "leave": 1
+   },
+   {
+    "d": "unistyle.com.tw",
+    "att": 1,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "unisurf.com.tw",
+    "att": 1,
+    "wait": 0,
+    "leave": 0
+   }
+  ]
+ },
+ {
+  "date": "2026-09-04",
+  "year": "2026",
+  "title": "9/4（五）《按下關機鍵：退出磁碟的休眠課》",
+  "status": "ENDED",
+  "guests": 38,
+  "totals": {
+   "att": 27,
+   "wait": 0,
+   "leave": 11
+  },
+  "domains": [
+   {
+    "d": "ua.com.tw",
+    "att": 3,
+    "wait": 0,
+    "leave": 3
+   },
+   {
+    "d": "ky-post.com",
+    "att": 2,
+    "wait": 0,
+    "leave": 2
+   },
+   {
+    "d": "medialand.tw",
+    "att": 2,
+    "wait": 0,
+    "leave": 2
+   },
+   {
+    "d": "meshplus.com.tw",
+    "att": 4,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "gmail.com",
+    "att": 3,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "unisurf.com.tw",
+    "att": 3,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "2008-media.com",
+    "att": 2,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "mxdigi.com",
+    "att": 1,
+    "wait": 0,
+    "leave": 1
+   },
+   {
+    "d": "pilotpr.com.tw",
+    "att": 2,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "planetpr.com.tw",
+    "att": 2,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "unismart.com.tw",
+    "att": 1,
+    "wait": 0,
+    "leave": 1
+   },
+   {
+    "d": "grandpr.com.tw",
+    "att": 0,
+    "wait": 0,
+    "leave": 1
+   },
+   {
+    "d": "hakuhodotm.com.tw",
+    "att": 1,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "jointoenjoy.com",
+    "att": 1,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "prestigepr.com.tw",
+    "att": 0,
+    "wait": 0,
+    "leave": 1
+   }
+  ]
  }
 ]

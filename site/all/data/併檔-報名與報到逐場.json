@@ -1,78 +1,284 @@
 [
  {
-  "date": "2026-07-31",
+  "date": "2026-09-04",
   "year": "2026",
-  "title": "《聲波共振！開出你專屬的魔法結界》",
-  "has_checkin": true,
+  "title": "《按下關機鍵：退出磁碟的休眠課》",
+  "has_checkin": false,
+  "rowkind": "domain",
   "totals": {
-   "y": 26,
-   "w": 2,
-   "l": 2,
+   "y": 14,
+   "w": 0,
+   "l": 6,
    "c": 0
   },
   "domains": [
    {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 10,
-    "w": 2,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 5,
+    "d": "ua",
+    "cat": "聯廣",
+    "y": 3,
     "w": 0,
-    "l": 1,
+    "l": 3,
     "c": 0
    },
    {
-    "d": "2008-media.com",
-    "cat": "2008傳媒",
+    "d": "unisurf",
+    "cat": "聯樂",
     "y": 3,
     "w": 0,
     "l": 0,
     "c": 0
    },
    {
-    "d": "hakuhodotm.com.tw",
+    "d": "2008-media",
+    "cat": "2008傳媒",
+    "y": 2,
+    "w": 0,
+    "l": 0,
+    "c": 0
+   },
+   {
+    "d": "pilotpr",
+    "cat": "先勢集團",
+    "y": 2,
+    "w": 0,
+    "l": 0,
+    "c": 0
+   },
+   {
+    "d": "planetpr",
+    "cat": "先勢集團",
+    "y": 2,
+    "w": 0,
+    "l": 0,
+    "c": 0
+   },
+   {
+    "d": "unismart",
+    "cat": "聯眾",
+    "y": 1,
+    "w": 0,
+    "l": 1,
+    "c": 0
+   },
+   {
+    "d": "grandpr",
+    "cat": "先勢集團",
+    "y": 0,
+    "w": 0,
+    "l": 1,
+    "c": 0
+   },
+   {
+    "d": "hakuhodo",
+    "cat": "台北博報堂 HTM",
+    "y": 1,
+    "w": 0,
+    "l": 0,
+    "c": 0
+   },
+   {
+    "d": "prestigepr",
+    "cat": "先勢集團",
+    "y": 0,
+    "w": 0,
+    "l": 1,
+    "c": 0
+   }
+  ]
+ },
+ {
+  "date": "2026-08-27",
+  "year": "2026",
+  "title": "《替身體乾一杯！ 滋養自己的香料野草茶》",
+  "has_checkin": false,
+  "rowkind": "domain",
+  "totals": {
+   "y": 20,
+   "w": 4,
+   "l": 5,
+   "c": 0
+  },
+  "domains": [
+   {
+    "d": "hakuhodo",
+    "cat": "台北博報堂 HTM",
+    "y": 9,
+    "w": 4,
+    "l": 0,
+    "c": 0
+   },
+   {
+    "d": "ua",
+    "cat": "聯廣",
+    "y": 4,
+    "w": 0,
+    "l": 4,
+    "c": 0
+   },
+   {
+    "d": "dvibemedia",
+    "cat": "迪維",
+    "y": 2,
+    "w": 0,
+    "l": 0,
+    "c": 0
+   },
+   {
+    "d": "unismart",
+    "cat": "聯眾",
+    "y": 2,
+    "w": 0,
+    "l": 0,
+    "c": 0
+   },
+   {
+    "d": "2008-media",
+    "cat": "2008傳媒",
+    "y": 1,
+    "w": 0,
+    "l": 0,
+    "c": 0
+   },
+   {
+    "d": "planetpr",
+    "cat": "先勢集團",
+    "y": 0,
+    "w": 0,
+    "l": 1,
+    "c": 0
+   },
+   {
+    "d": "unistyle",
+    "cat": "聯太",
+    "y": 1,
+    "w": 0,
+    "l": 0,
+    "c": 0
+   },
+   {
+    "d": "unisurf",
+    "cat": "聯樂",
+    "y": 1,
+    "w": 0,
+    "l": 0,
+    "c": 0
+   }
+  ]
+ },
+ {
+  "date": "2026-08-21",
+  "year": "2026",
+  "title": "《替身體乾一杯！ 滋養自己的香料野草茶》",
+  "has_checkin": false,
+  "rowkind": "domain",
+  "totals": {
+   "y": 4,
+   "w": 0,
+   "l": 16,
+   "c": 0
+  },
+  "domains": [
+   {
+    "d": "hakuhodo",
+    "cat": "台北博報堂 HTM",
+    "y": 0,
+    "w": 0,
+    "l": 12,
+    "c": 0
+   },
+   {
+    "d": "planetpr",
+    "cat": "先勢集團",
+    "y": 2,
+    "w": 0,
+    "l": 1,
+    "c": 0
+   },
+   {
+    "d": "ua",
+    "cat": "聯廣",
+    "y": 1,
+    "w": 0,
+    "l": 1,
+    "c": 0
+   },
+   {
+    "d": "unismart",
+    "cat": "聯眾",
+    "y": 1,
+    "w": 0,
+    "l": 1,
+    "c": 0
+   },
+   {
+    "d": "unistyle",
+    "cat": "聯太",
+    "y": 0,
+    "w": 0,
+    "l": 1,
+    "c": 0
+   }
+  ]
+ },
+ {
+  "date": "2026-07-31",
+  "year": "2026",
+  "title": "《聲波共振！開出你專屬的魔法結界》",
+  "has_checkin": true,
+  "rowkind": "domain",
+  "totals": {
+   "y": 16,
+   "w": 0,
+   "l": 7,
+   "c": 12
+  },
+  "domains": [
+   {
+    "d": "ua",
+    "cat": "聯廣",
+    "y": 10,
+    "w": 0,
+    "l": 4,
+    "c": 6
+   },
+   {
+    "d": "2008-media",
+    "cat": "2008傳媒",
+    "y": 3,
+    "w": 0,
+    "l": 0,
+    "c": 3
+   },
+   {
+    "d": "hakuhodo",
     "cat": "台北博報堂 HTM",
     "y": 2,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 2
    },
    {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 2,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "pilotpr.com.tw",
-    "cat": "先勢集團",
-    "y": 2,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "grandpr.com.tw",
+    "d": "pilotpr",
     "cat": "先勢集團",
     "y": 1,
     "w": 0,
-    "l": 0,
+    "l": 1,
+    "c": 1
+   },
+   {
+    "d": "grandpr",
+    "cat": "先勢集團",
+    "y": 0,
+    "w": 0,
+    "l": 1,
     "c": 0
    },
    {
-    "d": "prestigepr.com.tw",
+    "d": "prestigepr",
     "cat": "先勢集團",
-    "y": 1,
+    "y": 0,
     "w": 0,
-    "l": 0,
+    "l": 1,
     "c": 0
    }
   ]
@@ -82,83 +288,52 @@
   "year": "2026",
   "title": "《就是你了！來養顆苔球小精靈吧》",
   "has_checkin": true,
+  "rowkind": "domain",
   "totals": {
-   "y": 30,
-   "w": 15,
-   "l": 0,
-   "c": 0
+   "y": 12,
+   "w": 4,
+   "l": 3,
+   "c": 11
   },
   "domains": [
    {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 6,
-    "w": 4,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 7,
-    "w": 2,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 5,
+    "d": "ua",
+    "cat": "聯廣",
+    "y": 4,
     "w": 3,
-    "l": 0,
-    "c": 0
+    "l": 1,
+    "c": 4
    },
    {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 2,
-    "w": 3,
-    "l": 0,
-    "c": 0
+    "d": "unisurf",
+    "cat": "聯樂",
+    "y": 3,
+    "w": 0,
+    "l": 1,
+    "c": 3
    },
    {
-    "d": "hakuhodotm.com.tw",
+    "d": "hakuhodo",
     "cat": "台北博報堂 HTM",
     "y": 3,
     "w": 1,
     "l": 0,
-    "c": 0
+    "c": 2
    },
    {
-    "d": "unisurf.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 4,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
-    "y": 0,
-    "w": 2,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "unismart",
+    "cat": "聯眾",
     "y": 2,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 2
    },
    {
-    "d": "pilotpr.com.tw",
+    "d": "pilotpr",
     "cat": "先勢集團",
-    "y": 1,
+    "y": 0,
     "w": 0,
-    "l": 0,
+    "l": 1,
     "c": 0
    }
   ]
@@ -168,88 +343,33 @@
   "year": "2026",
   "title": "《就是你了！來養顆苔球小精靈吧》 加場！",
   "has_checkin": true,
+  "rowkind": "domain",
   "totals": {
-   "y": 24,
+   "y": 6,
    "w": 0,
-   "l": 2,
-   "c": 0
+   "l": 1,
+   "c": 6
   },
   "domains": [
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 6,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 6,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "ua",
+    "cat": "聯廣",
     "y": 4,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 4
    },
    {
-    "d": "hakuhodotm.com.tw",
+    "d": "hakuhodo",
     "cat": "台北博報堂 HTM",
     "y": 2,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 2
    },
    {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
-    "y": 2,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 2,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "ace-taipei.com",
+    "d": "ace-taipei",
     "cat": "艾斯",
-    "y": 0,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "medialnad.tw",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "mediand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "mxdogi.com",
-    "cat": "米蘭 MDCG",
     "y": 0,
     "w": 0,
     "l": 1,
@@ -262,15 +382,16 @@
   "year": "2026",
   "title": "《就是你了！來養顆苔球小精靈吧》",
   "has_checkin": true,
+  "rowkind": "domain",
   "totals": {
-   "y": 29,
-   "w": 24,
-   "l": 2,
-   "c": 29
+   "y": 20,
+   "w": 13,
+   "l": 0,
+   "c": 20
   },
   "domains": [
    {
-    "d": "hakuhodotm.com.tw",
+    "d": "hakuhodo",
     "cat": "台北博報堂 HTM",
     "y": 7,
     "w": 3,
@@ -278,47 +399,23 @@
     "c": 7
    },
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 4,
-    "w": 3,
-    "l": 2,
-    "c": 4
-   },
-   {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "ua",
+    "cat": "聯廣",
     "y": 5,
     "w": 2,
     "l": 0,
     "c": 5
    },
    {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 4,
-    "w": 3,
-    "l": 0,
-    "c": 4
-   },
-   {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
+    "d": "unisurf",
+    "cat": "聯樂",
     "y": 0,
     "w": 5,
     "l": 0,
     "c": 0
    },
    {
-    "d": "unisurf.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 0,
-    "w": 5,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "pilotpr.com.tw",
+    "d": "pilotpr",
     "cat": "先勢集團",
     "y": 3,
     "w": 1,
@@ -326,15 +423,7 @@
     "c": 2
    },
    {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 1,
-    "l": 0,
-    "c": 2
-   },
-   {
-    "d": "ace-taipei.com",
+    "d": "ace-taipei",
     "cat": "艾斯",
     "y": 1,
     "w": 1,
@@ -342,7 +431,15 @@
     "c": 1
    },
    {
-    "d": "dvibemedia.com",
+    "d": "charismomo",
+    "cat": "先勢集團",
+    "y": 0,
+    "w": 1,
+    "l": 0,
+    "c": 1
+   },
+   {
+    "d": "dvibemedia",
     "cat": "迪維",
     "y": 1,
     "w": 0,
@@ -350,7 +447,7 @@
     "c": 1
    },
    {
-    "d": "grandpr.com.tw",
+    "d": "grandpr",
     "cat": "先勢集團",
     "y": 1,
     "w": 0,
@@ -358,7 +455,7 @@
     "c": 1
    },
    {
-    "d": "planetpr.com.tw",
+    "d": "planetpr",
     "cat": "先勢集團",
     "y": 1,
     "w": 0,
@@ -366,8 +463,8 @@
     "c": 1
    },
    {
-    "d": "unistyle.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "unistyle",
+    "cat": "聯太",
     "y": 1,
     "w": 0,
     "l": 0,
@@ -380,39 +477,16 @@
   "year": "2026",
   "title": "啟動身體原廠設定！｜翻開吳清忠的自癒寶典",
   "has_checkin": true,
+  "rowkind": "domain",
   "totals": {
-   "y": 11,
+   "y": 2,
    "w": 0,
-   "l": 1,
-   "c": 11
+   "l": 0,
+   "c": 2
   },
   "domains": [
    {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 3,
-    "w": 0,
-    "l": 1,
-    "c": 3
-   },
-   {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 3,
-    "w": 0,
-    "l": 0,
-    "c": 3
-   },
-   {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 3,
-    "w": 0,
-    "l": 0,
-    "c": 3
-   },
-   {
-    "d": "ace-taipei.com",
+    "d": "ace-taipei",
     "cat": "艾斯",
     "y": 1,
     "w": 0,
@@ -420,7 +494,7 @@
     "c": 1
    },
    {
-    "d": "hakuhodotm.com.tw",
+    "d": "hakuhodo",
     "cat": "台北博報堂 HTM",
     "y": 1,
     "w": 0,
@@ -434,31 +508,24 @@
   "year": "2026",
   "title": "漫步在樹梢｜一場離地向上的自由練習",
   "has_checkin": true,
+  "rowkind": "domain",
   "totals": {
-   "y": 16,
-   "w": 15,
-   "l": 10,
-   "c": 16
+   "y": 13,
+   "w": 7,
+   "l": 8,
+   "c": 13
   },
   "domains": [
    {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "ua",
+    "cat": "聯廣",
     "y": 4,
-    "w": 3,
+    "w": 4,
     "l": 3,
     "c": 4
    },
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 2,
-    "w": 4,
-    "l": 1,
-    "c": 2
-   },
-   {
-    "d": "hakuhodotm.com.tw",
+    "d": "hakuhodo",
     "cat": "台北博報堂 HTM",
     "y": 3,
     "w": 1,
@@ -466,7 +533,7 @@
     "c": 3
    },
    {
-    "d": "grandpr.com.tw",
+    "d": "grandpr",
     "cat": "先勢集團",
     "y": 2,
     "w": 1,
@@ -474,31 +541,15 @@
     "c": 2
    },
    {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "unismart",
+    "cat": "聯眾",
     "y": 2,
     "w": 0,
     "l": 2,
     "c": 2
    },
    {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 2,
-    "l": 0,
-    "c": 1
-   },
-   {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
-    "y": 0,
-    "w": 2,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "ace-taipei.com",
+    "d": "ace-taipei",
     "cat": "艾斯",
     "y": 1,
     "w": 0,
@@ -506,7 +557,7 @@
     "c": 1
    },
    {
-    "d": "dvibemedia.com",
+    "d": "dvibemedia",
     "cat": "迪維",
     "y": 1,
     "w": 0,
@@ -514,15 +565,7 @@
     "c": 1
    },
    {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 0,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "pilotpr.com.tw",
+    "d": "pilotpr",
     "cat": "先勢集團",
     "y": 0,
     "w": 0,
@@ -530,7 +573,7 @@
     "c": 0
    },
    {
-    "d": "planetpr.com.tw",
+    "d": "planetpr",
     "cat": "先勢集團",
     "y": 0,
     "w": 0,
@@ -538,16 +581,8 @@
     "c": 0
    },
    {
-    "d": "ua.com",
-    "cat": "聯廣 UCG",
-    "y": 0,
-    "w": 1,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "unisurf.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "unisurf",
+    "cat": "聯樂",
     "y": 0,
     "w": 1,
     "l": 0,
@@ -560,23 +595,24 @@
   "year": "2026",
   "title": "［加場 ! ］春野・開運・馬上好",
   "has_checkin": true,
+  "rowkind": "domain",
   "totals": {
    "y": 40,
    "w": 2,
-   "l": 8,
+   "l": 7,
    "c": 40
   },
   "domains": [
    {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "ua",
+    "cat": "聯廣",
     "y": 11,
     "w": 0,
     "l": 1,
     "c": 11
    },
    {
-    "d": "hakuhodotm.com.tw",
+    "d": "hakuhodo",
     "cat": "台北博報堂 HTM",
     "y": 7,
     "w": 0,
@@ -584,7 +620,7 @@
     "c": 7
    },
    {
-    "d": "grandpr.com.tw",
+    "d": "grandpr",
     "cat": "先勢集團",
     "y": 5,
     "w": 2,
@@ -592,7 +628,7 @@
     "c": 5
    },
    {
-    "d": "pilotpr.com.tw",
+    "d": "pilotpr",
     "cat": "先勢集團",
     "y": 4,
     "w": 0,
@@ -600,7 +636,7 @@
     "c": 4
    },
    {
-    "d": "prestigepr.com.tw",
+    "d": "prestigepr",
     "cat": "先勢集團",
     "y": 3,
     "w": 0,
@@ -608,15 +644,15 @@
     "c": 3
    },
    {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "unismart",
+    "cat": "聯眾",
     "y": 3,
     "w": 0,
     "l": 1,
     "c": 3
    },
    {
-    "d": "planetpr.com.tw",
+    "d": "planetpr",
     "cat": "先勢集團",
     "y": 3,
     "w": 0,
@@ -624,23 +660,23 @@
     "c": 3
    },
    {
-    "d": "unisincere.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "unisurf",
+    "cat": "聯樂",
+    "y": 0,
+    "w": 0,
+    "l": 3,
+    "c": 0
+   },
+   {
+    "d": "unisincere",
+    "cat": "聯勤",
     "y": 2,
     "w": 0,
     "l": 0,
     "c": 2
    },
    {
-    "d": "unisurf.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 0,
-    "w": 0,
-    "l": 2,
-    "c": 0
-   },
-   {
-    "d": "dvibemedia.com",
+    "d": "dvibemedia",
     "cat": "迪維",
     "y": 1,
     "w": 0,
@@ -648,28 +684,12 @@
     "c": 1
    },
    {
-    "d": "unistyle.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "unistyle",
+    "cat": "聯太",
     "y": 1,
     "w": 0,
     "l": 0,
     "c": 1
-   },
-   {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 0,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "unisurf.com",
-    "cat": "聯廣 UCG",
-    "y": 0,
-    "w": 0,
-    "l": 1,
-    "c": 0
    }
   ]
  },
@@ -678,71 +698,40 @@
   "year": "2026",
   "title": "春野・開運・馬上好",
   "has_checkin": true,
+  "rowkind": "domain",
   "totals": {
-   "y": 45,
-   "w": 49,
-   "l": 4,
-   "c": 45
+   "y": 9,
+   "w": 48,
+   "l": 2,
+   "c": 9
   },
   "domains": [
    {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "ua",
+    "cat": "聯廣",
     "y": 2,
     "w": 14,
     "l": 2,
     "c": 2
    },
    {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 12,
-    "w": 0,
-    "l": 0,
-    "c": 12
-   },
-   {
-    "d": "hakuhodotm.com.tw",
+    "d": "hakuhodo",
     "cat": "台北博報堂 HTM",
-    "y": 2,
+    "y": 3,
     "w": 9,
     "l": 0,
-    "c": 2
+    "c": 3
    },
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 9,
-    "w": 1,
-    "l": 0,
-    "c": 9
-   },
-   {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 9,
-    "w": 0,
-    "l": 1,
-    "c": 9
-   },
-   {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "unismart",
+    "cat": "聯眾",
     "y": 0,
     "w": 6,
     "l": 0,
     "c": 0
    },
    {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
-    "y": 4,
-    "w": 0,
-    "l": 0,
-    "c": 4
-   },
-   {
-    "d": "grandpr.com.tw",
+    "d": "grandpr",
     "cat": "先勢集團",
     "y": 0,
     "w": 4,
@@ -750,7 +739,7 @@
     "c": 0
    },
    {
-    "d": "prestigepr.com.tw",
+    "d": "prestigepr",
     "cat": "先勢集團",
     "y": 0,
     "w": 4,
@@ -758,15 +747,23 @@
     "c": 0
    },
    {
-    "d": "unisurf.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "ace-taipei",
+    "cat": "艾斯",
+    "y": 2,
+    "w": 1,
+    "l": 0,
+    "c": 2
+   },
+   {
+    "d": "unisurf",
+    "cat": "聯樂",
     "y": 1,
     "w": 2,
     "l": 0,
     "c": 1
    },
    {
-    "d": "pilotpr.com.tw",
+    "d": "pilotpr",
     "cat": "先勢集團",
     "y": 0,
     "w": 3,
@@ -774,47 +771,23 @@
     "c": 0
    },
    {
-    "d": "ace-taipei.com",
-    "cat": "艾斯",
-    "y": 2,
-    "w": 0,
-    "l": 0,
-    "c": 2
-   },
-   {
-    "d": "mdcg.tw",
-    "cat": "米蘭 MDCG",
-    "y": 2,
-    "w": 0,
-    "l": 0,
-    "c": 2
-   },
-   {
-    "d": "unisincere.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "unisincere",
+    "cat": "聯勤",
     "y": 1,
     "w": 1,
     "l": 0,
     "c": 1
    },
    {
-    "d": "hakuhodoti.com.tw",
-    "cat": "台北博報堂 HTM",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 1
-   },
-   {
-    "d": "ace.taipei.com",
-    "cat": "艾斯",
+    "d": "planetpr",
+    "cat": "先勢集團",
     "y": 0,
-    "w": 1,
+    "w": 2,
     "l": 0,
     "c": 0
    },
    {
-    "d": "dvibemedia.com",
+    "d": "dvibemedia",
     "cat": "迪維",
     "y": 0,
     "w": 1,
@@ -822,32 +795,8 @@
     "c": 0
    },
    {
-    "d": "interplan.com.tw",
-    "cat": "安益",
-    "y": 0,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "planetpe.com.tw",
-    "cat": "先勢集團",
-    "y": 0,
-    "w": 1,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "planetpr.com.tw",
-    "cat": "先勢集團",
-    "y": 0,
-    "w": 1,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "unistyle.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "unistyle",
+    "cat": "聯太",
     "y": 0,
     "w": 1,
     "l": 0,
@@ -859,77 +808,38 @@
   "date": "2026-01-16",
   "year": "2026",
   "title": "動態靜心｜用激靜鼓敲開心流",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 20,
+   "y": 7,
    "w": 0,
-   "l": 9,
-   "c": 0
+   "l": 5,
+   "c": 7
   },
   "domains": [
    {
-    "d": "interplan.com.tw",
-    "cat": "安益",
-    "y": 5,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 2,
-    "w": 0,
-    "l": 3,
-    "c": 0
-   },
-   {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯眾",
+    "cat": "聯眾",
     "y": 1,
     "w": 0,
     "l": 4,
-    "c": 0
+    "c": 1
    },
    {
-    "d": "hakuhodotm.com.tw",
+    "d": "台北博報堂 HTM",
     "cat": "台北博報堂 HTM",
     "y": 3,
     "w": 0,
     "l": 1,
-    "c": 0
+    "c": 5
    },
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 3,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯廣",
+    "cat": "聯廣",
     "y": 3,
     "w": 0,
     "l": 0,
-    "c": 0
-   },
-   {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
-    "y": 2,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
+    "c": 1
    }
   ]
  },
@@ -937,85 +847,54 @@
   "date": "2025-12-26",
   "year": "2025",
   "title": "呼吸清理・找回身體的原廠設定",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 30,
+   "y": 16,
    "w": 0,
-   "l": 4,
-   "c": 0
+   "l": 3,
+   "c": 16
   },
   "domains": [
    {
-    "d": "hakuhodotm.com.tw",
+    "d": "台北博報堂 HTM",
     "cat": "台北博報堂 HTM",
     "y": 5,
     "w": 0,
     "l": 2,
-    "c": 0
+    "c": 5
    },
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 6,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
+    "d": "聯廣",
+    "cat": "聯廣",
     "y": 4,
     "w": 0,
     "l": 1,
-    "c": 0
+    "c": 4
    },
    {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 4,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
+    "d": "聯眾",
+    "cat": "聯眾",
     "y": 3,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 3
    },
    {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 3,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "2008-media.com",
+    "d": "2008傳媒",
     "cat": "2008傳媒",
     "y": 2,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 2
    },
    {
-    "d": "unisincere.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯勤",
+    "cat": "聯勤",
     "y": 2,
     "w": 0,
     "l": 0,
-    "c": 0
-   },
-   {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
+    "c": 2
    }
   ]
  },
@@ -1023,50 +902,27 @@
   "date": "2025-12-19",
   "year": "2025",
   "title": "練息場HR特邀場｜森之聖誕・微醺療癒",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 17,
+   "y": 12,
    "w": 0,
-   "l": 1,
-   "c": 0
+   "l": 0,
+   "c": 12
   },
   "domains": [
    {
-    "d": "hakuhodotm.com.tw",
+    "d": "台北博報堂 HTM",
     "cat": "台北博報堂 HTM",
-    "y": 9,
+    "y": 10,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 12
    },
    {
-    "d": "interplan.com.tw",
-    "cat": "安益",
-    "y": 3,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 2,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "pilotpr.com.tw",
+    "d": "先勢集團",
     "cat": "先勢集團",
     "y": 2,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "hakuhodoti.com.tw",
-    "cat": "台北博報堂 HTM",
-    "y": 1,
     "w": 0,
     "l": 0,
     "c": 0
@@ -1077,57 +933,34 @@
   "date": "2025-11-21",
   "year": "2025",
   "title": "上午10:00 ｜ RESET！讓內耗退場的動力發光術",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 10,
+   "y": 2,
    "w": 0,
-   "l": 3,
-   "c": 0
+   "l": 2,
+   "c": 2
   },
   "domains": [
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 5,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 2,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯眾",
+    "cat": "聯眾",
     "y": 1,
     "w": 0,
     "l": 1,
-    "c": 0
+    "c": 1
    },
    {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "pilotpr.com.tw",
+    "d": "先勢集團",
     "cat": "先勢集團",
     "y": 1,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 1
    },
    {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯廣",
+    "cat": "聯廣",
     "y": 0,
     "w": 0,
     "l": 1,
@@ -1139,48 +972,41 @@
   "date": "2025-11-21",
   "year": "2025",
   "title": "下午14:30 ｜ RESET！讓內耗退場的動力發光術",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 16,
+   "y": 9,
    "w": 0,
-   "l": 7,
-   "c": 0
+   "l": 6,
+   "c": 7
   },
   "domains": [
    {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯廣",
+    "cat": "聯廣",
     "y": 3,
     "w": 0,
     "l": 3,
-    "c": 0
+    "c": 2
    },
    {
-    "d": "hakuhodotm.com.tw",
+    "d": "台北博報堂 HTM",
     "cat": "台北博報堂 HTM",
     "y": 4,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 4
    },
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 4,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 2,
+    "d": "聯眾",
+    "cat": "聯眾",
+    "y": 1,
     "w": 0,
     "l": 1,
-    "c": 0
+    "c": 1
    },
    {
-    "d": "prestigepr.com.tw",
+    "d": "先勢集團",
     "cat": "先勢集團",
     "y": 0,
     "w": 0,
@@ -1188,24 +1014,8 @@
     "c": 0
    },
    {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 1,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "unisurf.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯樂",
+    "cat": "聯樂",
     "y": 1,
     "w": 0,
     "l": 0,
@@ -1217,101 +1027,54 @@
   "date": "2025-11-07",
   "year": "2025",
   "title": "聲音╳書寫・療癒實驗室",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 35,
+   "y": 15,
    "w": 0,
-   "l": 6,
-   "c": 0
+   "l": 4,
+   "c": 15
   },
   "domains": [
    {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯廣",
+    "cat": "聯廣",
     "y": 7,
     "w": 0,
     "l": 3,
-    "c": 0
+    "c": 3
    },
    {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 7,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 6,
+    "d": "先勢集團",
+    "cat": "先勢集團",
+    "y": 4,
     "w": 0,
     "l": 1,
-    "c": 0
+    "c": 4
    },
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 5,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "hakuhodotm.com.tw",
+    "d": "台北博報堂 HTM",
     "cat": "台北博報堂 HTM",
     "y": 2,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 5
    },
    {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
-    "y": 2,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "pilotpr.com.tw",
-    "cat": "先勢集團",
-    "y": 1,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "prestigepr.com.tw",
-    "cat": "先勢集團",
-    "y": 2,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "divibemedia.com",
+    "d": "迪維",
     "cat": "迪維",
     "y": 1,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 2
    },
    {
-    "d": "planetpr.com.tw",
-    "cat": "先勢集團",
+    "d": "聯眾",
+    "cat": "聯眾",
     "y": 1,
     "w": 0,
     "l": 0,
-    "c": 0
-   },
-   {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
+    "c": 1
    }
   ]
  },
@@ -1319,93 +1082,46 @@
   "date": "2025-10-09",
   "year": "2025",
   "title": "森之旅｜大自然的離線之旅｜秋之象 森林療癒",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 18,
+   "y": 12,
    "w": 7,
-   "l": 3,
-   "c": 0
+   "l": 2,
+   "c": 11
   },
   "domains": [
    {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯廣",
+    "cat": "聯廣",
     "y": 4,
     "w": 1,
     "l": 2,
-    "c": 0
+    "c": 3
    },
    {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯眾",
+    "cat": "聯眾",
     "y": 4,
     "w": 1,
+    "l": 0,
+    "c": 4
+   },
+   {
+    "d": "先勢集團",
+    "cat": "先勢集團",
+    "y": 1,
+    "w": 4,
     "l": 0,
     "c": 0
    },
    {
-    "d": "hakuhodotm.com.tw",
+    "d": "台北博報堂 HTM",
     "cat": "台北博報堂 HTM",
     "y": 3,
     "w": 1,
     "l": 0,
-    "c": 0
-   },
-   {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 4,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
-    "y": 1,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "pilotpr.com.tw",
-    "cat": "先勢集團",
-    "y": 0,
-    "w": 2,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "grandpr.com.tw",
-    "cat": "先勢集團",
-    "y": 0,
-    "w": 1,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "planetpr.com.tw",
-    "cat": "先勢集團",
-    "y": 0,
-    "w": 1,
-    "l": 0,
-    "c": 0
+    "c": 4
    }
   ]
  },
@@ -1413,69 +1129,30 @@
   "date": "2025-10-03",
   "year": "2025",
   "title": "水之旅｜大自然的離線之旅｜秋之象 森林療癒",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 16,
+   "y": 5,
    "w": 1,
    "l": 1,
-   "c": 0
+   "c": 5
   },
   "domains": [
    {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
-    "y": 5,
+    "d": "先勢集團",
+    "cat": "先勢集團",
+    "y": 3,
     "w": 0,
-    "l": 0,
-    "c": 0
+    "l": 1,
+    "c": 3
    },
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 4,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯廣",
+    "cat": "聯廣",
     "y": 2,
     "w": 1,
     "l": 0,
-    "c": 0
-   },
-   {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 2,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "pilotpr.com.tw",
-    "cat": "先勢集團",
-    "y": 1,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "grandpr.com.tw",
-    "cat": "先勢集團",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "planetpr.com.tw",
-    "cat": "先勢集團",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
+    "c": 2
    }
   ]
  },
@@ -1483,48 +1160,49 @@
   "date": "2025-09-05",
   "year": "2025",
   "title": "風土味蕾小宇宙｜夏之象——餐桌上的土地漫遊",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 25,
+   "y": 11,
    "w": 0,
-   "l": 6,
-   "c": 0
+   "l": 4,
+   "c": 11
   },
   "domains": [
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 6,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 4,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
+    "d": "先勢集團",
+    "cat": "先勢集團",
     "y": 2,
     "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "planetpr.com.tw",
-    "cat": "先勢集團",
-    "y": 1,
-    "w": 0,
     "l": 2,
-    "c": 0
+    "c": 2
    },
    {
-    "d": "2008-media.com",
+    "d": "台北博報堂 HTM",
+    "cat": "台北博報堂 HTM",
+    "y": 2,
+    "w": 0,
+    "l": 0,
+    "c": 2
+   },
+   {
+    "d": "聯勤",
+    "cat": "聯勤",
+    "y": 2,
+    "w": 0,
+    "l": 0,
+    "c": 2
+   },
+   {
+    "d": "聯廣",
+    "cat": "聯廣",
+    "y": 2,
+    "w": 0,
+    "l": 0,
+    "c": 2
+   },
+   {
+    "d": "2008傳媒",
     "cat": "2008傳媒",
     "y": 0,
     "w": 0,
@@ -1532,84 +1210,28 @@
     "c": 0
    },
    {
-    "d": "hakuhodotm.com.tw",
-    "cat": "台北博報堂 HTM",
-    "y": 2,
+    "d": "聯樂",
+    "cat": "聯樂",
+    "y": 1,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 1
    },
    {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 2,
+    "d": "聯眾",
+    "cat": "聯眾",
+    "y": 1,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 1
    },
    {
-    "d": "ace-taipei.com",
+    "d": "艾斯",
     "cat": "艾斯",
     "y": 1,
     "w": 0,
     "l": 0,
-    "c": 0
-   },
-   {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "medialand.com",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "pilotpr.com.tw",
-    "cat": "先勢集團",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "unisincere.com",
-    "cat": "聯廣 UCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "unisincere.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "unisurf.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
+    "c": 1
    }
   ]
  },
@@ -1617,85 +1239,46 @@
   "date": "2025-08-29",
   "year": "2025",
   "title": "風土味蕾小宇宙 ｜夏之象——餐桌上的土地漫遊",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 23,
+   "y": 11,
    "w": 1,
-   "l": 3,
-   "c": 0
+   "l": 0,
+   "c": 10
   },
   "domains": [
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 5,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 4,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "grandpr.com.tw",
+    "d": "先勢集團",
     "cat": "先勢集團",
-    "y": 3,
+    "y": 4,
     "w": 1,
     "l": 0,
-    "c": 0
+    "c": 4
    },
    {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯眾",
+    "cat": "聯眾",
     "y": 3,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 3
    },
    {
-    "d": "hakuhodotm.com.tw",
+    "d": "台北博報堂 HTM",
     "cat": "台北博報堂 HTM",
     "y": 2,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 2
    },
    {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
+    "d": "聯廣",
+    "cat": "聯廣",
     "y": 2,
     "w": 0,
     "l": 0,
-    "c": 0
-   },
-   {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 2,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "pilotpr.com.tw",
-    "cat": "先勢集團",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
+    "c": 1
    }
   ]
  },
@@ -1703,116 +1286,61 @@
   "date": "2025-07-25",
   "year": "2025",
   "title": "喚覺躺躺｜夏日聲波花園",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 29,
+   "y": 13,
    "w": 0,
-   "l": 13,
-   "c": 0
+   "l": 11,
+   "c": 10
   },
   "domains": [
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 7,
+    "d": "先勢集團",
+    "cat": "先勢集團",
+    "y": 2,
     "w": 0,
-    "l": 1,
+    "l": 5,
     "c": 0
    },
    {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯廣",
+    "cat": "聯廣",
     "y": 2,
     "w": 0,
     "l": 4,
     "c": 0
    },
    {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 5,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "pilotpr.com.tw",
-    "cat": "先勢集團",
-    "y": 1,
-    "w": 0,
-    "l": 4,
-    "c": 0
-   },
-   {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯眾",
+    "cat": "聯眾",
     "y": 4,
     "w": 0,
     "l": 1,
-    "c": 0
+    "c": 3
    },
    {
-    "d": "hakuhodotm.com.tw",
+    "d": "台北博報堂 HTM",
     "cat": "台北博報堂 HTM",
-    "y": 3,
+    "y": 4,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 5
    },
    {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
-    "y": 3,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "2008-media.com",
-    "cat": "2008傳媒",
-    "y": 0,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "dvibemedia.com",
+    "d": "迪維",
     "cat": "迪維",
     "y": 1,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 2
    },
    {
-    "d": "grandpr.com.tw",
-    "cat": "先勢集團",
+    "d": "2008傳媒",
+    "cat": "2008傳媒",
     "y": 0,
     "w": 0,
     "l": 1,
-    "c": 0
-   },
-   {
-    "d": "hakuhodoti.com.tw",
-    "cat": "台北博報堂 HTM",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "planetpr.com.tw",
-    "cat": "先勢集團",
-    "y": 1,
-    "w": 0,
-    "l": 0,
     "c": 0
    }
   ]
@@ -1821,93 +1349,62 @@
   "date": "2025-07-18",
   "year": "2025",
   "title": "進階情緒關係課｜陳德中的正念生活道場",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 21,
+   "y": 10,
    "w": 0,
-   "l": 4,
-   "c": 0
+   "l": 2,
+   "c": 10
   },
   "domains": [
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 7,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 3,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "hakuhodotm.com.tw",
+    "d": "台北博報堂 HTM",
     "cat": "台北博報堂 HTM",
     "y": 3,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 3
    },
    {
-    "d": "2008-media.com",
+    "d": "2008傳媒",
     "cat": "2008傳媒",
     "y": 2,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 2
    },
    {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
-    "y": 1,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯廣",
+    "cat": "聯廣",
     "y": 2,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 2
    },
    {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯眾",
+    "cat": "聯眾",
     "y": 2,
     "w": 0,
     "l": 0,
+    "c": 2
+   },
+   {
+    "d": "先勢集團",
+    "cat": "先勢集團",
+    "y": 0,
+    "w": 0,
+    "l": 2,
     "c": 0
    },
    {
-    "d": "dvibemedia.com",
+    "d": "迪維",
     "cat": "迪維",
     "y": 1,
     "w": 0,
     "l": 0,
-    "c": 0
-   },
-   {
-    "d": "grandpr.com.tw",
-    "cat": "先勢集團",
-    "y": 0,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "pilotpr.com.tw",
-    "cat": "先勢集團",
-    "y": 0,
-    "w": 0,
-    "l": 1,
-    "c": 0
+    "c": 1
    }
   ]
  },
@@ -1915,123 +1412,54 @@
   "date": "2025-06-27",
   "year": "2025",
   "title": "初階身心必修課｜陳德中的正念生活道場",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 23,
+   "y": 13,
    "w": 1,
-   "l": 3,
-   "c": 0
+   "l": 1,
+   "c": 13
   },
   "domains": [
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 7,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "hakuhodotm.com.tw",
+    "d": "台北博報堂 HTM",
     "cat": "台北博報堂 HTM",
     "y": 4,
     "w": 1,
     "l": 0,
-    "c": 0
+    "c": 5
    },
    {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯廣",
+    "cat": "聯廣",
     "y": 3,
     "w": 0,
     "l": 1,
-    "c": 0
+    "c": 3
    },
    {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
+    "d": "聯眾",
+    "cat": "聯眾",
     "y": 3,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 3
    },
    {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 3,
+    "d": "先勢集團",
+    "cat": "先勢集團",
+    "y": 2,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 1
    },
    {
-    "d": "dvibemedia.com",
+    "d": "迪維",
     "cat": "迪維",
     "y": 1,
     "w": 0,
     "l": 0,
-    "c": 0
-   },
-   {
-    "d": "grandpr.com.tw",
-    "cat": "先勢集團",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 0,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "pilotpr.com.tw",
-    "cat": "先勢集團",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   }
-  ]
- },
- {
-  "date": "2025-06-13",
-  "year": "2025",
-  "title": "場次一 13:30 土地精靈音樂會｜夏之象",
-  "has_checkin": false,
-  "totals": {
-   "y": 3,
-   "w": 0,
-   "l": 2,
-   "c": 0
-  },
-  "domains": [
-   {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 2,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 0,
-    "w": 0,
-    "l": 2,
-    "c": 0
-   },
-   {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
+    "c": 1
    }
   ]
  },
@@ -2039,69 +1467,30 @@
   "date": "2025-06-13",
   "year": "2025",
   "title": "場次二 15:30 土地精靈音樂會｜夏之象",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 18,
+   "y": 4,
    "w": 0,
-   "l": 6,
-   "c": 0
+   "l": 0,
+   "c": 4
   },
   "domains": [
    {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 7,
-    "w": 0,
-    "l": 3,
-    "c": 0
-   },
-   {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 5,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "pilotpr.com.tw",
+    "d": "先勢集團",
     "cat": "先勢集團",
     "y": 3,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 2
    },
    {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
-    "y": 1,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 0,
-    "w": 0,
-    "l": 2,
-    "c": 0
-   },
-   {
-    "d": "hakuhodotm.com.tw",
+    "d": "台北博報堂 HTM",
     "cat": "台北博報堂 HTM",
     "y": 1,
     "w": 0,
     "l": 0,
-    "c": 0
-   },
-   {
-    "d": "mdcg.tw",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
+    "c": 2
    }
   ]
  },
@@ -2109,76 +1498,45 @@
   "date": "2025-05-02",
   "year": "2025",
   "title": "<加場> 春蛻 暗光 字茶席｜貓空",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 16,
+   "y": 1,
    "w": 0,
-   "l": 8,
-   "c": 0
+   "l": 6,
+   "c": 1
   },
   "domains": [
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 9,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
-    "y": 4,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 2,
-    "w": 0,
-    "l": 2,
-    "c": 0
-   },
-   {
-    "d": "planetpr.com.tw",
+    "d": "先勢集團",
     "cat": "先勢集團",
     "y": 0,
     "w": 0,
-    "l": 3,
+    "l": 4,
     "c": 0
    },
    {
-    "d": "pilotpr.com.tw",
-    "cat": "先勢集團",
-    "y": 0,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 0,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "unisincere.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 0,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯眾",
+    "cat": "聯眾",
     "y": 1,
     "w": 0,
     "l": 0,
+    "c": 1
+   },
+   {
+    "d": "聯勤",
+    "cat": "聯勤",
+    "y": 0,
+    "w": 0,
+    "l": 1,
+    "c": 0
+   },
+   {
+    "d": "聯廣",
+    "cat": "聯廣",
+    "y": 0,
+    "w": 0,
+    "l": 1,
     "c": 0
    }
   ]
@@ -2187,72 +1545,49 @@
   "date": "2025-04-25",
   "year": "2025",
   "title": "銅鑼躺躺｜潛入聲波之海",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 34,
+   "y": 12,
    "w": 0,
-   "l": 6,
-   "c": 0
+   "l": 4,
+   "c": 11
   },
   "domains": [
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 13,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 7,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "2008-media.com",
+    "d": "2008傳媒",
     "cat": "2008傳媒",
     "y": 6,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 6
    },
    {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯廣",
+    "cat": "聯廣",
     "y": 2,
     "w": 0,
     "l": 3,
-    "c": 0
+    "c": 1
    },
    {
-    "d": "hakuhodotm.com.tw",
+    "d": "台北博報堂 HTM",
     "cat": "台北博報堂 HTM",
     "y": 2,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 2
    },
    {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
-    "y": 2,
+    "d": "聯眾",
+    "cat": "聯眾",
+    "y": 1,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 1
    },
    {
-    "d": "meshplus.con.tw",
-    "cat": "米蘭 MDCG",
-    "y": 0,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "planetpr.com.tw",
+    "d": "先勢集團",
     "cat": "先勢集團",
     "y": 1,
     "w": 0,
@@ -2260,20 +1595,20 @@
     "c": 0
    },
    {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "unisurf.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯樂",
+    "cat": "聯樂",
     "y": 0,
     "w": 0,
     "l": 1,
     "c": 0
+   },
+   {
+    "d": "迪維",
+    "cat": "迪維",
+    "y": 0,
+    "w": 0,
+    "l": 0,
+    "c": 1
    }
   ]
  },
@@ -2281,107 +1616,60 @@
   "date": "2025-04-11",
   "year": "2025",
   "title": "春蛻 暗光 字茶席｜貓空",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 17,
-   "w": 22,
-   "l": 5,
-   "c": 0
+   "y": 7,
+   "w": 17,
+   "l": 0,
+   "c": 7
   },
   "domains": [
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 2,
-    "w": 2,
-    "l": 3,
+    "d": "先勢集團",
+    "cat": "先勢集團",
+    "y": 0,
+    "w": 7,
+    "l": 0,
     "c": 0
    },
    {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯廣",
+    "cat": "聯廣",
     "y": 5,
     "w": 2,
     "l": 0,
     "c": 0
    },
    {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 4,
-    "w": 0,
-    "l": 2,
-    "c": 0
-   },
-   {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
-    "y": 2,
-    "w": 3,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "planetpr.com.tw",
-    "cat": "先勢集團",
-    "y": 0,
-    "w": 5,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "hakuhodotm.com.tw",
+    "d": "台北博報堂 HTM",
     "cat": "台北博報堂 HTM",
     "y": 2,
     "w": 2,
     "l": 0,
-    "c": 0
+    "c": 7
    },
    {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯眾",
+    "cat": "聯眾",
     "y": 0,
     "w": 3,
     "l": 0,
     "c": 0
    },
    {
-    "d": "pilotpr.com.tw",
-    "cat": "先勢集團",
+    "d": "聯勤",
+    "cat": "聯勤",
     "y": 0,
     "w": 2,
     "l": 0,
     "c": 0
    },
    {
-    "d": "unisincere.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 0,
-    "w": 2,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "ace-taipei.com",
+    "d": "艾斯",
     "cat": "艾斯",
     "y": 0,
     "w": 1,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "mdcg.tw",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 0,
     "l": 0,
     "c": 0
    }
@@ -2391,72 +1679,65 @@
   "date": "2025-03-28",
   "year": "2025",
   "title": "春蛻 暗光 字茶席｜坪林",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 15,
-   "w": 21,
-   "l": 2,
-   "c": 0
+   "y": 7,
+   "w": 17,
+   "l": 1,
+   "c": 7
   },
   "domains": [
    {
-    "d": "pilotpr.com.tw",
+    "d": "先勢集團",
     "cat": "先勢集團",
     "y": 2,
-    "w": 5,
+    "w": 7,
     "l": 0,
-    "c": 0
+    "c": 2
    },
    {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯眾",
+    "cat": "聯眾",
     "y": 1,
     "w": 6,
     "l": 0,
-    "c": 0
+    "c": 1
    },
    {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 5,
-    "w": 1,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 2,
-    "w": 1,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "unisincere.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯勤",
+    "cat": "聯勤",
     "y": 0,
     "w": 3,
     "l": 0,
     "c": 0
    },
    {
-    "d": "grandpr.com.tw",
-    "cat": "先勢集團",
-    "y": 0,
-    "w": 2,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "hakuhodotm.com.tw",
+    "d": "台北博報堂 HTM",
     "cat": "台北博報堂 HTM",
     "y": 1,
     "w": 1,
     "l": 0,
-    "c": 0
+    "c": 2
    },
    {
-    "d": "2008-media.com",
+    "d": "聯樂",
+    "cat": "聯樂",
+    "y": 1,
+    "w": 0,
+    "l": 0,
+    "c": 1
+   },
+   {
+    "d": "艾斯",
+    "cat": "艾斯",
+    "y": 1,
+    "w": 0,
+    "l": 0,
+    "c": 1
+   },
+   {
+    "d": "2008傳媒",
     "cat": "2008傳媒",
     "y": 0,
     "w": 0,
@@ -2464,48 +1745,8 @@
     "c": 0
    },
    {
-    "d": "ace-taipei.com",
-    "cat": "艾斯",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
-    "y": 0,
-    "w": 1,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 0,
-    "w": 1,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "mxdogi.com",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "unisurf.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯廣",
+    "cat": "聯廣",
     "y": 1,
     "w": 0,
     "l": 0,
@@ -2517,85 +1758,46 @@
   "date": "2025-02-27",
   "year": "2025",
   "title": "用耳朵來場森呼吸｜春之象：採集自然之聲小旅行",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 18,
+   "y": 2,
    "w": 0,
-   "l": 17,
-   "c": 0
+   "l": 10,
+   "c": 2
   },
   "domains": [
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 9,
+    "d": "先勢集團",
+    "cat": "先勢集團",
+    "y": 0,
     "w": 0,
-    "l": 6,
+    "l": 5,
     "c": 0
    },
    {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 5,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯廣",
+    "cat": "聯廣",
     "y": 2,
     "w": 0,
     "l": 3,
     "c": 0
    },
    {
-    "d": "pilotpr.com.tw",
-    "cat": "先勢集團",
-    "y": 0,
-    "w": 0,
-    "l": 4,
-    "c": 0
-   },
-   {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯眾",
+    "cat": "聯眾",
     "y": 0,
     "w": 0,
     "l": 2,
     "c": 0
    },
    {
-    "d": "mdcg.tw",
-    "cat": "米蘭 MDCG",
+    "d": "台北博報堂 HTM",
+    "cat": "台北博報堂 HTM",
     "y": 0,
     "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "mediand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 0,
     "l": 0,
-    "c": 0
-   },
-   {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "planetpr.com.tw",
-    "cat": "先勢集團",
-    "y": 0,
-    "w": 0,
-    "l": 1,
-    "c": 0
+    "c": 2
    }
   ]
  },
@@ -2603,108 +1805,61 @@
   "date": "2025-02-21",
   "year": "2025",
   "title": "用耳朵來場森呼吸｜春之象：採集自然之聲小旅行",
-  "has_checkin": false,
+  "has_checkin": true,
+  "rowkind": "cat",
   "totals": {
-   "y": 25,
-   "w": 1,
-   "l": 11,
-   "c": 0
+   "y": 9,
+   "w": 0,
+   "l": 6,
+   "c": 9
   },
   "domains": [
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 10,
-    "w": 0,
-    "l": 3,
-    "c": 0
-   },
-   {
-    "d": "planetpr.com.tw",
+    "d": "先勢集團",
     "cat": "先勢集團",
-    "y": 2,
+    "y": 4,
     "w": 0,
-    "l": 3,
-    "c": 0
+    "l": 4,
+    "c": 4
    },
    {
-    "d": "ky-post.com",
-    "cat": "光洋波斯特",
-    "y": 3,
-    "w": 1,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
-    "y": 2,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯廣",
+    "cat": "聯廣",
     "y": 3,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 3
    },
    {
-    "d": "mxdigi.com",
-    "cat": "米蘭 MDCG",
-    "y": 1,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "pilotpr.com.tw",
-    "cat": "先勢集團",
-    "y": 2,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "grandpr.com.tw",
-    "cat": "先勢集團",
-    "y": 0,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "hakuhodoti.com.tw",
+    "d": "台北博報堂 HTM",
     "cat": "台北博報堂 HTM",
     "y": 1,
     "w": 0,
     "l": 0,
-    "c": 0
+    "c": 1
    },
    {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 0,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "unistyle.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 0,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "unisurf.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯樂",
+    "cat": "聯樂",
     "y": 1,
     "w": 0,
     "l": 0,
+    "c": 1
+   },
+   {
+    "d": "聯太",
+    "cat": "聯太",
+    "y": 0,
+    "w": 0,
+    "l": 1,
+    "c": 0
+   },
+   {
+    "d": "聯眾",
+    "cat": "聯眾",
+    "y": 0,
+    "w": 0,
+    "l": 1,
     "c": 0
    }
   ]
@@ -2714,56 +1869,33 @@
   "year": "2025",
   "title": "薛喬 心理師｜[夢想UP] 新年人生整理術",
   "has_checkin": false,
+  "rowkind": "cat",
   "totals": {
-   "y": 6,
+   "y": 3,
    "w": 0,
-   "l": 2,
+   "l": 1,
    "c": 0
   },
   "domains": [
    {
-    "d": "medialand.tw",
-    "cat": "米蘭 MDCG",
-    "y": 2,
+    "d": "先勢集團",
+    "cat": "先勢集團",
+    "y": 1,
     "w": 0,
     "l": 1,
     "c": 0
    },
    {
-    "d": "meshplus.com.tw",
-    "cat": "米蘭 MDCG",
+    "d": "聯廣",
+    "cat": "聯廣",
     "y": 1,
     "w": 0,
     "l": 0,
     "c": 0
    },
    {
-    "d": "pilotpr.com.tw",
-    "cat": "先勢集團",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "planetpr.com.tw",
-    "cat": "先勢集團",
-    "y": 0,
-    "w": 0,
-    "l": 1,
-    "c": 0
-   },
-   {
-    "d": "ua.com.tw",
-    "cat": "聯廣 UCG",
-    "y": 1,
-    "w": 0,
-    "l": 0,
-    "c": 0
-   },
-   {
-    "d": "unismart.com.tw",
-    "cat": "聯廣 UCG",
+    "d": "聯眾",
+    "cat": "聯眾",
     "y": 1,
     "w": 0,
     "l": 0,

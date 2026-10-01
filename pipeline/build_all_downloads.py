@@ -71,8 +71,8 @@ def main():
     ed25 = load("event_domains_2025.json")
     ed26 = load("event_domains.json")
     states = load("wix_states.json")
-    merged = load("page_events.json")
-    summary = load("attendance_data.json")
+    merged = load("part_events.json")
+    summary = load("part_summary.json")
 
     groups = []
 
@@ -130,7 +130,7 @@ def main():
                             d.get("y", 0), d.get("w", 0), d.get("l", 0), d.get("c", 0)])
     groups.append({
         "title": "併檔後：報名 ＋ 現場報到",
-        "note": "把上面的 Wix 報名，跟 Google 現場報到表對起來之後的結果，"
+        "note": "把上面的 Wix 報名，跟現場報到（2025 用 Google 報到表、2026 用 Wix 後台的報到勾選）對起來之後的結果，"
                 "也就是這一頁與 /part 真正拿來算數字的那一份。"
                 "「報到」只有實際簽到才算；沒有報到表的場次（欄位『報到表＝無』）"
                 "報到一律是 0，不代表沒人來。",
@@ -141,7 +141,7 @@ def main():
                       mg_rows, "每一場、每個網域的正取／候補／請假／報到，含歸屬公司"),
             write_json("併檔-報名與報到逐場.json", merged, "同上，JSON 原檔"),
             write_json("彙總-各公司兩年度.json", summary,
-                       "各公司 2025／2026 的人次與人數彙總（這一頁表格的來源）"),
+                       "各公司 2025／2026 的報到人次與人數彙總（/part 頁表格的來源；歸戶待確認的信箱已遮罩）"),
         ],
     })
 
