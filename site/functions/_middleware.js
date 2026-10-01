@@ -1,13 +1,17 @@
-// 只保護 /all（全集團互動工具）。/part 是要獨立給外部看的，完全不設密碼。
+// 保護 /all（全集團互動工具）與 /2026（2026 全集團報告，含姓名與 email）。
+// /part 是要獨立給外部看的，完全不設密碼。
 //
-// 做法：進 /all 之前先出一頁輸入密碼，輸對就寫一個 cookie，之後同一台裝置直接進得去。
-// 連 /api/state（/all 的資料端點）也一起擋，否則只擋畫面、資料還是被抓得走。
+// 做法：進受保護頁之前先出一頁輸入密碼，輸對就寫一個 cookie，之後同一台裝置直接進得去。
+// 連資料端點也一起擋（/api/state、/2026/data.json），否則只擋畫面、資料還是被抓得走。
 //
-// 密碼一律由環境變數 ALL_PASSWORD 提供，程式碼裡不留密碼；沒設就把 /all 鎖死（fail closed）。
-// 想換密碼：wrangler pages secret put ALL_PASSWORD --project-name <專案名>，不用改程式。
-const COOKIE = "jte_all";
-
-const GATED = (p) => p === "/all" || p.startsWith("/all/") || p === "/api/state";
+// 密碼一律由環境變數提供，程式碼裡不留密碼；沒設就鎖死（fail closed）。
+// 想換密碼：wrangler pages secret put <變數名> --project-name <專案名>，不用改程式。
+const GATES = [
+  { name: "全集團互動工具", env: "ALL_PASSWORD", cookie: "jte_all",
+    match: (p) => p === "/all" || p.startsWith("/all/") || p === "/api/state" },
+  { name: "2026 全集團參與報告", env: "Y2026_PASSWORD", cookie: "jte_2026",
+    match: (p) => p === "/2026" || p.startsWith("/2026/") },
+];
 
 async function tokenOf(pw) {
   const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("jte:" + pw));
@@ -23,7 +27,7 @@ function cookieVal(req, name) {
   return null;
 }
 
-function loginPage(path, bad) {
+function loginPage(path, bad, title) {
   return `<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>需要密碼</title><style>
 :root{--brand:#004D89;--ink:#032639;--line:#DBE0E3;--muted:#6F838E;--radius:16px;
@@ -59,8 +63,8 @@ button:active{transform:scale(.97)}
   <span class="orb o1"></span><span class="orb o2"></span>
   <p class="eb">練息場 Join to Enjoy</p>
   <h1>這一頁需要密碼</h1>
-  <p class="sub">全集團互動工具（內部使用）。請輸入密碼後繼續。</p>
-  <input type="password" name="pw" inputmode="numeric" autocomplete="current-password"
+  <p class="sub">${title}（內部使用）。請輸入密碼後繼續。</p>
+  <input type="password" name="pw" autocomplete="current-password"
          placeholder="請輸入密碼" autofocus>
   <button type="submit">進入</button>
   ${bad ? '<p class="err">密碼不正確，請再試一次。</p>' : ""}
@@ -71,17 +75,20 @@ button:active{transform:scale(.97)}
 export async function onRequest(context) {
   const { request, env, next } = context;
   const url = new URL(request.url);
-  if (!GATED(url.pathname)) return next();
+  const gate = GATES.find((g) => g.match(url.pathname));
+  if (!gate) return next();
+  const COOKIE = gate.cookie;
+  const pwd = env[gate.env];
 
-  // 沒設環境變數就不放行，避免漏設時 /all 的原始報名資料變成裸公開
-  if (!env.ALL_PASSWORD) {
-    return new Response("此站尚未設定 ALL_PASSWORD 環境變數，/all 暫時無法檢視。", {
+  // 沒設環境變數就不放行，避免漏設時原始資料變成裸公開
+  if (!pwd) {
+    return new Response(`此站尚未設定 ${gate.env} 環境變數，這一頁暫時無法檢視。`, {
       status: 503,
       headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "no-store" },
     });
   }
 
-  const token = await tokenOf(env.ALL_PASSWORD);
+  const token = await tokenOf(pwd);
   if (cookieVal(request, COOKIE) === token) return next();
 
   // 送出密碼
@@ -98,21 +105,21 @@ export async function onRequest(context) {
         },
       });
     }
-    return new Response(loginPage(url.pathname, true), {
+    return new Response(loginPage(url.pathname, true, gate.name), {
       status: 401,
       headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" },
     });
   }
 
   // 沒登入時，資料端點直接回 401 JSON，不要餵 HTML 給前端的 fetch
-  if (url.pathname === "/api/state") {
+  if (url.pathname === "/api/state" || url.pathname.endsWith(".json")) {
     return new Response(JSON.stringify({ error: "unauthorized" }), {
       status: 401,
       headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },
     });
   }
 
-  return new Response(loginPage(url.pathname, false), {
+  return new Response(loginPage(url.pathname, false, gate.name), {
     status: 401,
     headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" },
   });

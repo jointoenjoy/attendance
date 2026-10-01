@@ -4,3 +4,4 @@ pipeline/keys.env
 pipeline/__pycache__/
 site/.wrangler/
 .DS_Store
+site/2026/*.json
