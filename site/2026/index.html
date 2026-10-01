@@ -33,7 +33,7 @@
   .hero>*{position:relative;z-index:1}
   .orb{display:none}
   .logo{position:absolute;right:28px;top:26px;height:28px;opacity:.92}
-  .eyebrow{font-family:var(--font-en);font-size:.8rem;letter-spacing:.18em;color:var(--blue);font-weight:700;margin:0 0 10px;text-transform:uppercase}
+  .eyebrow{font-family:var(--font-en);font-size:.8rem;letter-spacing:.18em;color:var(--blue);font-weight:700;margin:0 0 10px}
   h1{margin:0;color:var(--blue-dark);font-weight:700;font-size:clamp(1.3rem,5vw,2.1rem);line-height:1.25;letter-spacing:-.01em;padding-right:90px}
   .lede{margin:10px 0 0;color:var(--ink-2);font-size:.92rem}
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0 0}
@@ -95,6 +95,12 @@
   .note li{margin:2px 0}
   #msg{padding:40px 0;text-align:center;color:var(--ink-3)}
   @media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
+  details.fold>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  details.fold>summary::-webkit-details-marker{display:none}
+  details.fold>summary h2{margin:0}
+  details.fold[open]>summary{margin:0 0 10px}
+  .chev{width:30px;height:30px;flex:none;border-radius:50%;background:var(--blue-pale) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23004D89' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/12px 8px;transition:transform .25s var(--ease)}
+  details.fold[open] .chev{transform:rotate(180deg)}
 </style>
 </head>
 <body>
@@ -102,20 +108,20 @@
   <header class="hero">
     <span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span>
     <img class="logo" src="logo.svg" alt="練息場 Join to Enjoy">
-    <p class="eyebrow">Chill · 內部報告</p>
-    <h1>2026 練息場Chill療癒工作坊 ｜博報堂集團參與人數統計</h1>
+    <p class="eyebrow">練息場Chill療癒工作坊</p>
+    <h1>2026 博報堂集團參與人數統計</h1>
     <p class="lede" id="lede">資料載入中…</p>
     <div class="kpis" id="kpis"></div>
   </header>
   <div id="msg">資料載入中…</div>
   <main id="main" hidden>
-    <section class="card">
-      <h2>下載數據（Excel 可直接開）</h2>
+    <details class="card fold">
+      <summary><h2>下載數據（Excel 可直接開）</h2><span class="chev" aria-hidden="true"></span></summary>
       <p class="hint">CSV 檔用 Excel 或 Google 試算表打開即可，中文不會亂碼。每個公司的 HR 可以只下載自己公司的檔案。</p>
       <div class="dl" id="dlAll"></div>
       <p class="hint" style="margin:14px 0 6px">各公司明細：</p>
       <div class="dl" id="dlCo"></div>
-    </section>
+    </details>
     <section class="card">
       <h2>各公司彙總</h2>
       <p class="hint">人數＝同一人只算一次（用 email 判斷，不重複計算）；人次＝報名筆數。報到只計有登錄報到的場次。</p>
