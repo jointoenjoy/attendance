@@ -4,12 +4,21 @@
 只取：姓名、email、所屬企業/集團（下拉）、報名狀態、Wix 報到勾選。
 表單裡的身分證、生日、身高體重等欄位一律不讀、不存。
 """
-import json, os, urllib.request
+import json, os, re, urllib.request
 from probe_events import BASE, HEADERS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "_private", "wix_2026_guests.json")
 STATE = {"ATTENDING": "正取", "IN_WAITLIST": "候補", "NOT_ATTENDING": "請假"}
+
+
+def clean_name(name):
+    """報名者常把電話／分機打進姓名欄（例如 02-2758xxxx#523王小明），畫面只留人名。"""
+    name = re.sub(r"[(（][^)）]*[)）]?", "", name)          # 括號備註
+    name = re.sub(r"[0-9０-９#＃*＊/／,，\-－_]+", " ", name)  # 電話、分機與符號
+    name = re.sub(r"(?i)\b(ext|tel|mobile|phone)\b\.?|分機|手機|電話", " ", name)
+    name = re.sub(r"(?<=[\u4e00-\u9fff])\s+(?=[\u4e00-\u9fff])", "", name)  # 中文字中間不留空白
+    return re.sub(r"\s+", " ", name).strip()
 
 
 def call(m, p, b=None):
@@ -69,7 +78,7 @@ def main():
             name = ((gd.get("lastName") or "") + (gd.get("firstName") or "")).strip() \
                 if not (gd.get("firstName") or "").isascii() else \
                 " ".join(x for x in (gd.get("firstName"), gd.get("lastName")) if x).strip()
-            rows.append({"name": name, "email": (gd.get("email") or "").strip().lower(),
+            rows.append({"name": clean_name(name), "email": (gd.get("email") or "").strip().lower(),
                          "company": comp, "status": st, "wix_checked_in": bool(gd.get("checkedIn"))})
         # Wix 的 startDate 是 UTC，換成台北日期
         from datetime import datetime, timedelta

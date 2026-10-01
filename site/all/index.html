@@ -706,7 +706,11 @@ function refreshDerived(){
     fill.style.width = (uni!==null) ? Math.min(100,uni).toFixed(1)+"%" : "0%";
     track.append(fill);
     const foot = document.createElement("div"); foot.className = "foot";
-    foot.innerHTML = `<span>參與人數 <b>${h}</b></span><span>參與人次 <b>${v}</b></span>`;
+    // Wix 全部報名（含練息之友、私人信箱等非集團帳號），與年中報告「Chill 活動報名概況」合計同口徑
+    // 2025 的 DATA_2025 只有集團帳號，所以只有 2026 能算 Wix 全部報名
+    const all = (S.d2026||[]).reduce((s,r)=>s+r.v,0);
+    foot.innerHTML = `<span>參與人數 <b>${h}</b></span><span>參與人次 <b>${v}</b></span>`
+      + (yr==="2026" ? `<span title="含非集團 ${all-v} 人次（練息之友、私人信箱等）">Wix 總報名 <b>${all}</b> 人次</span>` : "");
     card.append(y, big, sub, cap, track, foot); rc.append(card);
   });
   const setTxt = (id,t)=>{ const el=$(id); if(el) el.textContent=t; };
