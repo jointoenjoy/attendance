@@ -1,5 +1,5 @@
 {
- "built": "2026-10-07 10:38",
+ "built": "2026-10-20 15:13",
  "groups": [
   {
    "title": "Wix 報名原始數據",
@@ -22,14 +22,14 @@
      "file": "wix-2026-報名逐場.csv",
      "label": "2026 每一場、每個 email 網域的報名人次與人數",
      "kind": "CSV",
-     "rows": 153,
-     "bytes": 15694
+     "rows": 173,
+     "bytes": 17518
     },
     {
      "file": "wix-2026-報名逐場.json",
      "label": "2026 同上，JSON 原檔（另含全年網域總表 grand_domains）",
      "kind": "JSON",
-     "bytes": 18293
+     "bytes": 20329
     }
    ]
   },
@@ -41,14 +41,14 @@
      "file": "wix-報名狀態逐場.csv",
      "label": "2025＋2026 每一場、每個網域的正取／候補／請假人數",
      "kind": "CSV",
-     "rows": 372,
-     "bytes": 38805
+     "rows": 392,
+     "bytes": 40669
     },
     {
      "file": "wix-報名狀態逐場.json",
      "label": "同上，JSON 原檔（含每場總計 totals）",
      "kind": "JSON",
-     "bytes": 38597
+     "bytes": 40679
     }
    ]
   },
@@ -60,20 +60,20 @@
      "file": "併檔-報名與報到逐場.csv",
      "label": "每一場、每個網域的正取／候補／請假／報到，含歸屬公司",
      "kind": "CSV",
-     "rows": 178,
-     "bytes": 17546
+     "rows": 193,
+     "bytes": 18760
     },
     {
      "file": "併檔-報名與報到逐場.json",
      "label": "同上，JSON 原檔",
      "kind": "JSON",
-     "bytes": 26242
+     "bytes": 28234
     },
     {
      "file": "彙總-各公司兩年度.json",
      "label": "各公司 2025／2026 的報到人次與人數彙總（/part 頁表格的來源；歸戶待確認的信箱已遮罩）",
      "kind": "JSON",
-     "bytes": 11472
+     "bytes": 11722
     }
    ]
   }

@@ -1,6 +1,6 @@
 {
  "pulled_year": 2026,
- "event_count": 15,
+ "event_count": 17,
  "events": [
   {
    "date": "2026-01-16",
@@ -915,37 +915,157 @@
      "people": 1
     }
    ]
+  },
+  {
+   "date": "2026-11-05",
+   "title": "11/5 （四）《 鬆鬆在・入冬茶席 》",
+   "status": "UPCOMING",
+   "total_visits": 23,
+   "total_people": 23,
+   "no_email": 0,
+   "domains": [
+    {
+     "domain": "@grandpr.com.tw",
+     "visits": 5,
+     "people": 5
+    },
+    {
+     "domain": "@mxdigi.com",
+     "visits": 5,
+     "people": 5
+    },
+    {
+     "domain": "@ua.com.tw",
+     "visits": 5,
+     "people": 5
+    },
+    {
+     "domain": "@ace-taipei.com",
+     "visits": 3,
+     "people": 3
+    },
+    {
+     "domain": "@2008-media.com",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@gmail.com",
+     "visits": 1,
+     "people": 1
+    },
+    {
+     "domain": "@planetpr.com.tw",
+     "visits": 1,
+     "people": 1
+    },
+    {
+     "domain": "@unistyle.com.tw",
+     "visits": 1,
+     "people": 1
+    }
+   ]
+  },
+  {
+   "date": "2026-11-06",
+   "title": "11/6 （五）《 鬆鬆在・入冬茶席 》",
+   "status": "UPCOMING",
+   "total_visits": 23,
+   "total_people": 23,
+   "no_email": 0,
+   "domains": [
+    {
+     "domain": "@meshplus.com.tw",
+     "visits": 7,
+     "people": 7
+    },
+    {
+     "domain": "@grandpr.com.tw",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@hakuhodotm.com.tw",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@pilotpr.com.tw",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@ua.com.tw",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@unismart.com.tw",
+     "visits": 2,
+     "people": 2
+    },
+    {
+     "domain": "@2008-media.com",
+     "visits": 1,
+     "people": 1
+    },
+    {
+     "domain": "@ace-taipei.com",
+     "visits": 1,
+     "people": 1
+    },
+    {
+     "domain": "@medialand.tw",
+     "visits": 1,
+     "people": 1
+    },
+    {
+     "domain": "@mxdogi.com",
+     "visits": 1,
+     "people": 1
+    },
+    {
+     "domain": "@planetpr.com.tw",
+     "visits": 1,
+     "people": 1
+    },
+    {
+     "domain": "@unistyle.com.tw",
+     "visits": 1,
+     "people": 1
+    }
+   ]
   }
  ],
  "grand_domains": [
   {
    "domain": "@ua.com.tw",
-   "visits": 92,
-   "people": 39
+   "visits": 99,
+   "people": 41
   },
   {
    "domain": "@gmail.com",
-   "visits": 42,
-   "people": 36
+   "visits": 43,
+   "people": 37
   },
   {
    "domain": "@medialand.tw",
-   "visits": 58,
-   "people": 35
+   "visits": 59,
+   "people": 36
   },
   {
    "domain": "@hakuhodotm.com.tw",
-   "visits": 72,
-   "people": 31
+   "visits": 74,
+   "people": 32
   },
   {
    "domain": "@meshplus.com.tw",
-   "visits": 57,
+   "visits": 64,
    "people": 24
   },
   {
    "domain": "@mxdigi.com",
-   "visits": 36,
+   "visits": 41,
    "people": 20
   },
   {
@@ -959,29 +1079,34 @@
    "people": 14
   },
   {
+   "domain": "@grandpr.com.tw",
+   "visits": 25,
+   "people": 13
+  },
+  {
    "domain": "@unismart.com.tw",
-   "visits": 27,
+   "visits": 29,
    "people": 12
   },
   {
    "domain": "@pilotpr.com.tw",
-   "visits": 17,
+   "visits": 19,
    "people": 11
   },
   {
-   "domain": "@grandpr.com.tw",
-   "visits": 18,
-   "people": 9
-  },
-  {
    "domain": "@planetpr.com.tw",
-   "visits": 12,
+   "visits": 14,
    "people": 8
   },
   {
    "domain": "@2008-media.com",
-   "visits": 6,
-   "people": 6
+   "visits": 9,
+   "people": 7
+  },
+  {
+   "domain": "@ace-taipei.com",
+   "visits": 11,
+   "people": 5
   },
   {
    "domain": "@prestigepr.com.tw",
@@ -997,11 +1122,6 @@
    "domain": "@hotmail.com",
    "visits": 4,
    "people": 4
-  },
-  {
-   "domain": "@ace-taipei.com",
-   "visits": 7,
-   "people": 3
   },
   {
    "domain": "@dvibemedia.com",
@@ -1029,8 +1149,13 @@
    "people": 2
   },
   {
+   "domain": "@mxdogi.com",
+   "visits": 2,
+   "people": 2
+  },
+  {
    "domain": "@unistyle.com.tw",
-   "visits": 5,
+   "visits": 7,
    "people": 1
   },
   {
@@ -1070,11 +1195,6 @@
   },
   {
    "domain": "@msn.com",
-   "visits": 1,
-   "people": 1
-  },
-  {
-   "domain": "@mxdogi.com",
    "visits": 1,
    "people": 1
   },

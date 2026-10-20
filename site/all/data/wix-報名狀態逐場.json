@@ -2720,5 +2720,153 @@
     "leave": 1
    }
   ]
+ },
+ {
+  "date": "2026-11-05",
+  "year": "2026",
+  "title": "11/5 （四）《 鬆鬆在・入冬茶席 》",
+  "status": "UPCOMING",
+  "guests": 23,
+  "totals": {
+   "att": 18,
+   "wait": 5,
+   "leave": 0
+  },
+  "domains": [
+   {
+    "d": "grandpr.com.tw",
+    "att": 2,
+    "wait": 3,
+    "leave": 0
+   },
+   {
+    "d": "mxdigi.com",
+    "att": 5,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "ua.com.tw",
+    "att": 4,
+    "wait": 1,
+    "leave": 0
+   },
+   {
+    "d": "ace-taipei.com",
+    "att": 3,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "2008-media.com",
+    "att": 2,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "gmail.com",
+    "att": 1,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "planetpr.com.tw",
+    "att": 1,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "unistyle.com.tw",
+    "att": 0,
+    "wait": 1,
+    "leave": 0
+   }
+  ]
+ },
+ {
+  "date": "2026-11-06",
+  "year": "2026",
+  "title": "11/6 （五）《 鬆鬆在・入冬茶席 》",
+  "status": "UPCOMING",
+  "guests": 23,
+  "totals": {
+   "att": 18,
+   "wait": 4,
+   "leave": 1
+  },
+  "domains": [
+   {
+    "d": "meshplus.com.tw",
+    "att": 6,
+    "wait": 1,
+    "leave": 0
+   },
+   {
+    "d": "grandpr.com.tw",
+    "att": 0,
+    "wait": 1,
+    "leave": 1
+   },
+   {
+    "d": "hakuhodotm.com.tw",
+    "att": 2,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "pilotpr.com.tw",
+    "att": 1,
+    "wait": 1,
+    "leave": 0
+   },
+   {
+    "d": "ua.com.tw",
+    "att": 2,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "unismart.com.tw",
+    "att": 2,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "2008-media.com",
+    "att": 1,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "ace-taipei.com",
+    "att": 1,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "medialand.tw",
+    "att": 1,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "mxdogi.com",
+    "att": 1,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "planetpr.com.tw",
+    "att": 1,
+    "wait": 0,
+    "leave": 0
+   },
+   {
+    "d": "unistyle.com.tw",
+    "att": 0,
+    "wait": 1,
+    "leave": 0
+   }
+  ]
  }
 ]
