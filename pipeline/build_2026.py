@@ -13,7 +13,7 @@
 import csv, io, json, os
 from collections import Counter, defaultdict
 from datetime import datetime, timedelta, timezone
-from wix2026 import year_events, has_checkin, today, HAKUHODO
+from wix2026 import year_events, load_events, has_checkin, today, HAKUHODO, YEAR_START, EXCLUDE_DATES
 from subsidiary_map import UCG_SUBS, cat_of
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -43,11 +43,15 @@ def write_csv(name, head, rows):
 
 T = today()
 events = year_events()   # 已報名但還沒辦的場次也列（2026-11-03 決策者要求），報到欄標「尚未舉辦」
+# 1/16 那場屬 2025 報價單：照樣列名單給人看（頁面換底色註明），但不算進任何統計與下載檔（2026-11-03 決策者要求）
+prev = [e for e in load_events() if "2026-01-01" <= e["date"] < YEAR_START
+        and e["date"] not in EXCLUDE_DATES and e["status"] != "CANCELED"]
 skipped = Counter()
 skipped_st = Counter()   # 未納入的報名狀態，讓頁面能加回成 Wix 全部報名（＝年中報告的報名／候補／請假）
 by_mail = Counter()
 evs, recs = [], []
-for e in events:
+for e in prev + events:
+    pv = e["date"] < YEAR_START
     up = e["date"] > T
     rec = has_checkin(e)
     gs = []
@@ -56,21 +60,26 @@ for e in events:
         if not g["company"]:
             code, src = CAT_CODE.get(cat_of(g["email"].split("@")[-1]), ""), "依 email 判斷"
         if code not in HAKUHODO:
-            skipped[g["company"] or "（未選企業・私人信箱）"] += 1
-            skipped_st[g["status"]] += 1
+            if not pv:
+                skipped[g["company"] or "（未選企業・私人信箱）"] += 1
+                skipped_st[g["status"]] += 1
             continue
-        by_mail[src] += 1
         ck = "尚未舉辦" if up else ("已報到" if g["wix_checked_in"] else "未報到") if rec else "報到未登錄"
         gs.append({"n": g["name"], "e": g["email"].lower(), "c": code, "s": g["status"], "k": ck, "m": src != "報名選填"})
+        if pv:
+            continue
+        by_mail[src] += 1
         recs.append([e["date"], e["title"], NAMES[code], g["name"], g["email"].lower(), g["status"], ck, src])
     gs.sort(key=lambda x: (HAKUHODO.index(x["c"]), ["正取", "候補", "請假"].index(x["s"]), x["n"]))
-    evs.append({"date": e["date"], "title": e["title"], "recorded": rec, "upcoming": up, "guests": gs})
+    evs.append({"date": e["date"], "title": e["title"], "recorded": rec, "upcoming": up, "prev": pv, "guests": gs})
 
 # 各公司彙總
 comp = {c: {"code": c, "name": NAMES[c], "people": set(), "rows": 0, "正取": 0, "候補": 0, "請假": 0,
             "ck": 0, "ck_people": set()} for c in HAKUHODO}
 person = {}
 for e in evs:
+    if e["prev"]:
+        continue
     for g in e["guests"]:
         s = comp[g["c"]]
         s["people"].add(g["e"]); s["rows"] += 1; s[g["s"]] += 1
@@ -93,11 +102,11 @@ for c in companies:
     files["byco"][c["code"]] = write_csv("2026-%s-逐筆明細.csv" % c["code"], HEAD,
                                          [r for r in recs if r[2] == c["name"]])
 
-nocheck = [e["date"] for e in evs if not e["recorded"] and not e["upcoming"]]
+nocheck = [e["date"] for e in evs if not e["recorded"] and not e["upcoming"] and not e["prev"]]
 data = {
     "generated": (datetime.now(timezone.utc) + timedelta(hours=8)).strftime("%Y-%m-%d %H:%M"),
     "asof": T, "upcoming": [e["date"] for e in evs if e["upcoming"]], "events": evs, "companies": companies, "files": files,
-    "totals": {"events": len(evs), "people": len(person), "rows": len(recs),
+    "totals": {"events": sum(not e["prev"] for e in evs), "people": len(person), "rows": len(recs),
                "ok": sum(c["正取"] for c in companies),
                "ck": sum(c["ck"] for c in companies), "ck_people": len({e for e, p in person.items() if p["ck"]})},
     "nocheck": nocheck, "skipped": dict(skipped.most_common()), "skipped_st": dict(skipped_st), "by_mail": by_mail["依 email 判斷"],

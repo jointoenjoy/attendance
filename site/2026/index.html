@@ -93,6 +93,12 @@
   .k-已報到{color:var(--yes)!important;font-weight:700} .k-未報到{color:var(--ink-4)!important} .k-報到未登錄{color:var(--wait)!important} .k-尚未舉辦{color:var(--ink-4)!important}
   .tag{display:inline-block;font-size:.72rem;font-weight:700;padding:1px 8px;border-radius:999px;background:#FFF1DC;color:var(--orange-dark)}
   .tag.up{background:var(--blue-pale);color:var(--blue-dark)}
+  /* 上一年度報價單的場次（1/16）：暖灰底，跟 2026 場次區隔 */
+  details.ev.prev{background:#F7F3EC;border-color:#E6DCCB}
+  details.ev.prev[open]>summary{background:#EFE7DA}
+  details.ev.prev .evt{color:#7A5A2E}
+  .tag.prev{background:#E9DCC6;color:#7A5A2E}
+  .prevnote{margin:8px 16px 0;font-size:.82rem;color:#7A5A2E}
   .note{font-size:.82rem;color:var(--ink-3);line-height:1.8}
   .note li{margin:2px 0}
   #msg{padding:40px 0;text-align:center;color:var(--ink-3)}
@@ -113,7 +119,7 @@
     <p class="eyebrow">練息場Chill療癒工作坊</p>
     <h1>2026 博報堂集團參與人數統計</h1>
     <p class="lede" id="lede">資料載入中…</p>
-    <p class="lede quote">統計期間：2026/3/20《春野・開運・馬上好》起，對應 2026 年度報價單。1/16《動態靜心》屬 2025 年度報價單，不列入本頁。</p>
+    <p class="lede quote">統計期間：2026/3/20《春野・開運・馬上好》起，對應 2026 年度報價單。1/16《動態靜心》屬 2025 年度報價單，名單以暖灰底列在最下方供參考，不計入本頁統計數字。</p>
     <div class="kpis" id="kpis"></div>
   </header>
   <div id="msg">資料載入中…</div>
@@ -167,7 +173,8 @@
     return;
   }
   const T = D.totals, CO = Object.fromEntries(D.companies.map((c) => [c.code, c.name]));
-  $("lede").textContent = `${md(D.events[0].date)}～${md(D.events.at(-1).date)} 共 ${T.events} 場｜資料更新：${D.generated}（每週三自動更新）`;
+  const E26 = D.events.filter((e) => !e.prev);
+  $("lede").textContent = `${md(E26[0].date)}～${md(E26.at(-1).date)} 共 ${T.events} 場｜資料更新：${D.generated}（每週三自動更新）`;
   for (const [v, l] of [[T.people, "參與人數（不重複）"], [T.rows, "報名人次"], [T.ck, "報到人次"], [T.events, "場次"]])
     $("kpis").append(el("div", { class: "kpi" }, el("b", {}, v.toLocaleString()), el("span", {}, l)));
 
@@ -201,11 +208,12 @@
       const gs = e.guests.filter((g) => (!co || g.c === co) && (!q || g.n.toLowerCase().includes(q) || g.e.includes(q)));
       if ((q || co) && !gs.length) continue;
       const ck = gs.filter((g) => g.k === "已報到").length, k = e.date + e.title;
-      const d = el("details", { class: "ev", "data-k": k });
+      const d = el("details", { class: "ev" + (e.prev ? " prev" : ""), "data-k": k });
       if (wasOpen.has(k) || q) d.open = true;
       d.append(el("summary", {},
         el("span", { class: "evt" }, el("small", {}, e.date), e.title),
-        el("span", { class: "evn" }, `報名 ${gs.length} 人次・`, e.upcoming ? el("span", { class: "tag up" }, "尚未舉辦") : e.recorded ? `報到 ${ck}` : el("span", { class: "tag" }, "報到未登錄"))));
+        el("span", { class: "evn" }, `報名 ${gs.length} 人次・`, ...(e.prev ? [`報到 ${ck}・`, el("span", { class: "tag prev" }, "2025 報價單")] : [e.upcoming ? el("span", { class: "tag up" }, "尚未舉辦") : e.recorded ? `報到 ${ck}` : el("span", { class: "tag" }, "報到未登錄")]))));
+      if (e.prev) d.append(el("p", { class: "prevnote" }, "此活動屬於 2025 練息場報價單，僅列名單供參考，不計入本頁統計數字與下載檔。"));
       const tbl = el("table", {}, el("thead", {}, el("tr", {}, ...["姓名", "email", "公司", "報名狀態", "報到"].map((h) => el("th", {}, h)))));
       const b = el("tbody");
       for (const g of gs)
@@ -229,7 +237,7 @@
   const sk = Object.entries(D.skipped).map(([k, v]) => `${k} ${v} 筆`).join("、");
   const notes = [
     "資料來源：Wix 活動後台的報名名單與報到勾選，每週三自動抓最新一次。",
-    "統計期間對應 2026 年度報價單，從 3/20《春野・開運・馬上好》開始；1/16《動態靜心》屬 2025 年度報價單，所以不列入本頁。",
+    "統計期間對應 2026 年度報價單，從 3/20《春野・開運・馬上好》開始；1/16《動態靜心》屬 2025 年度報價單，名單以暖灰底列在最下方供參考，不計入本頁的人數、人次、各公司彙總與下載檔。",
     `本頁算法：報名時選了博報堂六家公司的人，加上沒選公司、但用集團公司信箱報名的人（多半是候補，因為 Wix 候補表單不會問公司；這些人在名單上公司後面標「＊」，表示依 email 判斷）。共 ${T.rows} 筆。`,
     (sk ? `沒有算進本頁的：${sk}。` : "") + `本頁加上這些，就是 Wix 上全部的報名（${T.rows + Object.values(D.skipped).reduce((a, b) => a + b, 0)} 筆），跟年中報告「Chill 活動報名概況」的合計一樣。`,
     "年中報告「兩年參與人數比較」只算確定會來的人（不含候補、請假），所以各公司人數會比本頁少。兩邊只是算法不同，數字都正確。",
