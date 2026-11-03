@@ -125,8 +125,8 @@
   <div id="msg">資料載入中…</div>
   <main id="main" hidden>
     <details class="card fold">
-      <summary><h2>下載數據（Excel 可直接開）</h2><span class="chev" aria-hidden="true"></span></summary>
-      <p class="hint">CSV 檔用 Excel 或 Google 試算表打開即可，中文不會亂碼。每個公司的 HR 可以只下載自己公司的檔案。</p>
+      <summary><h2>下載數據（Excel 檔）</h2><span class="chev" aria-hidden="true"></span></summary>
+      <p class="hint">內容跟本頁同步：1/16《動態靜心》也列在檔案裡，用暖灰底標示、註明屬 2025 合約範圍，是否計入請自行判斷。每個公司的 HR 可以只下載自己公司的檔案。</p>
       <div class="dl" id="dlAll"></div>
       <p class="hint" style="margin:14px 0 6px">各公司明細：</p>
       <div class="dl" id="dlCo"></div>
@@ -213,7 +213,7 @@
       d.append(el("summary", {},
         el("span", { class: "evt" }, el("small", {}, e.date), e.title),
         el("span", { class: "evn" }, `報名 ${gs.length} 人次・`, ...(e.prev ? [`報到 ${ck}・`, el("span", { class: "tag prev" }, "2025 合約範圍")] : [e.upcoming ? el("span", { class: "tag up" }, "尚未舉辦") : e.recorded ? `報到 ${ck}` : el("span", { class: "tag" }, "報到未登錄")]))));
-      if (e.prev) d.append(el("p", { class: "prevnote" }, "此活動屬於 2025 練息場合約範圍，僅列名單供參考，不計入本頁統計數字與下載檔。"));
+      if (e.prev) d.append(el("p", { class: "prevnote" }, "此活動屬於 2025 練息場合約範圍，不計入本頁上方統計數字；下載的 Excel 也有列出，同樣以暖灰底標示。"));
       const tbl = el("table", {}, el("thead", {}, el("tr", {}, ...["姓名", "email", "公司", "報名狀態", "報到"].map((h) => el("th", {}, h)))));
       const b = el("tbody");
       for (const g of gs)
@@ -237,7 +237,7 @@
   const sk = Object.entries(D.skipped).map(([k, v]) => `${k} ${v} 筆`).join("、");
   const notes = [
     "資料來源：Wix 活動後台的報名名單與報到勾選，每週三自動抓最新一次。",
-    "統計期間對應 2026 年度合約範圍，從 3/20《春野・開運・馬上好》開始；1/16《動態靜心》屬 2025 年度合約範圍，名單以暖灰底列在最下方供參考，不計入本頁的人數、人次、各公司彙總與下載檔。",
+    "統計期間對應 2026 年度合約範圍，從 3/20《春野・開運・馬上好》開始；1/16《動態靜心》屬 2025 年度合約範圍，名單以暖灰底列在最下方供參考，不計入本頁的人數、人次與各公司彙總；下載的 Excel 也列出這場（暖灰底），是否計入請自行判斷。",
     `本頁算法：報名時選了博報堂六家公司的人，加上沒選公司、但用集團公司信箱報名的人（多半是候補，因為 Wix 候補表單不會問公司；這些人在名單上公司後面標「＊」，表示依 email 判斷）。共 ${T.rows} 筆。`,
     (sk ? `沒有算進本頁的：${sk}。` : "") + `本頁加上這些，就是 Wix 上全部的報名（${T.rows + Object.values(D.skipped).reduce((a, b) => a + b, 0)} 筆），跟年中報告「Chill 活動報名概況」的合計一樣。`,
     "年中報告「兩年參與人數比較」只算確定會來的人（不含候補、請假），所以各公司人數會比本頁少。兩邊只是算法不同，數字都正確。",
