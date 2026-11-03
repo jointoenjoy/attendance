@@ -36,6 +36,7 @@
   .eyebrow{font-family:var(--font-en);font-size:.8rem;letter-spacing:.18em;color:var(--blue);font-weight:700;margin:0 0 10px}
   h1{margin:0;color:var(--blue-dark);font-weight:700;font-size:clamp(1.3rem,5vw,2.1rem);line-height:1.25;letter-spacing:-.01em;padding-right:90px}
   .lede{margin:10px 0 0;color:var(--ink-2);font-size:.92rem}
+  .lede.quote{margin-top:4px;color:var(--ink-3);font-size:.84rem}
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0 0}
   .kpi{background:var(--blue-pale);border-radius:16px;padding:14px 16px;position:relative;overflow:hidden}
   .kpi::before{content:"";position:absolute;left:16px;right:16px;top:0;height:4px;background:var(--blue);border-radius:0 0 4px 4px}
@@ -89,8 +90,9 @@
   details.ev thead th{background:none;color:var(--ink-3);font-size:.78rem;border-bottom:1px solid var(--line-2);border-radius:0}
   details.ev td:first-child{color:var(--ink)}
   .s-正取{color:var(--yes)!important;font-weight:700} .s-候補{color:var(--wait)!important;font-weight:700} .s-請假{color:var(--leave)!important;font-weight:700}
-  .k-已報到{color:var(--yes)!important;font-weight:700} .k-未報到{color:var(--ink-4)!important} .k-報到未登錄{color:var(--wait)!important}
+  .k-已報到{color:var(--yes)!important;font-weight:700} .k-未報到{color:var(--ink-4)!important} .k-報到未登錄{color:var(--wait)!important} .k-尚未舉辦{color:var(--ink-4)!important}
   .tag{display:inline-block;font-size:.72rem;font-weight:700;padding:1px 8px;border-radius:999px;background:#FFF1DC;color:var(--orange-dark)}
+  .tag.up{background:var(--blue-pale);color:var(--blue-dark)}
   .note{font-size:.82rem;color:var(--ink-3);line-height:1.8}
   .note li{margin:2px 0}
   #msg{padding:40px 0;text-align:center;color:var(--ink-3)}
@@ -111,6 +113,7 @@
     <p class="eyebrow">練息場Chill療癒工作坊</p>
     <h1>2026 博報堂集團參與人數統計</h1>
     <p class="lede" id="lede">資料載入中…</p>
+    <p class="lede quote">統計期間：2026/3/20《春野・開運・馬上好》起，對應 2026 年度報價單。1/16《動態靜心》屬 2025 年度報價單，不列入本頁。</p>
     <div class="kpis" id="kpis"></div>
   </header>
   <div id="msg">資料載入中…</div>
@@ -202,7 +205,7 @@
       if (wasOpen.has(k) || q) d.open = true;
       d.append(el("summary", {},
         el("span", { class: "evt" }, el("small", {}, e.date), e.title),
-        el("span", { class: "evn" }, `報名 ${gs.length} 人次・`, e.recorded ? `報到 ${ck}` : el("span", { class: "tag" }, "報到未登錄"))));
+        el("span", { class: "evn" }, `報名 ${gs.length} 人次・`, e.upcoming ? el("span", { class: "tag up" }, "尚未舉辦") : e.recorded ? `報到 ${ck}` : el("span", { class: "tag" }, "報到未登錄"))));
       const tbl = el("table", {}, el("thead", {}, el("tr", {}, ...["姓名", "email", "公司", "報名狀態", "報到"].map((h) => el("th", {}, h)))));
       const b = el("tbody");
       for (const g of gs)
@@ -226,12 +229,14 @@
   const sk = Object.entries(D.skipped).map(([k, v]) => `${k} ${v} 筆`).join("、");
   const notes = [
     "資料來源：Wix 活動後台的報名名單與報到勾選，每週三自動抓最新一次。",
+    "統計期間對應 2026 年度報價單，從 3/20《春野・開運・馬上好》開始；1/16《動態靜心》屬 2025 年度報價單，所以不列入本頁。",
     `本頁算法：報名時選了博報堂六家公司的人，加上沒選公司、但用集團公司信箱報名的人（多半是候補，因為 Wix 候補表單不會問公司；這些人在名單上公司後面標「＊」，表示依 email 判斷）。共 ${T.rows} 筆。`,
     (sk ? `沒有算進本頁的：${sk}。` : "") + `本頁加上這些，就是 Wix 上全部的報名（${T.rows + Object.values(D.skipped).reduce((a, b) => a + b, 0)} 筆），跟年中報告「Chill 活動報名概況」的合計一樣。`,
     "年中報告「兩年參與人數比較」只算確定會來的人（不含候補、請假），所以各公司人數會比本頁少。兩邊只是算法不同，數字都正確。",
     "報名狀態：正取＝取得名額；候補＝額滿排補；請假＝報名後取消。",
     "報到：已報到＝Wix 後台有勾報到；未報到＝該場有登錄報到但此人沒勾。",
   ];
+  if ((D.upcoming || []).length) notes.push(`${D.upcoming.map(md).join("、")} 尚未舉辦，先列出目前的報名名單，已算進報名人數與人次；活動辦完、Wix 勾完報到後，下週三會自動更新報到。`);
   if (D.nocheck.length) notes.push(`${D.nocheck.map(md).join("、")} 這幾場的報到目前只有紙本簽到表，Wix 後台還沒勾，所以標「報到未登錄」（不代表沒人來）。到後台補勾後，下週三會自動更新。`);
   notes.push("本頁含姓名與 email，僅供內部與各公司 HR 使用，請勿轉貼公開。");
   for (const n of notes) $("notes").append(el("li", {}, n));

@@ -42,12 +42,13 @@ def write_csv(name, head, rows):
 
 
 T = today()
-events = [e for e in year_events() if e["date"] <= T]
+events = year_events()   # 已報名但還沒辦的場次也列（2026-11-03 決策者要求），報到欄標「尚未舉辦」
 skipped = Counter()
 skipped_st = Counter()   # 未納入的報名狀態，讓頁面能加回成 Wix 全部報名（＝年中報告的報名／候補／請假）
 by_mail = Counter()
 evs, recs = [], []
 for e in events:
+    up = e["date"] > T
     rec = has_checkin(e)
     gs = []
     for g in e["guests"]:
@@ -59,11 +60,11 @@ for e in events:
             skipped_st[g["status"]] += 1
             continue
         by_mail[src] += 1
-        ck = ("已報到" if g["wix_checked_in"] else "未報到") if rec else "報到未登錄"
+        ck = "尚未舉辦" if up else ("已報到" if g["wix_checked_in"] else "未報到") if rec else "報到未登錄"
         gs.append({"n": g["name"], "e": g["email"].lower(), "c": code, "s": g["status"], "k": ck, "m": src != "報名選填"})
         recs.append([e["date"], e["title"], NAMES[code], g["name"], g["email"].lower(), g["status"], ck, src])
     gs.sort(key=lambda x: (HAKUHODO.index(x["c"]), ["正取", "候補", "請假"].index(x["s"]), x["n"]))
-    evs.append({"date": e["date"], "title": e["title"], "recorded": rec, "guests": gs})
+    evs.append({"date": e["date"], "title": e["title"], "recorded": rec, "upcoming": up, "guests": gs})
 
 # 各公司彙總
 comp = {c: {"code": c, "name": NAMES[c], "people": set(), "rows": 0, "正取": 0, "候補": 0, "請假": 0,
@@ -92,10 +93,10 @@ for c in companies:
     files["byco"][c["code"]] = write_csv("2026-%s-逐筆明細.csv" % c["code"], HEAD,
                                          [r for r in recs if r[2] == c["name"]])
 
-nocheck = [e["date"] for e in evs if not e["recorded"]]
+nocheck = [e["date"] for e in evs if not e["recorded"] and not e["upcoming"]]
 data = {
     "generated": (datetime.now(timezone.utc) + timedelta(hours=8)).strftime("%Y-%m-%d %H:%M"),
-    "asof": T, "events": evs, "companies": companies, "files": files,
+    "asof": T, "upcoming": [e["date"] for e in evs if e["upcoming"]], "events": evs, "companies": companies, "files": files,
     "totals": {"events": len(evs), "people": len(person), "rows": len(recs),
                "ok": sum(c["正取"] for c in companies),
                "ck": sum(c["ck"] for c in companies), "ck_people": len({e for e, p in person.items() if p["ck"]})},
