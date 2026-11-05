@@ -101,6 +101,27 @@
   .prevnote{margin:8px 16px 0;font-size:.82rem;color:#7A5A2E}
   .note{font-size:.82rem;color:var(--ink-3);line-height:1.8}
   .note li{margin:2px 0}
+  .tag.ok{background:#E6F4DF;color:var(--yes)} .tag.na{background:var(--bg-soft);color:var(--ink-3)}
+  .hero-act{margin:16px 0 0}
+  details.ev .dinfo{margin:10px 16px 2px;font-size:.84rem;color:var(--ink-2)}
+  details.ev .dinfo b{color:var(--blue-dark)}
+  /* 統計查核報告（彈出視窗） */
+  dialog.audit{width:min(860px,calc(100vw - 32px));max-height:calc(100vh - 48px);border:none;border-radius:20px;padding:0;
+    box-shadow:0 20px 60px rgba(3,38,57,.25);color:var(--ink)}
+  dialog.audit::backdrop{background:rgba(10,24,44,.45)}
+  dialog.audit .ahead{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:12px;
+    padding:18px 22px;background:#fff;border-bottom:1px solid var(--line)}
+  dialog.audit .ahead h2{margin:0;font-size:1.2rem;color:var(--blue-dark)}
+  dialog.audit .abody{padding:6px 22px 22px}
+  dialog.audit h3{font-size:1rem;color:var(--blue-dark);margin:20px 0 6px}
+  dialog.audit td,dialog.audit th{text-align:left;white-space:normal}
+  dialog.audit thead th{background:none;color:var(--ink-3);font-size:.78rem;border-bottom:1px solid var(--line-2);border-radius:0}
+  dialog.audit td:first-child{color:var(--ink)}
+  .sumrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 0}
+  .sumrow div{background:var(--blue-pale);border-radius:14px;padding:10px 14px}
+  .sumrow b{display:block;font-family:var(--font-en);font-size:1.4rem;color:var(--blue-dark)}
+  .sumrow span{font-size:.78rem;color:var(--ink-3)}
+  @media (max-width:600px){.sumrow{grid-template-columns:1fr}}
   #msg{padding:40px 0;text-align:center;color:var(--ink-3)}
   @media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
   details.fold>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -121,7 +142,12 @@
     <p class="lede" id="lede">資料載入中…</p>
     <p class="lede quote">統計期間：2026/3/20《春野・開運・馬上好》起，對應 2026 年度合約範圍。1/16《動態靜心》屬 2025 年度合約範圍，名單以暖灰底列在最下方供參考，不計入本頁統計數字。</p>
     <div class="kpis" id="kpis"></div>
+    <div class="hero-act"><button class="btn primary" id="openAudit" type="button" hidden>統計查核報告</button></div>
   </header>
+  <dialog class="audit" id="audit">
+    <div class="ahead"><h2>統計查核報告</h2><button class="btn" type="button" id="closeAudit">關閉</button></div>
+    <div class="abody" id="auditBody"></div>
+  </dialog>
   <div id="msg">資料載入中…</div>
   <main id="main" hidden>
     <details class="card fold">
@@ -133,8 +159,14 @@
     </details>
     <section class="card">
       <h2>各公司彙總</h2>
-      <p class="hint">人數＝同一人只算一次（用 email 判斷，不重複計算）；人次＝報名筆數。報到只計有登錄報到的場次。</p>
+      <p class="hint">人數＝同一人只算一次（email 相同，或手機＋姓名＋集團都相同，就算同一人）；人次＝報名筆數。報到只計有登錄報到的場次。</p>
       <div class="scroll"><table id="coTbl"></table></div>
+    </section>
+    <section class="card">
+      <h2>email 網域歸戶確認</h2>
+      <p class="hint">每個 email 網域目前歸到哪家公司。「需確認」排在最前面，請集團 HR 看一下對不對；點網域可展開這個網域的所有報名。也可以下載只有網域與公司（不含個資）的確認表，直接在 Excel 填回覆。</p>
+      <div class="dl" id="dlDom" style="margin:0 0 12px"></div>
+      <div id="doms"></div>
     </section>
     <section class="card">
       <h2>各場明細（姓名・email）</h2>
@@ -199,6 +231,67 @@
         el("tr", { class: "all" }, ...["＝ Wix 全部報名", "", T.rows + n, sum("正取") + x("正取"), sum("候補") + x("候補"), sum("請假") + x("請假"), "", ""].map((v) => el("td", {}, v)))] : [];
     })()));
 
+  // email 網域歸戶確認表
+  if (D.files.domains) $("dlDom").append(btn(D.files.domains, "網域歸戶確認表（不含個資）"));
+  const ST = { "需確認": "tag", "一致": "tag ok", "不適用": "tag na" };
+  for (const x of D.domains || []) {
+    const d = el("details", { class: "ev" });
+    d.append(el("summary", {},
+      el("span", { class: "evt" }, el("small", {}, `${x.people} 人・${x.rows} 筆`), "@" + x.d),
+      el("span", { class: "evn" }, x.co.map(([c, n]) => x.co.length > 1 ? `${c} ${n} 筆` : c).join("、") + "　", el("span", { class: ST[x.st] }, x.st))));
+    const v = x.v;
+    d.append(el("p", { class: "dinfo" }, el("b", {}, x.why), "。",
+      ...(v ? ["網路查證：", v.name, `（${v.code}，把握度${v.conf}）`, v.note ? "；" + v.note : "", "。",
+        ...(v.src ? [" ", el("a", { href: v.src, target: "_blank", rel: "noopener" }, "查證來源")] : [])] : []),
+      ...(x.pick.length && x.co.length > 1 ? [" 報名自選：" + x.pick.map(([c, n]) => `${c} ${n} 筆`).join("、") + "。"] : [])));
+    const tbl = el("table", {}, el("thead", {}, el("tr", {}, ...["姓名", "email", "歸戶公司", "日期", "怎麼判斷"].map((h) => el("th", {}, h)))));
+    const b = el("tbody");
+    for (const [dt, n, em, c, src] of x.list) b.append(el("tr", {}, ...[n, em, c, md(dt), src].map((t) => el("td", {}, t))));
+    tbl.append(b);
+    d.append(el("div", { class: "scroll" }, tbl));
+    $("doms").append(d);
+  }
+
+  // 統計查核報告（彈出視窗）
+  const A = D.audit;
+  if (A) {
+    const ab = $("auditBody"), H3 = (t) => ab.append(el("h3", {}, t)), P = (t) => ab.append(el("p", { class: "hint" }, t));
+    const TB = (head, rows) => {
+      const t = el("table", {}, el("thead", {}, el("tr", {}, ...head.map((h) => el("th", {}, h)))));
+      const b = el("tbody");
+      for (const r of rows) b.append(el("tr", {}, ...r.map((v) => el("td", {}, v))));
+      t.append(b); ab.append(el("div", { class: "scroll" }, t));
+    };
+    const nSkip = Object.values(D.skipped).reduce((a, b) => a + b, 0);
+    ab.append(el("div", { class: "sumrow" },
+      ...[[A.email_people, "不同 email 數"], [T.people, "合併同一人後的參與人數"], [A.merged.length, "合併成同一人的組數"]]
+        .map(([n, l]) => el("div", {}, el("b", {}, n), el("span", {}, l)))));
+    H3("一、這一波修正（集團 HR 回報後）");
+    TB(["哪些報名", "原本", "改成", "原因"], A.fixes.map((f) => [f.what, f.from, f.to, f.why]));
+    H3("二、同一人的判斷");
+    P("email 相同就是同一人。不同 email 時，手機、姓名、集團三個都相同，才算同一人（手機只拿來比對，不顯示在任何地方）。姓名寫法略有不同（例如英文名、順序顛倒）也算相同。");
+    TB(["姓名", "公司", "用過的 email", "依據"], A.merged.map((m) => [m.n, m.c, m.emails.join("、"), m.why]));
+    if (A.not_merged.length) {
+      H3("三、手機相同但沒有合併");
+      P("同一支手機、但姓名不同，判斷為不同人（例如幫同事代報名），分開計算。");
+      TB(["姓名", "email"], A.not_merged.map((x) => [x.names.join("、"), x.emails.join("、")]));
+    }
+    if (A.shared.length) {
+      H3("四、請確認：同一個 email 報了不同姓名");
+      P("目前算同一人。如果其實是兩個人（例如共用部門信箱），請告訴我們，人數會加 1。");
+      TB(["email", "報名時填的姓名"], A.shared.map((x) => [x.email, x.names.join("、")]));
+    }
+    H3("五、公司怎麼判斷（2026 共 " + T.rows + " 筆）");
+    TB(["判斷方式", "筆數"], A.methods.map(([k, n]) => [k, n]));
+    P("有選公司的照選的；沒選的先看本人其他場次，再看同網域其他人選得最多的，最後才看 email 網域對照表。各網域的狀況請看頁面上的「email 網域歸戶確認」。");
+    H3("六、沒有算進來的");
+    P(Object.entries(D.skipped).map(([k, v]) => `${k} ${v} 筆`).join("、") + `，共 ${nSkip} 筆。1/16《動態靜心》屬 2025 合約範圍，也不計入。`);
+    $("openAudit").hidden = false;
+    $("openAudit").addEventListener("click", () => $("audit").showModal());
+    $("closeAudit").addEventListener("click", () => $("audit").close());
+    $("audit").addEventListener("click", (e) => { if (e.target === $("audit")) $("audit").close(); });
+  }
+
   for (const c of D.companies) $("co").append(el("option", { value: c.code }, c.name));
   const render = () => {
     const q = $("q").value.trim().toLowerCase(), co = $("co").value, box = $("evs");
@@ -239,6 +332,7 @@
     "資料來源：Wix 活動後台的報名名單與報到勾選，每週三自動抓最新一次。",
     "統計期間對應 2026 年度合約範圍，從 3/20《春野・開運・馬上好》開始；1/16《動態靜心》屬 2025 年度合約範圍，名單以暖灰底列在最下方供參考，不計入本頁的人數、人次與各公司彙總；下載的 Excel 也列出這場（暖灰底），是否計入請自行判斷。",
     `本頁算法：報名時選了博報堂六家公司的人，加上沒選公司的人（多半是候補，因為 Wix 候補表單不會問公司）。沒選公司的人，先照本人在其他場次選的公司；沒選過就照同網域其他人選得最多的公司；都沒有才看 email 網域對照表。這些人在名單上公司後面標「＊」。共 ${T.rows} 筆。`,
+    "同一人：email 相同，或手機、姓名、集團三個都相同，就算同一人，人數只算一次（有人換過信箱或 email 打錯字）。手機只用來比對，不會顯示在頁面或下載檔。",
     (sk ? `沒有算進本頁的：${sk}。` : "") + `本頁加上這些，就是 Wix 上全部的報名（${T.rows + Object.values(D.skipped).reduce((a, b) => a + b, 0)} 筆），跟年中報告「Chill 活動報名概況」的合計一樣。`,
     "年中報告「兩年參與人數比較」只算確定會來的人（不含候補、請假），所以各公司人數會比本頁少。兩邊只是算法不同，數字都正確。",
     "報名狀態：正取＝取得名額；候補＝額滿排補；請假＝報名後取消。",
