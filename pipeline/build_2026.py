@@ -270,14 +270,18 @@ for em in {g["e"] for e in evs if not e["prev"] for g in e["guests"]}:
     ns = sorted({g["name"] for g in ALL if g["email"] == em})
     if any(not same_name(x, y) and len(CH(x)) >= 2 and len(CH(y)) >= 2 for x in ns for y in ns):
         shared.append({"names": ns, "email": mask(em)})
+# 姓名只從私有名單帶出，不寫進程式碼（程式碼會進 git）
+NAME_OF = lambda dom: next((g["name"] for g in ALL if g["email"].endswith("@" + dom)), "一位同仁")
 audit = {
-    "fixes": [   # 2026-11-05 這一波修正（集團人資回報同一人歸到兩家公司）
-        {"what": "1 人 3 筆（unistyle 網域：3/20、11/5、11/6）", "from": "聯廣 UCG", "to": "先勢集團 PILOT",
-         "why": "聯太國際公關屬先勢集團，網域對照表更正"},
-        {"what": "1 人 1 筆（ua.com.tw 網域：3/20 候補）", "from": "聯廣 UCG", "to": "台北博報堂 HTM",
-         "why": "本人其他場次都選台北博報堂，改依本人"},
-        {"what": "1 人 1 筆（私人信箱：7/30 正取、已報到）", "from": "未納入", "to": "米蘭 MDCG",
-         "why": "本人其他場次選米蘭，原本漏算，補進來"},
+    # 2026-11-05 這一波修正（集團人資回報同一人歸到兩家公司）
+    "fix_cause": "這幾筆報名時沒選公司（候補表單不問公司），系統原本只看 email 網域對照表來歸：對照表把 unistyle、ua.com.tw 都歸到聯廣 UCG，私人信箱則整筆不算。",
+    "fix_rule": "以報名者本人在其他場次自己選過的公司為準；本人都沒選過，才看同網域多數人選的，最後才看網域對照表。",
+    "fixes": [
+        {"kind": "公司歸錯", "sum": "4 筆（2 個人）", "items": [
+            NAME_OF("unistyle.com.tw") + "（unistyle 信箱）：3/20、11/5、11/6 共 3 筆，原本歸聯廣 UCG，改成先勢 PILOT。她其他場次都自己選 PILOT。",
+            "另一位 ua.com.tw 信箱的同仁：3/20 那 1 筆，原本歸聯廣 UCG，改成台北博報堂 HTM。她其他場次都自己選 HTM。"]},
+        {"kind": "漏算", "sum": "1 筆（1 個人）", "items": [
+            "一位用 gmail 報名的同仁：7/30 那場沒選公司，以前因為是私人信箱，整筆沒算進去。她其他場次都選米蘭 MDCG，現在補算進 MDCG。這場她是正取、有報到，所以報到人次多了 1。"]},
     ],
     "email_people": len({g["e"] for e in evs if not e["prev"] for g in e["guests"]}),
     "merged": merged, "not_merged": nm, "shared": shared,

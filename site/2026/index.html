@@ -152,6 +152,7 @@
   dialog.audit td,dialog.audit th{text-align:left;white-space:normal}
   dialog.audit thead th{background:none;color:var(--ink-3);font-size:.78rem;border-bottom:1px solid var(--line-2);border-radius:0}
   dialog.audit td:first-child{color:var(--ink)}
+  dialog.audit ul{margin:4px 0 10px;padding-left:1.3em;line-height:1.6}dialog.audit ul li{margin:4px 0}
   .sumrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 0}
   .sumrow div{background:var(--blue-pale);border-radius:14px;padding:10px 14px}
   .sumrow b{display:block;font-family:var(--font-en);font-size:1.4rem;color:var(--blue-dark)}
@@ -405,7 +406,12 @@
       ...[[A.email_people, "不同 email 數"], [T.people, "合併同一人後的參與人數"], [A.merged.length, "合併成同一人的組數"]]
         .map(([n, l]) => el("div", {}, el("b", {}, n), el("span", {}, l)))));
     H3("一、這一波修正（集團 HR 回報後）");
-    TB(["哪些報名", "原本", "改成", "原因"], A.fixes.map((f) => [f.what, f.from, f.to, f.why]));
+    if (A.fix_cause) P("錯誤原因：" + A.fix_cause);
+    if (A.fix_rule) P("修正方式：" + A.fix_rule);
+    for (const f of A.fixes) {
+      ab.append(el("p", {}, el("b", {}, f.kind + "的有 " + f.sum)));
+      ab.append(el("ul", {}, ...f.items.map((t) => el("li", {}, t))));
+    }
     H3("二、同一人的判斷");
     P("email 相同就是同一人。不同 email 時，手機、姓名、集團三個都相同，才算同一人（手機只拿來比對，不顯示在任何地方）。姓名寫法略有不同（例如英文名、順序顛倒）也算相同。");
     TB(["姓名", "公司", "用過的 email", "依據"], A.merged.map((m) => [m.n, m.c, m.emails.join("、"), m.why]));
