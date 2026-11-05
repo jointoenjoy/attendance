@@ -286,7 +286,6 @@ for d, rs in dom_rows.items():
         "pick": [[NAMES[c], n] for c, n in pick.most_common()], "people": len(ppl), "rows": len(rs),
         "v": {"name": v[0], "code": NAMES.get(v[1], "查無"), "conf": v[2], "src": v[3], "note": v[4]} if v else None,
         "st": st, "why": why,
-        "list": sorted([[dt, g["n"], g["e"], NAMES[c], src] for dt, g, c, src in rs], key=lambda r: (r[1], r[0])),
     })
 domains.sort(key=lambda x: ({"需確認": 0, "一致": 1, "不適用": 2}[x["st"]], -x["people"], x["d"]))
 # 給集團人資確認的網域表（只有網域與公司，不含個資）

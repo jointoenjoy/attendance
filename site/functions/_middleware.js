@@ -10,7 +10,7 @@ const GATES = [
   { name: "全集團互動工具", env: "ALL_PASSWORD", cookie: "jte_all",
     match: (p) => p === "/all" || p.startsWith("/all/") || p === "/api/state" },
   { name: "2026 全集團參與報告", env: "Y2026_PASSWORD", cookie: "jte_2026",
-    match: (p) => p === "/2026" || p.startsWith("/2026/") },
+    match: (p) => p === "/2026" || p.startsWith("/2026/") || p === "/api/domain-check" },
 ];
 
 async function tokenOf(pw) {
@@ -112,7 +112,7 @@ export async function onRequest(context) {
   }
 
   // 沒登入時，資料端點直接回 401 JSON，不要餵 HTML 給前端的 fetch
-  if (url.pathname === "/api/state" || url.pathname.endsWith(".json")) {
+  if (url.pathname.startsWith("/api/") || url.pathname.endsWith(".json")) {
     return new Response(JSON.stringify({ error: "unauthorized" }), {
       status: 401,
       headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },

@@ -105,6 +105,34 @@
   .hero-act{margin:16px 0 0}
   details.ev .dinfo{margin:10px 16px 2px;font-size:.84rem;color:var(--ink-2)}
   details.ev .dinfo b{color:var(--blue-dark)}
+  /* 網域歸戶確認：一個 @網域一行；一致的直接打勾，需確認的點開小視窗 */
+  .dk{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:10px 4px;border-bottom:1px solid var(--line)}
+  .dk:last-of-type{border-bottom:0}
+  .dk .dn{flex:1 1 220px;min-width:0}
+  .dk .dn b{color:var(--blue-dark);font-size:.95rem}
+  .dk .dn small{display:block;font-size:.8rem;color:var(--ink-3)}
+  .dk .ans{font-size:.8rem;font-weight:700;color:var(--ink-4)}
+  .dk .ans.yes{color:var(--yes)} .dk .ans.chg{color:var(--orange-dark)}
+  .dk label.okc{display:inline-flex;align-items:center;gap:6px;font-size:.86rem;font-weight:700;color:var(--blue-dark);cursor:pointer}
+  .dk label.okc input,dialog.dedit input[type=radio]{width:18px;height:18px;accent-color:var(--blue-dark);margin:0}
+  .dk .btn{padding:6px 14px;font-size:.82rem}
+  .dk.na{opacity:.6}
+  dialog.dedit{width:min(520px,calc(100vw - 32px))}
+  dialog.dedit .dinfo{font-size:.84rem;color:var(--ink-2);line-height:1.8;margin:12px 0}
+  dialog.dedit .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid var(--line-2);border-radius:12px;margin:0 0 8px;
+    cursor:pointer;font-size:.92rem;font-weight:700;color:var(--ink)}
+  dialog.dedit .opt:has(input:checked){border-color:var(--blue);background:var(--blue-pale)}
+  dialog.dedit select,dialog.dedit textarea,.subbar input{width:100%;font:inherit;font-size:.9rem;padding:9px 12px;border-radius:10px;
+    border:1px solid var(--line-2);background-color:#fff;color:var(--ink)}
+  dialog.dedit select{margin:0 0 8px}
+  dialog.dedit textarea{min-height:70px;resize:vertical}
+  dialog.dedit .lbl{display:block;font-size:.8rem;color:var(--ink-3);margin:10px 0 4px}
+  dialog.dedit .acts{display:flex;justify-content:flex-end;gap:8px;margin:16px 0 0}
+  .subbar{position:sticky;bottom:12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:14px 0 0;padding:12px 16px;
+    border-radius:16px;background:var(--blue-pale);box-shadow:0 6px 20px rgba(3,38,57,.10)}
+  .subbar input{flex:0 1 220px;width:auto}
+  .subbar .msg{font-size:.84rem;color:var(--ink-2)}
+  .subbar .msg.err{color:#B4593A;font-weight:700}
   /* 統計查核報告（彈出視窗） */
   dialog.audit{width:min(860px,calc(100vw - 32px));max-height:calc(100vh - 48px);border:none;border-radius:20px;padding:0;
     box-shadow:0 20px 60px rgba(3,38,57,.25);color:var(--ink)}
@@ -144,6 +172,18 @@
     <div class="kpis" id="kpis"></div>
     <div class="hero-act"><button class="btn primary" id="openAudit" type="button" hidden>統計查核報告</button></div>
   </header>
+  <dialog class="audit dedit" id="dedit">
+    <div class="ahead"><h2 id="deTitle"></h2><button class="btn" type="button" id="deClose">取消</button></div>
+    <div class="abody">
+      <p class="dinfo" id="deInfo"></p>
+      <label class="opt"><input type="radio" name="deChoice" value="ok"><span id="deOkTxt"></span></label>
+      <label class="opt"><input type="radio" name="deChoice" value="chg">不對，要改歸到別家</label>
+      <select id="deCo" aria-label="改歸戶公司"></select>
+      <span class="lbl">備註（選填，例如正確的公司全名）</span>
+      <textarea id="deNote" maxlength="300"></textarea>
+      <div class="acts"><button class="btn primary" type="button" id="deSave">好了</button></div>
+    </div>
+  </dialog>
   <dialog class="audit" id="audit">
     <div class="ahead"><h2>統計查核報告</h2><button class="btn" type="button" id="closeAudit">關閉</button></div>
     <div class="abody" id="auditBody"></div>
@@ -164,7 +204,7 @@
     </section>
     <section class="card">
       <h2>email 網域歸戶確認</h2>
-      <p class="hint">每個 email 網域目前歸到哪家公司。「需確認」排在最前面，請集團 HR 看一下對不對；點網域可展開這個網域的所有報名。也可以下載只有網域與公司（不含個資）的確認表，直接在 Excel 填回覆。</p>
+      <p class="hint">每個 email 網域（@ 後面那段）目前歸到哪家公司。公司對的直接打勾；標「需確認」的請按「確認／修改」，在小視窗裡選對或改公司。填完按最下面「送出確認」。之後回來會看到上次送出的內容，可以再改再送。</p>
       <div class="dl" id="dlDom" style="margin:0 0 12px"></div>
       <div id="doms"></div>
     </section>
@@ -234,22 +274,89 @@
   // email 網域歸戶確認表
   if (D.files.domains) $("dlDom").append(btn(D.files.domains, "網域歸戶確認表（不含個資）"));
   const ST = { "需確認": "tag", "一致": "tag ok", "不適用": "tag na" };
-  for (const x of D.domains || []) {
-    const d = el("details", { class: "ev" });
-    d.append(el("summary", {},
-      el("span", { class: "evt" }, el("small", {}, `${x.people} 人・${x.rows} 筆`), "@" + x.d),
-      el("span", { class: "evn" }, x.co.map(([c, n]) => x.co.length > 1 ? `${c} ${n} 筆` : c).join("、") + "　", el("span", { class: ST[x.st] }, x.st))));
+  const OPT = [...D.companies.map((c) => c.name), "其他／非集團"];
+  for (const o of OPT) $("deCo").append(el("option", { value: o }, o));
+  const ans = {}, rowsDom = [];
+  const info = (x) => {
     const v = x.v;
-    d.append(el("p", { class: "dinfo" }, el("b", {}, x.why), "。",
+    return [el("b", {}, x.why), "。",
       ...(v ? ["網路查證：", v.name, `（${v.code}，把握度${v.conf}）`, v.note ? "；" + v.note : "", "。",
         ...(v.src ? [" ", el("a", { href: v.src, target: "_blank", rel: "noopener" }, "查證來源")] : [])] : []),
-      ...(x.pick.length && x.co.length > 1 ? [" 報名自選：" + x.pick.map(([c, n]) => `${c} ${n} 筆`).join("、") + "。"] : [])));
-    const tbl = el("table", {}, el("thead", {}, el("tr", {}, ...["姓名", "email", "歸戶公司", "日期", "怎麼判斷"].map((h) => el("th", {}, h)))));
-    const b = el("tbody");
-    for (const [dt, n, em, c, src] of x.list) b.append(el("tr", {}, ...[n, em, c, md(dt), src].map((t) => el("td", {}, t))));
-    tbl.append(b);
-    d.append(el("div", { class: "scroll" }, tbl));
-    $("doms").append(d);
+      ...(x.pick.length && x.co.length > 1 ? [" 報名自選：" + x.pick.map(([c, n]) => `${c} ${n} 筆`).join("、") + "。"] : [])];
+  };
+  const curOf = (x) => x.co.map(([c, n]) => x.co.length > 1 ? `${c} ${n} 筆` : c).join("、");
+  let editing = null;
+  const openEdit = (w) => {
+    const x = w.x, a = ans[x.d] || {};
+    editing = w;
+    $("deTitle").textContent = "@" + x.d;
+    $("deInfo").replaceChildren(`目前歸戶：${curOf(x)}（${x.people} 人・${x.rows} 筆）。`, ...info(x));
+    $("deOkTxt").textContent = x.co.length > 1 ? "正確，維持現在的分法（各人照自己選的公司）" : `正確，就是「${x.co[0][0]}」`;
+    const chg = !!a.co;
+    document.querySelectorAll("input[name=deChoice]").forEach((r) => (r.checked = r.value === (chg ? "chg" : a.ok ? "ok" : "")));
+    $("deCo").value = a.co || OPT[0]; $("deCo").style.display = chg ? "" : "none";
+    $("deNote").value = a.note || "";
+    $("dedit").showModal();
+  };
+  document.querySelectorAll("input[name=deChoice]").forEach((r) =>
+    r.addEventListener("change", () => ($("deCo").style.display = r.value === "chg" && r.checked ? "" : "none")));
+  $("deClose").addEventListener("click", () => $("dedit").close());
+  $("deSave").addEventListener("click", () => {
+    const c = document.querySelector("input[name=deChoice]:checked")?.value;
+    ans[editing.x.d] = { ok: c === "ok", co: c === "chg" ? $("deCo").value : "", note: $("deNote").value.trim() };
+    editing.paint(); $("dedit").close();
+  });
+  for (const x of D.domains || []) {
+    const need = x.st === "需確認", tag = el("span", { class: ST[x.st] }, x.st), mark = el("span", { class: "ans" });
+    const row = el("div", { class: "dk" + (x.st === "不適用" ? " na" : "") },
+      el("div", { class: "dn" }, el("b", {}, "@" + x.d), " ", tag, el("small", {}, `${curOf(x)}・${x.people} 人`)), mark);
+    const w = { x, paint: null };
+    let ck = null;
+    if (need) row.append(el("button", { class: "btn", type: "button" }, "確認／修改"));
+    else {
+      ck = el("input", { type: "checkbox" });
+      row.append(el("label", { class: "okc" }, ck, "正確"));
+      ck.addEventListener("change", () => { ans[x.d] = { ...(ans[x.d] || {}), ok: ck.checked, co: ck.checked ? "" : (ans[x.d] || {}).co || "" }; w.paint(); });
+      row.append(el("button", { class: "btn", type: "button", title: "改歸戶或留備註" }, "修改"));
+    }
+    row.querySelector("button").addEventListener("click", () => openEdit(w));
+    w.paint = () => {
+      const a = ans[x.d] || {};
+      if (ck) ck.checked = !!a.ok;
+      mark.className = "ans" + (a.co ? " chg" : a.ok ? " yes" : "");
+      mark.textContent = a.co ? "改歸：" + a.co : a.ok ? "已確認" : a.note ? "有備註" : "";
+      if (a.note && (a.co || a.ok)) mark.textContent += "＋備註";
+    };
+    rowsDom.push(w);
+    $("doms").append(row);
+  }
+  if (rowsDom.length) {
+    const by = el("input", { type: "text", placeholder: "填寫人（選填，例如：米蘭 HR）", maxlength: "30", "aria-label": "填寫人" }),
+      send = el("button", { class: "btn primary", type: "button" }, "送出確認"), msg = el("span", { class: "msg" });
+    $("doms").append(el("div", { class: "subbar" }, by, send, msg));
+    const stamp = (iso) => new Date(iso).toLocaleString("zh-TW", { hour12: false, month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" });
+    try {
+      const r = await fetch("/api/domain-check", { cache: "no-store", credentials: "same-origin" });
+      const S = r.ok ? await r.json() : { items: {} };
+      Object.assign(ans, S.items || {});
+      rowsDom.forEach((w) => w.paint());
+      if (S.by) by.value = S.by;
+      if (S.updated) msg.textContent = `上次送出：${stamp(S.updated)}${S.by ? "（" + S.by + "）" : ""}`;
+    } catch (e) {}
+    send.addEventListener("click", async () => {
+      send.disabled = true; msg.className = "msg"; msg.textContent = "送出中…";
+      try {
+        const r = await fetch("/api/domain-check", { method: "PUT", credentials: "same-origin",
+          headers: { "content-type": "application/json" }, body: JSON.stringify({ items: ans, by: by.value }) });
+        const j = await r.json();
+        if (!r.ok || !j.ok) throw new Error(j.error || r.status);
+        const v = Object.values(ans);
+        msg.textContent = `已送出（${stamp(j.updated)}）：${v.filter((a) => a.ok).length} 個確認正確、${v.filter((a) => a.co).length} 個改歸戶。謝謝！`;
+      } catch (e) {
+        msg.className = "msg err"; msg.textContent = "送出失敗，請稍後再試（" + e.message + "）";
+      }
+      send.disabled = false;
+    });
   }
 
   // 統計查核報告（彈出視窗）
