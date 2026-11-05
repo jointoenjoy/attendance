@@ -175,7 +175,7 @@
     <p class="eyebrow">練息場Chill療癒工作坊</p>
     <h1>2026 博報堂集團參與人數統計</h1>
     <p class="lede" id="lede">資料載入中…</p>
-    <p class="lede quote">統計期間：2026/3/20《春野・開運・馬上好》起，對應 2026 年度合約範圍。1/16《動態靜心》屬 2025 年度合約範圍，名單以暖灰底列在最下方供參考，不計入本頁統計數字。</p>
+    <p class="lede quote">統計期間：2026/1/16《動態靜心》起。1/16 那場屬 2025 年度合約範圍，以暖灰底標示，已計入本頁統計數字；3/20《春野・開運・馬上好》起屬 2026 年度合約範圍。</p>
     <div class="kpis" id="kpis"></div>
   </header>
   <dialog class="audit dedit" id="dedit">
@@ -204,7 +204,7 @@
     </section>
     <details class="card fold">
       <summary><h2>下載數據（Excel 檔）</h2><span class="chev" aria-hidden="true"></span></summary>
-      <p class="hint">內容跟本頁同步：1/16《動態靜心》也列在檔案裡，用暖灰底標示、註明屬 2025 合約範圍，是否計入請自行判斷。每個公司的 HR 可以只下載自己公司的檔案。</p>
+      <p class="hint">內容跟本頁同步，數字一致：1/16《動態靜心》也列在檔案裡並計入統計，用暖灰底標示、註明屬 2025 合約範圍。每個公司的 HR 可以只下載自己公司的檔案。</p>
       <div class="dl" id="dlAll"></div>
       <p class="hint" style="margin:14px 0 6px">各公司明細：</p>
       <div class="dl" id="dlCo"></div>
@@ -257,8 +257,7 @@
     return;
   }
   const T = D.totals, CO = Object.fromEntries(D.companies.map((c) => [c.code, c.name]));
-  const E26 = D.events.filter((e) => !e.prev);
-  $("lede").textContent = `${md(E26[0].date)}～${md(E26.at(-1).date)} 共 ${T.events} 場｜資料更新：${D.generated}（每週三自動更新）`;
+  $("lede").textContent = `${md(D.events[0].date)}～${md(D.events.at(-1).date)} 共 ${T.events} 場｜資料更新：${D.generated}（每週三自動更新）`;
   for (const [v, l] of [[T.people, "參與人數（不重複）"], [T.rows, "報名人次"], [T.ck, "報到人次"], [T.events, "場次"]])
     $("kpis").append(el("div", { class: "kpi" }, el("b", {}, v.toLocaleString()), el("span", {}, l)));
 
@@ -430,11 +429,11 @@
       P("目前算同一人。如果其實是兩個人（例如共用部門信箱），請告訴我們，人數會加 1。");
       TB(["email", "報名時填的姓名"], A.shared.map((x) => [x.email, x.names.join("、")]));
     }
-    H3("三、公司怎麼判斷（2026 共 " + T.rows + " 筆）");
+    H3("三、公司怎麼判斷（共 " + T.rows + " 筆）");
     TB(["判斷方式", "筆數"], A.methods.map(([k, n]) => [k, n]));
     P("有選公司的照選的；沒選的先看本人其他場次，再看同網域其他人選得最多的，最後才看 email 網域對照表。各網域的狀況請看頁面上的「email 網域歸戶確認」。");
     H3("四、沒有算進來的");
-    P(Object.entries(D.skipped).map(([k, v]) => `${k} ${v} 筆`).join("、") + `，共 ${nSkip} 筆。1/16《動態靜心》屬 2025 合約範圍，也不計入。`);
+    P(Object.entries(D.skipped).map(([k, v]) => `${k} ${v} 筆`).join("、") + `，共 ${nSkip} 筆。`);
     $("openAudit").addEventListener("click", () => $("audit").showModal());
     $("closeAudit").addEventListener("click", () => $("audit").close());
     $("audit").addEventListener("click", (e) => { if (e.target === $("audit")) $("audit").close(); });
@@ -454,7 +453,7 @@
       d.append(el("summary", {},
         el("span", { class: "evt" }, el("small", {}, e.date), e.title),
         el("span", { class: "evn" }, `報名 ${gs.length} 人次・`, ...(e.prev ? [`報到 ${ck}・`, el("span", { class: "tag prev" }, "2025 合約範圍")] : [e.upcoming ? el("span", { class: "tag up" }, "尚未舉辦") : e.recorded ? `報到 ${ck}` : el("span", { class: "tag" }, "報到未登錄")]))));
-      if (e.prev) d.append(el("p", { class: "prevnote" }, "此活動屬於 2025 練息場合約範圍，不計入本頁上方統計數字；下載的 Excel 也有列出，同樣以暖灰底標示。"));
+      if (e.prev) d.append(el("p", { class: "prevnote" }, "此活動屬於 2025 練息場合約範圍，已計入本頁上方統計數字；下載的 Excel 也有列出並計入，同樣以暖灰底標示。"));
       const tbl = el("table", {}, el("thead", {}, el("tr", {}, ...["姓名", "email", "公司", "報名狀態", "報到"].map((h) => el("th", {}, h)))));
       const b = el("tbody");
       for (const g of gs)
@@ -478,7 +477,7 @@
   const sk = Object.entries(D.skipped).map(([k, v]) => `${k} ${v} 筆`).join("、");
   const notes = [
     "資料來源：Wix 活動後台的報名名單與報到勾選，每週三自動抓最新一次。",
-    "統計期間對應 2026 年度合約範圍，從 3/20《春野・開運・馬上好》開始；1/16《動態靜心》屬 2025 年度合約範圍，名單以暖灰底列在最下方供參考，不計入本頁的人數、人次與各公司彙總；下載的 Excel 也列出這場（暖灰底），是否計入請自行判斷。",
+    "統計期間從 1/16《動態靜心》開始。1/16 那場屬 2025 年度合約範圍，以暖灰底標示，但已計入本頁的人數、人次與各公司彙總；下載的 Excel 也列出並計入這場（暖灰底），兩邊數字一致。3/20《春野・開運・馬上好》起屬 2026 年度合約範圍。",
     `本頁算法：報名時選了博報堂六家公司的人，加上沒選公司的人（多半是候補，因為 Wix 候補表單不會問公司）。沒選公司的人，先照本人在其他場次選的公司；沒選過就照同網域其他人選得最多的公司；都沒有才看 email 網域對照表。這些人在名單上公司後面標「＊」。共 ${T.rows} 筆。`,
     "同一人：email 相同，或手機、姓名、集團三個都相同，就算同一人，人數只算一次（有人換過信箱或 email 打錯字）。手機只用來比對，不會顯示在頁面或下載檔。",
     (sk ? `沒有算進本頁的：${sk}。` : "") + `本頁加上這些，就是 Wix 上全部的報名（${T.rows + Object.values(D.skipped).reduce((a, b) => a + b, 0)} 筆），跟年中報告「Chill 活動報名概況」的合計一樣。`,
