@@ -134,6 +134,32 @@ for g in ALL:
             dom_pick[em.split("@")[-1]][g["company"]] += 1
 
 
+def load_checks():
+    """集團人資在 /2026 網域歸戶確認送出的結果（存在 Cloudflare KV）：{網域: {ok, co, note}}。
+    抓不到就用上次存的 _private/domain_check.json，讓每週自動更新不會因為網路斷掉失敗。"""
+    import http.cookiejar, urllib.parse, urllib.request
+    cache = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_private", "domain_check.json")
+    try:
+        pw = os.environ.get("Y2026_PASSWORD") or open(os.path.join(os.path.dirname(cache), "y2026_password.txt")).read().strip()
+        op = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
+        op.addheaders = [("User-Agent", "Mozilla/5.0 attendance-pipeline")]   # Cloudflare 會擋 Python 預設的 User-Agent
+        op.open(SITE_URL + "/2026/", urllib.parse.urlencode({"pw": pw}).encode(), timeout=30)
+        got = json.loads(op.open(SITE_URL + "/api/domain-check", timeout=30).read().decode("utf-8"))
+        json.dump(got, open(cache, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    except Exception as e:
+        print("讀不到網域確認，改用上次存的：", e)
+        got = json.load(open(cache, encoding="utf-8")) if os.path.exists(cache) else {}
+    return got
+SITE_URL = "https://attendance-j2e.pages.dev"
+CHECK = load_checks()
+CHECKS = CHECK.get("items", {})
+CODE_OF = {v: k for k, v in NAMES.items()}
+# 人資把網域改歸到別家：該網域的每一筆都照改（選「其他／非集團」就不算進博報堂）
+MOVED = {d: CODE_OF.get(a["co"], "") for d, a in CHECKS.items() if a.get("co")}
+print("網域確認：%d 個已確認、%d 個改歸（%s %s）" % (sum(a.get("ok", False) for a in CHECKS.values()), len(MOVED),
+      CHECK.get("by", ""), CHECK.get("updated", "")[:16]))
+
+
 def guess(email):
     """沒選公司的人歸哪家，回傳 (公司代碼, 判斷方式)。"""
     em = email.lower().strip()
@@ -164,6 +190,8 @@ for e in prev + events:
         code, src = (g["company"] or "").upper(), "報名選填"
         if not g["company"]:
             code, src = guess(g["email"])
+        if g["email"].lower().split("@")[-1] in MOVED:
+            code, src = MOVED[g["email"].lower().split("@")[-1]], "人資確認改歸"
         if code not in HAKUHODO:
             if not pv:
                 skipped[g["company"] or "（未選企業・私人信箱）"] += 1
@@ -253,7 +281,7 @@ audit = {
     ],
     "email_people": len({g["e"] for e in evs if not e["prev"] for g in e["guests"]}),
     "merged": merged, "not_merged": nm, "shared": shared,
-    "methods": [[k, by_mail[k]] for k in ["報名選填", "依本人其他場次", "依同網域多數人所選", "依 email 網域"]],
+    "methods": [[k, by_mail[k]] for k in ["報名選填", "依本人其他場次", "依同網域多數人所選", "依 email 網域", "人資確認改歸"]],
 }
 PRIVATE = FREE_MAIL - {"jointoenjoy.com"}
 
@@ -301,12 +329,16 @@ for d, rs in dom_rows.items():
         "whoCap": "網域與自選公司不符的報名者" if len(co) > 1 else "這個網域底下的報名者",
     })
 domains.sort(key=lambda x: ({"需確認": 0, "一致": 1, "不適用": 2}[x["st"]], -x["people"], x["d"]))
+def ans_txt(d):
+    a = CHECKS.get(d) or {}
+    t = "改歸：" + a["co"] if a.get("co") else "已確認" if a.get("ok") else ""
+    return "；".join(x for x in (t, a.get("note", "")) if x)
 # 給集團人資確認的網域表（只有網域與公司，不含個資）
 files["domains"] = write_xlsx("2026-email網域歸戶確認表.xlsx",
     ["email 網域", "目前歸戶公司", "人數", "報名筆數", "狀態", "說明", "網路查證公司", "查證歸屬", "把握程度", "查證來源", "人資確認（請填）"],
     [[x["d"], "、".join("%s %d 筆" % (c, n) for c, n in x["co"]), x["people"], x["rows"], x["st"], x["why"],
       x["v"]["name"] if x["v"] else "", x["v"]["code"] if x["v"] else "", x["v"]["conf"] if x["v"] else "",
-      x["v"]["src"] if x["v"] else "", ""] for x in domains],
+      x["v"]["src"] if x["v"] else "", ans_txt(x["d"])] for x in domains],
     widths=[22, 30, 8, 10, 10, 34, 28, 18, 10, 40, 22])
 
 nocheck = [e["date"] for e in evs if not e["recorded"] and not e["upcoming"] and not e["prev"]]
