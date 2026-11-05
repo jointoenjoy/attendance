@@ -13,7 +13,7 @@ sheet = json.load(open(os.path.join(SCRATCH, "attendance_data.json"), encoding="
 DOMAIN_CAT = {
     "ua.com.tw": "聯廣 UCG", "ua.com": "聯廣 UCG",
     "unismart.com.tw": "聯廣 UCG", "unisurf.com.tw": "聯廣 UCG", "unisurf.com": "聯廣 UCG",
-    "unisincere.com.tw": "聯廣 UCG", "unistyle.com.tw": "聯廣 UCG", "unisincere.com": "聯廣 UCG",
+    "unisincere.com.tw": "聯廣 UCG", "unistyle.com.tw": "先勢集團", "unisincere.com": "聯廣 UCG",
     "ace-taipei.com": "艾斯", "ace.taipei.com": "艾斯",
     "2008-media.com": "2008傳媒", "dvibemedia.com": "迪維", "divibemedia.com": "迪維",
     "medialand.tw": "米蘭 MDCG", "medialnad.tw": "米蘭 MDCG", "mediand.tw": "米蘭 MDCG",
