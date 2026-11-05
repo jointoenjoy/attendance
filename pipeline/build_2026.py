@@ -37,8 +37,8 @@ CAT_CODE = dict({c: "UCG" for c in UCG_SUBS}, **{"先勢集團": "PILOT", "台�
 PREV_FILL = PatternFill("solid", fgColor="F3EADB")   # 跟頁面 1/16 場次同一個暖灰底
 HEAD_FILL = PatternFill("solid", fgColor="004D89")
 PREV_NOTE = "暖灰底＝1/16《動態靜心》，屬 2025 練息場合約範圍；其餘屬 2026 合約範圍（3/20 起）。頁面與本檔的統計都已含 1/16。"
-OTHER_FILL = PatternFill("solid", fgColor="E6E6E6")   # 非博報堂集團員工的報名（練息之友、民眾自費…），列在最下方、不計入統計
-OTHER_NOTE = "灰底＝不是博報堂集團員工（練息之友、民眾自費、未選企業的私人信箱），列在最下方供對照，不計入統計。"
+OTHER_FILL = PatternFill("solid", fgColor="E6E6E6")   # 非博報堂集團員工的報名（練息之友、民眾自費），列在最下方、不計入統計
+OTHER_NOTE = "灰底＝不是博報堂集團員工（練息之友、民眾自費），列在最下方供對照，不計入統計。"
 
 
 def write_xlsx(name, head, rows, prev_col=None, widths=None, prev_cols=(), others=()):
@@ -184,7 +184,7 @@ NOT_GROUP, SAME_PERSON = set(MARKS.get("not_group", [])), set(MARKS.get("same_pe
 
 # 非集團報名在 Excel 上的寫法（Wix「所屬企業」欄原值 → 註明）
 OTHER_KIND = {"練息之友": "非集團：練息之友", "非集團員工現場收費500元": "非集團：民眾自費（現場 500 元）",
-              "": "未選企業（私人信箱，無法確認）"}
+              "": "非集團：練息之友"}   # 沒選企業又是私人信箱的，決策者 2026-11-05 定：一律算練息之友
 
 T = today()
 events = year_events()   # 已報名但還沒辦的場次也列（2026-11-03 決策者要求），報到欄標「尚未舉辦」
@@ -210,13 +210,13 @@ for e in prev + events:
         if g["email"].lower().strip() in NOT_GROUP:
             code, g = "", dict(g, company="練息之友")
         if code not in HAKUHODO:
-            skipped[g["company"] or "（未選企業・私人信箱）"] += 1
+            skipped[g["company"] or "練息之友"] += 1
             skipped_st[g["status"]] += 1
             ck = "尚未舉辦" if up else ("已報到" if g["wix_checked_in"] else "未報到") if rec else "報到未登錄"
             others.append([e["date"], e["title"], "2025 合約範圍" if pv else "2026 合約範圍",
                            OTHER_KIND.get(g["company"], "非集團：" + (g["company"] or "未選企業")),
                            g["name"], g["email"].lower(), g["status"], ck, "不計入",
-                           "無法確認" if not g["company"] else "否"])
+                           "否"])
             continue
         ck = "尚未舉辦" if up else ("已報到" if g["wix_checked_in"] else "未報到") if rec else "報到未登錄"
         gs.append({"n": g["name"], "e": g["email"].lower(), "p": PID[g["email"].lower().strip()], "c": code, "s": g["status"],
