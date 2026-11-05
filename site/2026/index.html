@@ -153,11 +153,10 @@
   dialog.audit thead th{background:none;color:var(--ink-3);font-size:.78rem;border-bottom:1px solid var(--line-2);border-radius:0}
   dialog.audit td:first-child{color:var(--ink)}
   dialog.audit ul{margin:4px 0 10px;padding-left:1.3em;line-height:1.6}dialog.audit ul li{margin:4px 0}
-  .sumrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 0}
-  .sumrow div{background:var(--blue-pale);border-radius:14px;padding:10px 14px}
-  .sumrow b{display:block;font-family:var(--font-en);font-size:1.4rem;color:var(--blue-dark)}
-  .sumrow span{font-size:.78rem;color:var(--ink-3)}
-  @media (max-width:600px){.sumrow{grid-template-columns:1fr}}
+  .fixbox h3{font-size:1rem;color:var(--blue-dark);margin:16px 0 4px}
+  .fixbox ul{margin:4px 0 8px;padding-left:1.3em;line-height:1.6}.fixbox ul li{margin:4px 0}
+  .fixbox p{margin:2px 0;line-height:1.6}
+  .fixbox .acts{margin-top:16px}
   #msg{padding:40px 0;text-align:center;color:var(--ink-3)}
   @media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
   details.fold>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -178,7 +177,6 @@
     <p class="lede" id="lede">資料載入中…</p>
     <p class="lede quote">統計期間：2026/3/20《春野・開運・馬上好》起，對應 2026 年度合約範圍。1/16《動態靜心》屬 2025 年度合約範圍，名單以暖灰底列在最下方供參考，不計入本頁統計數字。</p>
     <div class="kpis" id="kpis"></div>
-    <div class="hero-act"><button class="btn primary" id="openAudit" type="button" hidden>統計查核報告</button></div>
   </header>
   <dialog class="audit dedit" id="dedit">
     <div class="ahead"><h2 id="deTitle"></h2><button class="btn" type="button" id="deClose">取消</button></div>
@@ -194,11 +192,16 @@
     </div>
   </dialog>
   <dialog class="audit" id="audit">
-    <div class="ahead"><h2>統計查核報告</h2><button class="btn" type="button" id="closeAudit">關閉</button></div>
+    <div class="ahead"><h2>程式判斷細節</h2><button class="btn" type="button" id="closeAudit">關閉</button></div>
     <div class="abody" id="auditBody"></div>
   </dialog>
   <div id="msg">資料載入中…</div>
   <main id="main" hidden>
+    <section class="card fixbox" id="fixbox" hidden>
+      <h2>統計查核報告</h2>
+      <div id="fixBody"></div>
+      <div class="acts"><button class="btn" id="openAudit" type="button">程式判斷細節</button></div>
+    </section>
     <details class="card fold">
       <summary><h2>下載數據（Excel 檔）</h2><span class="chev" aria-hidden="true"></span></summary>
       <p class="hint">內容跟本頁同步：1/16《動態靜心》也列在檔案裡，用暖灰底標示、註明屬 2025 合約範圍，是否計入請自行判斷。每個公司的 HR 可以只下載自己公司的檔案。</p>
@@ -402,35 +405,36 @@
       t.append(b); ab.append(el("div", { class: "scroll" }, t));
     };
     const nSkip = Object.values(D.skipped).reduce((a, b) => a + b, 0);
-    ab.append(el("div", { class: "sumrow" },
-      ...[[A.email_people, "不同 email 數"], [T.people, "合併同一人後的參與人數"], [A.merged.length, "合併成同一人的組數"]]
-        .map(([n, l]) => el("div", {}, el("b", {}, n), el("span", {}, l)))));
-    H3("一、這一波修正（集團 HR 回報後）");
-    if (A.fix_cause) P("錯誤原因：" + A.fix_cause);
-    if (A.fix_rule) P("修正方式：" + A.fix_rule);
+    // 這一波修正直接列在頁面上（給財務對帳，只放必要數字）；程式怎麼判斷收在「程式判斷細節」視窗
+    const fb = $("fixBody");
     for (const f of A.fixes) {
-      ab.append(el("p", {}, el("b", {}, f.kind + "的有 " + f.sum)));
-      ab.append(el("ul", {}, ...f.items.map((t) => el("li", {}, t))));
+      fb.append(el("h3", {}, f.kind + "的有 " + f.sum));
+      fb.append(el("ul", {}, ...f.items.map((t) => el("li", {}, t))));
     }
-    H3("二、同一人的判斷");
+    for (const [h, ls] of [["錯誤原因", A.fix_cause], ["修正方式", A.fix_rule]]) {
+      if (!ls) continue;
+      fb.append(el("h3", {}, h + "："));
+      for (const t of ls) fb.append(el("p", {}, t));
+    }
+    $("fixbox").hidden = false;
+    H3("一、同一人的判斷");
     P("email 相同就是同一人。不同 email 時，手機、姓名、集團三個都相同，才算同一人（手機只拿來比對，不顯示在任何地方）。姓名寫法略有不同（例如英文名、順序顛倒）也算相同。");
     TB(["姓名", "公司", "用過的 email", "依據"], A.merged.map((m) => [m.n, m.c, m.emails.join("、"), m.why]));
     if (A.not_merged.length) {
-      H3("三、手機相同但沒有合併");
+      H3("二、手機相同但沒有合併");
       P("同一支手機、但姓名不同，判斷為不同人（例如幫同事代報名），分開計算。");
       TB(["姓名", "email"], A.not_merged.map((x) => [x.names.join("、"), x.emails.join("、")]));
     }
     if (A.shared.length) {
-      H3("四、請確認：同一個 email 報了不同姓名");
+      H3("請確認：同一個 email 報了不同姓名");
       P("目前算同一人。如果其實是兩個人（例如共用部門信箱），請告訴我們，人數會加 1。");
       TB(["email", "報名時填的姓名"], A.shared.map((x) => [x.email, x.names.join("、")]));
     }
-    H3("五、公司怎麼判斷（2026 共 " + T.rows + " 筆）");
+    H3("三、公司怎麼判斷（2026 共 " + T.rows + " 筆）");
     TB(["判斷方式", "筆數"], A.methods.map(([k, n]) => [k, n]));
     P("有選公司的照選的；沒選的先看本人其他場次，再看同網域其他人選得最多的，最後才看 email 網域對照表。各網域的狀況請看頁面上的「email 網域歸戶確認」。");
-    H3("六、沒有算進來的");
+    H3("四、沒有算進來的");
     P(Object.entries(D.skipped).map(([k, v]) => `${k} ${v} 筆`).join("、") + `，共 ${nSkip} 筆。1/16《動態靜心》屬 2025 合約範圍，也不計入。`);
-    $("openAudit").hidden = false;
     $("openAudit").addEventListener("click", () => $("audit").showModal());
     $("closeAudit").addEventListener("click", () => $("audit").close());
     $("audit").addEventListener("click", (e) => { if (e.target === $("audit")) $("audit").close(); });

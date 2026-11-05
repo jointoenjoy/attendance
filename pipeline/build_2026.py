@@ -171,6 +171,11 @@ def guess(email):
     return CAT_CODE.get(cat_of(d), ""), "依 email 網域"
 
 
+# 人工標記（含完整 email，只放 _private、不進 git）：not_group＝練息之友不算；same_person＝確認同一人，不再列進「請確認」
+_mk = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_private", "manual_marks.json")
+MARKS = json.load(open(_mk, encoding="utf-8")) if os.path.exists(_mk) else {}
+NOT_GROUP, SAME_PERSON = set(MARKS.get("not_group", [])), set(MARKS.get("same_person", []))
+
 T = today()
 events = year_events()   # 已報名但還沒辦的場次也列（2026-11-03 決策者要求），報到欄標「尚未舉辦」
 # 1/16 那場屬 2025 報價單：照樣列名單給人看（頁面換底色註明），但不算進任何統計與下載檔（2026-11-03 決策者要求）
@@ -192,6 +197,8 @@ for e in prev + events:
             code, src = guess(g["email"])
         if g["email"].lower().split("@")[-1] in MOVED:
             code, src = MOVED[g["email"].lower().split("@")[-1]], "初審改歸"
+        if g["email"].lower().strip() in NOT_GROUP:
+            code, g = "", dict(g, company="練息之友")
         if code not in HAKUHODO:
             if not pv:
                 skipped[g["company"] or "（未選企業・私人信箱）"] += 1
@@ -268,16 +275,18 @@ for a, b in not_merged:
 shared = []   # 同一個 email 報了不同姓名的人（可能是幫別人報名），目前算一人
 for em in {g["e"] for e in evs if not e["prev"] for g in e["guests"]}:
     ns = sorted({g["name"] for g in ALL if g["email"] == em})
+    if em in NOT_GROUP or em in SAME_PERSON:
+        continue
     if any(not same_name(x, y) and len(CH(x)) >= 2 and len(CH(y)) >= 2 for x in ns for y in ns):
         shared.append({"names": ns, "email": mask(em)})
 # 姓名只從私有名單帶出，不寫進程式碼（程式碼會進 git）
 NAME_OF = lambda dom: next((g["name"] for g in ALL if g["email"].endswith("@" + dom)), "一位同仁")
 audit = {
     # 2026-11-05 這一波修正（集團人資回報同一人歸到兩家公司）
-    "fix_cause": "這幾筆報名時沒選公司（候補表單不問公司），系統原本只看 email 網域對照表來歸：對照表把 unistyle、ua.com.tw 都歸到聯廣 UCG，私人信箱則整筆不算。",
-    "fix_rule": "以報名者本人在其他場次自己選過的公司為準；本人都沒選過，才看同網域多數人選的，最後才看網域對照表。",
+    "fix_cause": ["這幾筆報名時是候補學員，沒有選公司的選項。", "系統先把 unistyle、ua.com.tw 都歸到聯廣 UCG。"],
+    "fix_rule": ["以報名者本人在其他場次自己選過的公司為準；", "本人都沒選過，才看同網域多數人選的，最後才看網域對照表。"],
     "fixes": [
-        {"kind": "公司歸錯", "sum": "4 筆（2 個人）", "items": [
+        {"kind": "歸錯", "sum": "4 筆（2 個人）", "items": [
             NAME_OF("unistyle.com.tw") + "（unistyle 信箱）：3/20、11/5、11/6 共 3 筆，原本歸聯廣 UCG，改成先勢 PILOT。她其他場次都自己選 PILOT。",
             "另一位 ua.com.tw 信箱的同仁：3/20 那 1 筆，原本歸聯廣 UCG，改成台北博報堂 HTM。她其他場次都自己選 HTM。"]},
         {"kind": "漏算", "sum": "1 筆（1 個人）", "items": [
