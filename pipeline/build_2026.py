@@ -278,21 +278,21 @@ for d, rs in dom_rows.items():
     if d == "jointoenjoy.com":
         st, why = "不適用", "練息場自家信箱，依本人報名時所選"
     elif d in PRIVATE:
-        st, why = "不適用", "私人信箱，每個人依自己報名時選的公司"
+        st, why = "不適用", "私人信箱，每個人照自己報名時選的公司算"
     elif len(co) > 1:
-        st, why = "需確認", "同網域的人分屬不同公司（依各人報名時所選）"
+        st, why = "需確認", "同一個網域的人，報名時選了不同公司"
     elif not v:
-        st, why = "需確認", "網路查無這個網域屬哪家公司"
+        st, why = "需確認", "網路上查不到這個網域是哪家公司的"
     elif not v[1]:
-        st, why = "需確認", v[4]
+        st, why = "需確認", "網路上查不到是哪家公司的" if v[0].startswith("（") else "查到是「%s」，不屬博報堂集團；報名的人自己選了「%s」" % (v[0], NAMES[co.most_common(1)[0][0]])
     elif v[1] != next(iter(co)):
-        st, why = "需確認", "網路查證結果跟目前歸戶不同"
+        st, why = "需確認", "網路查到屬「%s」，但目前歸在「%s」" % (NAMES.get(v[1], v[1]), NAMES[next(iter(co))])
     elif d != canon:
-        st, why = "需確認", "疑似 email 打錯字（應為 %s）" % canon
+        st, why = "需確認", "email 可能打錯字（應該是 @%s）" % canon
     elif v[2] == "低":
-        st, why = "需確認", "網路查證把握度低"
+        st, why = "需確認", "網路上查不到，先照報名的人自己選的「%s」歸" % NAMES[next(iter(co))]
     else:
-        st, why = "一致", "報名自選與網路查證一致"
+        st, why = "一致", "報名者選的公司，跟網路查到的一樣"
     domains.append({
         "d": d, "canon": canon if canon != d else "", "co": [[NAMES[c], n] for c, n in co.most_common()],
         "pick": [[NAMES[c], n] for c, n in pick.most_common()], "people": len(ppl), "rows": len(rs),

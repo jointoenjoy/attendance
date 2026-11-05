@@ -109,6 +109,7 @@
   table.dmap td,table.dmap th{text-align:left;vertical-align:middle}
   table.dmap td.dd{font-weight:700;color:var(--blue-dark);white-space:nowrap}
   table.dmap td.dd small{display:block;font-weight:500;font-size:.76rem;color:var(--ink-4)}
+  table.dmap td.st{min-width:12em} table.dmap td.st small{display:block;white-space:normal;margin-top:4px;font-size:.76rem;line-height:1.45;color:var(--orange-dark);min-width:9em;max-width:16em}
   table.dmap td.cc{font-weight:700;color:var(--ink)}
   table.dmap tr.na td{color:var(--ink-4)} table.dmap tr.na td.dd{color:var(--ink-3)}
   table.dmap .ans{display:block;font-size:.76rem;font-weight:700;color:var(--ink-4)}
@@ -325,11 +326,12 @@
   $("doms").append(el("div", { class: "scroll" }, el("table", { class: "dmap" },
     el("thead", {}, el("tr", {}, ...["網域", "企業名", "狀態", "確認", ""].map((h) => el("th", {}, h)))), dtb)));
   for (const x of D.domains || []) {
-    const na = x.st === "不適用", mark = el("span", { class: "ans" }), w = { x, paint: null };
+    const na = x.st === "不適用", mark = el("span", { class: "ans" }), w = { x, paint: null },
+      tag = el("span", { class: ST[x.st] }, x.st), why = x.st === "需確認" ? el("small", {}, x.why) : "";
     const tr = el("tr", { class: (na ? "na" : "") + (x.odd.length ? " has-odd" : "") },
       el("td", { class: "dd" }, "@" + x.d, el("small", {}, `${x.people} 人・${x.rows} 筆`)),
       el("td", { class: "cc" }, x.map || "依各人報名時所選", mark),
-      el("td", {}, el("span", { class: ST[x.st] }, x.st)));
+      el("td", { class: "st" }, tag, why));
     let ck = null;
     if (na) tr.append(el("td", {}), el("td", {}));
     else {
@@ -342,6 +344,11 @@
     w.paint = () => {
       const a = ans[x.d] || {};
       if (ck) ck.checked = !!a.ok;
+      // 人已確認過的，狀態改成「已確認／已改歸」，原因收起來
+      const done = a.co ? "已改歸" : a.ok ? "已確認" : "";
+      tag.className = done ? "tag ok" : ST[x.st];
+      tag.textContent = done || x.st;
+      if (why) why.style.display = done ? "none" : "";
       mark.className = "ans" + (a.co ? " chg" : a.ok ? " yes" : "");
       mark.textContent = (a.co ? "→ 改歸：" + a.co : "") + (a.note ? (a.co ? "＋" : "") + "有備註" : "");
     };
