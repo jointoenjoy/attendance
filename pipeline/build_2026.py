@@ -2,7 +2,10 @@
 """產出 /2026（博報堂集團 2026 參與報告）的資料檔與下載檔。
 
 收 Wix 報名表「所屬企業/集團」有選博報堂集團六家（MDCG／UCG／HTM／PILOT／KY-POST／INTERPLAN）的報名；
-沒選企業的（多半是候補，候補表單不問公司）改看 email 網域，是集團信箱就照網域歸到該公司（2026-10-01 決策者定）。
+沒選企業的（多半是候補，候補表單不問公司）依序判斷（2026-11-05 決策者定，取代 10-01 的「只看網域」）：
+  1. 本人在其他場次選過的公司（同一人不會一下 A 一下 B）
+  2. 同網域其他人報名時選得最多的公司
+  3. 都沒有才看 subsidiary_map 的網域對照表
 私人信箱又沒選企業、選「練息之友」、選「非集團員工」的不納入。
 
 輸出（全部含姓名與 email → 都在 .gitignore 裡、不進 git，只在 /2026 密碼後面提供）：
@@ -65,6 +68,31 @@ def write_xlsx(name, head, rows, prev_col=None, widths=None, prev_cols=()):
             "kb": max(1, round(os.path.getsize(os.path.join(FILES, name)) / 1024))}
 
 
+# 私人／公用信箱：同網域的人各自屬不同公司，不能拿來推
+FREE_MAIL = {"gmail.com", "hotmail.com", "yahoo.com.tw", "yahoo.com", "msn.com", "outlook.com", "icloud.com",
+             "jointoenjoy.com"}
+own, dom_pick = defaultdict(Counter), defaultdict(Counter)
+for e in load_events():
+    for g in e["guests"]:
+        c = (g["company"] or "").upper()
+        if c in HAKUHODO:
+            em = g["email"].lower().strip()
+            own[em][c] += 1
+            if em.split("@")[-1] not in FREE_MAIL:
+                dom_pick[em.split("@")[-1]][c] += 1
+
+
+def guess(email):
+    """沒選公司的人歸哪家，回傳 (公司代碼, 判斷方式)。"""
+    em = email.lower().strip()
+    d = em.split("@")[-1]
+    if own[em]:
+        return own[em].most_common(1)[0][0], "依本人其他場次"
+    if dom_pick[d]:
+        return dom_pick[d].most_common(1)[0][0], "依同網域多數人所選"
+    return CAT_CODE.get(cat_of(d), ""), "依 email 網域"
+
+
 T = today()
 events = year_events()   # 已報名但還沒辦的場次也列（2026-11-03 決策者要求），報到欄標「尚未舉辦」
 # 1/16 那場屬 2025 報價單：照樣列名單給人看（頁面換底色註明），但不算進任何統計與下載檔（2026-11-03 決策者要求）
@@ -82,7 +110,7 @@ for e in prev + events:
     for g in e["guests"]:
         code, src = (g["company"] or "").upper(), "報名選填"
         if not g["company"]:
-            code, src = CAT_CODE.get(cat_of(g["email"].split("@")[-1]), ""), "依 email 判斷"
+            code, src = guess(g["email"])
         if code not in HAKUHODO:
             if not pv:
                 skipped[g["company"] or "（未選企業・私人信箱）"] += 1
@@ -145,7 +173,7 @@ data = {
                "rows": sum(r[2].startswith("2026") for r in recs),
                "ok": sum(c["正取"] for c in companies),
                "ck": sum(c["ck"] for c in companies), "ck_people": len({e for e, p in person.items() if p["ck"]})},
-    "nocheck": nocheck, "skipped": dict(skipped.most_common()), "skipped_st": dict(skipped_st), "by_mail": by_mail["依 email 判斷"],
+    "nocheck": nocheck, "skipped": dict(skipped.most_common()), "skipped_st": dict(skipped_st), "by_mail": sum(v for k, v in by_mail.items() if k != "報名選填"),
 }
 os.makedirs(SITE, exist_ok=True)
 json.dump(data, open(os.path.join(SITE, "data.json"), "w", encoding="utf-8"), ensure_ascii=False,
