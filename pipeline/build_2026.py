@@ -37,38 +37,44 @@ CAT_CODE = dict({c: "UCG" for c in UCG_SUBS}, **{"先勢集團": "PILOT", "台�
 PREV_FILL = PatternFill("solid", fgColor="F3EADB")   # 跟頁面 1/16 場次同一個暖灰底
 HEAD_FILL = PatternFill("solid", fgColor="004D89")
 PREV_NOTE = "暖灰底＝1/16《動態靜心》，屬 2025 練息場合約範圍；其餘屬 2026 合約範圍（3/20 起）。頁面與本檔的統計都已含 1/16。"
+OTHER_FILL = PatternFill("solid", fgColor="E6E6E6")   # 非博報堂集團員工的報名（練息之友、民眾自費…），列在最下方、不計入統計
+OTHER_NOTE = "灰底＝不是博報堂集團員工（練息之友、民眾自費、未選企業的私人信箱），列在最下方供對照，不計入統計。"
 
 
-def write_xlsx(name, head, rows, prev_col=None, widths=None, prev_cols=()):
+def write_xlsx(name, head, rows, prev_col=None, widths=None, prev_cols=(), others=()):
     """寫 Excel 下載檔。prev_col＝第幾欄（0 起算）標示 2025 合約範圍，那幾列整列上暖灰底；
     prev_cols＝整欄都屬 2025 合約範圍的欄位（人員彙總的 1/16 欄），整欄上暖灰底。
+    others＝非集團員工的報名，接在最下方、整列上灰底，不算進回傳的筆數。
     姓名、活動名稱等文字一律存成純文字（data_type="s"），開頭是 = 也不會被當公式執行。"""
     os.makedirs(FILES, exist_ok=True)
     wb = Workbook()
     ws = wb.active
     ws.title = "明細"
-    ws.append([PREV_NOTE])
+    ws.append([PREV_NOTE + (OTHER_NOTE if others else "")])
     ws["A1"].font = Font(name="Arial", size=10, color="7A5A2E")
     ws.append(head)
     for c in ws[2]:
         c.font = Font(name="Arial", bold=True, color="FFFFFF")
         c.fill = HEAD_FILL
         c.alignment = Alignment(vertical="center")
-    for r in rows:
+    for r in list(rows) + list(others):
         ws.append(r)
         prev = prev_col is not None and str(r[prev_col]).startswith("2025")
+        other = r in others
         for c in ws[ws.max_row]:
             if isinstance(c.value, str):
                 c.data_type = "s"
             c.font = Font(name="Arial")
-            if prev or c.column - 1 in prev_cols:
+            if other:
+                c.fill = OTHER_FILL
+            elif prev or c.column - 1 in prev_cols:
                 c.fill = PREV_FILL
     for i, w in enumerate(widths or [], 1):
         ws.column_dimensions[ws.cell(2, i).column_letter].width = w
     ws.freeze_panes = "A3"
     ws.auto_filter.ref = "A2:%s%d" % (ws.cell(2, len(head)).column_letter, ws.max_row)
     wb.save(os.path.join(FILES, name))
-    return {"name": name, "url": "/2026/files/" + name, "rows": len(rows),
+    return {"name": name, "url": "/2026/files/" + name, "rows": len(rows), "other": len(others),
             "kb": max(1, round(os.path.getsize(os.path.join(FILES, name)) / 1024))}
 
 
@@ -176,6 +182,10 @@ _mk = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_private", "manu
 MARKS = json.load(open(_mk, encoding="utf-8")) if os.path.exists(_mk) else {}
 NOT_GROUP, SAME_PERSON = set(MARKS.get("not_group", [])), set(MARKS.get("same_person", []))
 
+# 非集團報名在 Excel 上的寫法（Wix「所屬企業」欄原值 → 註明）
+OTHER_KIND = {"練息之友": "非集團：練息之友", "非集團員工現場收費500元": "非集團：民眾自費（現場 500 元）",
+              "": "未選企業（私人信箱，無法確認）"}
+
 T = today()
 events = year_events()   # 已報名但還沒辦的場次也列（2026-11-03 決策者要求），報到欄標「尚未舉辦」
 # 1/16 那場屬 2025 報價單：頁面與下載檔都換暖灰底註明，但一起算進統計，讓頁面跟 Excel 數字一致（2026-11-05 決策者要求）
@@ -185,7 +195,7 @@ skipped = Counter()
 skipped_st = Counter()   # 未納入的報名狀態，讓頁面能加回成 Wix 全部報名（＝年中報告的報名／候補／請假）
 by_mail = Counter()
 dom_rows = defaultdict(list)   # 網域歸戶表用
-evs, recs = [], []
+evs, recs, others = [], [], []   # others＝非博報堂集團員工的報名，只列在全集團逐筆明細最下方
 for e in prev + events:
     pv = e["date"] < YEAR_START
     up = e["date"] > T
@@ -202,12 +212,17 @@ for e in prev + events:
         if code not in HAKUHODO:
             skipped[g["company"] or "（未選企業・私人信箱）"] += 1
             skipped_st[g["status"]] += 1
+            ck = "尚未舉辦" if up else ("已報到" if g["wix_checked_in"] else "未報到") if rec else "報到未登錄"
+            others.append([e["date"], e["title"], "2025 合約範圍" if pv else "2026 合約範圍",
+                           OTHER_KIND.get(g["company"], "非集團：" + (g["company"] or "未選企業")),
+                           g["name"], g["email"].lower(), g["status"], ck, "不計入",
+                           "無法確認" if not g["company"] else "否"])
             continue
         ck = "尚未舉辦" if up else ("已報到" if g["wix_checked_in"] else "未報到") if rec else "報到未登錄"
         gs.append({"n": g["name"], "e": g["email"].lower(), "p": PID[g["email"].lower().strip()], "c": code, "s": g["status"],
                    "k": ck, "m": src != "報名選填", "src": src})
         recs.append([e["date"], e["title"], "2025 合約範圍" if pv else "2026 合約範圍", NAMES[code],
-                     g["name"], g["email"].lower(), g["status"], ck, src])
+                     g["name"], g["email"].lower(), g["status"], ck, src, "是"])
         by_mail[src] += 1
         dom_rows[g["email"].lower().split("@")[-1]].append((e["date"], gs[-1], code, src))
     gs.sort(key=lambda x: (HAKUHODO.index(x["c"]), ["正取", "候補", "請假"].index(x["s"]), x["n"]))
@@ -231,8 +246,8 @@ companies = [c for c in companies if c["rows"]]
 companies.sort(key=lambda c: (-c["people"], -c["rows"]))
 
 # 下載檔跟頁面同步：1/16 也列也算，暖灰底註明屬 2025 合約範圍（2026-11-05 決策者要求）
-HEAD = ["日期", "活動名稱", "合約範圍", "所屬企業", "姓名", "email", "報名狀態", "報到", "企業判斷方式"]
-W = [12, 44, 14, 18, 14, 32, 10, 12, 14]
+HEAD = ["日期", "活動名稱", "合約範圍", "所屬企業", "姓名", "email", "報名狀態", "報到", "企業判斷方式", "博報堂集團員工"]
+W = [12, 44, 14, 26, 14, 32, 10, 12, 14, 14]
 pv_g = {}   # 1/16 那場每個人的報名狀態與報到
 for e in evs:
     if e["prev"]:
@@ -242,7 +257,7 @@ for e in evs:
             p["c"].add(NAMES[g["c"]]); p["em"].add(g["e"])
 prow = lambda e, p: [p["n"], "、".join(sorted(p["em"])), "、".join(sorted(p["c"])), p["reg"], p["ok"], p["ck"],
                      pv_g[e]["s"] if e in pv_g else "", pv_g[e]["k"] if e in pv_g else ""]
-files = {"all": write_xlsx("2026-博報堂全集團-逐筆明細.xlsx", HEAD, recs, 2, W),
+files = {"all": write_xlsx("2026-博報堂全集團-逐筆明細.xlsx", HEAD, recs, 2, W, others=others),
          "people": write_xlsx("2026-博報堂全集團-人員彙總.xlsx",
                               ["姓名", "email", "所屬企業", "報名場次（含 1/16）", "正取場次（含 1/16）", "報到場次（含 1/16）",
                                "1/16 報名狀態（2025 合約範圍）", "1/16 報到（2025 合約範圍）"],
