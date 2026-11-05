@@ -256,6 +256,18 @@ audit = {
     "methods": [[k, by_mail[k]] for k in ["報名選填", "依本人其他場次", "依同網域多數人所選", "依 email 網域"]],
 }
 PRIVATE = FREE_MAIL - {"jointoenjoy.com"}
+
+
+def odd_of(d, rs, co):
+    """跟網域歸戶公司不同的人（姓名、email、他歸到哪家、幾筆、怎麼判斷）：給 HR 逐人確認。私人信箱本來就各依各的，不列。"""
+    if d in PRIVATE or d == "jointoenjoy.com":
+        return []
+    top, out = co.most_common(1)[0][0], {}
+    for _, g, c, src in rs:
+        if c != top:
+            o = out.setdefault(g["e"], [g["n"], g["e"], NAMES[c], 0, src])
+            o[3] += 1
+    return sorted(out.values())
 domains = []
 for d, rs in dom_rows.items():
     canon = ALIAS.get(d, d)
@@ -285,7 +297,8 @@ for d, rs in dom_rows.items():
         "d": d, "canon": canon if canon != d else "", "co": [[NAMES[c], n] for c, n in co.most_common()],
         "pick": [[NAMES[c], n] for c, n in pick.most_common()], "people": len(ppl), "rows": len(rs),
         "v": {"name": v[0], "code": NAMES.get(v[1], "查無"), "conf": v[2], "src": v[3], "note": v[4]} if v else None,
-        "st": st, "why": why,
+        "st": st, "why": why, "map": "" if d in PRIVATE or d == "jointoenjoy.com" else NAMES[co.most_common(1)[0][0]],
+        "odd": odd_of(d, rs, co),
     })
 domains.sort(key=lambda x: ({"需確認": 0, "一致": 1, "不適用": 2}[x["st"]], -x["people"], x["d"]))
 # 給集團人資確認的網域表（只有網域與公司，不含個資）
