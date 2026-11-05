@@ -119,6 +119,7 @@
   table.dmap .btn{padding:5px 14px;font-size:.8rem;white-space:nowrap}
   table.dmap tr.odd>td{padding-top:0;background:#FFF8EE}
   table.dmap tr.has-odd>td{border-bottom:0}
+  table.dmap tr.odd summary{cursor:pointer;font-weight:700;color:var(--orange-dark);font-size:.8rem;padding:6px 0}
   .oddt{width:100%;font-size:.8rem;margin:0 0 4px}
   .oddt caption{text-align:left;font-weight:700;color:var(--orange-dark);padding:6px 0 4px;font-size:.8rem}
   .oddt td,.oddt th{padding:4px 8px!important;background:none!important;border-bottom:1px solid #F1E3CC!important}
@@ -299,7 +300,7 @@
     $("deTitle").textContent = "@" + x.d;
     $("deInfo").replaceChildren(`這個網域歸到：${x.map}（${x.people} 人・${x.rows} 筆）。`, ...info(x));
     $("deOkTxt").textContent = `正確，就是「${x.map}」`;
-    $("deOdd").replaceChildren(...(x.odd.length ? [oddTable(x)] : []));
+    $("deOdd").replaceChildren(...(x.who.length ? [oddTable(x)] : []));
     const chg = !!a.co;
     document.querySelectorAll("input[name=deChoice]").forEach((r) => (r.checked = r.value === (chg ? "chg" : a.ok ? "ok" : "")));
     $("deCo").value = a.co || OPT[0]; $("deCo").style.display = chg ? "" : "none";
@@ -315,10 +316,10 @@
     editing.paint(); $("dedit").close();
   });
   const oddTable = (x) => {
-    const t = el("table", { class: "oddt" }, el("caption", {}, `網域與自選公司不符的報名者（${x.odd.length} 人）`),
+    const t = el("table", { class: "oddt" }, el("caption", {}, `${x.whoCap}（${x.who.length} 人）`),
       el("thead", {}, el("tr", {}, ...["姓名", "email", "目前歸到", "筆數", "怎麼判斷"].map((h) => el("th", {}, h)))));
     const b = el("tbody");
-    for (const [n, em, c, k, src] of x.odd) b.append(el("tr", {}, ...[n, em, c, k, src].map((v) => el("td", {}, v))));
+    for (const [n, em, c, k, src] of x.who) b.append(el("tr", {}, ...[n, em, c, k, src].map((v) => el("td", {}, v))));
     t.append(b);
     return t;
   };
@@ -328,10 +329,13 @@
   for (const x of D.domains || []) {
     const na = x.st === "不適用", mark = el("span", { class: "ans" }), w = { x, paint: null },
       tag = el("span", { class: ST[x.st] }, x.st), why = x.st === "需確認" ? el("small", {}, x.why) : "";
-    const tr = el("tr", { class: (na ? "na" : "") + (x.odd.length ? " has-odd" : "") },
+    const tr = el("tr", { class: (na ? "na" : "") + (x.who.length ? " has-odd" : "") },
       el("td", { class: "dd" }, "@" + x.d, el("small", {}, `${x.people} 人・${x.rows} 筆`)),
       el("td", { class: "cc" }, x.map || "依各人報名時所選", mark),
       el("td", { class: "st" }, tag, why));
+    // 人多的網域先收起來，點開才看名單
+    const whoRow = x.who.length ? el("tr", { class: "odd" }, el("td", { colspan: "5" }, x.who.length > 6
+      ? el("details", {}, el("summary", {}, `看${x.whoCap}（${x.who.length} 人）`), oddTable(x)) : oddTable(x))) : null;
     let ck = null;
     if (na) tr.append(el("td", {}), el("td", {}));
     else {
@@ -349,12 +353,13 @@
       tag.className = done ? "tag ok" : ST[x.st];
       tag.textContent = done || x.st;
       if (why) why.style.display = done ? "none" : "";
+      if (whoRow) { whoRow.style.display = done ? "none" : ""; tr.classList.toggle("has-odd", !done); }
       mark.className = "ans" + (a.co ? " chg" : a.ok ? " yes" : "");
       mark.textContent = (a.co ? "→ 改歸：" + a.co : "") + (a.note ? (a.co ? "＋" : "") + "有備註" : "");
     };
     rowsDom.push(w);
     dtb.append(tr);
-    if (x.odd.length) dtb.append(el("tr", { class: "odd" }, el("td", { colspan: "5" }, oddTable(x))));
+    if (whoRow) dtb.append(whoRow);
   }
   if (rowsDom.length) {
     const by = el("input", { type: "text", placeholder: "填寫人（選填，例如：米蘭 HR）", maxlength: "30", "aria-label": "填寫人" }),

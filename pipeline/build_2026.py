@@ -258,13 +258,11 @@ audit = {
 PRIVATE = FREE_MAIL - {"jointoenjoy.com"}
 
 
-def odd_of(d, rs, co):
-    """跟網域歸戶公司不同的人（姓名、email、他歸到哪家、幾筆、怎麼判斷）：給 HR 逐人確認。私人信箱本來就各依各的，不列。"""
-    if d in PRIVATE or d == "jointoenjoy.com":
-        return []
-    top, out = co.most_common(1)[0][0], {}
+def who_of(rs, only_not=None):
+    """列出網域底下的人（姓名、email、歸到哪家、幾筆、怎麼判斷）給 HR 逐人確認；only_not 給公司代碼時只列跟它不同的人。"""
+    out = {}
     for _, g, c, src in rs:
-        if c != top:
+        if c != only_not:
             o = out.setdefault(g["e"], [g["n"], g["e"], NAMES[c], 0, src])
             o[3] += 1
     return sorted(out.values())
@@ -290,7 +288,7 @@ for d, rs in dom_rows.items():
     elif d != canon:
         st, why = "需確認", "email 可能打錯字（應該是 @%s）" % canon
     elif v[2] == "低":
-        st, why = "需確認", "網路上查不到，先照報名的人自己選的「%s」歸" % NAMES[next(iter(co))]
+        st, why = "需確認", "網路上查不到這個網域是哪家公司的；這 %d 人報名時大多自己選「%s」，所以先歸這家" % (len(ppl), NAMES[next(iter(co))])
     else:
         st, why = "一致", "報名者選的公司，跟網路查到的一樣"
     domains.append({
@@ -298,7 +296,9 @@ for d, rs in dom_rows.items():
         "pick": [[NAMES[c], n] for c, n in pick.most_common()], "people": len(ppl), "rows": len(rs),
         "v": {"name": v[0], "code": NAMES.get(v[1], "查無"), "conf": v[2], "src": v[3], "note": v[4]} if v else None,
         "st": st, "why": why, "map": "" if d in PRIVATE or d == "jointoenjoy.com" else NAMES[co.most_common(1)[0][0]],
-        "odd": odd_of(d, rs, co),
+        # 需確認的網域把底下的人列出來：分屬多家時只列跟多數不同的人，其餘整個網域都要確認就全列
+        "who": [] if st != "需確認" else who_of(rs, co.most_common(1)[0][0] if len(co) > 1 else None),
+        "whoCap": "網域與自選公司不符的報名者" if len(co) > 1 else "這個網域底下的報名者",
     })
 domains.sort(key=lambda x: ({"需確認": 0, "一致": 1, "不適用": 2}[x["st"]], -x["people"], x["d"]))
 # 給集團人資確認的網域表（只有網域與公司，不含個資）
