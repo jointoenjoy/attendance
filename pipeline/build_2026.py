@@ -78,6 +78,45 @@ def write_xlsx(name, head, rows, prev_col=None, widths=None, prev_cols=(), other
             "kb": max(1, round(os.path.getsize(os.path.join(FILES, name)) / 1024))}
 
 
+def add_finance_sheet(name, companies, others_sum):
+    """在下載檔最前面加一張「財務分攤參考」：集團各公司人數、人次與占比，非集團另列、不進分母。
+    合約是一包固定價、不保證人數，總部財務照各公司參與人數的比例分配預算（決策者 2026-11-05）。
+    直接寫數字不寫公式：手機預覽、LINE 預覽不會算公式，會變空白；每週重建時本表一起重算。"""
+    from openpyxl import load_workbook
+    path = os.path.join(FILES, name)
+    wb = load_workbook(path)
+    ws = wb.create_sheet("財務分攤參考", 0)
+    ws.append(["合約為固定價、不保證人數；本表給總部財務依各公司參與人數分配預算比例。人數＝同一人只算一次。"
+               "占比只用博報堂集團員工計算，非集團（練息之友、民眾自費）另列、不計入分母。含 1/16（2025 合約範圍）。"])
+    ws["A1"].font = Font(name="Arial", size=10, color="7A5A2E")
+    head = ["身分", "公司", "參與人數（不重複）", "人數占比", "報名人次", "正取人次", "正取人次占比", "報到人次"]
+    ws.append(head)
+    for c in ws[2]:
+        c.font = Font(name="Arial", bold=True, color="FFFFFF"); c.fill = HEAD_FILL
+    P, K = sum(c["people"] for c in companies), sum(c["正取"] for c in companies)
+    for c in companies:
+        ws.append(["博報堂集團員工", c["name"], c["people"], c["people"] / P, c["rows"], c["正取"], c["正取"] / K, c["ck"]])
+    tot = ws.max_row + 1
+    ws.append(["博報堂集團員工", "集團合計", P, 1, sum(c["rows"] for c in companies), K, 1, sum(c["ck"] for c in companies)])
+    ws.append([])
+    o1 = ws.max_row + 1
+    for o in others_sum:
+        ws.append(["非集團（不計入分攤）", o["kind"], o["people"], "不計入", o["rows"], o["ok"], "不計入", o["ck"]])
+    ws.append(["非集團（不計入分攤）", "非集團合計", sum(o["people"] for o in others_sum), "不計入",
+               sum(o["rows"] for o in others_sum), sum(o["ok"] for o in others_sum), "不計入", sum(o["ck"] for o in others_sum)])
+    for row in ws.iter_rows(min_row=3, max_row=ws.max_row):
+        for c in row:
+            c.font = Font(name="Arial", bold=c.row in (tot, ws.max_row))
+            if c.row >= o1:
+                c.fill = OTHER_FILL
+            if c.column in (4, 7) and c.row <= tot:
+                c.number_format = "0.0%"
+    for col, w in zip("ABCDEFGH", [20, 26, 18, 12, 12, 12, 14, 12]):
+        ws.column_dimensions[col].width = w
+    wb.active = 0
+    wb.save(path)
+
+
 # 私人／公用信箱：同網域的人各自屬不同公司，不能拿來推
 FREE_MAIL = {"gmail.com", "hotmail.com", "yahoo.com.tw", "yahoo.com", "msn.com", "outlook.com", "icloud.com",
              "jointoenjoy.com"}
@@ -264,6 +303,15 @@ files = {"all": write_xlsx("2026-博報堂全集團-逐筆明細.xlsx", HEAD, re
                               sorted([prow(e, p) for e, p in person.items()], key=lambda r: (r[2], -r[3], r[0])),
                               widths=[14, 32, 18, 14, 14, 14, 26, 24], prev_cols=(6, 7)),
          "byco": {}}
+# 非集團人數（同一人只算一次），給財務看「集團員工 vs 非集團」
+_os = {}
+for r in others:
+    k = r[3].replace("非集團：", "")
+    o = _os.setdefault(k, {"kind": k, "ppl": set(), "rows": 0, "ok": 0, "ck": 0})
+    o["ppl"].add(PID.get(r[5].strip(), r[5].strip())); o["rows"] += 1; o["ok"] += r[6] == "正取"; o["ck"] += r[7] == "已報到"
+others_sum = sorted([dict(o, people=len(o.pop("ppl"))) for o in _os.values()], key=lambda o: -o["rows"])
+for f in ("all", "people"):
+    add_finance_sheet(files[f]["name"], companies, others_sum)
 for c in companies:
     files["byco"][c["code"]] = write_xlsx("2026-%s-逐筆明細.xlsx" % c["code"], HEAD,
                                           [r for r in recs if r[3] == c["name"]], 2, W)
@@ -372,7 +420,9 @@ data = {
     "totals": {"events": len(evs), "people": sum(p["reg"] > 0 for p in person.values()),
                "rows": len(recs),
                "ok": sum(c["正取"] for c in companies),
-               "ck": sum(c["ck"] for c in companies), "ck_people": len({e for e, p in person.items() if p["ck"]})},
+               "ck": sum(c["ck"] for c in companies), "ck_people": len({e for e, p in person.items() if p["ck"]}),
+               "other_people": len({PID.get(r[5].strip(), r[5].strip()) for r in others}), "other_rows": len(others)},
+    "others_sum": others_sum,
     "nocheck": nocheck, "skipped": dict(skipped.most_common()), "skipped_st": dict(skipped_st), "by_mail": sum(v for k, v in by_mail.items() if k != "報名選填"),
     "audit": audit, "domains": domains,
 }
