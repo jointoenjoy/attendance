@@ -513,7 +513,7 @@
       const b = el("tbody");
       for (const g of gs)
         b.append(el("tr", {}, el("td", {}, g.n), el("td", {}, g.e), el("td", {}, (CO[g.c] || g.c) + (g.m ? "＊" : "")),
-          el("td", { class: "s-" + g.s }, g.s), el("td", { class: "k-" + g.k }, g.k)));
+          el("td", { class: "s-" + g.s }, g.sl || g.s), el("td", { class: "k-" + g.k }, g.k)));
       tbl.append(b);
       d.append(el("div", { class: "scroll" }, tbl));
       box.append(d);
@@ -537,7 +537,7 @@
     "同一人：email 相同，或手機、姓名、集團三個都相同，就算同一人，人數只算一次（有人換過信箱或 email 打錯字）。手機只用來比對，不會顯示在頁面或下載檔。",
     (sk ? `沒有算進本頁的：${sk}。` : "") + `本頁加上這些，就是 Wix 上全部的報名（${T.rows + Object.values(D.skipped).reduce((a, b) => a + b, 0)} 筆），跟年中報告「Chill 活動報名概況」的合計一樣。`,
     "年中報告「兩年參與人數比較」只算確定會來的人（不含候補、請假），所以各公司人數會比本頁少。兩邊只是算法不同，數字都正確。",
-    "報名狀態：正取＝取得名額；候補＝額滿排補；請假＝報名後取消。",
+    "報名狀態：正取＝取得名額；候補轉正＝先排候補、後來遞補取得名額（算正取）；候補＝額滿排補；請假＝報名後取消。",
     "報到：已報到＝Wix 後台有勾報到；未報到＝該場有登錄報到但此人沒勾。",
   ];
   if ((D.upcoming || []).length) notes.push(`${D.upcoming.map(md).join("、")} 尚未舉辦，先列出目前的報名名單，已算進報名人數與人次；活動辦完、Wix 勾完報到後，下週三會自動更新報到。`);

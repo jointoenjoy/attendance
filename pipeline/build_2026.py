@@ -57,7 +57,7 @@ GLOSS = {
     "報名場次（含 1/16）": "這個人總共報了幾場（正取、候補、請假都算），含 1/16。",
     "正取場次（含 1/16）": "這個人實際拿到座位的場數，含 1/16。",
     "報到場次（含 1/16）": "這個人被勾「已報到」的場數，含 1/16。",
-    "報名狀態": "正取＝拿到座位；候補＝額滿後排隊、沒拿到座位；請假＝拿到座位後取消。",
+    "報名狀態": "正取＝拿到座位；候補轉正＝先排候補、後來遞補拿到座位（算正取）；候補＝額滿後排隊、沒拿到座位；請假＝拿到座位後取消。",
     "報到": "已報到＝工作人員在 Wix 勾了報到；空白＝沒勾，或那場還沒登錄報到。",
     "合約範圍": "1/16《動態靜心》屬 2025 合約範圍，3/20 起屬 2026 合約範圍。統計兩者都算。",
     "企業判斷方式": "報名時自己選的公司；沒選的依序看：本人其他場選的公司 → 同網域多數人選的公司 → 網域對照表。",
@@ -281,6 +281,8 @@ for e in prev + events:
     rec = has_checkin(e)
     gs = []
     for g in e["guests"]:
+        # Wix 候補表單只收姓名與 email、不問公司，遞補成正取後也不會補填；公司欄是必填，所以「有公司欄卻空白的正取」＝候補轉正
+        sl = "候補轉正" if g["status"] == "正取" and not g["company"] and e.get("has_company_field") else g["status"]
         code, src = (g["company"] or "").upper(), "報名選填"
         if not g["company"]:
             code, src = guess(g["email"])
@@ -294,14 +296,14 @@ for e in prev + events:
             ck = "尚未舉辦" if up else ("已報到" if g["wix_checked_in"] else "未報到") if rec else "報到未登錄"
             others.append([e["date"], e["title"], "2025 合約範圍" if pv else "2026 合約範圍",
                            OTHER_KIND.get(g["company"], "非集團：" + (g["company"] or "未選企業")),
-                           g["name"], g["email"].lower(), g["status"], ck, "不計入",
+                           g["name"], g["email"].lower(), sl, ck, "不計入",
                            "否"])
             continue
         ck = "尚未舉辦" if up else ("已報到" if g["wix_checked_in"] else "未報到") if rec else "報到未登錄"
-        gs.append({"n": g["name"], "e": g["email"].lower(), "p": PID[g["email"].lower().strip()], "c": code, "s": g["status"],
+        gs.append({"n": g["name"], "e": g["email"].lower(), "p": PID[g["email"].lower().strip()], "c": code, "s": g["status"], "sl": sl,
                    "k": ck, "m": src != "報名選填", "src": src})
         recs.append([e["date"], e["title"], "2025 合約範圍" if pv else "2026 合約範圍", NAMES[code],
-                     g["name"], g["email"].lower(), g["status"], ck, src, "是"])
+                     g["name"], g["email"].lower(), sl, ck, src, "是"])
         by_mail[src] += 1
         dom_rows[g["email"].lower().split("@")[-1]].append((e["date"], gs[-1], code, src))
     gs.sort(key=lambda x: (HAKUHODO.index(x["c"]), ["正取", "候補", "請假"].index(x["s"]), x["n"]))
@@ -335,7 +337,7 @@ for e in evs:
             p = person.setdefault(g["p"], {"n": g["n"], "c": set(), "reg": 0, "ok": 0, "ck": 0, "em": set()})
             p["c"].add(NAMES[g["c"]]); p["em"].add(g["e"])
 prow = lambda e, p: [p["n"], "、".join(sorted(p["em"])), "、".join(sorted(p["c"])), p["reg"], p["ok"], p["ck"],
-                     pv_g[e]["s"] if e in pv_g else "", pv_g[e]["k"] if e in pv_g else ""]
+                     pv_g[e]["sl"] if e in pv_g else "", pv_g[e]["k"] if e in pv_g else ""]
 files = {"all": write_xlsx("2026-博報堂全集團-逐筆明細.xlsx", HEAD, recs, 2, W, others=others),
          "people": write_xlsx("2026-博報堂全集團-人員彙總.xlsx",
                               ["姓名", "email", "所屬企業", "報名場次（含 1/16）", "正取場次（含 1/16）", "報到場次（含 1/16）",
@@ -349,7 +351,7 @@ for r in others:
     k = r[3].replace("非集團：", "")
     o = _os.setdefault(k, {"kind": k, "ppl": set(), "ckp": set(), "rows": 0, "ok": 0, "ck": 0})
     pid = PID.get(r[5].strip(), r[5].strip())
-    o["ppl"].add(pid); o["rows"] += 1; o["ok"] += r[6] == "正取"; o["ck"] += r[7] == "已報到"
+    o["ppl"].add(pid); o["rows"] += 1; o["ok"] += r[6] in ("正取", "候補轉正"); o["ck"] += r[7] == "已報到"
     if r[7] == "已報到":
         o["ckp"].add(pid)
 others_sum = sorted([dict(o, people=len(o.pop("ppl")), ck_people=len(o.pop("ckp"))) for o in _os.values()],
@@ -386,11 +388,13 @@ for em in {g["e"] for e in evs for g in e["guests"]}:
 NAME_OF = lambda dom: next((g["name"] for g in ALL if g["email"].endswith("@" + dom)), "一位同仁")
 audit = {
     # 2026-11-05 這一波修正（集團人資回報同一人歸到兩家公司）
-    "fix_cause": ["這幾筆報名時是候補學員，沒有選公司的選項。", "系統先把 unistyle、ua.com.tw 都歸到聯廣 UCG。"],
+    "fix_cause": ["這幾筆報名時是候補。Wix 的候補報名表只收姓名與 email，沒有「所屬企業」欄；之後遞補成正取（名單標「候補轉正」）或請假，也不會再請學員補填。",
+                  "公司欄因此空白，系統只能依 email 網域推測，先把 unistyle、ua.com.tw 都歸到聯廣 UCG，所以歸錯。學員本身沒有填錯。"],
     "fix_rule": ["以報名者本人在其他場次自己選過的公司為準；", "本人都沒選過，才看同網域多數人選的，最後才看網域對照表。"],
     "fix_check": ["由於 email 是學員手動輸入，頁面下方「email 網域歸戶確認」區，練息場已先逐一人工歸戶。",
                   "仍需請持有全集團「email 網域 × 企業名稱」對照表的同仁協助再確認是否正確；如有不符，點選「修正」並送出後我們會立即更正。"],
     "fix_future": ["現行報名要學員自己輸入 email、自己選所屬企業，容易打錯或選錯，造成統計偏差。",
+                   "Wix 候補報名表也會加上「所屬企業」必填欄，候補轉正的學員就不會再沒有公司資料。",
                    "未來規劃改成「快速登入」報名，由系統自動辨識所屬企業並歸戶，不必再手動輸入與選擇。",
                    "後續也會向集團窗口索取全集團「email 網域 × 企業名稱」對照表，作為歸戶比對的依據。"],
     "fixes": [
