@@ -43,6 +43,9 @@
   .kpi b{display:block;font-family:var(--font-en);font-size:1.75rem;font-weight:800;color:var(--blue-dark);line-height:1.2;font-variant-numeric:tabular-nums}
   .kpi span{font-size:.8rem;color:var(--ink-3);font-weight:500}
   .kpis.split{grid-template-columns:repeat(2,1fr);margin:0 0 16px}
+  .q{display:inline-grid;place-items:center;width:16px;height:16px;margin-left:4px;padding:0;border-radius:50%;border:1px solid currentColor;background:none;color:inherit;font:700 .66rem/1 var(--font-en);cursor:help;opacity:.75;vertical-align:1px}
+  .q:hover,.q:focus-visible{opacity:1}
+  #tip{position:fixed;z-index:50;max-width:260px;padding:10px 12px;border-radius:10px;background:#1F2A37;color:#fff;font-size:.82rem;font-weight:400;line-height:1.6;white-space:normal;text-align:left;box-shadow:0 6px 20px rgba(0,0,0,.18)}
   .kpi.other{background:#EFEFEF} .kpi.other::before{background:#9A9A9A} .kpi.other b{color:var(--ink-3)}
   @media (max-width:600px){.kpis{grid-template-columns:repeat(2,1fr)} h1{padding-right:0} .logo{position:static;display:block;margin:0 0 14px}}
   .card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:22px 22px 18px;margin:18px 0}
@@ -206,7 +209,7 @@
     </section>
     <section class="card">
       <h2>財務分攤參考：集團員工與非集團人數</h2>
-      <p class="hint">合約為固定價、不保證人數；本表給總部財務依各公司參與人數分配預算比例。占比只用博報堂集團員工計算，非集團（練息之友、民眾自費）另列、不計入分母。含 1/16。下載的兩份全集團 Excel 第一頁也是這張表。</p>
+      <p class="hint">合約為固定價、不保證人數；本表給總部財務依各公司人數分配預算比例，可依需要選用「報名人數」或「報到人數」計算。欄名旁的 ? 可看白話定義。占比只用博報堂集團員工計算，非集團（練息之友、民眾自費）另列、不計入分母。含 1/16。下載的兩份全集團 Excel 第一頁也是這張表。</p>
       <div class="kpis split" id="finKpis"></div>
       <div class="scroll"><table id="finTbl"></table></div>
     </section>
@@ -266,33 +269,61 @@
   }
   const T = D.totals, CO = Object.fromEntries(D.companies.map((c) => [c.code, c.name]));
   $("lede").textContent = `${md(D.events[0].date)}～${md(D.events.at(-1).date)} 共 ${T.events} 場｜資料更新：${D.generated}（每週三自動更新）`;
-  for (const [v, l] of [[T.people, "集團員工人數（不重複）"], [T.rows, "集團報名人次"], [T.ck, "集團報到人次"], [T.events, "場次"]])
-    $("kpis").append(el("div", { class: "kpi" }, el("b", {}, v.toLocaleString()), el("span", {}, l)));
+  // 欄名旁的小問號：滑過或點一下就跳出白話定義（定義跟 Excel 表頭備註同一份 D.gloss）
+  const G = D.gloss || {}, tip = el("div", { id: "tip", role: "tooltip", hidden: "" });
+  let pinned = null;
+  document.body.append(tip);
+  const showTip = (b) => {
+    tip.textContent = b.dataset.tip; tip.hidden = false;
+    const r = b.getBoundingClientRect(), w = tip.offsetWidth;
+    tip.style.left = Math.max(8, Math.min(innerWidth - w - 8, r.left + r.width / 2 - w / 2)) + "px";
+    tip.style.top = (r.bottom + 8 + tip.offsetHeight > innerHeight ? r.top - tip.offsetHeight - 8 : r.bottom + 8) + "px";
+  };
+  const q = (label, key = label) => {
+    if (!G[key]) return label;
+    const b = el("button", { class: "q", type: "button", "aria-label": label + " 是什麼意思" }, "?");
+    b.dataset.tip = G[key];
+    // 滑過暫時顯示；點一下釘住（手機只能點），再點一次或點別處收起
+    b.addEventListener("mouseenter", () => showTip(b));
+    b.addEventListener("mouseleave", () => { if (pinned !== b) tip.hidden = true; });
+    b.addEventListener("click", (ev) => {
+      ev.stopPropagation();
+      if (pinned === b) { pinned = null; tip.hidden = true; } else { pinned = b; showTip(b); }
+    });
+    return el("span", { style: "white-space:nowrap" }, label, b);
+  };
+  const hideTip = () => { pinned = null; tip.hidden = true; };
+  addEventListener("click", hideTip);
+  addEventListener("scroll", hideTip, { passive: true, capture: true });
+  for (const [v, l, k] of [[T.people, "集團報名人數（不重複）", "報名人數（不重複）"], [T.rows, "集團報名人次", "報名人次"], [T.ck, "集團報到人次", "報到人次"], [T.events, "場次"]])
+    $("kpis").append(el("div", { class: "kpi" }, el("b", {}, v.toLocaleString()), el("span", {}, q(l, k))));
 
   // 財務分攤參考：集團員工 vs 非集團（固定價合約，總部依各公司人數比例分配預算）
   const OS = D.others_sum || [], pct = (a, b) => b ? (a / b * 100).toFixed(1) + "%" : "";
-  for (const [v, l, cls] of [[T.people, "博報堂集團員工（人）", ""], [T.other_people || 0, "非集團：練息之友、民眾自費（人）", " other"]])
+  for (const [v, l, cls] of [[T.people, "博報堂集團員工（報名人數，不重複）", ""], [T.other_people || 0, "非集團：練息之友、民眾自費（報名人數，不重複）", " other"]])
     $("finKpis").append(el("div", { class: "kpi" + cls }, el("b", {}, v.toLocaleString()), el("span", {}, l)));
   const okSum = D.companies.reduce((a, c) => a + c["正取"], 0);
   const ft = $("finTbl");
-  ft.append(el("thead", {}, el("tr", {}, ...["公司", "參與人數", "人數占比", "報名人次", "正取人次", "正取人次占比", "報到人次"].map((h) => el("th", {}, h)))));
+  ft.append(el("thead", {}, el("tr", {}, ...["公司", "報名人數（不重複）", "報名人數占比", "報名人次", "正取人次", "正取人次占比",
+    "報到人數（不重複）", "報到人數占比", "報到人次"].map((h) => el("th", {}, q(h))))));
   const fb = el("tbody");
   for (const c of D.companies)
-    fb.append(el("tr", {}, ...[c.name, c.people, pct(c.people, T.people), c.rows, c["正取"], pct(c["正取"], okSum), c.ck].map((v) => el("td", {}, v))));
+    fb.append(el("tr", {}, ...[c.name, c.people, pct(c.people, T.people), c.rows, c["正取"], pct(c["正取"], okSum),
+      c.ck_people, pct(c.ck_people, T.ck_people), c.ck].map((v) => el("td", {}, v))));
   ft.append(fb);
   const osum = (k) => OS.reduce((a, o) => a + o[k], 0);
-  ft.append(el("tfoot", {}, el("tr", {}, ...["集團員工合計", T.people, "100%", T.rows, okSum, "100%", T.ck].map((v) => el("td", {}, v))),
-    ...OS.map((o) => el("tr", { class: "sub" }, ...["非集團：" + o.kind, o.people, "不計入", o.rows, o.ok, "不計入", o.ck].map((v) => el("td", {}, v)))),
-    ...(OS.length ? [el("tr", { class: "sub" }, ...["非集團合計", T.other_people, "不計入", osum("rows"), osum("ok"), "不計入", osum("ck")].map((v) => el("td", {}, el("b", {}, v))))] : [])));
+  ft.append(el("tfoot", {}, el("tr", {}, ...["集團員工合計", T.people, "100%", T.rows, okSum, "100%", T.ck_people, "100%", T.ck].map((v) => el("td", {}, v))),
+    ...OS.map((o) => el("tr", { class: "sub" }, ...["非集團：" + o.kind, o.people, "不計入", o.rows, o.ok, "不計入", o.ck_people, "不計入", o.ck].map((v) => el("td", {}, v)))),
+    ...(OS.length ? [el("tr", { class: "sub" }, ...["非集團合計", T.other_people, "不計入", osum("rows"), osum("ok"), "不計入", osum("ck_people"), "不計入", osum("ck")].map((v) => el("td", {}, el("b", {}, v))))] : [])));
 
   const btn = (f, label, primary) => el("a", { class: "btn" + (primary ? " primary" : ""), href: f.url, download: f.name },
     "⬇ " + label + " ", el("small", {}, f.other ? `${f.rows} 筆＋非集團 ${f.other} 筆` : `${f.rows} 筆`));
   $("dlAll").append(btn(D.files.all, "全集團逐筆明細", true), btn(D.files.people, "全集團人員彙總"));
   for (const c of D.companies) $("dlCo").append(btn(D.files.byco[c.code], c.name));
 
-  const H = ["公司", "報名人數", "報名人次", "正取", "候補", "請假", "報到人次", "報到人數"];
+  const H = ["公司", "報名人數（不重複）", "報名人次", "正取人次", "候補人次", "請假人次", "報到人次", "報到人數（不重複）"];
   const t = $("coTbl");
-  t.append(el("thead", {}, el("tr", {}, ...H.map((h) => el("th", {}, h)))));
+  t.append(el("thead", {}, el("tr", {}, ...H.map((h) => el("th", {}, q(h))))));
   const tb = el("tbody");
   for (const c of D.companies)
     tb.append(el("tr", {}, ...[c.name, c.people, c.rows, c["正取"], c["候補"], c["請假"], c.ck, c.ck_people].map((v) => el("td", {}, v))));
@@ -434,7 +465,7 @@
       fb.append(el("h3", {}, f.kind + "的有 " + f.sum));
       fb.append(el("ul", {}, ...f.items.map((t) => el("li", {}, t))));
     }
-    for (const [h, ls] of [["錯誤原因", A.fix_cause], ["修正方式", A.fix_rule]]) {
+    for (const [h, ls] of [["錯誤原因", A.fix_cause], ["修正方式", A.fix_rule], ["未來優化方案", A.fix_future]]) {
       if (!ls) continue;
       fb.append(el("h3", {}, h + "："));
       for (const t of ls) fb.append(el("p", {}, t));

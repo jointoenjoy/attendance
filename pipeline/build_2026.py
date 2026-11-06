@@ -18,6 +18,7 @@
 """
 import json, os, re
 from openpyxl import Workbook
+from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Font, PatternFill
 from collections import Counter, defaultdict
 from datetime import datetime, timedelta, timezone
@@ -40,6 +41,37 @@ PREV_NOTE = "暖灰底＝1/16《動態靜心》，屬 2025 練息場合約範圍
 OTHER_FILL = PatternFill("solid", fgColor="E6E6E6")   # 非博報堂集團員工的報名（練息之友、民眾自費），列在最下方、不計入統計
 OTHER_NOTE = "灰底＝不是博報堂集團員工（練息之友、民眾自費），列在最下方供對照，不計入統計。"
 
+# 欄位白話定義（2026-11-06 決策者要求欄名一眼就懂）：Excel 表頭的儲存格備註、頁面欄名旁的小問號共用這一份
+GLOSS = {
+    "報名人數（不重複）": "報名過的「不同的人」。同一人報很多場只算 1 人；正取、候補、請假都算。"
+                     "同一人＝email 相同，或手機＋姓名＋集團都相同。",
+    "報名人數占比": "這家公司的報名人數 ÷ 集團報名人數合計。只算博報堂集團員工，非集團不進分母。",
+    "報名人次": "總共報了幾場。同一人每報一場算 1 次；正取、候補、請假都算。",
+    "正取人次": "實際拿到座位的次數。不含候補沒排上、請假。",
+    "正取人次占比": "這家公司的正取人次 ÷ 集團正取人次合計。只算博報堂集團員工，非集團不進分母。",
+    "候補人次": "報名時已額滿、排在候補名單、最後沒拿到座位的次數。",
+    "請假人次": "拿到座位後又取消（請假）的次數。",
+    "報到人次": "工作人員在 Wix 勾了「已報到」的次數。只算有登錄報到的場次，還沒登錄的場次不算。",
+    "報到人數（不重複）": "真的到過現場的「不同的人」。同一人來很多場只算 1 人。只算有登錄報到的場次。",
+    "報到人數占比": "這家公司的報到人數 ÷ 集團報到人數合計。只算博報堂集團員工，非集團不進分母。",
+    "報名場次（含 1/16）": "這個人總共報了幾場（正取、候補、請假都算），含 1/16。",
+    "正取場次（含 1/16）": "這個人實際拿到座位的場數，含 1/16。",
+    "報到場次（含 1/16）": "這個人被勾「已報到」的場數，含 1/16。",
+    "報名狀態": "正取＝拿到座位；候補＝額滿後排隊、沒拿到座位；請假＝拿到座位後取消。",
+    "報到": "已報到＝工作人員在 Wix 勾了報到；空白＝沒勾，或那場還沒登錄報到。",
+    "合約範圍": "1/16《動態靜心》屬 2025 合約範圍，3/20 起屬 2026 合約範圍。統計兩者都算。",
+    "企業判斷方式": "報名時自己選的公司；沒選的依序看：本人其他場選的公司 → 同網域多數人選的公司 → 網域對照表。",
+    "博報堂集團員工": "是＝計入統計與分攤；不是＝練息之友、民眾自費等，列在最下方對照、不計入。",
+}
+
+
+def note_head(ws, row):
+    """表頭有白話定義的欄位，加上儲存格備註（滑過紅色小三角就看得到）。"""
+    for c in ws[row]:
+        if c.value in GLOSS:
+            c.comment = Comment(GLOSS[c.value], "練息場")
+            c.comment.width, c.comment.height = 260, 110
+
 
 def write_xlsx(name, head, rows, prev_col=None, widths=None, prev_cols=(), others=()):
     """寫 Excel 下載檔。prev_col＝第幾欄（0 起算）標示 2025 合約範圍，那幾列整列上暖灰底；
@@ -57,6 +89,7 @@ def write_xlsx(name, head, rows, prev_col=None, widths=None, prev_cols=(), other
         c.font = Font(name="Arial", bold=True, color="FFFFFF")
         c.fill = HEAD_FILL
         c.alignment = Alignment(vertical="center")
+    note_head(ws, 2)
     for r in list(rows) + list(others):
         ws.append(r)
         prev = prev_col is not None and str(r[prev_col]).startswith("2025")
@@ -89,29 +122,36 @@ def add_finance_sheet(name, companies, others_sum):
     ws.append(["合約為固定價、不保證人數；本表給總部財務依各公司參與人數分配預算比例。人數＝同一人只算一次。"
                "占比只用博報堂集團員工計算，非集團（練息之友、民眾自費）另列、不計入分母。含 1/16（2025 合約範圍）。"])
     ws["A1"].font = Font(name="Arial", size=10, color="7A5A2E")
-    head = ["身分", "公司", "參與人數（不重複）", "人數占比", "報名人次", "正取人次", "正取人次占比", "報到人次"]
+    head = ["身分", "公司", "報名人數（不重複）", "報名人數占比", "報名人次", "正取人次", "正取人次占比",
+            "報到人數（不重複）", "報到人數占比", "報到人次"]
     ws.append(head)
     for c in ws[2]:
         c.font = Font(name="Arial", bold=True, color="FFFFFF"); c.fill = HEAD_FILL
-    P, K = sum(c["people"] for c in companies), sum(c["正取"] for c in companies)
+        c.alignment = Alignment(vertical="center", wrap_text=True)
+    note_head(ws, 2)
+    P, K, Q = (sum(c[k] for c in companies) for k in ("people", "正取", "ck_people"))
     for c in companies:
-        ws.append(["博報堂集團員工", c["name"], c["people"], c["people"] / P, c["rows"], c["正取"], c["正取"] / K, c["ck"]])
+        ws.append(["博報堂集團員工", c["name"], c["people"], c["people"] / P, c["rows"], c["正取"], c["正取"] / K,
+                   c["ck_people"], c["ck_people"] / Q, c["ck"]])
     tot = ws.max_row + 1
-    ws.append(["博報堂集團員工", "集團合計", P, 1, sum(c["rows"] for c in companies), K, 1, sum(c["ck"] for c in companies)])
+    ws.append(["博報堂集團員工", "集團合計", P, 1, sum(c["rows"] for c in companies), K, 1, Q, 1, sum(c["ck"] for c in companies)])
     ws.append([])
     o1 = ws.max_row + 1
     for o in others_sum:
-        ws.append(["非集團（不計入分攤）", o["kind"], o["people"], "不計入", o["rows"], o["ok"], "不計入", o["ck"]])
-    ws.append(["非集團（不計入分攤）", "非集團合計", sum(o["people"] for o in others_sum), "不計入",
-               sum(o["rows"] for o in others_sum), sum(o["ok"] for o in others_sum), "不計入", sum(o["ck"] for o in others_sum)])
+        ws.append(["非集團（不計入分攤）", o["kind"], o["people"], "不計入", o["rows"], o["ok"], "不計入",
+                   o["ck_people"], "不計入", o["ck"]])
+    ws.append(["非集團（不計入分攤）", "非集團合計"] + [
+        sum(o[k] for o in others_sum) if k else "不計入"
+        for k in ("people", None, "rows", "ok", None, "ck_people", None, "ck")])
     for row in ws.iter_rows(min_row=3, max_row=ws.max_row):
         for c in row:
             c.font = Font(name="Arial", bold=c.row in (tot, ws.max_row))
             if c.row >= o1:
                 c.fill = OTHER_FILL
-            if c.column in (4, 7) and c.row <= tot:
+            if c.column in (4, 7, 9) and c.row <= tot:
                 c.number_format = "0.0%"
-    for col, w in zip("ABCDEFGH", [20, 26, 18, 12, 12, 12, 14, 12]):
+    ws.row_dimensions[2].height = 32
+    for col, w in zip("ABCDEFGHIJ", [20, 26, 14, 12, 10, 10, 12, 14, 12, 10]):
         ws.column_dimensions[col].width = w
     wb.active = 0
     wb.save(path)
@@ -307,9 +347,13 @@ files = {"all": write_xlsx("2026-博報堂全集團-逐筆明細.xlsx", HEAD, re
 _os = {}
 for r in others:
     k = r[3].replace("非集團：", "")
-    o = _os.setdefault(k, {"kind": k, "ppl": set(), "rows": 0, "ok": 0, "ck": 0})
-    o["ppl"].add(PID.get(r[5].strip(), r[5].strip())); o["rows"] += 1; o["ok"] += r[6] == "正取"; o["ck"] += r[7] == "已報到"
-others_sum = sorted([dict(o, people=len(o.pop("ppl"))) for o in _os.values()], key=lambda o: -o["rows"])
+    o = _os.setdefault(k, {"kind": k, "ppl": set(), "ckp": set(), "rows": 0, "ok": 0, "ck": 0})
+    pid = PID.get(r[5].strip(), r[5].strip())
+    o["ppl"].add(pid); o["rows"] += 1; o["ok"] += r[6] == "正取"; o["ck"] += r[7] == "已報到"
+    if r[7] == "已報到":
+        o["ckp"].add(pid)
+others_sum = sorted([dict(o, people=len(o.pop("ppl")), ck_people=len(o.pop("ckp"))) for o in _os.values()],
+                    key=lambda o: -o["rows"])
 for f in ("all", "people"):
     add_finance_sheet(files[f]["name"], companies, others_sum)
 for c in companies:
@@ -344,6 +388,9 @@ audit = {
     # 2026-11-05 這一波修正（集團人資回報同一人歸到兩家公司）
     "fix_cause": ["這幾筆報名時是候補學員，沒有選公司的選項。", "系統先把 unistyle、ua.com.tw 都歸到聯廣 UCG。"],
     "fix_rule": ["以報名者本人在其他場次自己選過的公司為準；", "本人都沒選過，才看同網域多數人選的，最後才看網域對照表。"],
+    "fix_future": ["現行報名要學員自己輸入 email、自己選所屬企業，容易打錯或選錯，造成統計偏差。",
+                   "未來規劃改成「快速登入」報名，由系統自動辨識所屬企業並歸戶，不必再手動輸入與選擇。",
+                   "後續也會向集團窗口索取全集團「email 網域 × 企業名稱」對照表，作為歸戶比對的依據。"],
     "fixes": [
         {"kind": "歸錯", "sum": "4 筆（2 個人）", "items": [
             NAME_OF("unistyle.com.tw") + "（unistyle 信箱）：3/20、11/5、11/6 共 3 筆，原本歸聯廣 UCG，改成先勢 PILOT。她其他場次都自己選 PILOT。",
@@ -422,7 +469,7 @@ data = {
                "ok": sum(c["正取"] for c in companies),
                "ck": sum(c["ck"] for c in companies), "ck_people": len({e for e, p in person.items() if p["ck"]}),
                "other_people": len({PID.get(r[5].strip(), r[5].strip()) for r in others}), "other_rows": len(others)},
-    "others_sum": others_sum,
+    "others_sum": others_sum, "gloss": GLOSS,
     "nocheck": nocheck, "skipped": dict(skipped.most_common()), "skipped_st": dict(skipped_st), "by_mail": sum(v for k, v in by_mail.items() if k != "報名選填"),
     "audit": audit, "domains": domains,
 }
