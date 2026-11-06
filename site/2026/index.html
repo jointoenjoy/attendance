@@ -465,7 +465,7 @@
       fb.append(el("h3", {}, f.kind + "的有 " + f.sum));
       fb.append(el("ul", {}, ...f.items.map((t) => el("li", {}, t))));
     }
-    for (const [h, ls] of [["錯誤原因", A.fix_cause], ["修正方式", A.fix_rule], ["未來優化方案", A.fix_future]]) {
+    for (const [h, ls] of [["錯誤原因", A.fix_cause], ["修正方式", A.fix_rule], ["人工歸戶待確認", A.fix_check], ["未來優化方案", A.fix_future]]) {
       if (!ls) continue;
       fb.append(el("h3", {}, h + "："));
       for (const t of ls) fb.append(el("p", {}, t));
