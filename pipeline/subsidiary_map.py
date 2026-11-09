@@ -4,6 +4,8 @@
 /part 這頁只對外呈現三家：UCG（拆到子公司）、先勢集團、台北博報堂 HTM。
 米蘭 MDCG／光洋波斯特／安益 仍會被解析（用於稽核與「非本頁」統計），但不上這頁。
 
+【官方網域清單】2026-11-09 決策者提供集團 EIP 登入網域清單（domain_list.py），公司名稱與歸屬以它為準。
+
 【網域合併原則】（大寶 2026-07-27 指示）
 現場是手 key 的，`.com.tw` / `.com` 常打錯、字母也會拼錯。
 所以歸戶以「@ 後面的名字」為單位（GROUPS 的 key），
@@ -46,43 +48,60 @@ GROUPS = [
          vars=["unisincere.com.tw", "unisincere.com"]),
     # ── 先勢集團（不拆）──
     dict(key="pilotpr",     cat="先勢集團",    conf=True,
-         note="先勢公關",
+         note="先勢公關顧問",
          vars=["pilotpr.com.tw", "pilotpr.com"]),
     dict(key="grandpr",     cat="先勢集團",    conf=True,
-         note="精采公關",
+         note="鈞勢國際公關顧問",
          vars=["grandpr.com.tw", "grandpr.com"]),
     dict(key="prestigepr",  cat="先勢集團",    conf=True,
-         note="楷模公關",
+         note="先擎公關顧問",
          vars=["prestigepr.com.tw", "prestigepr.com"]),
     dict(key="planetpr",    cat="先勢集團",    conf=True,
-         note="頤德／星團公關（planetpe 為打錯的變體，已併入）",
+         note="天擎公關顧問（planetpe 為打錯的變體，已併入）",
          vars=["planetpr.com.tw", "planetpe.com.tw", "planetpr.com"]),
     dict(key="unistyle",    cat="先勢集團",    conf=True, settled=True,
          note="聯太國際公關 Uni-Style PR，屬先勢博報堂集團（2026-11-05 決策者查證更正；7 月曾誤歸聯廣旗下）",
          vars=["unistyle.com.tw", "unistyle.com"]),
-    dict(key="charismomo",  cat="先勢集團",    conf=False,
-         note="試算表「所屬企業」欄標 PILOT，但這不是先勢既有網域，請確認是哪家",
+    dict(key="charismomo",  cat="先勢集團",    conf=True,
+         note="桃花娛樂國際整合行銷（集團官方網域清單 2026-11-09 確認屬先勢）",
          vars=["charismomo.com", "charismomo.com.tw"]),
+    # 官方網域清單上有、但報名資料裡還沒出現過的先勢網域（2026-11-09 補）
+    dict(key="pilotcomms",  cat="先勢集團",    conf=True, note="先勢溝通行銷",
+         vars=["pilotcomms.com.tw", "pilotcomms.com"]),
+    dict(key="cubicism",    cat="先勢集團",    conf=True, note="立方體數位管理顧問",
+         vars=["cubicism.com", "cubicism.com.tw"]),
+    dict(key="pilotgp",     cat="先勢集團",    conf=True, note="先勢行銷傳播集團",
+         vars=["pilotgp.com", "pilotgp.com.tw"]),
+    dict(key="pilothakuhodo", cat="先勢集團",  conf=True, note="先勢博報堂集團",
+         vars=["pilothakuhodo.com", "pilothakuhodo.com.tw"]),
+    dict(key="newspie",     cat="先勢集團",    conf=True, note="News Pie 新聞派",
+         vars=["newspie.com.tw", "newspie.com"]),
     # ── 台北博報堂 ──
     dict(key="hakuhodo",    cat="台北博報堂 HTM", conf=True,
-         note="台北博報堂（hakuhodotm 與 hakuhodoti 兩組寫法已合併）",
+         note="台北博報堂管理顧問（hakuhodotm）＋台北博報堂投資（hakuhodoti），合併一列",
          vars=["hakuhodotm.com.tw", "hakuhodoti.com.tw",
                "hakuhodotm.com", "hakuhodoti.com"]),
     # ── 以下不在本頁呈現，但要正確排除、不要誤混進三家 ──
-    dict(key="medialand",   cat="米蘭 MDCG",   conf=True, note="米蘭數位行銷",
+    dict(key="medialand",   cat="米蘭 MDCG",   conf=True, note="米蘭營銷策劃",
          vars=["medialand.tw", "medialnad.tw", "mediand.tw", "medialand.com",
                "medialand.com.tw"]),
-    dict(key="mdcg",        cat="米蘭 MDCG",   conf=True, note="MDCG 總部",
+    dict(key="mdcg",        cat="米蘭 MDCG",   conf=True, note="米蘭營銷策劃（mdcg.tw）",
          vars=["mdcg.tw", "mdcg.com.tw"]),
-    dict(key="mxdigi",      cat="米蘭 MDCG",   conf=True, note="洰和 MX Digital",
+    dict(key="mxdigi",      cat="米蘭 MDCG",   conf=True, note="創意思境",
          vars=["mxdigi.com", "mxdogi.com", "mxdigi.com.tw"]),
-    dict(key="meshplus",    cat="米蘭 MDCG",   conf=True, note="創意思境",
+    dict(key="meshplus",    cat="米蘭 MDCG",   conf=True, note="洰和",
          vars=["meshplus.com.tw", "meshplus.con.tw", "meshplus.com"]),
     dict(key="ky-post",     cat="光洋波斯特",  conf=True,
-         note="光洋波斯特（UCG 會展事業，集團另計為 KY-POST）",
+         note="光洋波斯特國際展覽（集團另計為 KY-POST）",
          vars=["ky-post.com", "ky-post.com.tw", "kypost.com"]),
     dict(key="interplan",   cat="安益",        conf=True, note="安益國際展覽",
          vars=["interplan.com.tw", "interplan.com"]),
+    dict(key="messetaoyuan", cat="安益",       conf=True, note="桃園會展中心",
+         vars=["messetaoyuan.com", "messetaoyuan.com.tw"]),
+    dict(key="intercon",    cat="安益",        conf=True, note="茵康國際會議顧問",
+         vars=["intercon.com.tw", "intercon.com"]),
+    dict(key="kecc",        cat="安益",        conf=True, note="高雄展覽館",
+         vars=["kecc.com.tw", "kecc.com"]),
 ]
 
 # domain -> group key / 子公司 / 說明
