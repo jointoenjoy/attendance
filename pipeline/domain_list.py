@@ -2,7 +2,7 @@
 """集團官方 email 網域清單（EIP 登入網域清單）——網域歸戶的最終依據。
 
 來源：決策者 2026-11-09 提供的《公司網域清單.docx》，原檔存在 reference/公司網域清單.docx。
-不含個資，可進 git。subsidiary_map.py 與 domain_verify.py 都要跟這份一致；有衝突以這份為準。
+不含個資，可進 git。唯一例外：聯樂／聯眾以官網為準（見下方註解）。subsidiary_map.py 與 domain_verify.py 都要跟這份一致；有衝突以這份為準。
 
 OFFICIAL：網域 → (集團代碼, 公司名稱)。集團代碼跟 Wix「所屬企業」下拉一致。
 """
@@ -15,8 +15,10 @@ OFFICIAL = {
     "dvibemedia.com": ("UCG", "迪維數位智造"),
     "2008-media.com": ("UCG", "二零零八傳媒行銷"),
     "ace-taipei.com": ("UCG", "艾斯傳媒行銷"),
-    "unismart.com.tw": ("UCG", "聯樂數位行銷"),
-    "unisurf.com.tw": ("UCG", "聯眾廣告"),
+    # 原清單把下面兩列寫反（unismart＝聯樂、unisurf＝聯眾）；聯廣集團官網與兩家官網都是相反說法，
+    # 2026-11-10 決策者定案以官網為準。
+    "unisurf.com.tw": ("UCG", "聯樂數位行銷"),
+    "unismart.com.tw": ("UCG", "聯眾廣告"),
     "unisincere.com.tw": ("UCG", "聯勤公關顧問"),
     # 先勢博報堂集團（Pilot）
     "pilotpr.com.tw": ("PILOT", "先勢公關顧問"),
