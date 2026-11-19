@@ -6,3 +6,8 @@ site/.wrangler/
 .DS_Store
 site/2026/*.json
 site/2026/files/
+
+# 金鑰檔不上 GitHub（資安總檢 2026-11-19）
+.env*
+!.env.example
+.dev.vars
