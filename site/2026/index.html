@@ -162,6 +162,8 @@
   .fixbox ul{margin:4px 0 8px;padding-left:1.3em;line-height:1.6}.fixbox ul li{margin:4px 0}
   .fixbox p{margin:2px 0;line-height:1.6}
   .fixbox .acts{margin-top:16px}
+  .fixbox details.flog{border-top:1px solid var(--line);padding:10px 0}
+  .fixbox details.flog>summary{cursor:pointer;font-weight:700;color:var(--blue-dark)}
   #msg{padding:40px 0;text-align:center;color:var(--ink-3)}
   @media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
   details.fold>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -203,7 +205,7 @@
   <div id="msg">資料載入中…</div>
   <main id="main" hidden>
     <section class="card fixbox" id="fixbox" hidden>
-      <h2>統計查核報告</h2>
+      <h2>統計查核修改歷程</h2>
       <div id="fixBody"></div>
       <div class="acts"><button class="btn" id="openAudit" type="button">程式判斷細節</button></div>
     </section>
@@ -463,7 +465,15 @@
     };
     const nSkip = Object.values(D.skipped).reduce((a, b) => a + b, 0);
     // 這一波修正直接列在頁面上（給財務對帳，只放必要數字）；程式怎麼判斷收在「程式判斷細節」視窗
-    const fb = $("fixBody");
+    // 修改歷程：最新一版在上，每版預設收合
+    const fbox = $("fixBody");
+    for (const v of A.fix_new || []) {
+      const d = el("details", { class: "flog" }, el("summary", {}, v.title));
+      for (const [h, ls] of v.secs) { d.append(el("h3", {}, h + "：")); d.append(el("ul", {}, ...ls.map((t) => el("li", {}, t)))); }
+      fbox.append(d);
+    }
+    const fb = el("details", { class: "flog" }, el("summary", {}, A.fix_old_title || "上一版修正"));
+    fbox.append(fb);
     for (const f of A.fixes) {
       fb.append(el("h3", {}, f.kind + "的有 " + f.sum));
       fb.append(el("ul", {}, ...f.items.map((t) => el("li", {}, t))));
