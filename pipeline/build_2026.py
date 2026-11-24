@@ -47,18 +47,22 @@ GLOSS = {
                      "同一人＝email 相同，或手機＋姓名＋集團都相同。",
     "報名人數占比": "這家公司的報名人數 ÷ 集團報名人數合計。只算博報堂集團員工，非集團不進分母。",
     "報名人次": "總共報了幾場。同一人每報一場算 1 次；正取、候補、請假都算。",
-    "正取人次": "實際拿到座位的次數。不含候補沒排上、請假。",
-    "正取人次占比": "這家公司的正取人次 ÷ 集團正取人次合計。只算博報堂集團員工，非集團不進分母。",
+    "報名成功人數（不重複）": "報名成功（正取＋候補轉正）的「不同的人」。同一人成功報很多場只算 1 人；不含只排候補沒排上、只有請假的人。"
+                     "同一人的判斷方式同「報名人數（不重複）」，可用「人員編號」欄自行核對。",
+    "報名成功人數占比": "這家公司的報名成功人數 ÷ 集團報名成功人數合計。只算博報堂集團員工，非集團不進分母。",
+    "報名成功人次": "報名成功（正取＋候補轉正）的次數，也就是實際拿到座位的次數。不含候補沒排上、請假。",
+    "報名成功人次占比": "這家公司的報名成功人次 ÷ 集團報名成功人次合計。只算博報堂集團員工，非集團不進分母。",
     "候補人次": "報名時已額滿、排在候補名單、最後沒拿到座位的次數。",
     "請假人次": "拿到座位後又取消（請假）的次數。",
     "報到人次": "工作人員在 Wix 勾了「已報到」的次數。只算有登錄報到的場次，還沒登錄的場次不算。",
     "報到人數（不重複）": "真的到過現場的「不同的人」。同一人來很多場只算 1 人。只算有登錄報到的場次。",
     "報到人數占比": "這家公司的報到人數 ÷ 集團報到人數合計。只算博報堂集團員工，非集團不進分母。",
     "報名場次（含 1/16）": "這個人總共報了幾場（正取、候補、請假都算），含 1/16。",
-    "正取場次（含 1/16）": "這個人實際拿到座位的場數，含 1/16。",
+    "報名成功場次（含 1/16）": "這個人報名成功（正取＋候補轉正）的場數，含 1/16。",
     "報到場次（含 1/16）": "這個人被勾「已報到」的場數，含 1/16。",
     "報名狀態": "正取＝拿到座位；候補轉正＝先排候補、後來遞補拿到座位或當天有出席（算正取）；候補＝額滿後排隊、沒拿到座位；請假＝拿到座位後取消。",
-    "報到": "已報到＝工作人員在 Wix 勾了報到；空白＝沒勾，或那場還沒登錄報到。",
+    "報到": "已報到＝工作人員在 Wix 勾了報到；未報到＝沒勾（候補、請假本來就沒有座位，也會顯示未報到）；尚未舉辦＝活動還沒辦，之後會更新。",
+    "人員編號": "同一個人一個編號。有人用過不只一個 email（例如公司信箱＋私人信箱），編號相同就是同一人；要算不重複人數請用這欄去重複，不要用 email。",
     "合約範圍": "1/16《動態靜心》屬 2025 合約範圍，3/20 起屬 2026 合約範圍。統計兩者都算。",
     "企業判斷方式": "報名時自己選的公司；沒選的依序看：本人其他場選的公司 → 同網域多數人選的公司 → 網域對照表。",
     "博報堂集團員工": "是＝計入統計與分攤；不是＝練息之友、民眾自費等，列在最下方對照、不計入。",
@@ -122,27 +126,30 @@ def add_finance_sheet(name, companies, others_sum):
     ws.append(["合約為固定價、不保證人數；本表給總部財務依各公司參與人數分配預算比例。人數＝同一人只算一次。"
                "占比只用博報堂集團員工計算，非集團（練息之友、民眾自費）另列、不計入分母。含 1/16（2025 合約範圍）。"])
     ws["A1"].font = Font(name="Arial", size=10, color="7A5A2E")
-    head = ["身分", "公司", "報名人數（不重複）", "報名人數占比", "報名人次", "正取人次", "正取人次占比",
+    head = ["身分", "公司", "報名人數（不重複）", "報名人數占比", "報名人次",
+            "報名成功人數（不重複）", "報名成功人數占比", "報名成功人次", "報名成功人次占比",
             "報到人數（不重複）", "報到人數占比", "報到人次"]
     ws.append(head)
     for c in ws[2]:
         c.font = Font(name="Arial", bold=True, color="FFFFFF"); c.fill = HEAD_FILL
         c.alignment = Alignment(vertical="center", wrap_text=True)
     note_head(ws, 2)
-    P, K, Q = (sum(c[k] for c in companies) for k in ("people", "正取", "ck_people"))
+    P, K, Q, S = (sum(c[k] for c in companies) for k in ("people", "正取", "ck_people", "ok_people"))
     for c in companies:
-        ws.append(["博報堂集團員工", c["name"], c["people"], c["people"] / P, c["rows"], c["正取"], c["正取"] / K,
+        ws.append(["博報堂集團員工", c["name"], c["people"], c["people"] / P, c["rows"],
+                   c["ok_people"], c["ok_people"] / S, c["正取"], c["正取"] / K,
                    c["ck_people"], c["ck_people"] / Q, c["ck"]])
     tot = ws.max_row + 1
-    ws.append(["博報堂集團員工", "集團合計", P, 1, sum(c["rows"] for c in companies), K, 1, Q, 1, sum(c["ck"] for c in companies)])
+    ws.append(["博報堂集團員工", "集團合計", P, 1, sum(c["rows"] for c in companies), S, 1, K, 1, Q, 1,
+               sum(c["ck"] for c in companies)])
     ws.append([])
     o1 = ws.max_row + 1
     for o in others_sum:
-        ws.append(["非集團（不計入分攤）", o["kind"], o["people"], "不計入", o["rows"], o["ok"], "不計入",
-                   o["ck_people"], "不計入", o["ck"]])
+        ws.append(["非集團（不計入分攤）", o["kind"], o["people"], "不計入", o["rows"], o["ok_people"], "不計入",
+                   o["ok"], "不計入", o["ck_people"], "不計入", o["ck"]])
     ws.append(["非集團（不計入分攤）", "非集團合計"] + [
         sum(o[k] for o in others_sum) if k else "不計入"
-        for k in ("people", None, "rows", "ok", None, "ck_people", None, "ck")])
+        for k in ("people", None, "rows", "ok_people", None, "ok", None, "ck_people", None, "ck")])
     for row in ws.iter_rows(min_row=3, max_row=ws.max_row):
         for c in row:
             c.font = Font(name="Arial", bold=c.row in (tot, ws.max_row))
@@ -314,24 +321,33 @@ for e in prev + events:
 
 # 各公司彙總
 comp = {c: {"code": c, "name": NAMES[c], "people": set(), "rows": 0, "正取": 0, "候補": 0, "請假": 0,
-            "ck": 0, "ck_people": set()} for c in HAKUHODO}
+            "ck": 0, "ck_people": set(), "ok_people": set()} for c in HAKUHODO}
 person = {}
 for e in evs:
     for g in e["guests"]:
         s = comp[g["c"]]
         s["people"].add(g["p"]); s["rows"] += 1; s[g["s"]] += 1
+        if g["s"] == "正取":   # 正取＋候補轉正（候補轉正的 s 也是正取）
+            s["ok_people"].add(g["p"])
         if g["k"] == "已報到":
             s["ck"] += 1; s["ck_people"].add(g["p"])
         p = person.setdefault(g["p"], {"n": g["n"], "c": set(), "reg": 0, "ok": 0, "ck": 0, "em": set()})
         p["em"].add(g["e"])
         p["c"].add(NAMES[g["c"]]); p["reg"] += 1; p["ok"] += g["s"] == "正取"; p["ck"] += g["k"] == "已報到"
-companies = [dict(s, people=len(s["people"]), ck_people=len(s["ck_people"])) for s in comp.values()]
+companies = [dict(s, people=len(s["people"]), ck_people=len(s["ck_people"]), ok_people=len(s["ok_people"])) for s in comp.values()]
 companies = [c for c in companies if c["rows"]]
 companies.sort(key=lambda c: (-c["people"], -c["rows"]))
 
 # 下載檔跟頁面同步：1/16 也列也算，暖灰底註明屬 2025 合約範圍（2026-11-05 決策者要求）
-HEAD = ["日期", "活動名稱", "合約範圍", "所屬企業", "姓名", "email", "報名狀態", "報到", "企業判斷方式", "博報堂集團員工"]
-W = [12, 44, 14, 26, 14, 32, 10, 12, 14, 14]
+HEAD = ["日期", "活動名稱", "合約範圍", "所屬企業", "姓名", "email", "報名狀態", "報到", "企業判斷方式", "博報堂集團員工", "人員編號"]
+W = [12, 44, 14, 26, 14, 32, 10, 12, 14, 14, 10]
+# 人員編號：同一人（含用多個 email 的人）一個號碼，給財務自己去重複用（2026-11-24 決策者要求統一口徑）
+pid_of = lambda em: PID.get(em.strip(), em.strip())
+NO = {}
+for r in recs + others:
+    NO.setdefault(pid_of(r[5]), "P%03d" % (len(NO) + 1))
+for r in recs + others:
+    r.append(NO[pid_of(r[5])])
 pv_g = {}   # 1/16 那場每個人的報名狀態與報到
 for e in evs:
     if e["prev"]:
@@ -340,24 +356,27 @@ for e in evs:
             p = person.setdefault(g["p"], {"n": g["n"], "c": set(), "reg": 0, "ok": 0, "ck": 0, "em": set()})
             p["c"].add(NAMES[g["c"]]); p["em"].add(g["e"])
 prow = lambda e, p: [p["n"], "、".join(sorted(p["em"])), "、".join(sorted(p["c"])), p["reg"], p["ok"], p["ck"],
-                     pv_g[e]["sl"] if e in pv_g else "", pv_g[e]["k"] if e in pv_g else ""]
+                     pv_g[e]["sl"] if e in pv_g else "", pv_g[e]["k"] if e in pv_g else "", NO.get(e, "")]
 files = {"all": write_xlsx("2026-博報堂全集團-逐筆明細.xlsx", HEAD, recs, 2, W, others=others),
          "people": write_xlsx("2026-博報堂全集團-人員彙總.xlsx",
-                              ["姓名", "email", "所屬企業", "報名場次（含 1/16）", "正取場次（含 1/16）", "報到場次（含 1/16）",
-                               "1/16 報名狀態（2025 合約範圍）", "1/16 報到（2025 合約範圍）"],
+                              ["姓名", "email", "所屬企業", "報名場次（含 1/16）", "報名成功場次（含 1/16）", "報到場次（含 1/16）",
+                               "1/16 報名狀態（2025 合約範圍）", "1/16 報到（2025 合約範圍）", "人員編號"],
                               sorted([prow(e, p) for e, p in person.items()], key=lambda r: (r[2], -r[3], r[0])),
-                              widths=[14, 32, 18, 14, 14, 14, 26, 24], prev_cols=(6, 7)),
+                              widths=[14, 32, 18, 14, 14, 14, 26, 24, 10], prev_cols=(6, 7)),
          "byco": {}}
 # 非集團人數（同一人只算一次），給財務看「集團員工 vs 非集團」
 _os = {}
 for r in others:
     k = r[3].replace("非集團：", "")
-    o = _os.setdefault(k, {"kind": k, "ppl": set(), "ckp": set(), "rows": 0, "ok": 0, "ck": 0})
+    o = _os.setdefault(k, {"kind": k, "ppl": set(), "ckp": set(), "okp": set(), "rows": 0, "ok": 0, "ck": 0})
     pid = PID.get(r[5].strip(), r[5].strip())
     o["ppl"].add(pid); o["rows"] += 1; o["ok"] += r[6] in ("正取", "候補轉正"); o["ck"] += r[7] == "已報到"
     if r[7] == "已報到":
         o["ckp"].add(pid)
-others_sum = sorted([dict(o, people=len(o.pop("ppl")), ck_people=len(o.pop("ckp"))) for o in _os.values()],
+    if r[6] in ("正取", "候補轉正"):
+        o["okp"].add(pid)
+others_sum = sorted([dict(o, people=len(o.pop("ppl")), ck_people=len(o.pop("ckp")), ok_people=len(o.pop("okp")))
+                     for o in _os.values()],
                     key=lambda o: -o["rows"])
 for f in ("all", "people"):
     add_finance_sheet(files[f]["name"], companies, others_sum)
@@ -476,6 +495,7 @@ data = {
     "totals": {"events": len(evs), "people": sum(p["reg"] > 0 for p in person.values()),
                "rows": len(recs),
                "ok": sum(c["正取"] for c in companies),
+               "ok_people": len({e for e, p in person.items() if p["ok"]}),
                "ck": sum(c["ck"] for c in companies), "ck_people": len({e for e, p in person.items() if p["ck"]}),
                "other_people": len({PID.get(r[5].strip(), r[5].strip()) for r in others}), "other_rows": len(others)},
     "others_sum": others_sum, "gloss": GLOSS,

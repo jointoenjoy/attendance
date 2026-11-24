@@ -302,26 +302,26 @@
   const OS = D.others_sum || [], pct = (a, b) => b ? (a / b * 100).toFixed(1) + "%" : "";
   for (const [v, l, cls] of [[T.people, "博報堂集團員工（報名人數，不重複）", ""], [T.other_people || 0, "非集團：練息之友、民眾自費（報名人數，不重複）", " other"]])
     $("finKpis").append(el("div", { class: "kpi" + cls }, el("b", {}, v.toLocaleString()), el("span", {}, l)));
-  const okSum = D.companies.reduce((a, c) => a + c["正取"], 0);
+  const okSum = D.companies.reduce((a, c) => a + c["正取"], 0), okPpl = D.companies.reduce((a, c) => a + (c.ok_people || 0), 0);
   const ft = $("finTbl");
-  ft.append(el("thead", {}, el("tr", {}, ...["公司", "報名人數（不重複）", "報名人數占比", "報名人次", "正取人次", "正取人次占比",
+  ft.append(el("thead", {}, el("tr", {}, ...["公司", "報名人數（不重複）", "報名人數占比", "報名人次", "報名成功人數（不重複）", "報名成功人數占比", "報名成功人次", "報名成功人次占比",
     "報到人數（不重複）", "報到人數占比", "報到人次"].map((h) => el("th", {}, q(h))))));
   const fb = el("tbody");
   for (const c of D.companies)
-    fb.append(el("tr", {}, ...[c.name, c.people, pct(c.people, T.people), c.rows, c["正取"], pct(c["正取"], okSum),
+    fb.append(el("tr", {}, ...[c.name, c.people, pct(c.people, T.people), c.rows, c.ok_people, pct(c.ok_people, okPpl), c["正取"], pct(c["正取"], okSum),
       c.ck_people, pct(c.ck_people, T.ck_people), c.ck].map((v) => el("td", {}, v))));
   ft.append(fb);
   const osum = (k) => OS.reduce((a, o) => a + o[k], 0);
-  ft.append(el("tfoot", {}, el("tr", {}, ...["集團員工合計", T.people, "100%", T.rows, okSum, "100%", T.ck_people, "100%", T.ck].map((v) => el("td", {}, v))),
-    ...OS.map((o) => el("tr", { class: "sub" }, ...["非集團：" + o.kind, o.people, "不計入", o.rows, o.ok, "不計入", o.ck_people, "不計入", o.ck].map((v) => el("td", {}, v)))),
-    ...(OS.length ? [el("tr", { class: "sub" }, ...["非集團合計", T.other_people, "不計入", osum("rows"), osum("ok"), "不計入", osum("ck_people"), "不計入", osum("ck")].map((v) => el("td", {}, el("b", {}, v))))] : [])));
+  ft.append(el("tfoot", {}, el("tr", {}, ...["集團員工合計", T.people, "100%", T.rows, okPpl, "100%", okSum, "100%", T.ck_people, "100%", T.ck].map((v) => el("td", {}, v))),
+    ...OS.map((o) => el("tr", { class: "sub" }, ...["非集團：" + o.kind, o.people, "不計入", o.rows, o.ok_people, "不計入", o.ok, "不計入", o.ck_people, "不計入", o.ck].map((v) => el("td", {}, v)))),
+    ...(OS.length ? [el("tr", { class: "sub" }, ...["非集團合計", T.other_people, "不計入", osum("rows"), osum("ok_people"), "不計入", osum("ok"), "不計入", osum("ck_people"), "不計入", osum("ck")].map((v) => el("td", {}, el("b", {}, v))))] : [])));
 
   const btn = (f, label, primary) => el("a", { class: "btn" + (primary ? " primary" : ""), href: f.url, download: f.name },
     "⬇ " + label + " ", el("small", {}, f.other ? `${f.rows} 筆＋非集團 ${f.other} 筆` : `${f.rows} 筆`));
   $("dlAll").append(btn(D.files.all, "全集團逐筆明細", true), btn(D.files.people, "全集團人員彙總"));
   for (const c of D.companies) $("dlCo").append(btn(D.files.byco[c.code], c.name));
 
-  const H = ["公司", "報名人數（不重複）", "報名人次", "正取人次", "候補人次", "請假人次", "報到人次", "報到人數（不重複）"];
+  const H = ["公司", "報名人數（不重複）", "報名人次", "報名成功人次", "候補人次", "請假人次", "報到人次", "報到人數（不重複）"];
   const t = $("coTbl");
   t.append(el("thead", {}, el("tr", {}, ...H.map((h) => el("th", {}, q(h))))));
   const tb = el("tbody");
