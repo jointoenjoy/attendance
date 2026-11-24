@@ -159,11 +159,12 @@
   dialog.audit td:first-child{color:var(--ink)}
   dialog.audit ul{margin:4px 0 10px;padding-left:1.3em;line-height:1.6}dialog.audit ul li{margin:4px 0}
   .fixbox h3{font-size:1rem;color:var(--blue-dark);margin:16px 0 4px}
-  .fixbox ul{margin:4px 0 8px;padding-left:1.3em;line-height:1.6}.fixbox ul li{margin:4px 0}
+  .fixbox ul,.fixbox ol{margin:4px 0 8px;padding-left:1.3em;line-height:1.6}.fixbox li{margin:4px 0}
   .fixbox p{margin:2px 0;line-height:1.6}
   .fixbox .acts{margin-top:16px}
   .fixbox details.flog{border-top:1px solid var(--line);padding:10px 0}
   .fixbox details.flog>summary{cursor:pointer;font-weight:700;color:var(--blue-dark)}
+  .fixbox details.flog>p{margin-top:10px}
   #msg{padding:40px 0;text-align:center;color:var(--ink-3)}
   @media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
   details.fold>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -469,7 +470,8 @@
     const fbox = $("fixBody");
     for (const v of A.fix_new || []) {
       const d = el("details", { class: "flog" }, el("summary", {}, v.title));
-      for (const [h, ls] of v.secs) { d.append(el("h3", {}, h + "：")); d.append(el("ul", {}, ...ls.map((t) => el("li", {}, t)))); }
+      for (const t of v.intro || []) d.append(el("p", {}, t));
+      for (const [h, tag, ls] of v.secs) { d.append(el("h3", {}, h)); d.append(el(tag, {}, ...ls.map((t) => el("li", {}, t)))); }
       fbox.append(d);
     }
     const fb = el("details", { class: "flog" }, el("summary", {}, A.fix_old_title || "上一版修正"));
